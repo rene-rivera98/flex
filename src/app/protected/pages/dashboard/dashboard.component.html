@@ -1,0 +1,97 @@
+<!-- Navbar start -->
+<nav class="sb-topnav navbar-expand navbar navbar-dark bg-dark">
+
+    <button class="btn btn-secondary ms-3 " type="button" data-bs-toggle="offcanvas" title="Menú"
+        data-bs-target="#sidebar">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <a class="navbar-brand ps-3" href="/admin">ADMINISTRADOR</a>
+
+    <div class="dropdown ms-auto ">
+        <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false"
+            style="border: 0px; background-color: transparent; color: aliceblue;">
+            <i class="bi bi-person-circle"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item"><i class="bi bi-person-fill-gear"></i> Datos del perfil</a></li>
+            <li><a class="dropdown-item"><i class="bi bi-book-half"></i> Bitacora</a></li>
+            <li>
+                <a class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<!-- Navbar end -->
+
+
+<!-- Sidebar start -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+    style="background-color: #FFD700;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarLabel">Menú</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+
+        <!-- Contenido de la barra lateral -->
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false"
+                aria-controls="collapseLayouts"
+                style="border: 0px; background-color: transparent; color: black; outline: none;">
+                <i class="bi bi-clipboard-data"></i> Reportes
+            </button>
+
+            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+
+                <a class="dropdown-item" href="#">Reporte</a>
+                <a class="dropdown-item" href="#">Productos</a>
+                <a class="dropdown-item" href="#">Proveedores</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                data-bs-toggle="collapse" data-bs-target="#collapseBuy" aria-expanded="false"
+                aria-controls="collapseBuy"
+                style="border: 0px; background-color: transparent; color: black; outline: none;">
+                <i class="bi bi-cart4"></i> Compras
+            </button>
+
+            <div class="collapse" id="collapseBuy" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+
+                <a class="dropdown-item" href="#">Gastos</a>
+                <a class="dropdown-item" href="#">Insumos</a>
+                <a class="dropdown-item" href="#">Productos</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false"
+                aria-controls="collapseUser"
+                style="border: 0px; background-color: transparent; color: black; outline: none;">
+                 usuarios
+            </button>
+
+            <div class="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+
+                <a class="dropdown-item" href="#">Ver</a>
+                <a class="dropdown-item" href="#">Crear</a>
+                <a class="dropdown-item" href="#">Eliminar</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Sidebar end-->
+
+
+
+<div class="container main-container my-4">
+    <router-outlet></router-outlet>
+</div>

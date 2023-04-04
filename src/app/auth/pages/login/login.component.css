@@ -1,0 +1,6 @@
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+body {
+    background-color: black;
+    min-height: 100vh;
+}
