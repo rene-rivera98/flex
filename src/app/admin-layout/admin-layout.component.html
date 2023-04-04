@@ -1,82 +1,105 @@
-<!-- Navbar start -->
-<nav class="sb-topnav navbar-expand navbar navbar-dark bg-dark">
 
-    <button class="btn btn-secondary ms-3 " type="button" data-bs-toggle="offcanvas" title="Menú"
-        data-bs-target="#sidebar">
-        <i class="bi bi-list"></i>
-    </button>
+      <!-- INICIO DE NAVBAR -->
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3">ADMINISTRADOR</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="bi bi-list"></i></button>
+            <!-- Separacion-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-person-circle"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Datos del perfil</a></li>
+                        <li><a class="dropdown-item" href="#!">Bitacora</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- FIN NAVBAR -->
 
-    <a class="navbar-brand ps-3" href="/admin">ADMINISTRADOR</a>
+        <!-- INICIO SIDEBAR -->
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
 
+                          <!-- SECCION REGISTROS -->
+                            <div class="sb-sidenav-menu-heading pb-0">Registros</div>
+                            <a class="nav-link fs-5 pb-1" href="">
+                                <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
+                                Usuarios
+                            </a>
+                            <a class="nav-link fs-5 pb-1" href="">
+                                <div class="sb-nav-link-icon"><i class="bi bi-truck"></i></div>
+                                Proveedores
+                            </a>
+                            <a class="nav-link fs-5 pb-1" href="">
+                                <div class="sb-nav-link-icon"><i class="bi bi-basket-fill"></i></div>
+                                Productos
+                            </a>
+                            <a class="nav-link collapsed fs-5 pb-1" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="bi bi-box-seam-fill"></i></div>
+                                Paquetes
+                                <div class="sb-sidenav-collapse-arrow"><i class="bi bi-chevron-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link fs-6 pb-0" href="">Cafeteria</a>
+                                    <a class="nav-link fs-6 pb-0" href="">FrontDesk</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link fs-5 pb-1" href="">
+                                <div class="sb-nav-link-icon"><i class="bi bi-cart4"></i></div>
+                                Compras
+                            </a>
+                            <a class="nav-link fs-5 pb-1" href="">
+                              <div class="sb-nav-link-icon"><i class="bi bi-graph-down"></i></div>
+                              Gastos
+                            </a>
 
-    <!-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Buscar..." />
-            <button class="btn btn-secondary" id="btnNavbarSearch" type="button">
-                <i class="bi bi-search"></i>
-            </button>
-        </div>
-    </form> -->
+                          <!-- SECCION TRANSACCIONES -->
+                            <div class="sb-sidenav-menu-heading pb-0">Transacciones</div>
+                            <a class="nav-link fs-5 pb-1" href="">
+                                <div class="sb-nav-link-icon"><i class="bi bi-cash-coin"></i></div>
+                                Caja
+                            </a>
+                            <a class="nav-link fs-5 pb-1" href="">
+                                <div class="sb-nav-link-icon"><i class="bi bi-clipboard-fill"></i></div>
+                                Facturas
+                            </a>
+                          <!-- SECCION ANALISIS -->
+                            <div class="sb-sidenav-menu-heading pb-0">Analisis</div>
+                              <a class="nav-link collapsed fs-5 pb-1" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
+                                  <div class="sb-nav-link-icon"><i class="bi bi-clipboard-data-fill"></i></div>
+                                  Reportes
+                                  <div class="sb-sidenav-collapse-arrow"><i class="bi bi-chevron-down"></i></div>
+                              </a>
+                              <div class="collapse" id="collapseReports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                  <nav class="sb-sidenav-menu-nested nav">
+                                      <a class="nav-link fs-6 pb-0" href="">Insumos</a>
+                                      <a class="nav-link fs-6 pb-0" href="">Mermas</a>
+                                      <a class="nav-link fs-6 pb-0" href="">Ventas</a>
+                                  </nav>
+                              </div>
+                        </div> <!-- Fin div nav-->
+                    </div> <!-- Fin div menu -->
+                </nav> <!-- Fin nav principal -->
+            </div> <!-- Fin layoutSidenav_nav -->
+            <!-- FIN SIDEBAR -->
 
-    <div class="dropdown ms-auto ">
-        <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false"
-            style="border: 0px; background-color: transparent; color: aliceblue;">
-            <i class="bi bi-person-circle"></i>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-person-fill-gear"></i> Datos del perfil</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-book-half"></i> Bitacora</a></li>
-            <li>
-                <a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
-            </li>
-        </ul>
-    </div>
-
-</nav>
-<!-- Navbar end -->
-
-
-<!-- Sidebar start -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel" style="background-color: #FFD700;">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarLabel">Menú</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-
-    <div class="offcanvas-body">
-
-        <!-- Contenido de la barra lateral -->
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false"
-                aria-controls="collapseLayouts" style="border: 0px; background-color: transparent; color: black; outline: none;">
-                <i class="bi bi-clipboard-data"></i> Reportes
-            </button>
-
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                
-                <a class="dropdown-item" href="#">Reporte</a>
-                <a class="dropdown-item" href="#">Productos</a>
-                <a class="dropdown-item" href="#">Proveedores</a>
+            <!-- contenido -->
+            <div id="layoutSidenav_content">
+                <main>
+                  <ng-content></ng-content> <!-- AQUI SE INSERTARA EN CONTENIDO EN LOS COMPONENTES -->
+                </main>
             </div>
         </div>
 
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                data-bs-toggle="collapse" data-bs-target="#collapseBuy" aria-expanded="false"
-                aria-controls="collapseBuy" style="border: 0px; background-color: transparent; color: black; outline: none;">
-                <i class="bi bi-cart4"></i> Compras
-            </button>
-
-            <div class="collapse" id="collapseBuy" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                
-                <a class="dropdown-item" href="#">Gastos</a>
-                <a class="dropdown-item" href="#">Insumos</a>
-                <a class="dropdown-item" href="#">Productos</a>
-            </div>
-        </div>
-
-    </div>
-</div>
-<!-- Sidebar end-->
