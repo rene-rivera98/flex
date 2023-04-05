@@ -6,10 +6,10 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
+    component: UsuariosComponent,
     children: [
-      { path: 'registro', component: UsuariosComponent },
-      { path: '**', redirectTo: '/dashboard' }
+      { path: 'registro', component: DashboardComponent },
+      { path: '**', redirectTo: '/usuarios' }
       // { path: 'auth', component: LoginComponent },
     ]
   }

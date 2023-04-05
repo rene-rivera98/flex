@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Ususario } from 'src/app/interfaces/interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ApiRequestService {
 
   constructor(private http: HttpClient) { }
 
-  getUsuarios() {
+  getUsuarios():Observable<Ususario> {
     const authorization = localStorage.getItem('token')!
     const headers = new HttpHeaders({'Authorization': authorization})
     const url = `${this.baseUrl}/users/${''}`

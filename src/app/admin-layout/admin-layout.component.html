@@ -1,105 +1,110 @@
+<mat-toolbar>
 
-      <!-- INICIO DE NAVBAR -->
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3">ADMINISTRADOR</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="bi bi-list"></i></button>
-            <!-- Separacion-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-person-circle"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Datos del perfil</a></li>
-                        <li><a class="dropdown-item" href="#!">Bitacora</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Cerrar sesión</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <!-- FIN NAVBAR -->
+    <!-- BOTON ABRIR SIDEBAR -->
+    <div style="display: flex; align-items: center;">
+      <button class="btn btn-warning btn-sm" (click)="sidenav.toggle()" matTooltip="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span style="margin-left: 10px; color: white;">ADMINISTRADOR</span>
+    </div>
+  
+    <span class="toolbar-item-spacer"></span>
+  
+    <!-- BOTON PARA ABRIR MENU USUARIO -->
+    <button class="btn btn-warning btn-sm" matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <!-- FIN BOTON -->
+  
+    <!-- MENU USUARIO -->
+    <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+        <button mat-menu-item routerLink="#">
+            <mat-icon>person</mat-icon><span>Mi cuenta</span>
+        </button>
+        <button mat-menu-item routerLink="#">
+            <mat-icon>list_alt</mat-icon><span>Bitacora</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="#">
+            <mat-icon>exit_to_app</mat-icon>Cerrar sesión
+        </button>
+    </mat-menu>
+  <!-- FIN MENU -->
+</mat-toolbar>
+  <!-- FIN NAVBAR -->
+  
+  <!-- INICIO SIDEBAR -->
+<mat-sidenav-container class="app-container">
 
-        <!-- INICIO SIDEBAR -->
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-
-                          <!-- SECCION REGISTROS -->
-                            <div class="sb-sidenav-menu-heading pb-0">Registros</div>
-                            <a class="nav-link fs-5 pb-1" href="">
-                                <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
-                                Usuarios
-                            </a>
-                            <a class="nav-link fs-5 pb-1" href="">
-                                <div class="sb-nav-link-icon"><i class="bi bi-truck"></i></div>
-                                Proveedores
-                            </a>
-                            <a class="nav-link fs-5 pb-1" href="">
-                                <div class="sb-nav-link-icon"><i class="bi bi-basket-fill"></i></div>
-                                Productos
-                            </a>
-                            <a class="nav-link collapsed fs-5 pb-1" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="bi bi-box-seam-fill"></i></div>
-                                Paquetes
-                                <div class="sb-sidenav-collapse-arrow"><i class="bi bi-chevron-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link fs-6 pb-0" href="">Cafeteria</a>
-                                    <a class="nav-link fs-6 pb-0" href="">FrontDesk</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link fs-5 pb-1" href="">
-                                <div class="sb-nav-link-icon"><i class="bi bi-cart4"></i></div>
-                                Compras
-                            </a>
-                            <a class="nav-link fs-5 pb-1" href="">
-                              <div class="sb-nav-link-icon"><i class="bi bi-graph-down"></i></div>
-                              Gastos
-                            </a>
-
-                          <!-- SECCION TRANSACCIONES -->
-                            <div class="sb-sidenav-menu-heading pb-0">Transacciones</div>
-                            <a class="nav-link fs-5 pb-1" href="">
-                                <div class="sb-nav-link-icon"><i class="bi bi-cash-coin"></i></div>
-                                Caja
-                            </a>
-                            <a class="nav-link fs-5 pb-1" href="">
-                                <div class="sb-nav-link-icon"><i class="bi bi-clipboard-fill"></i></div>
-                                Facturas
-                            </a>
-                          <!-- SECCION ANALISIS -->
-                            <div class="sb-sidenav-menu-heading pb-0">Analisis</div>
-                              <a class="nav-link collapsed fs-5 pb-1" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
-                                  <div class="sb-nav-link-icon"><i class="bi bi-clipboard-data-fill"></i></div>
-                                  Reportes
-                                  <div class="sb-sidenav-collapse-arrow"><i class="bi bi-chevron-down"></i></div>
-                              </a>
-                              <div class="collapse" id="collapseReports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                  <nav class="sb-sidenav-menu-nested nav">
-                                      <a class="nav-link fs-6 pb-0" href="">Insumos</a>
-                                      <a class="nav-link fs-6 pb-0" href="">Mermas</a>
-                                      <a class="nav-link fs-6 pb-0" href="">Ventas</a>
-                                  </nav>
-                              </div>
-                        </div> <!-- Fin div nav-->
-                    </div> <!-- Fin div menu -->
-                </nav> <!-- Fin nav principal -->
-            </div> <!-- Fin layoutSidenav_nav -->
-            <!-- FIN SIDEBAR -->
-
-            <!-- contenido -->
-            <div id="layoutSidenav_content">
-                <main>
-                  <ng-content></ng-content> <!-- AQUI SE INSERTARA EN CONTENIDO EN LOS COMPONENTES -->
-                </main>
+    <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav">
+        <mat-nav-list class="list-group my-nav-list">
+  
+            <!-- SECCION REGISTROS -->
+                <h5 class="list-group-item my-heading">REGISTROS</h5>        
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                    <span class="my-text"><i class="bi bi-person-fill"></i> Usuarios</span>
+                </mat-list-item>
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                    <span class="my-text"><i class="bi bi-truck"></i> Proveedores</span>
+                </mat-list-item>
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                    <span class="my-text"><i class="bi bi-basket-fill"></i> Productos</span>
+                </mat-list-item>
+  
+                <mat-expansion-panel [class.mat-elevation-z0]="true">
+                    <mat-expansion-panel-header class="my-list-item-acordeon">
+                      <span class="my-text"><i class="bi bi-box-seam-fill"></i> Paquetes</span>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list class="nav-list-items">
+                        <a mat-list-item routerLink="#" class="my-link">Cafeteria</a>
+                        <a mat-list-item routerLink="#" class="my-link">FrontDesk</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                  <span class="my-text"><i class="bi bi-cart4"></i> Compras</span>
+                </mat-list-item>
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                  <span class="my-text"><i class="bi bi-graph-down"></i> Gastos</span>
+                </mat-list-item>
+  
+            <!-- SECCION TRANSACCIONES -->
+                <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                  <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
+                </mat-list-item>
+  
+                <mat-list-item routerLink="#" class="my-list-item">
+                    <span class="my-text"><i class="bi bi-clipboard-fill"></i> Facturas</span>
+                </mat-list-item>
+  
+            <!-- SECCION ANALISIS -->
+                <h5 class="list-group-item my-heading-top">ANALISIS</h5>
+  
+                <mat-expansion-panel [class.mat-elevation-z0]="true">
+                    <mat-expansion-panel-header class="my-list-item-acordeon">
+                      <span class="my-text"><i class="bi bi-clipboard-data-fill"></i> Reportes</span>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list class="nav-list-items">
+                        <a mat-list-item routerLink="#" class="my-link">Insumos</a>
+                        <a mat-list-item routerLink="#" class="my-link">Mermas</a>
+                        <a mat-list-item routerLink="#" class="my-link">Ventas</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+        </mat-nav-list>
+    </mat-sidenav>
+  
+  
+    <mat-sidenav-content>
+        <router-outlet>
+            <div class="app-sidenav-content">
+                <ng-content></ng-content>
             </div>
-        </div>
-
+        </router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container> 

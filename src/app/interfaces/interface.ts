@@ -1,8 +1,9 @@
+
 export interface Ususario {
     idusuario: string;
     nombre: string;
-    apellidoMaterno: string;
     apellidoPaterno: string;
+    apellidoMaterno: string;
     username: string;
     celular: string;
     email: string;
