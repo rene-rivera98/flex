@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { ComprasComponent } from './pages/compras/compras.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UsuariosComponent,
+    component: ComprasComponent,
     children: [
       { path: 'registro', component: DashboardComponent },
-      { path: '**', redirectTo: '/usuarios' }
+      { path: '**', redirectTo: '/compras' }
       // { path: 'auth', component: LoginComponent },
     ]
   }

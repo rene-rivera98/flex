@@ -1,0 +1,166 @@
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>Datos de compra:</h1>
+<!-- FIN TITULO DIALOG -->
+
+<!-- INICIO CONTENIDO DIALOG -->
+<div mat-dialog-content class="custom-dialog">
+
+  <form autocomplete="off">
+
+          <!-- INPUTS PROVEEDOR -->
+          <div class="form-floating mb-3 col-13 mx-auto">
+            <select class="form-control" id="selectProveedor" formControlName="Proveedor" placeholder="Proveedor">
+              <option value="" disabled selected>Seleccionar Proveedor</option>
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.nombreProveedor">{{ proveedor.nombreProveedor }}</option>
+            </select>
+            <label for="selectProveedor">Proveedor</label>
+          
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+          <!-- FIN INPUT -->
+
+        <!-- PRODUCTOS -->
+        <div>
+          PRODUCTOS
+        </div>
+
+        
+<!------------------------------- DATOS DE FACTURA ----------------------------------------->
+    <div>
+      DATOS DE FACTURA
+    </div>
+    <!-- FILA DE INPUT REFERENCIA, CFDI Y FECHA FACTURA-->
+      <div class="row">
+        <!-- INPUT REFERENCIA -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputReferencia" type="text"
+                formControlName="Referencia" placeholder="Referencia"/>
+            <label for="inputReferencia">Referencia</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT CFDI -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputCDFI" type="text"
+                formControlName="Uso de CFDI" placeholder="Uso de CFDI" />
+            <label for="inputCDFI">Uso de CFDI</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-feedback">
+                La contraseña es obligatoria.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUT FECHA FACTURA -->
+      <div class="col">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="inputFechaFactura" type="date"
+              formControlName="Fecha de factura" placeholder="fecha de factura"/>
+          <label for="inputFechaFactura">Fecha de factura</label>
+          <!-- Aqui falta la validacion -->
+          <div class="invalid-tooltip">
+              Please choose a username.
+          </div>
+        </div>
+      </div>
+
+    <!-- FIN FILA -->
+
+
+      <!-- INPUT METODO DE PAGO -->
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <select class="form-control" id="selectMetodo" formControlName="Metodo de pago" placeholder="Metodo de pago">
+            <option value="" disabled selected>Metodo de pago</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Deposito">Deposito</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Tarjeta">Tarjeta</option>
+          </select>
+          <label for="selectMetodo">Metodo de pago</label>
+  
+          <!-- Aqui falta la validacion -->
+          <div class="invalid-tooltip">
+              Please choose a username.
+          </div>
+        </div>
+  <!-- FIN FILA -->
+    
+    <!-- INPUT COMPLEMENTO DE PAGO -->
+      <div class="form-floating mb-3 col-13 mx-auto">
+        <select class="form-control" id="selectComplemento" formControlName="Complemento de pago" placeholder="Complemento de pago">
+          <option value="" disabled selected>Complemento de pago</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Finalizado">Finalizado</option>
+        </select>
+        <label for="selectComplemento">Complemento de pago</label>
+
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+      </div>
+    <!-- FIN INPUT -->
+
+<!------------------------ DATOS DE PAGO ------------------------->
+
+
+
+
+
+<!------------------------ DATOS DE PRODUCTO ------------------------->
+
+
+
+
+        <!-- INPUT FECHA CADUCIDAD -->
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <input class="form-control" id="inputCaducidad" type="date"
+              formControlName="Fecha de caducidad" placeholder="Fecha de caducidad"/>
+          <label for="inputCaducidad">Fecha de caducidad</label>
+
+          <!-- Aqui falta la validacion -->
+          <div class="invalid-tooltip">
+              Please choose a username.
+          </div>
+        </div>
+        <!-- FIN  INPUT -->
+
+<!------------------------ CLASIFICACION ------------------------->
+
+
+
+
+<!-------------------------- DIV BOTONES ---------------------------->
+      <div class="row">
+        <div class="col">
+          <div class="d-flex align-items-center mt-4">
+            <button class="btn btn-warning mx-auto col-6" type="submit">
+              Registrar
+            </button>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="d-flex align-items-center mt-4">
+            <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- FIN DIV BOTONES -->
+
+  </form>
+  
+</div>
+<!-- FIN CONTENIDO DE DIALOG -->
