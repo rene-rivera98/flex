@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import {MatCardModule} from '@angular/material/card';
@@ -13,6 +14,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { ProtectedRoutingModule } from './protected-routing.module';
 
@@ -66,7 +68,10 @@ import { DialogCompraComponent } from './pages/compras/dialog/dialog-compra/dial
     MatDividerModule,
     MatMenuModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTabsModule
   ]
 })
 export class ProtectedModule { }

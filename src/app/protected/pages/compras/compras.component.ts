@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 /* LIBRERIAS DE MATERIAL ANGULAR*/
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-compras',
@@ -60,9 +60,11 @@ export class ComprasComponent {
 
  /* FUNCION PARA ABRIR DIALOG*/
  openDialog(): void {
-  const dialogRef = this.dialog.open(DialogCompraComponent, {
-    disableClose: true, /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
-  });
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+  dialogConfig.width = '950px'; // Asignar ancho al dialog
+  dialogConfig.height = '600px'; // Asignar ancho al dialog
+  const dialogRef = this.dialog.open(DialogCompraComponent, dialogConfig);
 }
 /* EVENTO QUE APLICA EL FILTRO */
 applyFilter(event: Event) {
