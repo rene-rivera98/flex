@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { proveedores } from 'src/app/interfaces/interface';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 
 @Component({
@@ -13,8 +12,7 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
 })
 export class DialogCompraComponent implements OnInit {
 
-/* Variable que contiene los datos de proveedores */
-  proveedores: proveedores[] = [];
+  myForm!: FormGroup;
 
 /* Variables para metodo de pago */
   formulario!: FormGroup;
@@ -33,10 +31,37 @@ export class DialogCompraComponent implements OnInit {
   
   constructor(private _entriesService:ApiRequestService, 
               public dialogRef: MatDialogRef<DialogCompraComponent>,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder) { 
+                this.myForm = new FormGroup({
+                  myFormControlName: new FormControl()
+                });
+              }
 
   ngOnInit(): void {
-    this.obtenerListaProveedores();
+    this.myForm = this.fb.group({
+      Proveedor: ['', Validators.required],
+      Productos: ['', Validators.required],
+      Folio: ['', Validators.required],
+      UsoCFDI: [],
+      Fechafactura: [],
+      Subtotal: [],
+      IVA: [],
+      ISR: [],
+      IEPS: [],
+      Total: [],
+      metodoDePago: [],
+      Pago: [],
+      FechaPago: [],
+      FormaPago: [],
+      ComplementoPago: [],
+      FechaRecibido: [],
+      Monto: [],
+      Recepción: [],
+      FechaRecepción: [],
+      FechaCaducidad: [],
+      Sucursal: [],
+      TipoEgreso: []
+    });
 
     this.formulario = this.fb.group({
       metodoDePago: ['1', Validators.required]
@@ -46,16 +71,6 @@ export class DialogCompraComponent implements OnInit {
       Productos: ['', Validators.required]
     });
   }
-
-/* Obtener lista de proveedores */
-obtenerListaProveedores(){
-  this._entriesService.getListaProveedores().subscribe(
-    response =>{
-      console.log(response);
-      this.proveedores = response;
-    }
-  );
-}
 
   /* FUNCION CERRAR DIALOG*/
   closeDialog() {

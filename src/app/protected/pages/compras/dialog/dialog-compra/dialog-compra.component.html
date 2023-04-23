@@ -9,7 +9,7 @@
 <!-- INICIO CONTENIDO DIALOG -->
 <div mat-dialog-content class="custom-dialog">
 
-  <form autocomplete="off">
+  <form autocomplete="off" [formGroup]="myForm">
 
     <mat-tab-group mat-align-tabs="center">
 
@@ -91,7 +91,7 @@
                 <div class="col">
                   <div class="form-floating mb-3">
                     <input class="form-control" id="inputCDFI" type="text"
-                        formControlName="Uso de CFDI" placeholder="Uso de CFDI" />
+                        formControlName="UsoCFDI" placeholder="Uso de CFDI" />
 
                     <label for="inputCDFI">Uso de CFDI</label>
                   </div>
@@ -102,7 +102,7 @@
                 <div class="col">
                   <div class="form-floating mb-3">
                     <input class="form-control" id="inputFechaFactura" type="date"
-                        formControlName="Fecha de factura" placeholder="fecha de factura"/>
+                        formControlName="Fechafactura" placeholder="fecha de factura"/>
 
                     <label for="inputFechaFactura">Fecha de factura</label>
                   </div>
@@ -223,7 +223,7 @@
                 <div class="col" id="fechaPago" *ngIf="mostrarFechaPago">
                   <div class="form-floating mb-3 col-13 mx-auto">
                     <input class="form-control" id="inputFechaPago" type="date"
-                        formControlName="Fecha de pago" placeholder="Fecha de pago"/>
+                        formControlName="FechaPago" placeholder="Fecha de pago"/>
 
                     <label for="inputFechaPago">Fecha de pago</label>
                   </div>
@@ -261,7 +261,7 @@
                 <!-- SELECT COMPLEMENTO DE PAGO -->
                 <div class="col">
                   <div class="form-floating mb-3 col-13 mx-auto">
-                    <select class="form-control" id="selectComplementoPago" formControlName="Complemento de pago" placeholder="Complemento de pago" (change)="onComplementoChange()">
+                    <select class="form-control" id="selectComplementoPago" formControlName="ComplementoPago" placeholder="Complemento de pago" (change)="onComplementoChange()">
                       <option value="" disabled selected>Selecciona el estado del complemento de pago</option>
                       <option value="Pendiente">Pendiente</option>
                       <option value="Finalizado">Finalizado</option>
@@ -276,7 +276,7 @@
                 <div class="col" id="fechaRecibido" *ngIf="mostrarFechaRecibido">
                   <div class="form-floating mb-3 col-13 mx-auto">
                     <input class="form-control" id="inputFechaRecibido" type="date"
-                          formControlName="Fecha de recibido" placeholder="Fecha de recibido"/>
+                          formControlName="FechaRecibido" placeholder="Fecha de recibido"/>
                     
                     <label for="inputFechaRecibido">Fecha de recibido</label>
                   </div>
@@ -324,7 +324,7 @@
             <div class="col" *ngIf="mostrarFechaRecepcion"> <!-- SE MOSTRARA SI ES QUE SE SELECCIONA RECIBIDO EN EL SELECT ANTERIOR -->
               <div class="form-floating mb-3 col-13 mx-auto">
                 <input class="form-control" id="inputFechaRecepcion" type="date"
-                      formControlName="Fecha de recepción" placeholder="Fecha de recepción"/>
+                      formControlName="FechaRecepción" placeholder="Fecha de recepción"/>
                 
                 <label for="inputFechaRecepcion">Fecha de recepción</label>
               </div>
@@ -335,7 +335,7 @@
             <div class="col" *ngIf="mostrarFechaCaducidad"> <!-- SE MOSTRARA SI ES QUE SE SELECCIONA RECIBIDO EN EL SELECT ANTERIOR -->
               <div class="form-floating mb-3 col-13 mx-auto">
                 <input class="form-control" id="inputCaducidad" type="date"
-                    formControlName="Fecha de caducidad" placeholder="Fecha de caducidad"/>
+                    formControlName="FechaCaducidad" placeholder="Fecha de caducidad"/>
                     
                 <label for="inputCaducidad">Fecha de caducidad</label>
               </div>
@@ -371,7 +371,7 @@
             <!-- INPUT TIPO DE EGRESO -->
             <div class="col">
               <div class="form-floating mb-3 col-13 mx-auto">
-                <select class="form-control" id="selectTipoEgreso" formControlName="Tipo de egreso" placeholder="Tipo de egreso">
+                <select class="form-control" id="selectTipoEgreso" formControlName="TipoEgreso" placeholder="Tipo de egreso">
                   <option value="" disabled selected>Selecciona el tipo de egreso</option>
                   <option value="Gasto">Gasto</option>
                   <option value="Compra">Compra</option>
