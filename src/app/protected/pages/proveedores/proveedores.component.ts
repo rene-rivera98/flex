@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig  } from '@angular/material/dialog';
+import { DialogProveedoresComponent } from './dialog-proveedores/dialog-proveedores.component';
+import { DialogBorrarProveedoresComponent } from './dialog-borrar-proveedores/dialog-borrar-proveedores.component';
+import { DialogEditarProveedorComponent } from './dialog-editar-proveedor/dialog-editar-proveedor.component';
 
 
 @Component({
@@ -47,6 +50,13 @@ export class ProveedoresComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /* FUNCION PARA ABRIR DIALOG*/
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogProveedoresComponent, {
+      disableClose: true, /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    });
+  }
+
   /* EVENTO QUE APLICA EL FILTRO */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -59,10 +69,14 @@ export class ProveedoresComponent implements OnInit {
     dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
     dialogConfig.width = '650px'; // Asignar ancho al dialog
     dialogConfig.height = '650px'; // Asignar ancho al dialog
-    const dialogRef = this.dialog.open(ProveedoresComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DialogEditarProveedorComponent, dialogConfig);
   }
 
   delete(element: any) {
-    
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.width = '650px'; // Asignar ancho al dialog
+    dialogConfig.height = '650px'; // Asignar ancho al dialog
+    const dialogRef = this.dialog.open(DialogBorrarProveedoresComponent, dialogConfig);
   }
 }

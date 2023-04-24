@@ -38,6 +38,8 @@ import { DialogEditarCompraComponent } from './pages/compras/dialog-editar-compr
 import { DialogEditarUsuarioComponent } from './pages/usuarios/dialog-editar-usuario/dialog-editar-usuario.component';
 import { DialogProveedoresComponent } from './pages/proveedores/dialog-proveedores/dialog-proveedores.component';
 import { DialogEditarProveedorComponent } from './pages/proveedores/dialog-editar-proveedor/dialog-editar-proveedor.component';
+import { DialogBorrarUsuarioComponent } from './pages/usuarios/dialog-borrar-usuario/dialog-borrar-usuario.component';
+import { DialogBorrarProveedoresComponent } from './pages/proveedores/dialog-borrar-proveedores/dialog-borrar-proveedores.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DialogEditarProveedorComponent } from './pages/proveedores/dialog-edita
     DialogEditarCompraComponent,
     DialogEditarUsuarioComponent,
     DialogProveedoresComponent,
-    DialogEditarProveedorComponent
+    DialogEditarProveedorComponent,
+    DialogBorrarUsuarioComponent,
+    DialogBorrarProveedoresComponent
     
   ],
   imports: [

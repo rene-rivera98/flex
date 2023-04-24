@@ -1,1 +1,164 @@
-<p>dialog-editar-proveedor works!</p>
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>Datos de proveedor a modificar:</h1>
+<!-- FIN TITULO DIALOG -->
+
+<!-- INICIO CONTENIDO DIALOG -->
+<div mat-dialog-content class="custom-dialog">
+
+  <form autocomplete="off">
+
+    <!-- FILA DE INPUT RFC, NOMBRE Y CP -->
+      <div class="row mt-1">
+        <!-- INPUT RFC -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputRFCEd" type="text"
+                formControlName="RFCEd" placeholder="RFC"/>
+            <label for="inputRFCEd">RFC</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT NOMBRE -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputNombreProveedorEd" type="text"
+                formControlName="NombreProveedorEd" placeholder="Nombre del proveedor" />
+            <label for="inputNombreProveedorEd">Nombre del proveedor</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-feedback">
+                La contraseña es obligatoria.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT CP -->
+        <div class="col">
+            <div class="form-floating mb-3">
+              <input class="form-control" id="inputCPProveedorEd" type="number"
+                  formControlName="CPProveedorEd" placeholder="Código Postal" />
+              <label for="inputCPProveedorEd">Código Postal</label>
+              <!-- Aqui falta la validacion -->
+              <div class="invalid-feedback">
+                  La contraseña es obligatoria.
+              </div>
+            </div>
+          </div>
+      
+    </div>
+    <!-- FIN FILA -->
+
+    <!-- FILA DE INPUT REGIMEN FISCAL, CORREO Y TELEFONO 1 Y 2 -->
+      <div class="row">
+        <!-- INPUT REGIMEN -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputRegimenFiscalEd" type="text"
+                formControlName="RegimenFiscalEd" placeholder="Regimen fiscal"/>
+            <label for="inputRegimenFiscalEd">Regimen fiscal</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT TELEFONO 1 -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputTelefono1Ed" type="number" pattern="[0-9]{10}"
+                formControlName="Telefono1Ed" placeholder="Teléfono #1" />
+            <label for="inputTelefono1Ed">Teléfono #1</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-feedback">
+                La contraseña es obligatoria.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT TELEFONO 2 -->
+        <div class="col">
+            <div class="form-floating mb-3">
+              <input class="form-control" id="inputTelefono2Ed" type="number" pattern="[0-9]{10}"
+                  formControlName="Telefono2Ed" placeholder="Teléfono #2" />
+              <label for="inputTelefono2Ed">Teléfono #2</label>
+              <!-- Aqui falta la validacion -->
+              <div class="invalid-feedback">
+                  La contraseña es obligatoria.
+              </div>
+            </div>
+          </div>
+
+      </div>
+    <!-- FIN FILA -->
+
+    <!-- FILA DE INPUT BANCO, CLAVE Y CUENTA -->
+    <div class="row">
+
+    <!-- INPUT BANCO-->
+      <div class="form-floating mb-3 col-13 mx-auto">
+        <input class="form-control" id="inputNombreBancoEd" type="text" 
+            formControlName="NombreBancoEd" placeholder="Nombre del banco" />
+        <label for="inputNombreBancoEd">Nombre del banco</label>
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-feedback">
+            La contraseña es obligatoria.
+        </div>
+      </div>
+    <!-- FIN INPUT -->
+
+    <!-- INPUT CLAVE -->
+      <div class="form-floating mb-3 col-13 mx-auto">
+        <input class="form-control" id="inputClaveBEd" type="text" 
+            formControlName="ClaveBEd" placeholder="Clave interbancaria" />
+        <label for="inputClaveBEd">Clave interbancaria</label>
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-feedback">
+            La contraseña es obligatoria.
+        </div>
+      </div>
+    <!-- FIN INPUT -->
+    
+    <!-- INPUT CUENTA -->
+    <div class="form-floating mb-3 col-13 mx-auto">
+        <input class="form-control" id="inputCuentaBEd" type="text" 
+            formControlName="CuentaBEd" placeholder="Cuenta bancaria" />
+        <label for="inputCuentaBEd">Cuenta bancaria</label>
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-feedback">
+            La contraseña es obligatoria.
+        </div>
+      </div>
+    <!-- FIN INPUT -->
+
+    </div>
+    <!-- FIN FILA -->
+
+    
+      <!-- DIV BOTONES -->
+      <div class="row">
+        <div class="col">
+          <div class="d-flex align-items-center mt-4">
+            <button class="btn btn-warning mx-auto col-6" type="submit">
+              Registrar
+            </button>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="d-flex align-items-center mt-4">
+            <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- FIN DIV BOTONES -->
+
+  </form>
+  
+</div>
+<!-- FIN CONTENIDO DE DIALOG -->

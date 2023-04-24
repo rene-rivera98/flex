@@ -14,6 +14,8 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig  } from '@angular/material/dialog';
+import { DialogBorrarUsuarioComponent } from './dialog-borrar-usuario/dialog-borrar-usuario.component';
+import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-editar-usuario.component';
 
 
 @Component({
@@ -83,11 +85,15 @@ edit(element: any): void {
   dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
   dialogConfig.width = '650px'; // Asignar ancho al dialog
   dialogConfig.height = '650px'; // Asignar ancho al dialog
-  const dialogRefEd = this.dialog.open(UsuariosComponent, dialogConfig);
+  const dialogRefEd = this.dialog.open(DialogEditarUsuarioComponent, dialogConfig);
 }
 
 delete(element: any) {
-  
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+  dialogConfig.width = '650px'; // Asignar ancho al dialog
+  dialogConfig.height = '650px'; // Asignar ancho al dialog
+  const dialogRefEd = this.dialog.open(DialogBorrarUsuarioComponent, dialogConfig);
 }
  
 }

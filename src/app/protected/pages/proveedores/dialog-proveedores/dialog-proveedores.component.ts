@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ProveedoresComponent } from '../proveedores.component';
 
 @Component({
   selector: 'app-dialog-proveedores',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogProveedoresComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<ProveedoresComponent>) { }
 
   ngOnInit(): void {
+  }
+
+  /* FUNCION CERRAR DIALOG*/
+  closeDialog() {
+    this.dialogRef.close();
   }
 
 }
