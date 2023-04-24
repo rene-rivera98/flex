@@ -6,7 +6,8 @@ import { ApiRequestService } from '../../services/api-request.service';
 import { compra } from 'src/app/interfaces/interface';
 
 /* SE IMPORTA EL DIALOG COMPRAS*/
-import { DialogCompraComponent } from './dialog/dialog-compra/dialog-compra.component';
+import { DialogCompraComponent } from './dialog-compra/dialog-compra.component';
+import { DialogEditarCompraComponent } from './dialog-editar-compra/dialog-editar-compra.component';
 /**/
 
 import { Observable } from 'rxjs';
@@ -36,7 +37,8 @@ export class ComprasComponent {
     'referencia',
     'fechaFactura',
     'complementoPago',
-    'importeTotal'
+    'importeTotal',
+    'opciones'
   ];
 
   /* Variable que contiene los datos de compras */
@@ -70,6 +72,19 @@ export class ComprasComponent {
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+
+ /* FUNCION PARA ABRIR DIALOG EDIT*/
+edit(element: any): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+  dialogConfig.width = '950px'; // Asignar ancho al dialog
+  dialogConfig.height = '600px'; // Asignar ancho al dialog
+  const dialogRefEd = this.dialog.open(DialogEditarCompraComponent, dialogConfig);
+}
+
+delete(element: any) {
+  
 }
 
 }

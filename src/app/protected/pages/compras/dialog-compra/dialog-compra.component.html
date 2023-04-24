@@ -9,7 +9,7 @@
 <!-- INICIO CONTENIDO DIALOG -->
 <div mat-dialog-content class="custom-dialog">
 
-  <form autocomplete="off" [formGroup]="myForm">
+  <form autocomplete="off" [formGroup]="FormDialogCompra">
 
     <mat-tab-group mat-align-tabs="center">
 
@@ -35,6 +35,7 @@
                 <div class="form-floating mb-3 mt-3">
                   <select class="form-control" id="selectProductos" formControlName="Productos" placeholder="Productos">
                     <option value="" disabled selected>Selecciona un producto</option>
+                    <!-- OPCIONES SOLO DE EJEMPLO -->
                     <option value="Calcetas">Calcetas</option>
                     <option value="Bebidas">Bebidas</option>
                     <option value="Ropa">Ropa</option>
@@ -271,6 +272,41 @@
                   </div>
                 </div>
                 <!-- FIN SELECT COMPLEMENTO DE PAGO -->
+
+                <!-- INPUT FECHA DE PAGO EN PENDIENTE -->
+                <div class="col" id="fechaPagoPendiente" *ngIf="mostrarFechaPagoPendiente">
+                  <div class="form-floating mb-3 col-13 mx-auto">
+                    <input class="form-control" id="inputfechaPagoPendiente" type="date"
+                          formControlName="FechaPagoPendiente" placeholder="Fecha de pago"/>
+                    
+                    <label for="inputFechaPagoPendiente">Fecha de pago</label>
+                  </div>
+                </div>
+                <!-- FIN INPUT FECHA DE PAGO PENDIENTE -->
+
+                <!-- INPUT MONTO DE PAGO PENDIENTE-->
+                <div class="col" id="MontoPendiente" *ngIf="mostrarMontoPendiente">
+                  <div class="form-floating mb-3 col-13 mx-auto">
+                    <input class="form-control" id="inputMontoPendiente" type="number"
+                            formControlName="MontoPendiente" placeholder="Monto" />
+
+                    <label for="inputMontoPendiente">Monto</label>
+                  </div>
+                </div>
+                <!-- FIN INPUT MONTO DE PAGO PENDIENTE -->
+
+                <!-- INPUT PAGO INSOLUTO (CALCULO DE LO QUE RESTA DE TOTAL CON EL MONTO)-->
+                <div class="col" id="PagoInsoluto" *ngIf="mostrarPagoInsoluto">
+                  <div class="form-floating mb-3 col-13 mx-auto">
+                    <input class="form-control" id="inputPagoInsoluto" type="number"
+                            formControlName="PagoInsoluto" placeholder="Pago insoluto" readonly/>
+
+                    <label for="inputPagoInsoluto">Pago insoluto</label>
+                  </div>
+                </div>
+                <!-- FIN INPUT MONTO DE PAGO PENDIENTE -->
+
+                <!-- DIVISION PAGO PENDIENTE Y FINALIZADO -->
 
                 <!-- INPUT FECHA DE RECIBIDO -->
                 <div class="col" id="fechaRecibido" *ngIf="mostrarFechaRecibido">

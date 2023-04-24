@@ -12,7 +12,7 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
 })
 export class DialogCompraComponent implements OnInit {
 
-  myForm!: FormGroup;
+  FormDialogCompra!: FormGroup;
 
 /* Variables para metodo de pago */
   formulario!: FormGroup;
@@ -24,6 +24,9 @@ export class DialogCompraComponent implements OnInit {
   mostrarMonto = false;
   mostrarFechaRecepcion = false;
   mostrarFechaCaducidad = false;
+  mostrarFechaPagoPendiente = false;
+  mostrarMontoPendiente = false;
+  mostrarPagoInsoluto = false;
 
 /* Variables para agregar productos a tabla */
   productosForm!: FormGroup;
@@ -32,13 +35,13 @@ export class DialogCompraComponent implements OnInit {
   constructor(private _entriesService:ApiRequestService, 
               public dialogRef: MatDialogRef<DialogCompraComponent>,
               private fb: FormBuilder) { 
-                this.myForm = new FormGroup({
+                this.FormDialogCompra = new FormGroup({
                   myFormControlName: new FormControl()
                 });
               }
 
   ngOnInit(): void {
-    this.myForm = this.fb.group({
+    this.FormDialogCompra = this.fb.group({
       Proveedor: ['', Validators.required],
       Productos: ['', Validators.required],
       Folio: ['', Validators.required],
@@ -103,6 +106,9 @@ export class DialogCompraComponent implements OnInit {
     const valorComplemento = selectComplemento.value;
     this.mostrarFechaRecibido = valorComplemento === 'Finalizado';
     this.mostrarMonto = valorComplemento === 'Finalizado';
+    this.mostrarFechaPagoPendiente = valorComplemento === 'Pendiente';
+    this.mostrarMontoPendiente = valorComplemento === 'Pendiente';
+    this.mostrarPagoInsoluto = valorComplemento == 'Pendiente';
   }
   
   onRecepcionChange() {

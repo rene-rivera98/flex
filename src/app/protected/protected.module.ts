@@ -33,7 +33,8 @@ import { RInsumosComponent } from './pages/r-insumos/r-insumos.component';
 import { RMermaComponent } from './pages/r-merma/r-merma.component';
 import { RVentasComponent } from './pages/r-ventas/r-ventas.component';
 import { DialogUsuarioComponent } from './pages/usuarios/dialog/dialog-usuario/dialog-usuario.component';
-import { DialogCompraComponent } from './pages/compras/dialog/dialog-compra/dialog-compra.component';
+import { DialogCompraComponent } from './pages/compras/dialog-compra/dialog-compra.component';
+import { DialogEditarCompraComponent } from './pages/compras/dialog-editar-compra/dialog-editar-compra.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { DialogCompraComponent } from './pages/compras/dialog/dialog-compra/dial
     RVentasComponent,
     DialogUsuarioComponent,
     DialogCompraComponent,
+    DialogEditarCompraComponent,
   ],
   imports: [
     CommonModule,
