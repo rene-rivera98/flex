@@ -13,7 +13,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'compras', loadChildren: () =>
+    path: '', loadChildren: () =>
     import('./protected/protected.module').then(m => m.ProtectedModule),
     canActivate:[ValidarTokenGuard],
     canLoad: [ValidarTokenGuard]
@@ -22,10 +22,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'auth'
   }
-
-  // { path: 'login', component: LoginComponent },
-  // { path: 'admin', component: AdminLayoutComponent },
-  // { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 
 @NgModule({

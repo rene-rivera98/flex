@@ -6,15 +6,9 @@ import { ComprasComponent } from './pages/compras/compras.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProveedoresComponent,
-    children: [
-      { path: 'registro', component: DashboardComponent },
-      { path: '**', redirectTo: '/compras' }
-      // { path: 'auth', component: LoginComponent },
-    ]
-  }
+  { path: 'usuarios', component: UsuariosComponent},
+  { path: 'compras', component: ComprasComponent },
+  { path: 'proveedores', component: ProveedoresComponent}
 ];
 
 @NgModule({
