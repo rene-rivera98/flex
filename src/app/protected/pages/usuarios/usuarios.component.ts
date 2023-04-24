@@ -6,14 +6,14 @@ import { ApiRequestService } from '../../services/api-request.service';
 import { Ususario} from '../../../interfaces/interface';
 
 /* SE IMPORTA EL DIALOG USUARIOS*/
-import { DialogUsuarioComponent } from './dialog/dialog-usuario/dialog-usuario.component';
+import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.component';
 
 import { Observable } from 'rxjs';
 
 /* LIBRERIAS DE MATERIAL ANGULAR*/
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig  } from '@angular/material/dialog';
 
 
 @Component({
@@ -39,7 +39,8 @@ export class UsuariosComponent {
     'celular',
     'email',
     'createdAt',
-    'updatedAt'
+    'updatedAt',
+    'opciones'
   ];
 
   /* Variable que contiene los datos de usuarios */
@@ -75,5 +76,18 @@ export class UsuariosComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+   /* FUNCION PARA ABRIR DIALOG EDIT*/
+edit(element: any): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+  dialogConfig.width = '650px'; // Asignar ancho al dialog
+  dialogConfig.height = '650px'; // Asignar ancho al dialog
+  const dialogRefEd = this.dialog.open(UsuariosComponent, dialogConfig);
+}
+
+delete(element: any) {
+  
+}
  
 }

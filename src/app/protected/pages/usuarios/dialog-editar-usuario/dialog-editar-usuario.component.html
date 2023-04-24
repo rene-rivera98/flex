@@ -1,0 +1,135 @@
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>Modificar datos de usuario</h1>
+<!-- FIN TITULO DIALOG -->
+
+<!-- INICIO CONTENIDO DIALOG -->
+<div mat-dialog-content class="custom-dialog">
+
+  <form autocomplete="off">
+
+    <!-- FILA DE INPUT NOMBRES Y APELLIDOS -->
+      <div class="row mt-1">
+        <!-- INPUT NOMBRES -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputNombreEd" type="text"
+                formControlName="NombreEd" placeholder="Nombre(s)"/>
+            <label for="inputNombreEd">Nombre(s)</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUTS APELLIDOS -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputApellidoPEd" type="text"
+                formControlName="ApellidoPaternoEd" placeholder="Apellido Paterno" />
+            <label for="inputApellidoPEd">Apellido Paterno</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-feedback">
+                La contraseña es obligatoria.
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- FIN FILA -->
+
+    <!-- FILA DE INPUT APELLIDO MATERNO Y TELEFONO -->
+      <div class="row">
+        <!-- INPUT APELLIDO MATERNO -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputApellidoMaternoEd" type="text"
+                formControlName="ApellidoMaternoEd" placeholder="Apellido Materno"/>
+            <label for="inputApellidoMEd">Apellido Materno</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT TELEFONO -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input class="form-control" id="inputTelefonoEd" type="tel" pattern="[0-9]{10}"
+                formControlName="TelefonoEd" placeholder="Teléfono" />
+            <label for="inputTelefonoEd">Teléfono</label>
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-feedback">
+                La contraseña es obligatoria.
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- FIN FILA -->
+
+    <!-- INPUT EMAIL-->
+      <div class="form-floating mb-3 col-13 mx-auto">
+        <input class="form-control" id="inputEmailEd" type="email" pattern="[0-9]{10}"
+            formControlName="CorreoElectrónicoEd" placeholder="Correo Electrónico" />
+        <label for="inputEmailEd">Correo Electrónico</label>
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-feedback">
+            La contraseña es obligatoria.
+        </div>
+      </div>
+    <!-- FIN INPUT -->
+
+    <!-- INPUT FECHA NACIMIENTO -->
+      <div class="form-floating mb-3 col-13 mx-auto">
+        <input class="form-control" id="inputNacimientoEd" type="date" min="1930-01-01" max="2016-12-31"
+            formControlName="FechaNacimientoEd" placeholder="Fecha de nacimiento"/>
+        <label for="inputNacimientoEd">Fecha de nacimiento</label>
+
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+      </div>
+    <!-- FIN  INPUT -->
+    
+    <!-- INPUT TIPO DE USUARIO -->
+      <div class="form-floating mb-3 col-13 mx-auto">
+        <select class="form-control" id="selectRolEd" formControlName="RolEd" placeholder="Rol">
+          <option value="" disabled selected>Seleccionar Rol</option>
+          <option value="Administrador">Administrador</option>
+          <option value="Vendedor">Vendedor</option>
+          <option value="Almacen">Almacen</option>
+        </select>
+        <label for="selectRolEd">Rol</label>
+
+        <!-- Aqui falta la validacion -->
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+      </div>
+    <!-- FIN INPUT -->
+
+      <!-- DIV BOTONES -->
+      <div class="row">
+        <div class="col">
+          <div class="d-flex align-items-center mt-4">
+            <button class="btn btn-warning mx-auto col-6" type="submit">
+              Modificar
+            </button>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="d-flex align-items-center mt-4">
+            <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- FIN DIV BOTONES -->
+
+  </form>
+  
+</div>
+<!-- FIN CONTENIDO DE DIALOG -->

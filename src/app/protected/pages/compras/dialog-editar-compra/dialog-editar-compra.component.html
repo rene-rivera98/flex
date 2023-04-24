@@ -1,65 +1,101 @@
 <!-- TITULO DIALOG -->
 <h1 mat-dialog-title>
-    <div class="text-center">
-      <h1>Agregar monto</h1>
-    </div>
-  </h1>
-  <!-- FIN TITULO DIALOG -->
-  
-  <!-- INICIO CONTENIDO DIALOG -->
-  <div mat-dialog-content class="custom-dialog">
-  
-    <form autocomplete="off" [formGroup]="FormEditarCompra">
-  
-      <div class="row">
-        <!-- INPUT FECHA DE PAGO NUEVO-->
-        <div class="col" id="fechaNuevoPago">
-            <div class="form-floating mb-3 col-13 mx-auto">
-              <input class="form-control" id="inputfechaNuevoPago" type="date"
-                  formControlName="fechaNuevoMonto" placeholder="Fecha de pago"/>
-
-              <label for="inputfechaNuevoPago">Fecha de pago</label>
-            </div>
-        </div>
-        <!-- FIN INPUT FECHA DE PAGO NUEVO -->
-  
-        <!-- INPUT MONTO DE PAGO NUEVO-->
-        <div class="col" id="MontoNuevoPendiente">
-            <div class="form-floating mb-3 col-13 mx-auto">
-              <input class="form-control" id="inputMontoNuevoPendiente" type="number"
-                      formControlName="MontoNuevoPendiente" placeholder="Monto" />
-
-              <label for="inputMontoNuevoPendiente">Monto</label>
-            </div>
-        </div>
-        <!-- FIN INPUT MONTO DE PAGO NUEVO -->
-
-        <!-- BOTON AGREGAR -->
-        <div class="col">
-          <div class="d-flex align-items-center mt-4">
-            <button class="btn btn-warning mx-auto col-6" (click)="agregarPago()">
-              Agregar
-            </button>          
-          </div>
-        </div>
-        <!-- FIN BOTON AGREGAR -->
-
-      </div>
-      <!-- FIN ROW -->
-      
-        <table #tablaPagos class="table table-striped table-bordered" [(ngModel)]="pagos">
-          <thead class="thead-dark">
-            <tr>
-              <th>Lista de pagos:</th>
-            </tr>
-
-          </thead>
-            <tbody>
-              <!-- aquí se agregarán los pagos -->
-            </tbody>
-        </table>
-
-    </form>
-    
+  <div class="text-center">
+    <h1>Agregar pago</h1>
   </div>
-  <!-- FIN CONTENIDO DE DIALOG -->
+</h1>
+<!-- FIN TITULO DIALOG -->
+
+<!-- INICIO CONTENIDO DIALOG -->
+<div mat-dialog-content class="custom-dialog">
+
+  <form autocomplete="off" [formGroup]="FormEditarCompra">
+
+    <div class="row">
+      <!-- INPUT FECHA DE PAGO NUEVO-->
+      <div class="col" id="fechaNuevoPago">
+        <div class="form-floating mb-3 mt-2 col-13 mx-auto">
+          <input class="form-control" id="inputfechaNuevoPago" type="date"
+                 formControlName="fechaNuevoMonto" placeholder="Fecha de pago"/>
+
+          <label for="inputfechaNuevoPago">Fecha de pago</label>
+        </div>
+      </div>
+      <!-- FIN INPUT FECHA DE PAGO NUEVO -->
+
+      <!-- INPUT MONTO DE PAGO NUEVO-->
+      <div class="col" id="MontoNuevoPendiente">
+        <div class="form-floating mb-3 mt-2 col-13 mx-auto">
+          <input class="form-control" id="inputMontoNuevoPendiente" type="text"
+                formControlName="MontoNuevoPendiente" placeholder="Monto" />
+
+          <label for="inputMontoNuevoPendiente">Monto</label>
+        </div>
+      </div>
+      <!-- FIN INPUT MONTO DE PAGO NUEVO -->
+
+      <!-- BOTON AGREGAR -->
+      <div class="col">
+        <div class="form-floating mb-3 mt-3 col-13 mx-auto">
+          <button class="btn btn-warning mx-auto col-6" (click)="agregarPago()">
+            Agregar
+          </button>
+        </div>
+      </div>
+      <!-- FIN BOTON AGREGAR -->
+
+    </div>
+    <!-- FIN ROW -->
+
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>Fecha</th>
+        <th>Monto</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pago of pagos">
+        <td>{{ pago.fecha }}</td>
+        <td>{{ pago.monto }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- INPUT PAGO INSOLUTO (LO QUE FALTA, HARÁ LA RESTA DEL TOTAL CON EL MONTO)-->
+    <div class="col" id="PagoInsolutoEd">
+      <div class="form-floating mb-3 mt-2 col-13 mx-auto">
+        <input class="form-control" id="inputPagoInsolutoEd" type="text"
+              formControlName="PagoInsolutoEd" placeholder="Pago insoluto" readonly/>
+
+        <label for="PagoInsolutoEd">Pago insoluto</label>
+      </div>
+    </div>
+    <!-- FIN INPUT PAGO INSOLUTO -->
+
+    <!------------------------------- BOTONES CERRAR Y REGISTRAR ------------------------------------------------------------------------->
+    <div class="row col-13 mx-auto">
+
+      <div class="col">
+        <div class="d-flex align-items-center mt-4">
+          <button class="btn btn-warning mx-auto col-6" type="submit">
+            Registrar
+          </button>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="d-flex align-items-center mt-4">
+          <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+            Cerrar
+          </button>
+        </div>
+      </div>
+      
+    </div>
+    <!-- FIN DIV BOTONES -->
+
+  </form>
+
+</div>
+<!-- FIN CONTENIDO DE DIALOG -->

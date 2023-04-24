@@ -32,9 +32,12 @@ import { FacturasComponent } from './pages/facturas/facturas.component';
 import { RInsumosComponent } from './pages/r-insumos/r-insumos.component';
 import { RMermaComponent } from './pages/r-merma/r-merma.component';
 import { RVentasComponent } from './pages/r-ventas/r-ventas.component';
-import { DialogUsuarioComponent } from './pages/usuarios/dialog/dialog-usuario/dialog-usuario.component';
+import { DialogUsuarioComponent } from './pages/usuarios/dialog-usuario/dialog-usuario.component';
 import { DialogCompraComponent } from './pages/compras/dialog-compra/dialog-compra.component';
 import { DialogEditarCompraComponent } from './pages/compras/dialog-editar-compra/dialog-editar-compra.component';
+import { DialogEditarUsuarioComponent } from './pages/usuarios/dialog-editar-usuario/dialog-editar-usuario.component';
+import { DialogProveedoresComponent } from './pages/proveedores/dialog-proveedores/dialog-proveedores.component';
+import { DialogEditarProveedorComponent } from './pages/proveedores/dialog-editar-proveedor/dialog-editar-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,10 @@ import { DialogEditarCompraComponent } from './pages/compras/dialog-editar-compr
     DialogUsuarioComponent,
     DialogCompraComponent,
     DialogEditarCompraComponent,
+    DialogEditarUsuarioComponent,
+    DialogProveedoresComponent,
+    DialogEditarProveedorComponent
+    
   ],
   imports: [
     CommonModule,

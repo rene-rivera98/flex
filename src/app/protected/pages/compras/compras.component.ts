@@ -78,8 +78,8 @@ applyFilter(event: Event) {
 edit(element: any): void {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
-  dialogConfig.width = '950px'; // Asignar ancho al dialog
-  dialogConfig.height = '600px'; // Asignar ancho al dialog
+  dialogConfig.width = '650px'; // Asignar ancho al dialog
+  dialogConfig.height = '650px'; // Asignar ancho al dialog
   const dialogRefEd = this.dialog.open(DialogEditarCompraComponent, dialogConfig);
 }
 
