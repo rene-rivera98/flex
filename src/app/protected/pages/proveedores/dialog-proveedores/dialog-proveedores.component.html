@@ -1,5 +1,9 @@
 <!-- TITULO DIALOG -->
-<h1 mat-dialog-title>Datos de proveedor nuevo:</h1>
+<h1 mat-dialog-title>
+  <div class="text-center">
+    <h1>Datos de nuevo proveedor</h1>
+  </div>
+</h1>
 <!-- FIN TITULO DIALOG -->
 
 <!-- INICIO CONTENIDO DIALOG -->
@@ -14,11 +18,8 @@
           <div class="form-floating mb-3">
             <input class="form-control" id="inputRFC" type="text"
                 formControlName="RFC" placeholder="RFC"/>
+
             <label for="inputRFC">RFC</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
           </div>
         </div>
 
@@ -27,11 +28,8 @@
           <div class="form-floating mb-3">
             <input class="form-control" id="inputNombreProveedor" type="text"
                 formControlName="NombreProveedor" placeholder="Nombre del proveedor" />
+
             <label for="inputNombreProveedor">Nombre del proveedor</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-feedback">
-                La contraseña es obligatoria.
-            </div>
           </div>
         </div>
 
@@ -40,16 +38,13 @@
             <div class="form-floating mb-3">
               <input class="form-control" id="inputCPProveedor" type="number"
                   formControlName="CPProveedor" placeholder="Código Postal" />
+
               <label for="inputCPProveedor">Código Postal</label>
-              <!-- Aqui falta la validacion -->
-              <div class="invalid-feedback">
-                  La contraseña es obligatoria.
-              </div>
             </div>
           </div>
       
     </div>
-    <!-- FIN FILA -->
+    <!-- FIN FILA s-->
 
     <!-- FILA DE INPUT REGIMEN FISCAL, CORREO Y TELEFONO 1 Y 2 -->
       <div class="row col-13 mx-auto">
@@ -58,11 +53,8 @@
           <div class="form-floating mb-3">
             <input class="form-control" id="inputRegimenFiscal" type="text"
                 formControlName="RegimenFiscal" placeholder="Regimen fiscal"/>
+
             <label for="inputRegimenFiscal">Regimen fiscal</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
           </div>
         </div>
 
@@ -71,11 +63,8 @@
           <div class="form-floating mb-3">
             <input class="form-control" id="inputTelefono1" type="number" pattern="[0-9]{10}"
                 formControlName="Telefono1" placeholder="Teléfono #1" />
+
             <label for="inputTelefono1">Teléfono #1</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-feedback">
-                La contraseña es obligatoria.
-            </div>
           </div>
         </div>
 
@@ -84,11 +73,8 @@
             <div class="form-floating mb-3">
               <input class="form-control" id="inputTelefono2" type="number" pattern="[0-9]{10}"
                   formControlName="Telefono2" placeholder="Teléfono #2" />
+
               <label for="inputTelefono2">Teléfono #2</label>
-              <!-- Aqui falta la validacion -->
-              <div class="invalid-feedback">
-                  La contraseña es obligatoria.
-              </div>
             </div>
           </div>
 
@@ -111,6 +97,7 @@
         <div class="form-floating mb-3 col-13 mx-auto">
           <input class="form-control" id="inputNombreBanco" type="text" 
               formControlName="NombreBanco" placeholder="Nombre del banco" />
+
           <label for="inputNombreBanco">Nombre del banco</label>
         </div>
       </div>
@@ -121,6 +108,7 @@
         <div class="form-floating mb-3 col-13 mx-auto">
           <input class="form-control" id="inputClaveB" type="text" 
               formControlName="ClaveB" placeholder="Clave interbancaria" />
+
           <label for="inputClaveB">Clave interbancaria</label>
         </div>
       </div>
@@ -131,6 +119,7 @@
         <div class="form-floating mb-3 col-13 mx-auto">
           <input class="form-control" id="inputCuentaB" type="text" 
               formControlName="CuentaB" placeholder="Cuenta bancaria" />
+
           <label for="inputCuentaB">Cuenta bancaria</label>
         </div>
       </div>
