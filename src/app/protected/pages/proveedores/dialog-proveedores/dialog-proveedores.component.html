@@ -8,7 +8,7 @@
   <form autocomplete="off">
 
     <!-- FILA DE INPUT RFC, NOMBRE Y CP -->
-      <div class="row mt-1">
+      <div class="row mt-1 row col-13 mx-auto">
         <!-- INPUT RFC -->
         <div class="col">
           <div class="form-floating mb-3">
@@ -52,7 +52,7 @@
     <!-- FIN FILA -->
 
     <!-- FILA DE INPUT REGIMEN FISCAL, CORREO Y TELEFONO 1 Y 2 -->
-      <div class="row">
+      <div class="row col-13 mx-auto">
         <!-- INPUT REGIMEN -->
         <div class="col">
           <div class="form-floating mb-3">
@@ -95,51 +95,53 @@
       </div>
     <!-- FIN FILA -->
 
+    <!-- SEPARADOR -->
+    <div class="row mt-1 row col-13 mx-auto">
+      <div class="col">
+        <mat-divider>
+        </mat-divider>    
+      </div>
+    </div>
+
     <!-- FILA DE INPUT BANCO, CLAVE Y CUENTA -->
-    <div class="row">
+    <div class="row mt-3 col-13 mx-auto">
 
-    <!-- INPUT BANCO-->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputNombreBanco" type="text" 
-            formControlName="NombreBanco" placeholder="Nombre del banco" />
-        <label for="inputNombreBanco">Nombre del banco</label>
-        <!-- Aqui falta la validacion -->
-        <div class="invalid-feedback">
-            La contraseña es obligatoria.
+      <!-- INPUT BANCO-->
+      <div class="col">
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <input class="form-control" id="inputNombreBanco" type="text" 
+              formControlName="NombreBanco" placeholder="Nombre del banco" />
+          <label for="inputNombreBanco">Nombre del banco</label>
         </div>
       </div>
-    <!-- FIN INPUT -->
+      <!-- FIN INPUT -->
 
-    <!-- INPUT CLAVE -->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputClaveB" type="text" 
-            formControlName="ClaveB" placeholder="Clave interbancaria" />
-        <label for="inputClaveB">Clave interbancaria</label>
-        <!-- Aqui falta la validacion -->
-        <div class="invalid-feedback">
-            La contraseña es obligatoria.
+      <!-- INPUT CLAVE -->
+      <div class="col">
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <input class="form-control" id="inputClaveB" type="text" 
+              formControlName="ClaveB" placeholder="Clave interbancaria" />
+          <label for="inputClaveB">Clave interbancaria</label>
         </div>
       </div>
-    <!-- FIN INPUT -->
-    
-    <!-- INPUT CUENTA -->
-    <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputCuentaB" type="text" 
-            formControlName="CuentaB" placeholder="Cuenta bancaria" />
-        <label for="inputCuentaB">Cuenta bancaria</label>
-        <!-- Aqui falta la validacion -->
-        <div class="invalid-feedback">
-            La contraseña es obligatoria.
+      <!-- FIN INPUT -->
+
+      <!-- INPUT CUENTA -->
+      <div class="col">
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <input class="form-control" id="inputCuentaB" type="text" 
+              formControlName="CuentaB" placeholder="Cuenta bancaria" />
+          <label for="inputCuentaB">Cuenta bancaria</label>
         </div>
       </div>
-    <!-- FIN INPUT -->
+      <!-- FIN INPUT -->
 
     </div>
     <!-- FIN FILA -->
 
     
       <!-- DIV BOTONES -->
-      <div class="row">
+      <div class="row col-13 mx-auto">
         <div class="col">
           <div class="d-flex align-items-center mt-4">
             <button class="btn btn-warning mx-auto col-6" type="submit">
