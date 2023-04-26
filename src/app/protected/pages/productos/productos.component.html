@@ -1,8 +1,92 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <app-admin-layout>
+<app-admin-layout>
 
-    </app-admin-layout>
-</body>
-</html>
+    <mat-card>
+        <mat-card-header class="d-flex align-items-center">
+            <h1 class="mx-auto">REGISTRO DE PRODUCTOS</h1>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
+                <!-- BOTON CREAR -->
+                <div>
+                  <button type="button" class="btn btn-warning" (click)="openDialog()">Registrar producto</button>
+                </div>
+                <!-- FIN BOTON -->
+              
+                <!-- FILTRO -->  
+                <div>
+                  <input class="search-input w-100" matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+                </div>
+                <!-- FIN FILTRO -->
+            </div>
+            
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+
+                <!-- Codigo -->
+                <ng-container matColumnDef="codigoP">
+                  <th mat-header-cell *matHeaderCellDef> Código </th>
+                  <td mat-cell *matCellDef="let element"> {{element.codigoP}}</td>
+                </ng-container>
+              
+                <!-- Nombre producto -->
+                <ng-container matColumnDef="nombreProducto">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombreProducto}} </td>
+                </ng-container>
+              
+                <!-- Tamaño de producto -->
+                <ng-container matColumnDef="tamanioProducto">
+                    <th mat-header-cell *matHeaderCellDef> Tamaño </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tamanioProducto}} </td>
+                  </ng-container>
+
+                <!-- Talla de producto -->
+                <ng-container matColumnDef="tallaProducto">
+                  <th mat-header-cell *matHeaderCellDef> Talla </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tallaProducto}} </td>
+                </ng-container>
+
+                <!-- Existencias-->
+                <ng-container matColumnDef="stockProducto">
+                    <th mat-header-cell *matHeaderCellDef> Existencias </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stockProductos}} </td>
+                </ng-container>
+
+                <!-- Fecha de alta -->
+                <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef> Alta </th>
+                    <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
+                </ng-container>
+                
+                <!-- Ultima modificacion -->
+                <ng-container matColumnDef="updatedAt">
+                    <th mat-header-cell *matHeaderCellDef> Actualización </th>
+                    <td mat-cell *matCellDef="let element"> {{element.updatedAt}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="opciones">
+                  <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button *ngIf="element" type="button" class="btn btn-info mr-2" (click)="edit(element)">Modificar</button>
+                    <button *ngIf="element" type="button" class="btn btn-danger" (click)="delete(element)">Eliminar</button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- EN CASO DE QUE NO COINCIDAN LOS RESULTADOS DE BUSQUEDA -->
+                <!-- <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No se encuentran resultados "{{input.value}}"</td>
+                </tr> -->
+              </table>
+        </mat-card-content>   
+        <!-- INICIO PAGINACION -->
+        <mat-paginator class="mt-4"
+             showFirstLastButtons>
+        </mat-paginator>
+        <!-- FIN PAGINACION -->
+</mat-card> 
+
+</app-admin-layout>

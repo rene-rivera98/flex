@@ -40,6 +40,9 @@ import { DialogProveedoresComponent } from './pages/proveedores/dialog-proveedor
 import { DialogEditarProveedorComponent } from './pages/proveedores/dialog-editar-proveedor/dialog-editar-proveedor.component';
 import { DialogBorrarUsuarioComponent } from './pages/usuarios/dialog-borrar-usuario/dialog-borrar-usuario.component';
 import { DialogBorrarProveedoresComponent } from './pages/proveedores/dialog-borrar-proveedores/dialog-borrar-proveedores.component';
+import { DialogProductosComponent } from './pages/productos/dialog-productos/dialog-productos.component';
+import { DialogBorrarProductoComponent } from './pages/productos/dialog-borrar-producto/dialog-borrar-producto.component';
+import { DialogEditarProductoComponent } from './pages/productos/dialog-editar-producto/dialog-editar-producto.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,10 @@ import { DialogBorrarProveedoresComponent } from './pages/proveedores/dialog-bor
     DialogProveedoresComponent,
     DialogEditarProveedorComponent,
     DialogBorrarUsuarioComponent,
-    DialogBorrarProveedoresComponent
+    DialogBorrarProveedoresComponent,
+    DialogProductosComponent,
+    DialogBorrarProductoComponent,
+    DialogEditarProductoComponent
     
   ],
   imports: [

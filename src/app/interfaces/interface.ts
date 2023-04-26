@@ -39,3 +39,13 @@ export interface proveedores{
     cuentaBancaria: string;
     claveInter: string; 
 }
+
+export interface productos{
+    codigoProducto: string;
+    nombreProducto: string;
+    stockProducto: string;
+    tamanioProducto: string;
+    tallaProducto: string;
+    createdAt: string;
+    updatedAt: string;
+}

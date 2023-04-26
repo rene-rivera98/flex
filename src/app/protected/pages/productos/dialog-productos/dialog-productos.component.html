@@ -1,0 +1,85 @@
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>
+    <div class="text-center">
+      <h1>Datos de nuevo producto</h1>
+    </div>
+  </h1>
+  <!-- FIN TITULO DIALOG -->
+  
+  <!-- INICIO CONTENIDO DIALOG -->
+  <div mat-dialog-content class="custom-dialog">
+  
+    <form autocomplete="off">
+  
+      <!-- INPUT CODIGO-->
+        <div class="form-floating mb-3 col-13 mx-auto mt-3">
+          <input class="form-control" id="inputCodigoProducto" type="text"
+              formControlName="codigoProducto" placeholder="Código del producto" />
+
+          <label for="inputCodigoProducto">Código del producto</label>
+        </div>
+      <!-- FIN INPUT -->
+  
+      <!-- INPUT NOMBRE -->
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <input class="form-control" id="inputNombreProducto" type="text"
+              formControlName="NombreProducto" placeholder="Nombre"/>
+          
+              <label for="inputNombreProducto">Nombre</label>
+        </div>
+      <!-- FIN  INPUT -->
+
+      <!-- SELECT TAMAÑO -->
+      <div class="col">
+        <div class="form-floating mb-3 mt-3">
+          <select class="form-control" id="selectTamanio" formControlName="tamanioProducto" placeholder="Tamaño">
+            <option value="" disabled selected>Selecciona un tamaño</option>
+            <option value="Gramos">Gramos</option>
+            <option value="Mililitros">Mililitros</option>
+            <option value="Piezas">Piezas</option>
+          </select>
+          
+          <label for="selectTamanio">Tamaño</label>
+        </div>
+      </div>
+      <!-- FIN SELECT -->
+
+      <!-- SELECT TALLA (TENTATIVO A CAMBIO DE VALORES) -->
+      <div class="col">
+        <div class="form-floating mb-3 mt-3">
+          <select class="form-control" id="selectTalla" formControlName="tallaProducto" placeholder="Talla">
+            <option value="" disabled selected>Selecciona una talla</option>
+            <option value="Chico">Chico</option>
+            <option value="Mediano">Mediano</option>
+            <option value="Grande">Grande</option>
+          </select>
+          
+          <label for="selectTalla">Talla</label>
+        </div>
+      </div>
+      <!-- FIN SELECT -->
+  
+        <!-- DIV BOTONES -->
+        <div class="row">
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button class="btn btn-warning mx-auto col-6" type="submit">
+                Registrar
+              </button>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- FIN DIV BOTONES -->
+  
+    </form>
+    
+  </div>
+  <!-- FIN CONTENIDO DE DIALOG -->

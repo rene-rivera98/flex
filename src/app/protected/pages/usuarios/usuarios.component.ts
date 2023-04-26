@@ -79,21 +79,21 @@ export class UsuariosComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-   /* FUNCION PARA ABRIR DIALOG EDIT*/
-edit(element: any): void {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
-  dialogConfig.width = '650px'; // Asignar ancho al dialog
-  dialogConfig.height = '650px'; // Asignar ancho al dialog
-  const dialogRefEd = this.dialog.open(DialogEditarUsuarioComponent, dialogConfig);
-}
+    /* FUNCION PARA ABRIR DIALOG EDIT*/
+  edit(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.width = '650px'; // Asignar ancho al dialog
+    dialogConfig.height = '650px'; // Asignar ancho al dialog
+    const dialogRefEd = this.dialog.open(DialogEditarUsuarioComponent, dialogConfig);
+  }
 
-delete(element: any) {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
-  dialogConfig.width = '650px'; // Asignar ancho al dialog
-  dialogConfig.height = '650px'; // Asignar ancho al dialog
-  const dialogRefEd = this.dialog.open(DialogBorrarUsuarioComponent, dialogConfig);
-}
+  delete(element: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.width = '650px'; // Asignar ancho al dialog
+    dialogConfig.height = '180px'; // Asignar ancho al dialog
+    const dialogRefEd = this.dialog.open(DialogBorrarUsuarioComponent, dialogConfig);
+  }
  
 }

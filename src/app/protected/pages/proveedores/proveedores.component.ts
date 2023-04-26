@@ -76,7 +76,7 @@ export class ProveedoresComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
     dialogConfig.width = '650px'; // Asignar ancho al dialog
-    dialogConfig.height = '650px'; // Asignar ancho al dialog
+    dialogConfig.height = '180px'; // Asignar ancho al dialog
     const dialogRef = this.dialog.open(DialogBorrarProveedoresComponent, dialogConfig);
   }
 }
