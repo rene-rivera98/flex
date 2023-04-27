@@ -83,8 +83,5 @@ edit(element: any): void {
   const dialogRefEd = this.dialog.open(DialogEditarCompraComponent, dialogConfig);
 }
 
-delete(element: any) {
-  
-}
 
 }
