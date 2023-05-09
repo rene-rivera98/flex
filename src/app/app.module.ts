@@ -11,7 +11,8 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { CustomMatPaginatorIntl } from './protected/pages/compras/compras.component';
+
+import { CustomMatPaginatorIntl } from './mat-paginator/paginator';
 
 @NgModule({
   declarations: [
