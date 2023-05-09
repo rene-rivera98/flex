@@ -13,6 +13,8 @@ import { DialogCafeteriaComponent } from './dialog-cafeteria/dialog-cafeteria.co
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogEditarCafeteriaComponent } from './dialog-editar-cafeteria/dialog-editar-cafeteria.component';
+import { DialogBorrarCafeteriaComponent } from './dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
 
 @Component({
   selector: 'app-cafeteria',
@@ -55,10 +57,19 @@ export class CafeteriaComponent {
   }
 
   edit(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.width = '550px'; // Asignar ancho al dialog
+    dialogConfig.height = '500px'; // Asignar ancho al dialog
+    const dialogRef = this.dialog.open(DialogEditarCafeteriaComponent, dialogConfig);
   }
 
-  delete(element: any): void{
-
+  delete(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.width = '650px'; // Asignar ancho al dialog
+    dialogConfig.height = '180px'; // Asignar ancho al dialog
+    const dialogRef = this.dialog.open(DialogBorrarCafeteriaComponent, dialogConfig);
   }
 
   /* FUNCION PARA ABRIR DIALOG*/

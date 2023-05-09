@@ -10,7 +10,8 @@ import { LoginComponent } from './auth/pages/login/login.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './protected/pages/compras/compras.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

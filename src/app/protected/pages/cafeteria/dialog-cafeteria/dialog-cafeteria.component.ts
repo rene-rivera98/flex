@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 
 @Component({
@@ -13,12 +11,12 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
 export class DialogCafeteriaComponent implements OnInit {
   
   precioValues!: FormGroup;
-  descuentoActivo: boolean = false; // Agregar esta línea
+  descuentoActivo: boolean = false;
   FormDialogCafeteria!: FormGroup;
 
   /* Variables para agregar productos a tabla */
   productosFormPC!: FormGroup;
-  @ViewChild('tablaProductos') tablaProductos: any;
+  @ViewChild('tablaProductos', { static: false }) tablaProductos: any;
 
   constructor(private _entriesService:ApiRequestService, 
               public dialogRef: MatDialogRef<DialogCafeteriaComponent>,
@@ -78,6 +76,17 @@ export class DialogCafeteriaComponent implements OnInit {
       descuentoInput?.disable();
     }
   }
+
+  eliminarUltimaFila() {
+      const tabla = this.tablaProductos.nativeElement;
+      const filas = tabla.rows;
+      if (filas.length > 1) {
+        tabla.deleteRow(filas.length - 1);
+      }
+  }
+    
+  
+    
   
 
 }

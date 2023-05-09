@@ -30,7 +30,7 @@ export class DialogCompraComponent implements OnInit {
 
 /* Variables para agregar productos a tabla */
   productosForm!: FormGroup;
-  @ViewChild('tablaProductos') tablaProductos: any;
+  @ViewChild('tablaProductos', { static: false }) tablaProductos: any;
   
   constructor(private _entriesService:ApiRequestService, 
               public dialogRef: MatDialogRef<DialogCompraComponent>,
@@ -125,6 +125,14 @@ export class DialogCompraComponent implements OnInit {
       const celda = fila.insertCell();
       celda.innerText = producto;
       this.productosForm.reset();
+    }
+  }
+
+  eliminarUltimaFila() {
+    const tabla = this.tablaProductos.nativeElement;
+    const filas = tabla.rows;
+    if (filas.length > 1) {
+      tabla.deleteRow(filas.length - 1);
     }
   }
 }

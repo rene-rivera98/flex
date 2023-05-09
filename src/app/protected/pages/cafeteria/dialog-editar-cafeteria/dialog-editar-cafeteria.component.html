@@ -1,1 +1,237 @@
-<p>dialog-editar-cafeteria works!</p>
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>
+    <div class="text-center">
+      <h1>Datos de paquete a modificar:</h1>
+    </div>
+  </h1>
+  <!-- FIN TITULO DIALOG -->
+  
+  <!-- INICIO CONTENIDO DIALOG -->
+  <div mat-dialog-content class="custom-dialog">
+  
+      <form autocomplete="off" [formGroup]="FormDialogCafeteriaEd">
+          
+          <mat-tab-group mat-align-tabs="center">
+  
+              <mat-tab label="Datos del paquete">
+  
+                  <!------------------------------- CLASIFICACION Y DATOS ----------------------------------------------------------------->
+  
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto"> 
+  
+                    <!-- SELECT CLASIFICACION -->
+                    <div class="col">
+                        <div class="form-floating mb-3 mt-3">
+                            <select class="form-control" id="selectClasificacionPCEd" formControlName="clasificacionPCEd" placeholder="Clasificación">
+                                <option value="" disabled selected>Selecciona una clasificación</option>
+                                <option value="Fiestas y cumpleaños">Fiestas y cumpleaños</option>
+                                <option value="Pase">Pase</option>
+                            </select>
+                            
+                            <label for="selectCLasificacionPCEd">Clasificación</label>
+                        </div>
+                    </div>
+                    <!-- FIN SELECT CLASIFICACION -->
+
+                      <!-- INPUT NOMBRE -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                          <input class="form-control" id="inputNombrePCEd" type="text"
+                              formControlName="nombrePCEd" placeholder="Nombre" />
+      
+                          <label for="inputNombrePCEd">Nombre</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT NOMBRE --> 
+  
+                  </div>
+                  <!-- FIN FILA -->
+  
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                      <!-- INPUT MIN PERSONAS -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                          <input class="form-control" id="inputMinPersonasEd" type="number"
+                                  formControlName="minPersonasEd" placeholder="Min. Personas"/>
+      
+                          <label for="inputMinPersonasEd">Min. Personas</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT MIN PERSONAS -->
+  
+                      <!-- INPUT MAX PERSONAS -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                          <input class="form-control" id="inputMaxPersonasEd" type="number"
+                              formControlName="maxPersonasEd" placeholder="Max. Personas" />
+      
+                          <label for="inputMaxPersonasEd">Max. Personas</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT MAX PERSONAS --> 
+  
+                  </div>
+                  <!-- FIN FILA -->
+  
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                      <!-- INPUT DESCRIPCION -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                              <textarea class="form-control" id="inputDescripcionPCEd" type="text"
+                                  formControlName="descripcionPCEd" placeholder="Descripción"></textarea>
+          
+                              <label for="inputDescripcionPCEd">Descripción</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT DESCRIPCION --> 
+  
+                  </div>
+                  <!-- FIN FILA -->
+  
+              </mat-tab>
+  
+              <mat-tab label="Productos">
+                  <div class="row col-13 mx-auto">
+                      <!-- PRODUCTOS -->
+                      <div class="col">
+                          <form [formGroup]="productosFormPCEd">
+                              <div class="form-floating mb-3 mt-3">
+                                  <select class="form-control" id="selectProductosPCEd" formControlName="productosPCEd" placeholder="Productos">
+                                      <option value="" disabled selected>Selecciona un producto</option>
+                                      <!-- OPCIONES SOLO DE EJEMPLO -->
+                                      <option value="Calcetas">Calcetas</option>
+                                      <option value="Bebidas">Bebidas</option>
+                                      <option value="Ropa">Ropa</option>
+                                  </select>
+                                  <label for="selectProductosPCEd">Productos</label>
+                              </div>
+                          </form>
+                      </div>
+          
+                      <div class="col">
+                        <div class="d-flex align-items-center mt-4">
+                            <button class="btn btn-warning mx-auto col-6" (click)="agregarProductoPCEd()">
+                                Agregar
+                            </button>
+                            
+                            <button class="btn btn-danger mx-2 col-6 " (click)="eliminarUltimaFilaEd()">
+                                Quitar
+                            </button>
+                        </div>
+                    </div>
+                  </div>
+  
+                  <div class="row col-13 mx-auto">
+                      <div class="col">
+                        <!-- AQUI LLAMARA LOS PRODUCTOS REGISTRADOS EN EL PAQUETE A TRAVES DEL CODIGO -->
+                          <table #tablaProductosEd class="table table-striped table-bordered">
+                              <thead class="thead-dark">
+                              <tr>
+                                  <th>Productos dentro del paquete:</th>
+                              </tr>
+              
+                              </thead>
+                              <tbody>
+                                  <!-- aquí se agregarán los productos -->
+                              </tbody>
+                          </table>    
+                          <!-- FIN PRODUCTOS -->
+                      </div>
+                  </div>
+                  
+  
+              </mat-tab>
+  
+              <mat-tab label="Precio">
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                      <!-- INPUT PRECIO -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                              <input class="form-control" id="inputPrecioPCEd" type="number"
+                                     formControlName="precioPCEd" placeholder="Precio" readonly/>
+                      
+                              <label for="inputPrecioPCEd">Precio base</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT PRECIO --> 
+  
+                      <!-- RADIOS BUTTONS -->
+                      <div class="col">
+                          <div class="form-floating mt-3">
+                              <div class="row col-13 mx-auto">
+                                  <section class="example-section" [formGroup]="precioValuesEd">
+                                      <p><mat-checkbox formControlName="IVAEd">IVA</mat-checkbox></p>
+                                      <p><mat-checkbox formControlName="DescuentoEd" [(ngModel)]="descuentoActivoEd">Descuento</mat-checkbox></p>
+                                  </section>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- FIN BUTTONS -->
+  
+                  </div>
+                  <!-- FIN FILA -->
+  
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                     <!-- INPUT DESCUENTO -->
+                     <div class="col">
+                          <div class="form-floating mb-3 mt-3" *ngIf="descuentoActivoEd">
+                              <input class="form-control" id="inputDescuentoPCEd" type="number"
+                              formControlName="descuentoPCEd" placeholder="Descuento %"/>
+                  
+                              <label for="inputDescuentoPCEd">Descuento %</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT DESCUENTO --> 
+  
+                  </div>
+                  <!-- FIN FILA -->
+                                 
+                  <div class="row col-13 mx-auto">
+                      <!-- INPUT PRECIO FINAL -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                              <input class="form-control" id="inputPrecioFinalPCEd" type="number"
+                                  formControlName="precioFinalPCEd" placeholder="Precio final" readonly/>
+  
+                              <label for="inputPrecioFinalPCEd">Precio final</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT PRECIO FINAL --> 
+                  </div>
+  
+                  <!------------------------------- BOTONES CERRAR Y REGISTRAR ------------------------------------------------------------------------->
+              <div class="row col-13 mx-auto">
+  
+                  <div class="col">
+                    <div class="d-flex align-items-center mt-4">
+                      <button class="btn btn-warning mx-auto col-6" type="submit">
+                        Modificar
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="col">
+                    <div class="d-flex align-items-center mt-4">
+                      <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                  
+                </div>
+                <!-- FIN DIV BOTONES -->
+  
+              </mat-tab>
+  
+          </mat-tab-group>
+      </form>
+  </div>
