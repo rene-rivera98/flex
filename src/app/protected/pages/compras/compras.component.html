@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <app-admin-layout>
+<app-admin-layout>
         <mat-card>
             <mat-card-header class="d-flex align-items-center">
                 <h1 class="mx-auto">REGISTRO DE COMPRAS</h1>
@@ -58,7 +55,7 @@
                     <ng-container matColumnDef="opciones">
                       <th mat-header-cell *matHeaderCellDef> Opciones </th>
                       <td mat-cell *matCellDef="let element">
-                        <button *ngIf="element" type="button" class="btn btn-info mr-2" >Modificar</button>
+                        <button *ngIf="element" type="button" class="btn btn-info mr-2" (click)="edit(element)">Modificar</button>
                       </td>
                     </ng-container>
 
@@ -70,6 +67,7 @@
                         <td class="mat-cell" colspan="4">No se encuentran resultados "{{input.value}}"</td>
                     </tr> -->
                 </table>
+                
             </mat-card-content>   
             <!-- INICIO PAGINACION -->
             <mat-paginator class="mt-4"
@@ -77,6 +75,4 @@
             </mat-paginator>
             <!-- FIN PAGINACION -->
         </mat-card> 
-    </app-admin-layout>
-</body>
-</html>
+</app-admin-layout>

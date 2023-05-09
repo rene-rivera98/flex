@@ -49,3 +49,15 @@ export interface productos{
     createdAt: string;
     updatedAt: string;
 }
+
+export interface cafeteria{
+    codigoPC: string;
+    nombrePC: string;
+    categoriaPC: string;
+    minimoPersonas: string;
+    maximoPersonas: string;
+    descripcionPC: string;
+    createdAt: string;
+    updatedAt: string;
+}
+

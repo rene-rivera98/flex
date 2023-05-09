@@ -15,15 +15,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { ProtectedRoutingModule } from './protected-routing.module';
 
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { AdminLayoutComponent } from '../admin-layout/admin-layout.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { ProductosComponent } from './pages/productos/productos.component';
-import { CafeteriaComponent } from './pages/cafeteria/cafeteria.component';
 import { FrontdeskComponent } from './pages/frontdesk/frontdesk.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { GastosComponent } from './pages/gastos/gastos.component';
@@ -43,15 +42,17 @@ import { DialogBorrarProveedoresComponent } from './pages/proveedores/dialog-bor
 import { DialogProductosComponent } from './pages/productos/dialog-productos/dialog-productos.component';
 import { DialogBorrarProductoComponent } from './pages/productos/dialog-borrar-producto/dialog-borrar-producto.component';
 import { DialogEditarProductoComponent } from './pages/productos/dialog-editar-producto/dialog-editar-producto.component';
+import { CafeteriaComponent } from './pages/cafeteria/cafeteria.component';
+import { DialogCafeteriaComponent } from './pages/cafeteria/dialog-cafeteria/dialog-cafeteria.component';
+import { DialogEditarCafeteriaComponent } from './pages/cafeteria/dialog-editar-cafeteria/dialog-editar-cafeteria.component';
+import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
     UsuariosComponent,
     AdminLayoutComponent,
     ProveedoresComponent,
     ProductosComponent,
-    CafeteriaComponent,
     FrontdeskComponent,
     ComprasComponent,
     GastosComponent,
@@ -70,8 +71,11 @@ import { DialogEditarProductoComponent } from './pages/productos/dialog-editar-p
     DialogBorrarProveedoresComponent,
     DialogProductosComponent,
     DialogBorrarProductoComponent,
-    DialogEditarProductoComponent
-    
+    DialogEditarProductoComponent,
+    CafeteriaComponent,
+    DialogCafeteriaComponent,
+    DialogEditarCafeteriaComponent,
+    DialogBorrarCafeteriaComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +94,8 @@ import { DialogEditarProductoComponent } from './pages/productos/dialog-editar-p
     MatExpansionModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ]
 })
 export class ProtectedModule { }
