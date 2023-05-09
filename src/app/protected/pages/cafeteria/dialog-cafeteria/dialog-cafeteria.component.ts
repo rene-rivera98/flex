@@ -13,7 +13,7 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
 export class DialogCafeteriaComponent implements OnInit {
   
   precioValues!: FormGroup;
-
+  descuentoActivo: boolean = false; // Agregar esta línea
   FormDialogCafeteria!: FormGroup;
 
   /* Variables para agregar productos a tabla */
@@ -28,7 +28,8 @@ export class DialogCafeteriaComponent implements OnInit {
                 });
                 this.precioValues = new FormGroup({
                   IVA: new FormControl(false),
-                  Descuento: new FormControl(false)
+                  Descuento: new FormControl(false),
+                  'descuentoPC': new FormControl({ value: null, disabled: true })
                 });
               }
 
@@ -40,12 +41,16 @@ export class DialogCafeteriaComponent implements OnInit {
       minPersonas: [],
       maxPersonas: [],
       descripcionPC: [],
-      productosPC: []
+      productosPC: [],
+      precioPC: [],
+      descuentoPC: [],
+      precioFinalPC: []
     });
 
     this.productosFormPC = this.fb.group({
-      Productos: ['', Validators.required]
+      productosPC: ['', Validators.required]
     });
+
   }
 
   /* FUNCION CERRAR DIALOG*/
@@ -55,7 +60,7 @@ export class DialogCafeteriaComponent implements OnInit {
 
   agregarProductoPC() {
     if (this.productosFormPC.valid) {
-      const producto = this.productosFormPC.value.Productos;
+      const producto = this.productosFormPC.value.productosPC;
       const fila = this.tablaProductos.nativeElement.insertRow();
       const celda = fila.insertCell();
       celda.innerText = producto;
@@ -63,17 +68,16 @@ export class DialogCafeteriaComponent implements OnInit {
     }
   }
 
-  // Agrega este método
   onDescuentoChange() {
-    const descuentoControl = this.precioValues.get('Descuento');
-    const descuentoInputControl = this.precioValues.get('descuentoPC');
-    if (this.precioValues.controls['Descuento'].value) {
-      const descuentoControl = this.precioValues.controls['descuentoPC'];
-      if (descuentoControl) {
-        descuentoControl.enable();
-      }
+    const descuentoCheckbox = this.precioValues.get('Descuento');
+    const descuentoInput = this.precioValues.get('descuentoPC');
+
+    if (descuentoCheckbox?.value) {
+      descuentoInput?.enable();
+    } else {
+      descuentoInput?.disable();
     }
-    
   }
+  
 
 }
