@@ -3,25 +3,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ApiRequestService } from '../../services/api-request.service';
 
-import { cafeteria } from 'src/app/interfaces/interface';
+import { frontdesk } from 'src/app/interfaces/interface';
 
-/* SE IMPORTA EL DIALOG CAFETERIA*/
-import { DialogCafeteriaComponent } from './dialog-cafeteria/dialog-cafeteria.component';
+/* SE IMPORTA EL DIALOG FRONTDESK*/
+import { DialogFrontDeskComponent} from './dialog-frontdesk/dialog-frontdesk.component';
 /**/
 
 /* LIBRERIAS DE MATERIAL ANGULAR*/
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogEditarCafeteriaComponent } from './dialog-editar-cafeteria/dialog-editar-cafeteria.component';
-import { DialogBorrarCafeteriaComponent } from './dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
+import { DialogEditarFrontDeskComponent } from './dialog-editar-frontdesk/dialog-editar-frontdesk.component';
+import { DialogBorrarFrontDeskComponent } from './dialog-borrar-frontdesk/dialog-borrar-frontdesk.component';
 
 @Component({
-  selector: 'app-cafeteria',
-  templateUrl: './cafeteria.component.html',
-  styleUrls: ['./cafeteria.component.css']
+  selector: 'app-frontdesk',
+  templateUrl: './frontdesk.component.html',
+  styleUrls: ['./frontdesk.component.css']
 })
-export class CafeteriaComponent {
+export class FrontDeskComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -43,7 +43,7 @@ export class CafeteriaComponent {
     ];
 
       /* Variable que contiene los datos de compras */
-      dataSource = new MatTableDataSource<cafeteria>([]);
+      dataSource = new MatTableDataSource<frontdesk>([]);
 
   constructor(private _entriesService:ApiRequestService, public dialog: MatDialog) { }
 
@@ -61,24 +61,24 @@ export class CafeteriaComponent {
     dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
     dialogConfig.width = '550px'; // Asignar ancho al dialog
     dialogConfig.height = '500px'; // Asignar ancho al dialog
-    const dialogRef = this.dialog.open(DialogEditarCafeteriaComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DialogEditarFrontDeskComponent, dialogConfig);
   }
 
   delete(element: any): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.disableClose = true; 
     dialogConfig.width = '650px'; // Asignar ancho al dialog
     dialogConfig.height = '180px'; // Asignar ancho al dialog
-    const dialogRef = this.dialog.open(DialogBorrarCafeteriaComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DialogBorrarFrontDeskComponent, dialogConfig);
   }
 
   /* FUNCION PARA ABRIR DIALOG*/
   openDialog(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
+    dialogConfig.disableClose = true;
     dialogConfig.width = '650px'; // Asignar ancho al dialog
     dialogConfig.height = '600px'; // Asignar ancho al dialog
-    const dialogRef = this.dialog.open(DialogCafeteriaComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DialogFrontDeskComponent, dialogConfig);
   }
 
 }

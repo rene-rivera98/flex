@@ -23,7 +23,6 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { AdminLayoutComponent } from '../admin-layout/admin-layout.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { ProductosComponent } from './pages/productos/productos.component';
-import { FrontdeskComponent } from './pages/frontdesk/frontdesk.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { GastosComponent } from './pages/gastos/gastos.component';
 import { CajaComponent } from './pages/caja/caja.component';
@@ -42,10 +41,10 @@ import { DialogBorrarProveedoresComponent } from './pages/proveedores/dialog-bor
 import { DialogProductosComponent } from './pages/productos/dialog-productos/dialog-productos.component';
 import { DialogBorrarProductoComponent } from './pages/productos/dialog-borrar-producto/dialog-borrar-producto.component';
 import { DialogEditarProductoComponent } from './pages/productos/dialog-editar-producto/dialog-editar-producto.component';
-import { CafeteriaComponent } from './pages/cafeteria/cafeteria.component';
-import { DialogCafeteriaComponent } from './pages/cafeteria/dialog-cafeteria/dialog-cafeteria.component';
-import { DialogEditarCafeteriaComponent } from './pages/cafeteria/dialog-editar-cafeteria/dialog-editar-cafeteria.component';
-import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
+import { FrontDeskComponent } from './pages/cafeteria/frontdesk.component';
+import { DialogFrontDeskComponent } from './pages/cafeteria/dialog-frontdesk/dialog-frontdesk.component';
+import { DialogEditarFrontDeskComponent } from './pages/cafeteria/dialog-editar-frontdesk/dialog-editar-frontdesk.component';
+import { DialogBorrarFrontDeskComponent } from './pages/cafeteria/dialog-borrar-frontdesk/dialog-borrar-frontdesk.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-
     AdminLayoutComponent,
     ProveedoresComponent,
     ProductosComponent,
-    FrontdeskComponent,
     ComprasComponent,
     GastosComponent,
     CajaComponent,
@@ -72,10 +70,10 @@ import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-
     DialogProductosComponent,
     DialogBorrarProductoComponent,
     DialogEditarProductoComponent,
-    CafeteriaComponent,
-    DialogCafeteriaComponent,
-    DialogEditarCafeteriaComponent,
-    DialogBorrarCafeteriaComponent
+    DialogFrontDeskComponent,
+    FrontDeskComponent,
+    DialogEditarFrontDeskComponent,
+    DialogBorrarFrontDeskComponent
   ],
   imports: [
     CommonModule,

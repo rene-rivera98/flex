@@ -6,24 +6,24 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 
 @Component({
-  selector: 'app-dialog-editar-cafeteria',
-  templateUrl: './dialog-editar-cafeteria.component.html',
-  styleUrls: ['./dialog-editar-cafeteria.component.css']
+  selector: 'app-dialog-editar-frontdesk',
+  templateUrl: './dialog-editar-frontdesk.component.html',
+  styleUrls: ['./dialog-editar-frontdesk.component.css']
 })
-export class DialogEditarCafeteriaComponent implements OnInit {
+export class DialogEditarFrontDeskComponent implements OnInit {
 
   precioValuesEd!: FormGroup;
   descuentoActivoEd: boolean = false;
-  FormDialogCafeteriaEd!: FormGroup;
+  FormDialogFrontDeskEd!: FormGroup;
 
   /* Variables para agregar productos a tabla */
   productosFormPCEd!: FormGroup;
   @ViewChild('tablaProductosEd', { static: false }) tablaProductosEd: any;
 
   constructor(private _entriesService:ApiRequestService, 
-              public dialogRef: MatDialogRef<DialogEditarCafeteriaComponent>,
+              public dialogRef: MatDialogRef<DialogEditarFrontDeskComponent>,
               private fb: FormBuilder) {
-                this.FormDialogCafeteriaEd = new FormGroup({
+                this.FormDialogFrontDeskEd = new FormGroup({
                   myFormControlName: new FormControl()
                 });
                 this.precioValuesEd = new FormGroup({
@@ -34,7 +34,7 @@ export class DialogEditarCafeteriaComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.FormDialogCafeteriaEd = this.fb.group({
+    this.FormDialogFrontDeskEd = this.fb.group({
       clasificacionPCEd: ['', Validators.required],
       nombrePCEd: ['', Validators.required],
       minPersonasEd: [],

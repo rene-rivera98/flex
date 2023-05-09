@@ -50,7 +50,7 @@ export interface productos{
     updatedAt: string;
 }
 
-export interface cafeteria{
+export interface frontdesk{
     codigoPC: string;
     nombrePC: string;
     categoriaPC: string;

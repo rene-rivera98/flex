@@ -4,24 +4,24 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 
 @Component({
-  selector: 'app-dialog-cafeteria',
-  templateUrl: './dialog-cafeteria.component.html',
-  styleUrls: ['./dialog-cafeteria.component.css']
+  selector: 'app-dialog-frontdesk',
+  templateUrl: './dialog-frontdesk.component.html',
+  styleUrls: ['./dialog-frontdesk.component.css']
 })
-export class DialogCafeteriaComponent implements OnInit {
+export class DialogFrontDeskComponent implements OnInit {
   
   precioValues!: FormGroup;
   descuentoActivo: boolean = false;
-  FormDialogCafeteria!: FormGroup;
+  FormDialogFrontDesk!: FormGroup;
 
   /* Variables para agregar productos a tabla */
   productosFormPC!: FormGroup;
   @ViewChild('tablaProductos', { static: false }) tablaProductos: any;
 
   constructor(private _entriesService:ApiRequestService, 
-              public dialogRef: MatDialogRef<DialogCafeteriaComponent>,
+              public dialogRef: MatDialogRef<DialogFrontDeskComponent>,
               private fb: FormBuilder) {
-                this.FormDialogCafeteria = new FormGroup({
+                this.FormDialogFrontDesk = new FormGroup({
                   myFormControlName: new FormControl()
                 });
                 this.precioValues = new FormGroup({
@@ -32,7 +32,7 @@ export class DialogCafeteriaComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.FormDialogCafeteria = this.fb.group({
+    this.FormDialogFrontDesk = this.fb.group({
       clasificacionPC: ['', Validators.required],
       codigoPC: ['', Validators.required],
       nombrePC: ['', Validators.required],
