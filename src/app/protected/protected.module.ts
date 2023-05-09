@@ -41,10 +41,10 @@ import { DialogBorrarProveedoresComponent } from './pages/proveedores/dialog-bor
 import { DialogProductosComponent } from './pages/productos/dialog-productos/dialog-productos.component';
 import { DialogBorrarProductoComponent } from './pages/productos/dialog-borrar-producto/dialog-borrar-producto.component';
 import { DialogEditarProductoComponent } from './pages/productos/dialog-editar-producto/dialog-editar-producto.component';
-import { FrontDeskComponent } from './pages/cafeteria/frontdesk.component';
-import { DialogFrontDeskComponent } from './pages/cafeteria/dialog-frontdesk/dialog-frontdesk.component';
-import { DialogEditarFrontDeskComponent } from './pages/cafeteria/dialog-editar-frontdesk/dialog-editar-frontdesk.component';
-import { DialogBorrarFrontDeskComponent } from './pages/cafeteria/dialog-borrar-frontdesk/dialog-borrar-frontdesk.component';
+import { FrontDeskComponent } from './pages/frontdesk/frontdesk.component';
+import { DialogFrontDeskComponent } from './pages/frontdesk/dialog-frontdesk/dialog-frontdesk.component';
+import { DialogEditarFrontDeskComponent } from './pages/frontdesk/dialog-editar-frontdesk/dialog-editar-frontdesk.component';
+import { DialogBorrarFrontDeskComponent } from './pages/frontdesk/dialog-borrar-frontdesk/dialog-borrar-frontdesk.component';
 
 @NgModule({
   declarations: [

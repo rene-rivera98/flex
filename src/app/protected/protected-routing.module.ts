@@ -4,7 +4,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { ProductosComponent } from './pages/productos/productos.component';
-import { FrontDeskComponent } from './pages/cafeteria/frontdesk.component';
+import { FrontDeskComponent } from './pages/frontdesk/frontdesk.component';
 
 const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent},
