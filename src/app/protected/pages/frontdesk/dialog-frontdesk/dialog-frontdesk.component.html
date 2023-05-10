@@ -23,13 +23,13 @@
                     <!-- SELECT CLASIFICACION -->
                     <div class="col">
                         <div class="form-floating mb-3 mt-3">
-                            <select class="form-control" id="selectClasificacionPC" formControlName="clasificacionPC" placeholder="Clasificación">
+                            <select class="form-control" id="selectClasificacionPF" formControlName="clasificacionPF" placeholder="Clasificación">
                                 <option value="" disabled selected>Selecciona una clasificación</option>
                                 <option value="Fiestas y cumpleaños">Fiestas y cumpleaños</option>
                                 <option value="Pase">Pase</option>
                             </select>
                             
-                            <label for="selectCLasificacionPC">Clasificación</label>
+                            <label for="selectCLasificacionPF">Clasificación</label>
                         </div>
                     </div>
                     <!-- FIN SELECT CLASIFICACION -->
@@ -43,10 +43,10 @@
                     <!-- INPUT CODIGO -->
                     <div class="col">
                         <div class="form-floating mb-3 mt-3">
-                            <input class="form-control" id="inputCodigoPC" type="text"
-                                   formControlName="codigoPC" placeholder="Código de paquete"/>
+                            <input class="form-control" id="inputCodigoPF" type="text"
+                                   formControlName="codigoPF" placeholder="Código de paquete"/>
                     
-                            <label for="inputCodigoPC">Código de paquete</label>
+                            <label for="inputCodigoPF">Código de paquete</label>
                         </div>
                     </div>
                     <!-- FIN INPUT CODIGO --> 
@@ -55,10 +55,10 @@
                     <!-- INPUT NOMBRE -->
                     <div class="col">
                         <div class="form-floating mb-3 mt-3">
-                        <input class="form-control" id="inputNombrePC" type="text"
-                            formControlName="nombrePC" placeholder="Nombre" />
+                        <input class="form-control" id="inputNombrePF" type="text"
+                            formControlName="nombrePF" placeholder="Nombre" />
     
-                        <label for="inputNombrePC">Nombre</label>
+                        <label for="inputNombrePF">Nombre</label>
                         </div>
                     </div>
                     <!-- FIN INPUT NOMBRE --> 
@@ -100,10 +100,10 @@
                     <!-- INPUT DESCRIPCION -->
                     <div class="col">
                         <div class="form-floating mb-3 mt-3">
-                            <textarea class="form-control" id="inputDescripcionPC" type="text"
-                                formControlName="descripcionPC" placeholder="Descripción"></textarea>
+                            <textarea class="form-control" id="inputDescripcionPF" type="text"
+                                formControlName="descripcionPF" placeholder="Descripción"></textarea>
         
-                            <label for="inputDescripcionPC">Descripción</label>
+                            <label for="inputDescripcionPF">Descripción</label>
                         </div>
                     </div>
                     <!-- FIN INPUT DESCRIPCION --> 
@@ -117,16 +117,16 @@
                 <div class="row col-13 mx-auto">
                     <!-- PRODUCTOS -->
                     <div class="col">
-                        <form [formGroup]="productosFormPC">
+                        <form [formGroup]="productosFormPF">
                             <div class="form-floating mb-3 mt-3">
-                                <select class="form-control" id="selectProductosPC" formControlName="productosPC" placeholder="Productos">
+                                <select class="form-control" id="selectProductosPF" formControlName="productosPF" placeholder="Productos">
                                     <option value="" disabled selected>Selecciona un producto</option>
-                                    <!-- OPCIONES SOLO DE EJEMPLO -->
+                                    <!-- OPFIONES SOLO DE EJEMPLO -->
                                     <option value="Calcetas">Calcetas</option>
                                     <option value="Bebidas">Bebidas</option>
                                     <option value="Ropa">Ropa</option>
                                 </select>
-                                <label for="selectProductosPC">Productos</label>
+                                <label for="selectProductosPF">Productos</label>
                             </div>
                         </form>
                     </div>
@@ -183,31 +183,14 @@
                     <div class="col">
                         <div class="form-floating mt-3">
                             <div class="row col-13 mx-auto">
-                                <section class="example-section" [formGroup]="precioValues">
+                                <section class="example-section">
                                     <p><mat-checkbox formControlName="IVA">IVA</mat-checkbox></p>
-                                    <p><mat-checkbox formControlName="Descuento" [(ngModel)]="descuentoActivo">Descuento</mat-checkbox></p>
+                                    <p><mat-checkbox formControlName="IEPS">IEPS</mat-checkbox></p>
                                 </section>
                             </div>
                         </div>
                     </div>
                     <!-- FIN BUTTONS -->
-
-                </div>
-                <!-- FIN FILA -->
-
-                <!-- INICIO FILA -->
-                <div class="row col-13 mx-auto">
-
-                   <!-- INPUT DESCUENTO -->
-                   <div class="col">
-                        <div class="form-floating mb-3 mt-3" *ngIf="descuentoActivo">
-                            <input class="form-control" id="inputDescuentoPC" type="number"
-                            formControlName="descuentoPC" placeholder="Descuento %"/>
-                
-                            <label for="inputDescuentoPC">Descuento %</label>
-                        </div>
-                    </div>
-                    <!-- FIN INPUT DESCUENTO --> 
 
                 </div>
                 <!-- FIN FILA -->

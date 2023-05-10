@@ -26,11 +26,6 @@ export class DialogEditarFrontDeskComponent implements OnInit {
                 this.FormDialogFrontDeskEd = new FormGroup({
                   myFormControlName: new FormControl()
                 });
-                this.precioValuesEd = new FormGroup({
-                  IVAEd: new FormControl(false),
-                  DescuentoEd: new FormControl(false),
-                  'descuentoPCEd': new FormControl({ value: null, disabled: true })
-                });
               }
 
   ngOnInit(): void {
@@ -42,7 +37,8 @@ export class DialogEditarFrontDeskComponent implements OnInit {
       descripcionPCEd: [],
       productosPCEd: [],
       precioPCEd: [],
-      descuentoPCEd: [],
+      IVAEd: [],
+      IEPSEd: [],
       precioFinalPCEd: []
     });
 
@@ -64,17 +60,6 @@ export class DialogEditarFrontDeskComponent implements OnInit {
       const celda = fila.insertCell();
       celda.innerText = producto;
       this.productosFormPCEd.reset();
-    }
-  }
-
-  onDescuentoChange() {
-    const descuentoCheckbox = this.precioValuesEd.get('DescuentoEd');
-    const descuentoInput = this.precioValuesEd.get('descuentoPCEd');
-
-    if (descuentoCheckbox?.value) {
-      descuentoInput?.enable();
-    } else {
-      descuentoInput?.disable();
     }
   }
   

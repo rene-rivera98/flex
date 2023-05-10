@@ -166,31 +166,14 @@
                       <div class="col">
                           <div class="form-floating mt-3">
                               <div class="row col-13 mx-auto">
-                                  <section class="example-section" [formGroup]="precioValuesEd">
+                                  <section class="example-section" >
                                       <p><mat-checkbox formControlName="IVAEd">IVA</mat-checkbox></p>
-                                      <p><mat-checkbox formControlName="DescuentoEd" [(ngModel)]="descuentoActivoEd">Descuento</mat-checkbox></p>
+                                      <p><mat-checkbox formControlName="IEPSEd">IEPS</mat-checkbox></p>
                                   </section>
                               </div>
                           </div>
                       </div>
                       <!-- FIN BUTTONS -->
-  
-                  </div>
-                  <!-- FIN FILA -->
-  
-                  <!-- INICIO FILA -->
-                  <div class="row col-13 mx-auto">
-  
-                     <!-- INPUT DESCUENTO -->
-                     <div class="col">
-                          <div class="form-floating mb-3 mt-3" *ngIf="descuentoActivoEd">
-                              <input class="form-control" id="inputDescuentoPCEd" type="number"
-                              formControlName="descuentoPCEd" placeholder="Descuento %"/>
-                  
-                              <label for="inputDescuentoPCEd">Descuento %</label>
-                          </div>
-                      </div>
-                      <!-- FIN INPUT DESCUENTO --> 
   
                   </div>
                   <!-- FIN FILA -->

@@ -51,13 +51,22 @@ export interface productos{
 }
 
 export interface frontdesk{
-    codigoPC: string;
-    nombrePC: string;
-    categoriaPC: string;
+    codigoPF: string;
+    nombrePF: string;
+    categoriaPF: string;
     minimoPersonas: string;
     maximoPersonas: string;
-    descripcionPC: string;
+    descripcionPF: string;
+    precioPF: string;
     createdAt: string;
     updatedAt: string;
 }
 
+export interface cafeteria{
+    codigoPC:string;
+    nombrePC: string;
+    descripcionPC: string;
+    precioPC: string;
+    createdAt: string;
+    updatedAt: string;
+}

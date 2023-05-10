@@ -45,6 +45,10 @@ import { FrontDeskComponent } from './pages/frontdesk/frontdesk.component';
 import { DialogFrontDeskComponent } from './pages/frontdesk/dialog-frontdesk/dialog-frontdesk.component';
 import { DialogEditarFrontDeskComponent } from './pages/frontdesk/dialog-editar-frontdesk/dialog-editar-frontdesk.component';
 import { DialogBorrarFrontDeskComponent } from './pages/frontdesk/dialog-borrar-frontdesk/dialog-borrar-frontdesk.component';
+import { CafeteriaComponent } from './pages/cafeteria/cafeteria.component';
+import { DialogCafeteriaComponent } from './pages/cafeteria/dialog-cafeteria/dialog-cafeteria.component';
+import { DialogEditarCafeteriaComponent } from './pages/cafeteria/dialog-editar-cafeteria/dialog-editar-cafeteria.component';
+import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,11 @@ import { DialogBorrarFrontDeskComponent } from './pages/frontdesk/dialog-borrar-
     DialogFrontDeskComponent,
     FrontDeskComponent,
     DialogEditarFrontDeskComponent,
-    DialogBorrarFrontDeskComponent
+    DialogBorrarFrontDeskComponent,
+    CafeteriaComponent,
+    DialogCafeteriaComponent,
+    DialogEditarCafeteriaComponent,
+    DialogBorrarCafeteriaComponent
   ],
   imports: [
     CommonModule,

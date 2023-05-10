@@ -15,38 +15,35 @@ export class DialogFrontDeskComponent implements OnInit {
   FormDialogFrontDesk!: FormGroup;
 
   /* Variables para agregar productos a tabla */
-  productosFormPC!: FormGroup;
+  productosFormPF!: FormGroup;
   @ViewChild('tablaProductos', { static: false }) tablaProductos: any;
 
   constructor(private _entriesService:ApiRequestService, 
               public dialogRef: MatDialogRef<DialogFrontDeskComponent>,
               private fb: FormBuilder) {
+
                 this.FormDialogFrontDesk = new FormGroup({
                   myFormControlName: new FormControl()
-                });
-                this.precioValues = new FormGroup({
-                  IVA: new FormControl(false),
-                  Descuento: new FormControl(false),
-                  'descuentoPC': new FormControl({ value: null, disabled: true })
                 });
               }
 
   ngOnInit(): void {
     this.FormDialogFrontDesk = this.fb.group({
-      clasificacionPC: ['', Validators.required],
-      codigoPC: ['', Validators.required],
-      nombrePC: ['', Validators.required],
+      clasificacionPF: ['', Validators.required],
+      codigoPF: ['', Validators.required],
+      nombrePF: ['', Validators.required],
       minPersonas: [],
       maxPersonas: [],
-      descripcionPC: [],
-      productosPC: [],
-      precioPC: [],
-      descuentoPC: [],
-      precioFinalPC: []
+      descripcionPF: [],
+      productosPF: [],
+      precioPF: [],
+      IVA:[],
+      IEPS:[],
+      precioFinalPF: []
     });
 
-    this.productosFormPC = this.fb.group({
-      productosPC: ['', Validators.required]
+    this.productosFormPF = this.fb.group({
+      productosPF: ['', Validators.required]
     });
 
   }
@@ -57,23 +54,12 @@ export class DialogFrontDeskComponent implements OnInit {
   }
 
   agregarProductoPC() {
-    if (this.productosFormPC.valid) {
-      const producto = this.productosFormPC.value.productosPC;
+    if (this.productosFormPF.valid) {
+      const producto = this.productosFormPF.value.productosPF;
       const fila = this.tablaProductos.nativeElement.insertRow();
       const celda = fila.insertCell();
       celda.innerText = producto;
-      this.productosFormPC.reset();
-    }
-  }
-
-  onDescuentoChange() {
-    const descuentoCheckbox = this.precioValues.get('Descuento');
-    const descuentoInput = this.precioValues.get('descuentoPC');
-
-    if (descuentoCheckbox?.value) {
-      descuentoInput?.enable();
-    } else {
-      descuentoInput?.disable();
+      this.productosFormPF.reset();
     }
   }
 
@@ -85,8 +71,5 @@ export class DialogFrontDeskComponent implements OnInit {
       }
   }
     
-  
-    
-  
 
 }
