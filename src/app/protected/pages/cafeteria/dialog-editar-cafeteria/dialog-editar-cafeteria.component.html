@@ -1,1 +1,178 @@
-<p>dialog-editar-cafeteria works!</p>
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>
+    <div class="text-center">
+      <h1>Datos de paquete a modificar</h1>
+    </div>
+  </h1>
+  <!-- FIN TITULO DIALOG -->
+  
+  <!-- INICIO CONTENIDO DIALOG -->
+  <div mat-dialog-content class="custom-dialog">
+  
+      <form autocomplete="off" [formGroup]="FormDialogCafeteriaEd">
+          
+          <mat-tab-group mat-align-tabs="center">
+  
+              <mat-tab label="Datos del paquete">
+  
+                  <!------------------------------- CLASIFICACION Y DATOS ----------------------------------------------------------------->
+  
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                      <!-- INPUT NOMBRE -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                          <input class="form-control" id="inputNombrePCEd" type="text"
+                              formControlName="nombrePCEd" placeholder="Nombre" />
+      
+                          <label for="inputNombrePCEd">Nombre</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT NOMBRE --> 
+  
+                  </div>
+                  <!-- FIN FILA -->
+  
+  
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                      <!-- INPUT DESCRIPCION -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                              <textarea class="form-control" id="inputDescripcionPCEd" type="text"
+                                  formControlName="descripcionPCEd" placeholder="Descripción"></textarea>
+          
+                              <label for="inputDescripcionPCEd">Descripción</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT DESCRIPCION --> 
+  
+                  </div>
+                  <!-- FIN FILA -->
+  
+              </mat-tab>
+  
+              <mat-tab label="Receta">
+                  <div class="row col-13 mx-auto">
+                      <!-- INSUMOS DE RECETA -->
+                      <div class="col">
+                          <form [formGroup]="recetaFormPCEd">
+                              <div class="form-floating mb-3 mt-3">
+                                  <select class="form-control" id="selectInsumosPCEd" formControlName="insumosPCEd" placeholder="Insumos">
+                                      <option value="" disabled selected>Selecciona un insumo</option>
+                                      <!-- OPCIONES SOLO DE EJEMPLO -->
+                                      <option value="Calcetas">Calcetas</option>
+                                      <option value="Bebidas">Bebidas</option>
+                                      <option value="Ropa">Ropa</option>
+                                  </select>
+                                  <label for="selectInsumosPCEd">Insumos</label>
+                              </div>
+                          </form>
+                      </div>
+          
+                      <div class="col">
+                          <div class="d-flex align-items-center mt-4">
+                              <button class="btn btn-warning mx-auto col-6" (click)="agregarInsumosPCEd()">
+                                  Agregar
+                              </button>
+                              
+                              <button class="btn btn-danger mx-2 col-6 " (click)="eliminarUltimaFilaEd()">
+                                  Quitar
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="row col-13 mx-auto">
+                      <div class="col">
+                          <table #tablaInsumosEd class="table table-striped table-bordered">
+                              <thead class="thead-dark">
+                              <tr>
+                                  <th>Insumos dentro de la receta:</th>
+                              </tr>
+              
+                              </thead>
+                              <tbody>
+                                  <!-- aquí se agregarán los insumos -->
+                              </tbody>
+                          </table>    
+                          <!-- FIN INSUMOS -->
+                      </div>
+                  </div>
+                  
+  
+              </mat-tab>
+  
+              <mat-tab label="Precio">
+                  <!-- INICIO FILA -->
+                  <div class="row col-13 mx-auto">
+  
+                      <!-- INPUT PRECIO -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                              <input class="form-control" id="inputPrecioPCEd" type="number"
+                                     formControlName="precioPCEd" placeholder="Precio" readonly/>
+                      
+                              <label for="inputPrecioPCEd">Precio base</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT PRECIO --> 
+  
+                      <!-- RADIOS BUTTONS -->
+                      <div class="col">
+                          <div class="form-floating mt-3">
+                              <div class="row col-13 mx-auto">
+                                  <section class="example-section">
+                                      <p><mat-checkbox formControlName="IVAEd">IVA</mat-checkbox></p>
+                                      <p><mat-checkbox formControlName="IEPSEd">IEPS</mat-checkbox></p>
+                                  </section>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- FIN BUTTONS -->
+  
+                  </div>
+                  <!-- FIN FILA -->
+                                 
+                  <div class="row col-13 mx-auto">
+                      <!-- INPUT PRECIO FINAL -->
+                      <div class="col">
+                          <div class="form-floating mb-3 mt-3">
+                              <input class="form-control" id="inputPrecioFinalPCEd" type="number"
+                                  formControlName="precioFinalPCEd" placeholder="Precio final" readonly/>
+  
+                              <label for="inputPrecioFinalPCEd">Precio final</label>
+                          </div>
+                      </div>
+                      <!-- FIN INPUT PRECIO FINAL --> 
+                  </div>
+  
+                  <!------------------------------- BOTONES CERRAR Y REGISTRAR ------------------------------------------------------------------------->
+              <div class="row col-13 mx-auto">
+  
+                  <div class="col">
+                    <div class="d-flex align-items-center mt-4">
+                      <button class="btn btn-warning mx-auto col-6" type="submit">
+                        Registrar
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="col">
+                    <div class="d-flex align-items-center mt-4">
+                      <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                        Cerrar
+                      </button>
+                    </div>
+                  </div>
+                  
+                </div>
+                <!-- FIN DIV BOTONES -->
+  
+              </mat-tab>
+  
+          </mat-tab-group>
+      </form>
+  </div>

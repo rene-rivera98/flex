@@ -13,7 +13,6 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
 export class DialogEditarFrontDeskComponent implements OnInit {
 
   precioValuesEd!: FormGroup;
-  descuentoActivoEd: boolean = false;
   FormDialogFrontDeskEd!: FormGroup;
 
   /* Variables para agregar productos a tabla */

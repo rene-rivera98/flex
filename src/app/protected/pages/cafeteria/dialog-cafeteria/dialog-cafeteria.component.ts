@@ -10,7 +10,6 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
 })
 export class DialogCafeteriaComponent implements OnInit {
 
-  precioValues!: FormGroup;
   FormDialogCafeteria!: FormGroup;
 
    /* Variables para agregar insumos a tabla */
@@ -35,6 +34,7 @@ export class DialogCafeteriaComponent implements OnInit {
       descripcionPC: [],
       insumosPC: [],
       IVA: [],
+      IPES:[],
       precioPC: [],
       precioFinalPC: []
     });
@@ -65,6 +65,6 @@ export class DialogCafeteriaComponent implements OnInit {
     if (filas.length > 1) {
       tabla.deleteRow(filas.length - 1);
     }
-}
+  }
 
 }

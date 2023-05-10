@@ -54,8 +54,8 @@ export class CafeteriaComponent {
   edit(element: any): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
-    dialogConfig.width = '550px'; // Asignar ancho al dialog
-    dialogConfig.height = '500px'; // Asignar ancho al dialog
+    dialogConfig.width = '650px'; // Asignar ancho al dialog
+    dialogConfig.height = '550px'; // Asignar ancho al dialog
     const dialogRef = this.dialog.open(DialogEditarCafeteriaComponent, dialogConfig);
   }
 

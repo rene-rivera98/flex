@@ -9,9 +9,7 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
   styleUrls: ['./dialog-frontdesk.component.css']
 })
 export class DialogFrontDeskComponent implements OnInit {
-  
-  precioValues!: FormGroup;
-  descuentoActivo: boolean = false;
+ 
   FormDialogFrontDesk!: FormGroup;
 
   /* Variables para agregar productos a tabla */

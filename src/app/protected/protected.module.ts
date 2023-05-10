@@ -24,7 +24,6 @@ import { AdminLayoutComponent } from '../admin-layout/admin-layout.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { ComprasComponent } from './pages/compras/compras.component';
-import { GastosComponent } from './pages/gastos/gastos.component';
 import { CajaComponent } from './pages/caja/caja.component';
 import { FacturasComponent } from './pages/facturas/facturas.component';
 import { RInsumosComponent } from './pages/r-insumos/r-insumos.component';
@@ -57,7 +56,6 @@ import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-
     ProveedoresComponent,
     ProductosComponent,
     ComprasComponent,
-    GastosComponent,
     CajaComponent,
     FacturasComponent,
     RInsumosComponent,
