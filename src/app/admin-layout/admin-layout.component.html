@@ -49,14 +49,6 @@
                     <span class="my-text"><i class="bi bi-person-fill"></i> Usuarios</span>
                 </mat-list-item>                
   
-                <mat-list-item routerLink="/proveedores" class="my-list-item">
-                    <span class="my-text"><i class="bi bi-truck"></i> Proveedores</span>
-                </mat-list-item>
-  
-                <mat-list-item routerLink="/productos" class="my-list-item">
-                    <span class="my-text"><i class="bi bi-basket-fill"></i> Productos</span>
-                </mat-list-item>
-  
                 <mat-expansion-panel [class.mat-elevation-z0]="true">
                     <mat-expansion-panel-header class="my-list-item-acordeon">
                       <span class="my-text"><i class="bi bi-box-seam-fill"></i> Paquetes</span>
@@ -66,10 +58,18 @@
                         <a mat-list-item routerLink="/frontdesk" class="my-link">FrontDesk</a>
                     </mat-nav-list>
                 </mat-expansion-panel>
-  
-                <mat-list-item routerLink="/compras" class="my-list-item">
-                  <span class="my-text"><i class="bi bi-cart4"></i> Compras</span>
-                </mat-list-item>
+                
+                <mat-expansion-panel [class.mat-elevation-z0]="true">
+                    <mat-expansion-panel-header class="my-list-item-acordeon">
+                        <span class="my-text"><i class="bi bi-cart4"></i> Compras</span>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list class="nav-list-items">
+                        <a mat-list-item routerLink="/compras" class="my-link">Compras</a>
+                        <a mat-list-item routerLink="/productos" class="my-link">Productos</a>
+                        <a mat-list-item routerLink="/proveedores" class="my-link">Proveedores</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+                
   
             <!-- SECCION TRANSACCIONES -->
                 <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>

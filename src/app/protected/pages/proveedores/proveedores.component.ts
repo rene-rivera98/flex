@@ -39,6 +39,7 @@ export class ProveedoresComponent implements OnInit {
     'nombreBanco',
     'claveInter',
     'cuentaBanc',
+    'constancia',
     'opciones'
   ];
 

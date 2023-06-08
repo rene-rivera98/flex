@@ -10,6 +10,8 @@ export interface Ususario {
     estado: boolean
     fechaNacimiento: string;
     idrol: number;
+    areaUser: string;
+    sucursalUser: string;
     password_temporary: boolean;
     createdAt: string;
     updatedAt: string;
@@ -37,14 +39,15 @@ export interface proveedores{
     telefono2: string;
     banco: string;
     cuentaBancaria: string;
-    claveInter: string; 
+    claveInter: string;
+    constancia: string; 
 }
 
 export interface productos{
     codigoProducto: string;
     nombreProducto: string;
     stockProducto: string;
-    tamanioProducto: string;
+    medidaProducto: string;
     tallaProducto: string;
     createdAt: string;
     updatedAt: string;

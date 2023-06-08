@@ -35,7 +35,7 @@ export class ProductosComponent{
   displayedColumns: string[] = [
     'codigoP',
     'nombreProducto',
-    'tamanioProducto',
+    'medidaProducto',
     'tallaProducto',
     'stockProducto',
     'createdAt',
@@ -63,7 +63,7 @@ export class ProductosComponent{
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true; /* BLOQUEAR DIALOG DE CLICKS FUERA DE ESTE*/
       dialogConfig.width = '550px'; // Asignar ancho al dialog
-      dialogConfig.height = '500px'; // Asignar ancho al dialog
+      dialogConfig.height = '570px'; // Asignar ancho al dialog
       const dialogRef = this.dialog.open(DialogProductosComponent, dialogConfig);
     }
 

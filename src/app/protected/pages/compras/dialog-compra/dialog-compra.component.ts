@@ -28,10 +28,22 @@ export class DialogCompraComponent implements OnInit {
   mostrarMontoPendiente = false;
   mostrarPagoInsoluto = false;
 
+/* Variables para clasificacion */
+  formularioClasif!: FormGroup;
+  mostrarProducto = false;
+  mostrarServicio = false;
+  mostrarInputBase = true;
+  baseForm!: FormGroup;
 /* Variables para agregar productos a tabla */
   productosForm!: FormGroup;
-  @ViewChild('tablaProductos', { static: false }) tablaProductos: any;
+  mostrarBotonProducto = false;
+/* Variables para agregar servicios a tabla */
+  serviciosForm!: FormGroup;
+  mostrarBotonServicios = false;
   
+/* TABLA: LISTA DE COMPRA*/
+  @ViewChild('tablaCompras', { static: false }) tablaCompras: any;
+
   constructor(private _entriesService:ApiRequestService, 
               public dialogRef: MatDialogRef<DialogCompraComponent>,
               private fb: FormBuilder) { 
@@ -42,9 +54,11 @@ export class DialogCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormDialogCompra = this.fb.group({
-      Proveedor: ['', Validators.required],
-      Productos: ['', Validators.required],
-      Folio: ['', Validators.required],
+      Proveedor: [],
+      Productos: [],
+      selectClasif: [],
+      Base: [],
+      Folio: [],
       UsoCFDI: [],
       Fechafactura: [],
       Subtotal: [],
@@ -67,12 +81,27 @@ export class DialogCompraComponent implements OnInit {
     });
 
     this.formulario = this.fb.group({
-      metodoDePago: ['1', Validators.required]
+      metodoDePago: []
     });
     
     this.productosForm = this.fb.group({
-      Productos: ['', Validators.required]
+      Productos: []
     });
+
+    this.serviciosForm = this.fb.group({
+      Servicios: []
+    });
+
+    this.formularioClasif = this.fb.group({
+      Proveedor: [],
+      selectClasif: [],
+      Productos: [],
+      Servicios: []
+    });
+
+    this.baseForm = this.fb.group({
+      Base: []
+    })
   }
 
   /* FUNCION CERRAR DIALOG*/
@@ -118,18 +147,48 @@ export class DialogCompraComponent implements OnInit {
     this.mostrarFechaCaducidad = valorRecepcion === 'Recibido';
   }
 
+    /* CLASIFICACION DE COMPRA*/
+  onChangeClasificacion() {
+    const clasif = this.formularioClasif?.get('selectClasif')?.value;
+    if (clasif === "Productos") {
+      this.mostrarProducto = true;
+      this.mostrarServicio = false;
+      this.mostrarInputBase = false;
+      this.mostrarBotonProducto = true;
+      this.mostrarBotonServicios = false;
+      console.log('Se seleccionó Producto');
+    } else if (clasif === "Servicios") {
+      this.mostrarProducto = false;
+      this.mostrarServicio = true;
+      this.mostrarInputBase = false;
+      this.mostrarBotonProducto = false;
+      this.mostrarBotonServicios = true;
+      console.log('Se seleccionó Servicio');
+    }
+  }
+
   agregarProducto() {
     if (this.productosForm.valid) {
       const producto = this.productosForm.value.Productos;
-      const fila = this.tablaProductos.nativeElement.insertRow();
+      const fila = this.tablaCompras.nativeElement.insertRow();
       const celda = fila.insertCell();
       celda.innerText = producto;
       this.productosForm.reset();
     }
   }
 
+  agregarServicio() {
+    if (this.serviciosForm.valid) {
+      const servicio = this.serviciosForm.value.Servicios;
+      const fila = this.tablaCompras.nativeElement.insertRow();
+      const celda = fila.insertCell();
+      celda.innerText = servicio;
+      this.serviciosForm.reset();
+    }
+  }
+
   eliminarUltimaFila() {
-    const tabla = this.tablaProductos.nativeElement;
+    const tabla = this.tablaCompras.nativeElement;
     const filas = tabla.rows;
     if (filas.length > 1) {
       tabla.deleteRow(filas.length - 1);

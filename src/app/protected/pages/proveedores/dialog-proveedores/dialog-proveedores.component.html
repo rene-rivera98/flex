@@ -62,19 +62,19 @@
         <div class="col">
           <div class="form-floating mb-3">
             <input class="form-control" id="inputTelefono1" type="number" pattern="[0-9]{10}"
-                formControlName="Telefono1" placeholder="Teléfono #1" />
+                formControlName="Telefono1" placeholder="Teléfono fijo" />
 
-            <label for="inputTelefono1">Teléfono #1</label>
+            <label for="inputTelefono1">Teléfono fijo</label>
           </div>
         </div>
 
-        <!-- INPUT TELEFONO 2 -->
+        <!-- INPUT WHATSAPP -->
         <div class="col">
             <div class="form-floating mb-3">
               <input class="form-control" id="inputTelefono2" type="number" pattern="[0-9]{10}"
-                  formControlName="Telefono2" placeholder="Teléfono #2" />
+                  formControlName="Telefono2" placeholder="WhatsApp" />
 
-              <label for="inputTelefono2">Teléfono #2</label>
+              <label for="inputTelefono2">WhatsApp</label>
             </div>
           </div>
 
@@ -114,6 +114,11 @@
       </div>
       <!-- FIN INPUT -->
 
+    </div>
+    <!-- FIN FILA -->
+
+    <!-- FILA INPUT CUENTA BANCARIA, CONSTANCIA -->
+    <div class="row mt-3 col-13 mx-auto">
       <!-- INPUT CUENTA -->
       <div class="col">
         <div class="form-floating mb-3 col-13 mx-auto">
@@ -125,10 +130,21 @@
       </div>
       <!-- FIN INPUT -->
 
+      <!-- RADIOS BUTTONS -->
+      <div class="col">
+        <div class="form-floating mt-3">
+            <div class="row col-13 mx-auto">
+                <section class="example-section">
+                    <p><mat-checkbox formControlName="Si">Constancia</mat-checkbox></p>
+                </section>
+            </div>
+        </div>
+      </div>
+      <!-- FIN BUTTONS -->
+
     </div>
     <!-- FIN FILA -->
 
-    
       <!-- DIV BOTONES -->
       <div class="row col-13 mx-auto">
         <div class="col">

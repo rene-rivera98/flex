@@ -92,6 +92,47 @@
       </div>
     <!-- FIN  INPUT -->
     
+    <div class="row mt-1">
+      
+      <!-- INPUT SUCURSAL -->
+        <div class="col">
+          <div class="form-floating mb-3">
+            <select class="form-control" id="selectSucursalEd" formControlName="sucursalUserEd" placeholder="Sucursal">
+              <option value="" disabled selected>Seleccionar sucursal</option>
+              <option value="Coatepec">Coatepec</option>
+              <option value="Xalapa">Xalapa</option>
+            </select>
+            <label for="selectSucursalEd">Sucursal</label>
+  
+            <!-- Aqui falta la validacion -->
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+          </div>
+        </div>
+      <!-- FIN INPUT -->
+
+      <!-- INPUT AREA -->
+      <div class="col">
+        <div class="form-floating mb-3">
+          <select class="form-control" id="selectAreaUserEd" formControlName="areaUserEd" placeholder="Área">
+            <option value="" disabled selected>Seleccionar área</option>
+            <option value="Cafeteria">Cafetería</option>
+            <option value="FrontDesk">FrontDesk</option>
+          </select>
+          <label for="selectAreaEd">Área</label>
+
+          <!-- Aqui falta la validacion -->
+          <div class="invalid-tooltip">
+              Please choose a username.
+          </div>
+        </div>
+      </div>
+      <!-- FIN INPUT -->
+
+    </div>
+
+
     <!-- INPUT TIPO DE USUARIO -->
       <div class="form-floating mb-3 col-13 mx-auto">
         <select class="form-control" id="selectRolEd" formControlName="RolEd" placeholder="Rol">

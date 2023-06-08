@@ -9,7 +9,7 @@
   <!-- INICIO CONTENIDO DIALOG -->
   <div mat-dialog-content class="custom-dialog">
   
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="FormDialogProducto">
   
       <!-- INPUT CODIGO-->
         <div class="form-floating mb-3 col-13 mx-auto mt-3">
@@ -29,58 +29,139 @@
         </div>
       <!-- FIN  INPUT -->
 
-      <!-- SELECT TAMAÑO -->
-      <div class="col">
-        <div class="form-floating mb-3 mt-3">
-          <select class="form-control" id="selectTamanio" formControlName="tamanioProducto" placeholder="Tamaño">
-            <option value="" disabled selected>Selecciona un tamaño</option>
-            <option value="Gramos">Gramos</option>
-            <option value="Mililitros">Mililitros</option>
-            <option value="Piezas">Piezas</option>
-            <option value="--">Sin tamaño</option>
-          </select>
-          
-          <label for="selectTamanio">Tamaño</label>
+      <form [formGroup]="formulario" class="mt-4">
+        <!-- SELECT CATEGORIA (FRONTDESK O CAFETERIA) -->
+        <div class="col">
+          <div class="form-floating mb-3 mt-3">
+            <select class="form-control" id="selectAreaP" 
+                    formControlName="areaProducto" placeholder="Área"
+                    (change)="onChangeArea()">
+              <option value="" disabled selected>Seleccionar área</option>
+              <option value="Cafeteria">Cafeteria</option>
+              <option value="FrontDesk">FrontDesk</option>
+            </select>
+            
+            <label for="selectAreaP">Área</label>
+          </div>
         </div>
-      </div>
-      <!-- FIN SELECT -->
+        <!-- FIN SELECT -->
 
-      <!-- SELECT TALLA (TENTATIVO A CAMBIO DE VALORES) -->
-      <div class="col">
-        <div class="form-floating mb-3 mt-3">
-          <select class="form-control" id="selectTalla" formControlName="tallaProducto" placeholder="Talla">
-            <option value="" disabled selected>Selecciona una talla</option>
-            <option value="Chico">Chico</option>
-            <option value="Mediano">Mediano</option>
-            <option value="Grande">Grande</option>
-            <option value="---">Sin talla</option>
-          </select>
-          
-          <label for="selectTalla">Talla</label>
-        </div>
+      <!-- DIV MEDIDA-->
+      <div *ngIf="mostrarTalla">
+
+         <div class="row">
+
+            <!-- SELECT MEDIDA -->
+            <div class="col">
+              <div class="form-floating mb-3 mt-2">
+                <select class="form-control" id="selectMedida" 
+                        formControlName="medidaProducto" placeholder="Unidad de medida">
+                  <option value="" disabled selected>Seleccionar unidad de medida</option>
+                  <option value="Gramos">Gramos</option>
+                  <option value="Mililitros">Mililitros</option>
+                  <option value="Piezas">Piezas</option>
+                  <option value="--">Sin tamaño</option>
+                </select>
+                
+                <label for="selectMedida">Unidad de medida</label>
+              </div>
+            </div>
+            <!-- FIN SELECT -->
+
+            <!-- SELECT TALLA -->
+            <div class="col">
+              <div class="form-floating mb-3 mt-2">
+                <select class="form-control" id="selectTalla" formControlName="tallaProducto" placeholder="Talla">
+                  <option value="" disabled selected>Selecciona una talla</option>
+                  <option value="Bebe">Bebé</option>
+                  <option value="Niño">Niño</option>
+                  <option value="Chico">Chico</option>
+                  <option value="Mediano">Mediano</option>
+                  <option value="Grande">Grande</option>
+                  <option value="Extra-Grande">Extra-Grande</option>
+                  <option value="---">Sin talla</option>
+                </select>
+                
+                <label for="selectTalla">Talla</label>
+              </div>
+            </div>
+            <!-- FIN SELECT -->
+            
+            <!-- RADIOS BUTTONS -->
+            <div class="col">
+              <div class="form-floating mb-3 mt-4">
+                  <section class="example-section">
+                      <p><mat-checkbox formControlName="Perecedero">Perecedero</mat-checkbox></p>
+                  </section>
+              </div>
+            </div>
+            <!-- FIN BUTTONS -->
+
+         </div>
+            
+
       </div>
-      <!-- FIN SELECT -->
-  
-        <!-- DIV BOTONES -->
+        
+      <!-- DIV CAFETERIA -->
+      <div *ngIf="mostrarMedida">
+
         <div class="row">
+          <!-- SELECT MEDIDA -->
           <div class="col">
-            <div class="d-flex align-items-center mt-4">
-              <button class="btn btn-warning mx-auto col-6" type="submit">
-                Registrar
-              </button>
+            <div class="form-floating mb-3 mt-2">
+              <select class="form-control" id="selectMedida" 
+                      formControlName="medidaProducto" placeholder="Unidad de medida">
+                <option value="" disabled selected>Seleccionar unidad de medida</option>
+                <option value="Gramos">Gramos</option>
+                <option value="Mililitros">Mililitros</option>
+                <option value="Piezas">Piezas</option>
+                <option value="--">Sin tamaño</option>
+              </select>
+              
+              <label for="selectMedida">Unidad de medida</label>
             </div>
           </div>
-          
+          <!-- FIN SELECT -->
+
+          <!-- RADIOS BUTTONS -->
           <div class="col">
-            <div class="d-flex align-items-center mt-4">
-              <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
-                Cerrar
-              </button>
+            <div class="form-floating mb-3 mt-4">
+                <section class="example-section">
+                    <p><mat-checkbox formControlName="Perecedero">Perecedero</mat-checkbox></p>
+                </section>
             </div>
           </div>
+          <!-- FIN BUTTONS -->
+
         </div>
-        <!-- FIN DIV BOTONES -->
-  
+        
+
+      </div>
+
+      
+
+      
+      </form>
+
+          <!-- DIV BOTONES -->
+          <div class="row">
+            <div class="col">
+              <div class="d-flex align-items-center mt-4">
+                <button class="btn btn-warning mx-auto col-6" type="submit">
+                  Registrar
+                </button>
+              </div>
+            </div>
+            
+            <div class="col">
+              <div class="d-flex align-items-center mt-4">
+                <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- FIN DIV BOTONES -->
     </form>
     
   </div>

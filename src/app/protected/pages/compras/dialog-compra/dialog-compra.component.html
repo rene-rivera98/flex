@@ -14,12 +14,15 @@
     <mat-tab-group mat-align-tabs="center">
 
       <mat-tab label="Proveedor y Productos">
+        
+        <form [formGroup]="formularioClasif" class="mt-3">
         <!------------------------------- ELEGIR PROVEEDOR Y PRODUCTOS ----------------------------------------------------------------------->
-          <!-- SELECT PROVEEDOR -->
+          <!-- PROVEEDOR Y TIPO DE REGISTRO -->
           <div class="row col-13 mx-auto">
 
+            <!-- SELECT PROVEEDOR -->
             <div class="col">
-              <div class="form-floating mb-3 mt-3">
+              <div class="form-floating mb-3">
                 <select class="form-control" id="selectProveedor" formControlName="Proveedor" placeholder="Proveedor">
                   <option value="" disabled selected>Selecciona un Proveedor</option>
                 </select>
@@ -27,12 +30,46 @@
                 <label for="selectProveedor">Proveedor</label>
               </div>
             </div>
-            <!-- FIN SELECT PROVEEDOR -->
+            <!-- FIN SELECT PROVEEDOR --> 
+
+            
+            <!-- SELECT CLASIFICACION -->
+            <div class="col">
+              <div class="form-floating mb-3">
+                <select class="form-control" id="selectClasif" 
+                        formControlName="selectClasif" placeholder="Clasificación" (change)="onChangeClasificacion()">
+                  <option value="" disabled selected>Selecciona una clasificación</option>
+                  <option value="Productos">Productos</option>
+                  <option value="Servicios">Servicios</option>
+                </select>
+                
+                <label for="selectClasif">Clasificación</label>
+              </div>
+            </div>
+            <!-- FIN SELECT CLASIFICACION --> 
+
+          </div>
+
+          <!------------------------- AGREGAR PRODUCTOS O SERVICIOS -------------------------------------->
+          
+          <div class="row col-13 mx-auto">
+            
+            <!-- Input -->
+            <div class="col" *ngIf="mostrarInputBase">
+              <form [formGroup]="baseForm">
+                <div class="form-floating mb-3 mt-2">
+                  <input class="form-control" id="selectBase" formControlName="Base" placeholder="" readonly/>
+                  
+                  <label for="selectBase">Clasificación sin elegir</label>
+                </div>
+              </form>
+            </div>
+            <!-- FIN Input base -->
 
             <!-- PRODUCTOS -->
-            <div class="col">
+            <div class="col" *ngIf="mostrarProducto">
               <form [formGroup]="productosForm">
-                <div class="form-floating mb-3 mt-3">
+                <div class="form-floating mb-3 mt-2">
                   <select class="form-control" id="selectProductos" formControlName="Productos" placeholder="Productos">
                     <option value="" disabled selected>Selecciona un producto</option>
                     <!-- OPCIONES SOLO DE EJEMPLO -->
@@ -44,9 +81,24 @@
                 </div>
               </form>
             </div>
+            <!-- FIN PRODUCTOS -->
 
-            <div class="col">
-              <div class="d-flex align-items-center mt-4">
+            <!-- SERVICIOS -->
+            <div class="col" *ngIf="mostrarServicio">
+              <form [formGroup]="serviciosForm">
+                <div class="form-floating mb-3 mt-2">
+                  <input class="form-control" id="selectServicios" formControlName="Servicios" placeholder="Servicios"/>
+                  
+                  <label for="selectServicios">Servicio</label>
+                </div>
+              </form>
+            </div>
+            <!-- FIN SERVICIOS -->
+            
+
+            <!-- BOTONES PRODUCTO -->
+            <div class="col" *ngIf="mostrarBotonProducto">
+              <div class="d-flex align-items-center mt-3">
                   <button class="btn btn-warning mx-auto col-6" (click)="agregarProducto()">
                       Agregar
                   </button>
@@ -55,22 +107,40 @@
                       Quitar
                   </button>
               </div>
-          </div>
-              
-            <table #tablaProductos class="table table-striped table-bordered">
+            </div>
+            <!-- FIN BOTONES -->
+
+            <!-- BOTONES SERVICIO -->
+            <div class="col" *ngIf="mostrarBotonServicios">
+              <div class="d-flex align-items-center mt-3">
+                  <button class="btn btn-warning mx-auto col-6" (click)="agregarServicio()">
+                      Agregar
+                  </button>
+                  
+                  <button class="btn btn-danger mx-2 col-6 " (click)="eliminarUltimaFila()">
+                      Quitar
+                  </button>
+              </div>
+            </div>
+            <!-- FIN BOTONES -->
+
+            <table #tablaCompras class="table table-striped table-bordered">
               <thead class="thead-dark">
                 <tr>
-                  <th>Productos agregados:</th>
+                  <th>Lista de compra:</th>
                 </tr>
 
               </thead>
                 <tbody>
-                  <!-- aquí se agregarán los productos -->
+                  <!-- aquí se agregarán los productos o servicios -->
                 </tbody>
             </table>
             
-          </div>            
-          <!-- FIN PRODUCTOS -->
+          </div>   
+        </form>
+         
+          
+
       </mat-tab>
 
       <mat-tab label="Datos de la factura y Datos de pago">
@@ -84,8 +154,7 @@
                 <div class="col">
                   <div class="form-floating mb-3">
                     <input class="form-control" id="inputFolio" type="text"
-                          formControlName="Folio" placeholder="Folio"
-                          maxLength="4" />
+                          formControlName="Folio" placeholder="Folio"/>
 
                     <label for="inputFolio">Folio</label>
                   </div>
@@ -303,9 +372,9 @@
                 <div class="col" id="PagoInsoluto" *ngIf="mostrarPagoInsoluto">
                   <div class="form-floating mb-3 col-13 mx-auto">
                     <input class="form-control" id="inputPagoInsoluto" type="number"
-                            formControlName="PagoInsoluto" placeholder="Pago insoluto" readonly/>
+                            formControlName="PagoInsoluto" placeholder="Saldo insoluto" readonly/>
 
-                    <label for="inputPagoInsoluto">Pago insoluto</label>
+                    <label for="inputPagoInsoluto">Saldo insoluto</label>
                   </div>
                 </div>
                 <!-- FIN INPUT MONTO DE PAGO PENDIENTE -->
@@ -370,17 +439,6 @@
               </div>
             </div>
             <!-- FIN INPUT FECHA DE RECEPCIÓN -->
-
-            <!-- INPUT FECHA CADUCIDAD -->
-            <div class="col" *ngIf="mostrarFechaCaducidad"> <!-- SE MOSTRARA SI ES QUE SE SELECCIONA RECIBIDO EN EL SELECT ANTERIOR -->
-              <div class="form-floating mb-3 col-13 mx-auto">
-                <input class="form-control" id="inputCaducidad" type="date"
-                    formControlName="FechaCaducidad" placeholder="Fecha de caducidad"/>
-                    
-                <label for="inputCaducidad">Fecha de caducidad</label>
-              </div>
-            </div>
-            <!-- FIN INPUT FECHA CADUCIDAD -->
 
           </div>
           <!-- FIN ROW -->

@@ -70,8 +70,8 @@
         <div class="col">
           <div class="form-floating mb-3">
             <input class="form-control" id="inputTelefono1Ed" type="number" pattern="[0-9]{10}"
-                formControlName="Telefono1Ed" placeholder="Teléfono #1" />
-            <label for="inputTelefono1Ed">Teléfono #1</label>
+                formControlName="Telefono1Ed" placeholder="Teléfono fijo" />
+            <label for="inputTelefono1Ed">Teléfono fijo</label>
             <!-- Aqui falta la validacion -->
             <div class="invalid-feedback">
                 La contraseña es obligatoria.
@@ -83,8 +83,8 @@
         <div class="col">
             <div class="form-floating mb-3">
               <input class="form-control" id="inputTelefono2Ed" type="number" pattern="[0-9]{10}"
-                  formControlName="Telefono2Ed" placeholder="Teléfono #2" />
-              <label for="inputTelefono2Ed">Teléfono #2</label>
+                  formControlName="Telefono2Ed" placeholder="WhatsApp" />
+              <label for="inputTelefono2Ed">WhatsApp</label>
               <!-- Aqui falta la validacion -->
               <div class="invalid-feedback">
                   La contraseña es obligatoria.
@@ -132,6 +132,18 @@
             La contraseña es obligatoria.
         </div>
       </div>
+    <!-- FIN INPUT -->
+
+    <!-- INPUT CONSTANCIA -->
+    <div class="form-floating mb-3 col-13 mx-auto">
+      <input class="form-control" id="inputConstanciaPE" type="text" 
+          formControlName="ConstanciaPE" placeholder="Constancia" />
+      <label for="inputConstanciaPE">Constancia</label>
+      <!-- Aqui falta la validacion -->
+      <div class="invalid-feedback">
+          La contraseña es obligatoria.
+      </div>
+    </div>
     <!-- FIN INPUT -->
 
     </div>
