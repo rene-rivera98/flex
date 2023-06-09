@@ -1,0 +1,93 @@
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>
+    <div class="text-center">
+      <h1>Datos de apertura de caja</h1>
+    </div>
+  </h1>
+  <!-- FIN TITULO DIALOG -->
+  
+  <!-- INICIO CONTENIDO DIALOG -->
+  <div mat-dialog-content class="custom-dialog">
+  
+    <form autocomplete="off">
+      
+        <div class="row mt-1">
+            
+            <!-- INPUT AREA -->
+            <div class="col">
+              <div class="form-floating mb-3">
+                  <select class="form-control" id="selectArea" formControlName="area" placeholder="Área">
+                  <option value="" disabled selected>Seleccionar área</option>
+                  <option value="Cafeteria">Cafetería</option>
+                  <option value="FrontDesk">FrontDesk</option>
+                  </select>
+
+                  <label for="selectArea">Área</label>
+              </div>
+            </div>
+            <!-- FIN INPUT -->
+    
+            <!-- INPUT SELECT CAJA-->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <select class="form-control" id="selectCaja" formControlName="Caja" placeholder="Caja">
+                    <option value="" disabled selected>Seleccionar caja</option>
+                    <option value="001">1</option>
+                    <option value="002">2</option>
+                    <option value="003">3</option>
+                    </select>
+
+                    <label for="selectCaja">Caja</label>
+                </div>
+            </div>
+            <!-- FIN INPUT -->
+
+        </div>
+      
+        
+        <!-- INPUT EFECTIVO -->
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="inputEfectivo" type="text"
+                    formControlName="efectivo" placeholder="Efectivo"/>
+
+                <label for="inputEfectivo">Efectivo</label>
+            </div>
+        </div>
+
+        <!-- INPUT REFERENCIA -->
+        <div class="col">
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="inputReferencia" type="text"
+                    formControlName="referencias" placeholder="referencias">
+                </textarea>
+                
+                <label for="inputReferencia">Referencias</label>
+            </div>
+        </div>
+      
+  
+        <!-- DIV BOTONES -->
+        <div class="row">
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button class="btn btn-warning mx-auto col-6" type="submit">
+                Registrar
+              </button>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- FIN DIV BOTONES -->
+  
+    </form>
+    
+  </div>
+  <!-- FIN CONTENIDO DE DIALOG -->

@@ -74,9 +74,15 @@
             <!-- SECCION TRANSACCIONES -->
                 <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>
   
-                <mat-list-item routerLink="#" class="my-list-item">
-                  <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
-                </mat-list-item>
+                <mat-expansion-panel [class.mat-elevation-z0]="true">
+                    <mat-expansion-panel-header class="my-list-item-acordeon">
+                        <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list class="nav-list-items">
+                        <a mat-list-item routerLink="/apertura-caja" class="my-link">Apertura de caja</a>
+                        <a mat-list-item routerLink="/corte-parcial" class="my-link">Corte parcial</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
   
                 <mat-list-item routerLink="#" class="my-list-item">
                     <span class="my-text"><i class="bi bi-clipboard-fill"></i> Facturas</span>

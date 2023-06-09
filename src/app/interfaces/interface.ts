@@ -1,3 +1,4 @@
+import { IterableDiffers } from "@angular/core";
 
 export interface Ususario {
     idusuario: string;
@@ -72,4 +73,27 @@ export interface cafeteria{
     precioPC: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface aperturaCaja{
+    area: string;
+    caja: string;
+    efectivo: string;
+    referencias: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface corteParcial{
+    codigo: string;
+    revision: string;
+    fechaEmision: string;
+    fechaRevision: string;
+    cajero: string;
+    fechaCorte: string;
+    totalEfectivo: string;
+    totalTarjeta: string;
+    totalTransferencia: string;
+    totalGeneral: string;
+    referencias: string;
 }

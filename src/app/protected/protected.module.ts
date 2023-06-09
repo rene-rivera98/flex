@@ -24,7 +24,6 @@ import { AdminLayoutComponent } from '../admin-layout/admin-layout.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { ComprasComponent } from './pages/compras/compras.component';
-import { CajaComponent } from './pages/caja/caja.component';
 import { FacturasComponent } from './pages/facturas/facturas.component';
 import { RInsumosComponent } from './pages/r-insumos/r-insumos.component';
 import { RMermaComponent } from './pages/r-merma/r-merma.component';
@@ -48,6 +47,10 @@ import { CafeteriaComponent } from './pages/cafeteria/cafeteria.component';
 import { DialogCafeteriaComponent } from './pages/cafeteria/dialog-cafeteria/dialog-cafeteria.component';
 import { DialogEditarCafeteriaComponent } from './pages/cafeteria/dialog-editar-cafeteria/dialog-editar-cafeteria.component';
 import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
+import { AperturaCajaComponent } from './pages/apertura-caja/apertura-caja.component';
+import { CorteParcialComponent } from './pages/corte-parcial/corte-parcial.component';
+import { DialogAperturaCajaComponent } from './pages/apertura-caja/dialog-apertura-caja/dialog-apertura-caja.component';
+import { DialogCorteParcialComponent } from './pages/corte-parcial/dialog-corte-parcial/dialog-corte-parcial.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,6 @@ import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-
     ProveedoresComponent,
     ProductosComponent,
     ComprasComponent,
-    CajaComponent,
     FacturasComponent,
     RInsumosComponent,
     RMermaComponent,
@@ -79,7 +81,11 @@ import { DialogBorrarCafeteriaComponent } from './pages/cafeteria/dialog-borrar-
     CafeteriaComponent,
     DialogCafeteriaComponent,
     DialogEditarCafeteriaComponent,
-    DialogBorrarCafeteriaComponent
+    DialogBorrarCafeteriaComponent,
+    AperturaCajaComponent,
+    CorteParcialComponent,
+    DialogAperturaCajaComponent,
+    DialogCorteParcialComponent
   ],
   imports: [
     CommonModule,

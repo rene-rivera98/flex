@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CajaComponent } from './caja.component';
+import { CorteParcialComponent } from './corte-parcial.component';
 
-describe('CajaComponent', () => {
-  let component: CajaComponent;
-  let fixture: ComponentFixture<CajaComponent>;
+describe('CorteParcialComponent', () => {
+  let component: CorteParcialComponent;
+  let fixture: ComponentFixture<CorteParcialComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CajaComponent ]
+      declarations: [ CorteParcialComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CajaComponent);
+    fixture = TestBed.createComponent(CorteParcialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,127 @@
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>
+    <div class="text-center">
+      <h1>Corte parcial de caja</h1>
+    </div>
+</h1>
+<!-- FIN TITULO DIALOG -->
+  
+  <!-- INICIO CONTENIDO DIALOG -->
+  <div mat-dialog-content class="custom-dialog">
+  
+    <form autocomplete="off">
+      
+        <div class="row mt-1">
+            
+            <!-- INPUT CODIGO -->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="inputCodigo" type="text"
+                        formControlName="codigo" placeholder="Código"/>
+
+                    <label for="inputCodigo">Código</label>
+                </div>
+            </div>
+            <!-- FIN INPUT -->
+    
+            <!-- INPUT REVISION -->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="inputRevision" type="month"
+                        formControlName="Revision" placeholder="Revisión"/>
+
+                    <label for="inputRevision">Revisión</label>
+                </div>
+            </div>
+            <!-- FIN INPUT -->
+
+            <!-- INPUT FECHA DE EMISION -->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="inputFechaEmision" type="month"
+                        formControlName="FechaEmision" placeholder="Fecha de emisión"/>
+
+                    <label for="inputFechaEmision">Fecha de emisión</label>
+                </div>
+            </div>
+            <!-- FIN INPUT -->
+
+            <!-- INPUT FECHA DE REVISION -->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="inputFechaRevision" type="month"
+                        formControlName="FechaRevision" placeholder="Fecha de revisión"/>
+
+                    <label for="inputRevision">Revision</label>
+                </div>
+            </div>
+            <!-- FIN INPUT -->
+
+        </div>
+        
+        <div class="row mt-1">
+
+            <!-- SELECT CAJERO -->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <select class="form-control" id="selectCajero" formControlName="cajero" placeholder="Cajero">
+                    <option value="" disabled selected>Seleccionar cajero</option>
+                    <option value="001">1</option>
+                    <option value="002">2</option>
+                    </select>
+    
+                    <label for="selectCajero">Cajero</label>
+                </div>
+            </div>
+            <!-- FIN SELECT -->
+
+            <!-- INPUT FECHA DE CORTE -->
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="input" type="text"
+                        formControlName="efectivo" placeholder="Efectivo"/>
+
+                    <label for="inputEfectivo">Efectivo</label>
+                </div>
+            </div>
+
+        </div>
+        
+        
+
+        <!-- INPUT REFERENCIA -->
+        <div class="col">
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="inputReferencia" type="text"
+                    formControlName="referencias" placeholder="referencias">
+                </textarea>
+                
+                <label for="inputReferencia">Referencias</label>
+            </div>
+        </div>
+      
+  
+        <!-- DIV BOTONES -->
+        <div class="row">
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button class="btn btn-warning mx-auto col-6" type="submit">
+                Registrar
+              </button>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- FIN DIV BOTONES -->
+  
+    </form>
+    
+  </div>
+  <!-- FIN CONTENIDO DE DIALOG -->
