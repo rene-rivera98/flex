@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-corte-parcial',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogCorteParcialComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<DialogCorteParcialComponent>) { }
 
   ngOnInit(): void {
   }
-
+ /* FUNCION CERRAR DIALOG*/
+ closeDialog() {
+  this.dialogRef.close();
+}
 }

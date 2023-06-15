@@ -28,6 +28,8 @@ export interface compra {
     metodoPago: string;
     montoFactura: string;
     complementoPago: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface proveedores{
@@ -42,6 +44,8 @@ export interface proveedores{
     cuentaBancaria: string;
     claveInter: string;
     constancia: string; 
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface productos{
