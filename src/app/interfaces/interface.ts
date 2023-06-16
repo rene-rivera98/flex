@@ -51,7 +51,6 @@ export interface proveedores{
 export interface productos{
     codigoProducto: string;
     nombreProducto: string;
-    stockProducto: string;
     medidaProducto: string;
     tallaProducto: string;
     createdAt: string;
