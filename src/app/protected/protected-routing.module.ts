@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsuariosComponent } from './pages/usuarios/usuarios.component';
-import { ComprasComponent } from './pages/compras/compras.component';
-import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
-import { ProductosComponent } from './pages/productos/productos.component';
-import { FrontDeskComponent } from './pages/frontdesk/frontdesk.component';
-import { CafeteriaComponent } from './pages/cafeteria/cafeteria.component';
-import { AperturaCajaComponent } from './pages/apertura-caja/apertura-caja.component';
-import { CorteParcialComponent } from './pages/corte-parcial/corte-parcial.component';
+import { UsuariosComponent } from './pages/admin-master/registros/usuarios/usuarios.component';
+import { ComprasComponent } from './pages/admin-master/registros/compras/compras/compras.component';
+import { ProveedoresComponent } from './pages/admin-master/registros/compras/proveedores/proveedores.component';
+import { ProductosComponent } from './pages/admin-master/registros/compras/productos/productos.component';
+import { FrontDeskComponent } from './pages/admin-master/registros/paquetes/frontdesk/frontdesk.component';
+import { CafeteriaComponent } from './pages/admin-master/registros/paquetes/cafeteria/cafeteria.component';
+import { AperturaCajaComponent } from './pages/admin-master/transacciones/caja/apertura-caja/apertura-caja.component';
+import { CorteParcialComponent } from './pages/admin-master/transacciones/caja/corte-parcial/corte-parcial.component';
 
 const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent},

@@ -1,6 +1,6 @@
 import { IterableDiffers } from "@angular/core";
 
-export interface Ususario {
+export interface usuario {
     idusuario: string;
     nombre: string;
     apellidoPaterno: string;

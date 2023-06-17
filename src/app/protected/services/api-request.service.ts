@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-import { Ususario } from 'src/app/interfaces/interface';
+import { usuario } from 'src/app/interfaces/interface';
 import { compra } from 'src/app/interfaces/interface';
 import { proveedores } from 'src/app/interfaces/interface';
 
@@ -18,11 +18,11 @@ export class ApiRequestService {
 
   constructor(private http: HttpClient) { }
 
-  getUsuarios():Observable<Ususario> {
+  getUsuarios():Observable<usuario> {
     const authorization = localStorage.getItem('token')!
     const headers = new HttpHeaders({'Authorization': authorization})
     const url = `${this.baseUrl}/users/${''}`
-    return this.http.get<Ususario>(url, {headers})
+    return this.http.get<usuario>(url, {headers})
   }
 
   getCompras():Observable<compra> {
