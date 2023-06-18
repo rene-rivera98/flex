@@ -1,115 +1,169 @@
+<!-- inicio barra de herramientas -->
 <mat-toolbar>
-
-    <!-- BOTON ABRIR SIDEBAR -->
+    
     <div style="display: flex; align-items: center;">
-      <button class="btn btn-warning btn-sm" (click)="sidenav.toggle()" matTooltip="Menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span style="margin-left: 10px; color: white;">ADMINISTRADOR</span>
+
+        <!-- boton para mover barra lateral -->
+        <button class="btn btn-warning btn-sm spacing-right-s" (click)="sidenav.toggle()" matTooltip="Menu">
+            <i class="bi bi-list fs-5"></i>
+        </button>
+
+        <span class="text-white">ADMINISTRADOR</span>
+
     </div>
-  
+    
+    <!-- span para añadir espacio entre botones -->
     <span class="toolbar-item-spacer"></span>
-  
-    <!-- BOTON PARA ABRIR MENU USUARIO -->
+    
+    <!-- boton para abrir menu usuario y bitacora -->
     <button class="btn btn-warning btn-sm" matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
-        <mat-icon>account_circle</mat-icon>
+        <i class="bi bi-gear-fill fs-5"></i>
     </button>
-    <!-- FIN BOTON -->
   
-    <!-- MENU USUARIO -->
+    <!-- contenido de menu usuario y bitacora -->
     <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+
         <button mat-menu-item routerLink="#">
-            <mat-icon>person</mat-icon><span>Mi cuenta</span>
+            <i class="bi bi-person-vcard-fill fs-4 spacing-right"></i>Mi cuenta
         </button>
+
         <button mat-menu-item routerLink="#">
-            <mat-icon>list_alt</mat-icon><span>Bitacora</span>
+            <i class="bi bi-list-check fs-4 spacing-right"></i>Bitacora
         </button>
-        <button mat-menu-item routerLink="#">
-            <mat-icon></mat-icon><span>Actualizar contraseña</span>
-        </button>
+
         <mat-divider></mat-divider>
+
         <button mat-menu-item routerLink="#">
-            <mat-icon>exit_to_app</mat-icon>Cerrar sesión
+            <i class="bi bi-box-arrow-right fs-4 spacing-right"></i>Cerrar sesión
         </button>
+
     </mat-menu>
-  <!-- FIN MENU -->
+
+
 </mat-toolbar>
-  <!-- FIN NAVBAR -->
+<!-- fin barra de herramientas -->
   
-  <!-- INICIO SIDEBAR -->
+
+<!-- barra lateral y contenido -->
 <mat-sidenav-container class="app-container">
 
+    <!-- inicio de barra lateral -->
     <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav" opened>
+
         <mat-nav-list class="list-group my-nav-list">
   
-            <!-- SECCION REGISTROS -->
-                <h5 class="list-group-item my-heading">REGISTROS</h5>        
+            <!-- seccion registros -->
+            <h5 class="list-group-item my-heading">REGISTROS</h5>        
   
-                <mat-list-item routerLink="/usuarios" class="my-list-item">
-                    <span class="my-text"><i class="bi bi-person-fill"></i> Usuarios</span>
-                </mat-list-item>                
+            <!-- modulo usuarios -->
+            <mat-list-item routerLink="/usuarios" class="my-list-item">
+                <span class="my-text"><i class="bi bi-person-fill"></i> Usuarios</span>
+            </mat-list-item>                
   
-                <mat-expansion-panel [class.mat-elevation-z0]="true">
-                    <mat-expansion-panel-header class="my-list-item-acordeon">
-                      <span class="my-text"><i class="bi bi-box-seam-fill"></i> Paquetes</span>
-                    </mat-expansion-panel-header>
-                    <mat-nav-list class="nav-list-items">
-                        <a mat-list-item routerLink="/cafeteria" class="my-link">Cafeteria</a>
-                        <a mat-list-item routerLink="/frontdesk" class="my-link">FrontDesk</a>
-                    </mat-nav-list>
-                </mat-expansion-panel>
+            <!-- modulo paquetes -->
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+
+                <mat-expansion-panel-header class="my-list-item-acordeon">
+                    <span class="my-text"><i class="bi bi-box-seam-fill"></i> Paquetes</span>
+                </mat-expansion-panel-header>
+
+                <mat-nav-list class="nav-list-items">
+                    <a mat-list-item routerLink="/cafeteria" class="my-link">Cafeteria</a>
+                    <a mat-list-item routerLink="/frontdesk" class="my-link">FrontDesk</a>
+                </mat-nav-list>
                 
-                <mat-expansion-panel [class.mat-elevation-z0]="true">
-                    <mat-expansion-panel-header class="my-list-item-acordeon">
-                        <span class="my-text"><i class="bi bi-cart4"></i> Compras</span>
-                    </mat-expansion-panel-header>
-                    <mat-nav-list class="nav-list-items">
-                        <a mat-list-item routerLink="/compras" class="my-link">Compras</a>
-                        <a mat-list-item routerLink="/productos" class="my-link">Productos</a>
-                        <a mat-list-item routerLink="/proveedores" class="my-link">Proveedores</a>
-                    </mat-nav-list>
-                </mat-expansion-panel>
+            </mat-expansion-panel>
+            
+            <!-- modulo compras -->
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+                
+                <mat-expansion-panel-header class="my-list-item-acordeon">
+                    <span class="my-text"><i class="bi bi-cart4"></i> Compras</span>
+                </mat-expansion-panel-header>
+
+                <mat-nav-list class="nav-list-items">
+                    <a mat-list-item routerLink="/compras" class="my-link">Compras</a>
+                    <a mat-list-item routerLink="/productos" class="my-link">Productos</a>
+                    <a mat-list-item routerLink="/proveedores" class="my-link">Proveedores</a>
+                </mat-nav-list>
+
+            </mat-expansion-panel>
+
+            <!-- modulo gastos -->
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+                
+                <mat-expansion-panel-header class="my-list-item-acordeon">
+                    <span class="my-text"><i class="bi bi-graph-down-arrow"></i> Gastos</span>
+                </mat-expansion-panel-header>
+
+                <mat-nav-list class="nav-list-items">
+                    <a mat-list-item routerLink="#" class="my-link">Servicios</a>
+                </mat-nav-list>
+
+            </mat-expansion-panel>
+
+            <!-- modulo almacen -->
+            <mat-list-item routerLink="#" class="my-list-item">
+                <span class="my-text"><i class="bi bi-boxes"></i> Almacén</span>
+            </mat-list-item>  
                 
   
-            <!-- SECCION TRANSACCIONES -->
-                <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>
+            <!-- seccion transacciones -->
+            <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>
   
-                <mat-expansion-panel [class.mat-elevation-z0]="true">
-                    <mat-expansion-panel-header class="my-list-item-acordeon">
-                        <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
-                    </mat-expansion-panel-header>
-                    <mat-nav-list class="nav-list-items">
-                        <a mat-list-item routerLink="/apertura-caja" class="my-link">Apertura de caja</a>
-                        <a mat-list-item routerLink="/corte-parcial" class="my-link">Corte parcial</a>
-                    </mat-nav-list>
-                </mat-expansion-panel>
+            <!-- modulo caja -->
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+                
+                <mat-expansion-panel-header class="my-list-item-acordeon">
+                    <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
+                </mat-expansion-panel-header>
+                
+                <mat-nav-list class="nav-list-items">
+                    <a mat-list-item routerLink="/apertura-caja" class="my-link">Apertura de caja</a>
+                </mat-nav-list>
+            
+            </mat-expansion-panel>
   
-                <mat-list-item routerLink="#" class="my-list-item">
-                    <span class="my-text"><i class="bi bi-clipboard-fill"></i> Facturas</span>
-                </mat-list-item>
+            <!-- modulo facturacion -->
+            <mat-list-item routerLink="#" class="my-list-item">
+                <span class="my-text"><i class="bi bi-file-earmark-text"></i> Facturación</span>
+            </mat-list-item>
   
-            <!-- SECCION ANALISIS -->
-                <h5 class="list-group-item my-heading-top">ANALISIS</h5>
+            <!-- seccion analisis -->
+            <h5 class="list-group-item my-heading-top">ANALISIS</h5>
   
-                <mat-expansion-panel [class.mat-elevation-z0]="true">
-                    <mat-expansion-panel-header class="my-list-item-acordeon">
-                      <span class="my-text"><i class="bi bi-clipboard-data-fill"></i> Reportes</span>
-                    </mat-expansion-panel-header>
-                    <mat-nav-list class="nav-list-items">
-                        <a mat-list-item routerLink="#" class="my-link">Insumos</a>
-                        <a mat-list-item routerLink="#" class="my-link">Mermas</a>
-                        <a mat-list-item routerLink="#" class="my-link">Ventas</a>
-                    </mat-nav-list>
-                </mat-expansion-panel>
+            <!-- modulo reportes -->
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+                
+                <mat-expansion-panel-header class="my-list-item-acordeon">
+                    <span class="my-text"><i class="bi bi-clipboard-data-fill"></i> Reportes</span>
+                </mat-expansion-panel-header>
+                
+                <mat-nav-list class="nav-list-items">
+                    <a mat-list-item routerLink="#" class="my-link">Insumos</a>
+                    <a mat-list-item routerLink="#" class="my-link">Mermas</a>
+                    <a mat-list-item routerLink="#" class="my-link">Ventas</a>
+                </mat-nav-list>
+                
+            </mat-expansion-panel>
+
         </mat-nav-list>
+
     </mat-sidenav>
-  
-  
+    <!-- fin de barra lateral -->
+
+    <!-- CRUD -->
     <mat-sidenav-content>
+
         <router-outlet>
+
             <div class="app-sidenav-content">
                 <ng-content></ng-content>
             </div>
+
         </router-outlet>
+
     </mat-sidenav-content>
+    <!-- FIN CRUD -->
+
 </mat-sidenav-container> 

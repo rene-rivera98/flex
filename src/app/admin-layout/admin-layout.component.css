@@ -72,3 +72,15 @@
   .mat-expansion-panel {
     background-color: rgb(251, 201, 0); 
   }
+
+  .spacing-right{
+    margin-right: 8px;
+  }
+
+  .spacing-right-s {
+    margin-right: 6px;
+  }
+
+  .text-white {
+    color: white;
+  }
