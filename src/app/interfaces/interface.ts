@@ -100,3 +100,32 @@ export interface corteParcial{
     totalGeneral: string;
     referencias: string;
 }
+
+export interface gastos{
+    folio_gasto: string;
+    cdfi: string;
+    fecha_factura: string;
+    subtotal: string;
+    IVA: string;
+    ISR: string;
+    IEPS: string;
+    total: string;
+    metodo_pago:string;
+    sucursal: string;
+    tipo_egreso: string;
+    complemento_pago: string;
+    fecha_pago: string;
+    forma_pago: string;
+    estado_pago: string;
+    monto: string;
+    saldo_insoluto: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface servicios{
+    nombre_servicio: string;
+    tipo_egreso: string;
+    createdAt: string;
+    updatedAt: string;
+}

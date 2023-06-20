@@ -60,6 +60,13 @@ import { DialogBorrarCafeteriaComponent } from './pages/admin-master/registros/p
 
 import { DialogAperturaCajaComponent } from './pages/admin-master/transacciones/caja/apertura-caja/dialog-apertura-caja/dialog-apertura-caja.component';
 import { DialogCorteParcialComponent } from './pages/admin-master/transacciones/caja/corte-parcial/dialog-corte-parcial/dialog-corte-parcial.component';
+import { GastosComponent } from './pages/admin-master/registros/gastos/gastos/gastos.component';
+import { ServiciosComponent } from './pages/admin-master/registros/gastos/servicios/servicios.component';
+import { DialogGastoComponent } from './pages/admin-master/registros/gastos/gastos/dialog-gasto/dialog-gasto.component';
+import { DialogEditarGastoComponent } from './pages/admin-master/registros/gastos/gastos/dialog-editar-gasto/dialog-editar-gasto.component';
+import { DialogServiciosComponent } from './pages/admin-master/registros/gastos/servicios/dialog-servicios/dialog-servicios.component';
+import { DialogEditarServicioComponent } from './pages/admin-master/registros/gastos/servicios/dialog-editar-servicio/dialog-editar-servicio.component';
+import { DialogBorrarServicioComponent } from './pages/admin-master/registros/gastos/servicios/dialog-borrar-servicio/dialog-borrar-servicio.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +75,8 @@ import { DialogCorteParcialComponent } from './pages/admin-master/transacciones/
    ProveedoresComponent,
    ProductosComponent,
    ComprasComponent,
+   GastosComponent,
+   ServiciosComponent, 
    FrontDeskComponent,
    CafeteriaComponent,
    AperturaCajaComponent,
@@ -78,7 +87,9 @@ import { DialogCorteParcialComponent } from './pages/admin-master/transacciones/
    DialogProductosComponent, DialogEditarProductoComponent, DialogBorrarProductoComponent,
    DialogFrontDeskComponent, DialogEditarFrontDeskComponent, DialogBorrarFrontDeskComponent,
    DialogCafeteriaComponent, DialogEditarCafeteriaComponent, DialogBorrarCafeteriaComponent,
-   DialogAperturaCajaComponent, DialogCorteParcialComponent
+   DialogAperturaCajaComponent, DialogCorteParcialComponent,
+   DialogGastoComponent,  DialogEditarGastoComponent, 
+   DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent
   ],
   imports: [
     CommonModule,

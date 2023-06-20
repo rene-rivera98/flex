@@ -4,16 +4,16 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 
 @Component({
-  selector: 'app-dialog-compra',
-  templateUrl: './dialog-compra.component.html',
-  styleUrls: ['./dialog-compra.component.css']
+  selector: 'app-dialog-gasto',
+  templateUrl: './dialog-gasto.component.html',
+  styleUrls: ['./dialog-gasto.component.css']
 })
-export class DialogCompraComponent implements OnInit {
+export class DialogGastoComponent implements OnInit {
 
-  FormDialogCompra!: FormGroup;
+  FormDialogGasto!: FormGroup;
 
   formulario!: FormGroup;
-
+  
   mostrarPago: boolean = false;
 
   mostrarComplemento: boolean = false;
@@ -22,11 +22,7 @@ export class DialogCompraComponent implements OnInit {
 
   mostrarFormaPago = false;
 
-  mostrarFechaRecibido = false;
-
   mostrarMonto = false;
-
-  mostrarFechaRecepcion = false;
 
   mostrarFechaPagoPendiente = false;
 
@@ -34,30 +30,22 @@ export class DialogCompraComponent implements OnInit {
 
   mostrarPagoInsoluto = false;
 
-/* Variables para clasificacion */
-  formularioClasif!: FormGroup;
-
-/* Variables para agregar productos a tabla */
-  productosForm!: FormGroup;
-
-
-
-/* TABLA: LISTA DE COMPRA*/
-  @ViewChild('tablaCompras', { static: false }) tablaCompras: any;
+  serviciosForm!: FormGroup;
+  
+  @ViewChild('tablaGastos', { static: false }) tablaGastos: any;
 
   constructor(private _entriesService:ApiRequestService, 
-              public dialogRef: MatDialogRef<DialogCompraComponent>,
-              private fb: FormBuilder) { 
-                this.FormDialogCompra = new FormGroup({
-                  myFormControlName: new FormControl()
-                });
-              }
+    public dialogRef: MatDialogRef<DialogGastoComponent>,
+    private fb: FormBuilder) { 
+      this.FormDialogGasto = new FormGroup({
+        myFormControlName: new FormControl()
+      });
+    }
 
   ngOnInit(): void {
-    
-    this.FormDialogCompra = this.fb.group({
-      Proveedor: [],
-      Productos: [],
+
+    this.FormDialogGasto = this.fb.group({
+      Servicios: [],
       Folio: [],
       UsoCFDI: [],
       Fechafactura: [],
@@ -73,8 +61,6 @@ export class DialogCompraComponent implements OnInit {
       ComplementoPago: [],
       FechaRecibido: [],
       Monto: [],
-      Recepción: [],
-      FechaRecepción: [],
       Sucursal: [],
       TipoEgreso: []
     });
@@ -82,9 +68,9 @@ export class DialogCompraComponent implements OnInit {
     this.formulario = this.fb.group({
       metodoDePago: []
     });
-    
-    this.productosForm = this.fb.group({
-      Productos: []
+
+    this.serviciosForm = this.fb.group({
+      Servicios: []
     });
 
   }
@@ -117,38 +103,27 @@ export class DialogCompraComponent implements OnInit {
 
   onComplementoChange() {
     const selectComplemento = document.getElementById("selectComplementoPago") as HTMLSelectElement;
-    const valorComplemento = selectComplemento.value;
-    this.mostrarFechaRecibido = valorComplemento === 'Finalizado';
-    this.mostrarMonto = valorComplemento === 'Finalizado';
+    const valorComplemento = selectComplemento.value;this.mostrarMonto = valorComplemento === 'Finalizado';
     this.mostrarFechaPagoPendiente = valorComplemento === 'Pendiente';
     this.mostrarMontoPendiente = valorComplemento === 'Pendiente';
     this.mostrarPagoInsoluto = valorComplemento == 'Pendiente';
   }
-  
-  onRecepcionChange() {
-    const selectRecepcion = document.getElementById("status_recepcion") as HTMLSelectElement;
-    const valorRecepcion = selectRecepcion.value;
-    this.mostrarFechaRecepcion = valorRecepcion === 'Recibido';
-  }
-
 
   agregarProducto() {
-    if (this.productosForm.valid) {
-      const producto = this.productosForm.value.Productos;
-      const fila = this.tablaCompras.nativeElement.insertRow();
+    if (this.serviciosForm.valid) {
+      const producto = this.serviciosForm.value.Productos;
+      const fila = this.tablaGastos.nativeElement.insertRow();
       const celda = fila.insertCell();
       celda.innerText = producto;
-      this.productosForm.reset();
+      this.serviciosForm.reset();
     }
   }
 
   eliminarUltimaFila() {
-    const tabla = this.tablaCompras.nativeElement;
+    const tabla = this.tablaGastos.nativeElement;
     const filas = tabla.rows;
     if (filas.length > 1) {
       tabla.deleteRow(filas.length - 1);
     }
   }
-
-
 }

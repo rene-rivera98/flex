@@ -1,0 +1,61 @@
+<!-- TITULO DIALOG -->
+<h1 mat-dialog-title>
+    <div class="text-center">
+      <h1>Datos de nuevo servicio</h1>
+    </div>
+  </h1>
+  <!-- FIN TITULO DIALOG -->
+  
+  <!-- INICIO CONTENIDO DIALOG -->
+  <div mat-dialog-content class="custom-dialog">
+  
+    <form autocomplete="off">
+  
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="nombre_servicio" type="text"
+                  formControlName="Servicio" placeholder="Nombre" />
+  
+              <label for="nombre_servicio">Nombre</label>
+
+            </div>
+  
+            <div class="form-floating mb-3">
+
+                <select class="form-control" id="tipo_egreso" 
+                        formControlName="tipoEgreso">
+                <option disabled selected>Seleccione el tipo de egreso</option>
+                <option value="">Activos</option>
+                <option value="">Compras</option>
+                <option value="">Gastos</option>
+                </select>
+                
+                <label for="tipo_egreso">Tipo de egreso</label>
+
+            </div>
+  
+  
+        <!-- DIV BOTONES -->
+        <div class="row col-13 mx-auto">
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button class="btn btn-warning mx-auto col-6" type="submit">
+                Registrar
+              </button>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="d-flex align-items-center mt-4">
+              <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- FIN DIV BOTONES -->
+  
+    </form>
+    
+  </div>
+  <!-- FIN CONTENIDO DE DIALOG -->

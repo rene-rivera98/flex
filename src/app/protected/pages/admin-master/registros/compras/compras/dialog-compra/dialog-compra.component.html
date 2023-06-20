@@ -1,104 +1,65 @@
-<!-- TITULO DIALOG -->
+<!-- titulo de dialog -->
 <h1 mat-dialog-title>
-  <div class="text-center">
-    <h1>Detalle de compra</h1>
-  </div>
-</h1>
-<!-- FIN TITULO DIALOG -->
 
-<!-- INICIO CONTENIDO DIALOG -->
+  <div class="text-center">
+
+    <h1>DETALLE DE COMPRA</h1>
+
+  </div>
+
+</h1>
+
+
+<!-- inicio contenido del dialog -->
 <div mat-dialog-content class="custom-dialog">
 
+  <!-- inicio de formulario -->
   <form autocomplete="off" [formGroup]="FormDialogCompra">
 
     <mat-tab-group mat-align-tabs="center">
 
       <mat-tab label="Proveedor y Productos">
         
-        <form [formGroup]="formularioClasif" class="mt-3">
-        <!------------------------------- ELEGIR PROVEEDOR Y PRODUCTOS ----------------------------------------------------------------------->
+        <form [formGroup]="formulario" class="mt-3">
+     
           <!-- PROVEEDOR Y TIPO DE REGISTRO -->
           <div class="row col-13 mx-auto">
 
             <!-- SELECT PROVEEDOR -->
             <div class="col">
               <div class="form-floating mb-3">
-                <select class="form-control" id="selectProveedor" formControlName="Proveedor" placeholder="Proveedor">
-                  <option value="" disabled selected>Selecciona un Proveedor</option>
+                <select class="form-control" id="proveedor" formControlName="Proveedor">
+                  <option disabled selected>Seleccione el proveedor</option>
                 </select>
                 
-                <label for="selectProveedor">Proveedor</label>
+                <label for="proveedor">Proveedor</label>
               </div>
             </div>
             <!-- FIN SELECT PROVEEDOR --> 
 
-            
-            <!-- SELECT CLASIFICACION -->
-            <div class="col">
-              <div class="form-floating mb-3">
-                <select class="form-control" id="selectClasif" 
-                        formControlName="selectClasif" placeholder="Clasificación" (change)="onChangeClasificacion()">
-                  <option value="" disabled selected>Selecciona una clasificación</option>
-                  <option value="Productos">Productos</option>
-                  <option value="Servicios">Servicios</option>
-                </select>
-                
-                <label for="selectClasif">Clasificación</label>
-              </div>
-            </div>
-            <!-- FIN SELECT CLASIFICACION --> 
-
-          </div>
-
-          <!------------------------- AGREGAR PRODUCTOS O SERVICIOS -------------------------------------->
-          
-          <div class="row col-13 mx-auto">
-            
-            <!-- Input -->
-            <div class="col" *ngIf="mostrarInputBase">
-              <form [formGroup]="baseForm">
-                <div class="form-floating mb-3 mt-2">
-                  <input class="form-control" id="selectBase" formControlName="Base" placeholder="" readonly/>
-                  
-                  <label for="selectBase">Clasificación sin elegir</label>
-                </div>
-              </form>
-            </div>
-            <!-- FIN Input base -->
-
             <!-- PRODUCTOS -->
-            <div class="col" *ngIf="mostrarProducto">
-              <form [formGroup]="productosForm">
-                <div class="form-floating mb-3 mt-2">
-                  <select class="form-control" id="selectProductos" formControlName="Productos" placeholder="Productos">
-                    <option value="" disabled selected>Selecciona un producto</option>
-                    <!-- OPCIONES SOLO DE EJEMPLO -->
-                    <option value="Calcetas">Calcetas</option>
-                    <option value="Bebidas">Bebidas</option>
-                    <option value="Ropa">Ropa</option>
-                  </select>
-                  <label for="selectProductos">Productos</label>
-                </div>
-              </form>
-            </div>
-            <!-- FIN PRODUCTOS -->
+            <div class="col">
 
-            <!-- SERVICIOS -->
-            <div class="col" *ngIf="mostrarServicio">
-              <form [formGroup]="serviciosForm">
-                <div class="form-floating mb-3 mt-2">
-                  <input class="form-control" id="selectServicios" formControlName="Servicios" placeholder="Servicios"/>
-                  
-                  <label for="selectServicios">Servicio</label>
+              <form [formGroup]="productosForm">
+
+                <div class="form-floating mb-3">
+
+                  <select class="form-control" id="productos" formControlName="Productos">
+                    <option disabled selected>Seleccione un producto</option>
+                    <option value=""></option>
+                  </select>
+
+                  <label for="productos">Productos</label>
                 </div>
+
               </form>
+
             </div>
-            <!-- FIN SERVICIOS -->
-            
+            <!-- FIN PRODUCTOS -->         
 
             <!-- BOTONES PRODUCTO -->
-            <div class="col" *ngIf="mostrarBotonProducto">
-              <div class="d-flex align-items-center mt-3">
+            <div class="col">
+              <div class="d-flex align-items-center mt-2">
                   <button class="btn btn-warning mx-auto col-6" (click)="agregarProducto()">
                       Agregar
                   </button>
@@ -110,19 +71,11 @@
             </div>
             <!-- FIN BOTONES -->
 
-            <!-- BOTONES SERVICIO -->
-            <div class="col" *ngIf="mostrarBotonServicios">
-              <div class="d-flex align-items-center mt-3">
-                  <button class="btn btn-warning mx-auto col-6" (click)="agregarServicio()">
-                      Agregar
-                  </button>
-                  
-                  <button class="btn btn-danger mx-2 col-6 " (click)="eliminarUltimaFila()">
-                      Quitar
-                  </button>
-              </div>
-            </div>
-            <!-- FIN BOTONES -->
+          </div>
+
+          <!------------------------- AGREGAR PRODUCTOS O SERVICIOS -------------------------------------->
+          
+          <div class="row col-13 mx-auto">
 
             <table #tablaCompras class="table table-striped table-bordered">
               <thead class="thead-dark">
@@ -138,9 +91,7 @@
             
           </div>   
         </form>
-         
-          
-
+        
       </mat-tab>
 
       <mat-tab label="Datos de la factura y Datos de pago">
@@ -153,10 +104,9 @@
                 <!-- INPUT REFERENCIA -->
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input class="form-control" id="inputFolio" type="text"
-                          formControlName="Folio" placeholder="Folio"/>
+                    <input class="form-control" id="folio" type="text" formControlName="Folio" placeholder="Folio"/>
 
-                    <label for="inputFolio">Folio</label>
+                    <label for="folio">Folio</label>
                   </div>
                 </div>
                 <!-- FIN INPUT REFERENCIA -->
@@ -164,10 +114,9 @@
                 <!-- INPUT CFDI -->
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input class="form-control" id="inputCDFI" type="text"
-                        formControlName="UsoCFDI" placeholder="Uso de CFDI" />
+                    <input class="form-control" id="cfdi" type="text" formControlName="UsoCFDI" placeholder="Uso de CFDI"/>
 
-                    <label for="inputCDFI">Uso de CFDI</label>
+                    <label for="cfdi">Uso de CFDI</label>
                   </div>
                 </div>
                 <!-- FIN INPUT CFDI -->
@@ -175,10 +124,9 @@
                 <!-- INPUT FECHA FACTURA -->
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input class="form-control" id="inputFechaFactura" type="date"
-                        formControlName="Fechafactura" placeholder="fecha de factura"/>
+                    <input class="form-control" id="fecha_factura" type="date" formControlName="Fechafactura"/>
 
-                    <label for="inputFechaFactura">Fecha de factura</label>
+                    <label for="fecha_factura">Fecha de factura</label>
                   </div>
                 </div>
                 <!-- FIN INPUT FECHA FACTURA -->
@@ -191,10 +139,12 @@
             <!-- INPUT SUBTOTAL -->
             <div class="col">
               <div class="form-floating mb-3">
-                <input class="form-control" id="inputSubtotal" type="number"
-                      formControlName="Subtotal" placeholder="Subtotal"/>
-
-                <label for="inputSubtotal">Subtotal</label>
+                <input class="form-control" id="subtotal" type="number" 
+                       formControlName="Subtotal" placeholder="Subtotal" 
+                       step="0.01" min="0" max="100000"/>
+                <label for="subtotal">Subtotal</label>
+                <div *ngIf="FormDialogCompra.get('Subtotal')?.invalid && (FormDialogCompra.get('Subtotal')?.dirty || FormDialogCompra.get('Subtotal')?.touched)"></div>
+                  <div *ngIf="FormDialogCompra.get('Subtotal')?.errors?.['pattern']">El subtotal debe ser numérico</div>
               </div>
             </div>
             <!-- FIN INPUT SUBTOTAL -->
@@ -202,10 +152,10 @@
             <!-- INPUT IVA -->
             <div class="col">
               <div class="form-floating mb-3">
-                <input class="form-control" id="inputIVA" type="number"
+                <input class="form-control" id="iva" type="number"
                     formControlName="IVA" placeholder="IVA" />
 
-                <label for="inputIVA">IVA</label>
+                <label for="iva">IVA</label>
               </div>
             </div>
             <!-- FIN INPUT IVA -->
@@ -419,13 +369,13 @@
             <!-- SELECT RECEPCION -->
             <div class="col">
               <div class="form-floating mb-3 col-13 mx-auto">
-                <select class="form-control" id="selectRecepcion" formControlName="Recepción" placeholder="Recepción" (change)="onRecepcionChange()">
-                  <option value="" disabled selected>Selecciona una opción</option>
-                  <option value="Pendiente">Pendiente</option>
+                <select class="form-control" id="status_recepcion" formControlName="Recepción" (change)="onRecepcionChange()">
+                  <option disabled selected>Seleccione el estado de recepción</option>
                   <option value="Recibido">Recibido</option>
+                  <option value="Pendiente">Pendiente</option>
                 </select>
 
-                <label for="selectRecepcion">Recepción</label>
+                <label for="status_recepcion">Estado de recepción</label>
               </div>
             </div>
             <!-- FIN SELECT RECEPCION -->
@@ -433,10 +383,10 @@
             <!-- INPUT FECHA DE RECEPCIÓN -->
             <div class="col" *ngIf="mostrarFechaRecepcion"> <!-- SE MOSTRARA SI ES QUE SE SELECCIONA RECIBIDO EN EL SELECT ANTERIOR -->
               <div class="form-floating mb-3 col-13 mx-auto">
-                <input class="form-control" id="inputFechaRecepcion" type="date"
+                <input class="form-control" id="fecha_recepcion" type="date"
                       formControlName="FechaRecepción" placeholder="Fecha de recepción"/>
                 
-                <label for="inputFechaRecepcion">Fecha de recepción</label>
+                <label for="fecha_recepcion">Fecha de recepción</label>
               </div>
             </div>
             <!-- FIN INPUT FECHA DE RECEPCIÓN -->
@@ -456,10 +406,9 @@
             <!-- INPUT SUCURSAL -->
             <div class="col">
               <div class="form-floating mb-3 col-13 mx-auto">
-                <select class="form-control" id="selectSucursal" formControlName="Sucursal" placeholder="Sucursal">
-                  <option value="" disabled selected>Selecciona una sucursal</option>
-                  <option value="Xalapa">Xalapa</option>
-                  <option value="Coatepec">Coatepec</option>
+                <select class="form-control" id="selectSucursal" formControlName="Sucursal">
+                  <option disabled selected>Seleccione una sucursal</option>
+                  <option value=""></option>
                 </select>
                 
                 <label for="selectSucursal">Sucursal</label>
@@ -470,8 +419,8 @@
             <!-- INPUT TIPO DE EGRESO -->
             <div class="col">
               <div class="form-floating mb-3 col-13 mx-auto">
-                <select class="form-control" id="selectTipoEgreso" formControlName="TipoEgreso" placeholder="Tipo de egreso">
-                  <option value="" disabled selected>Selecciona el tipo de egreso</option>
+                <select class="form-control" id="selectTipoEgreso" formControlName="TipoEgreso">
+                  <option disabled selected>Seleccione el tipo de egreso</option>
                   <option value="Gasto">Gasto</option>
                   <option value="Compra">Compra</option>
                   <option value="Activo">Activo</option>

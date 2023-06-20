@@ -54,8 +54,8 @@ export class ProductosComponent{
     createDialog(): void {
       const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
       dialogConfig.disableClose = true; //bloquea el dialog
-      dialogConfig.width = '550px'; // Asignar ancho al dialog
-      dialogConfig.height = '570px'; // Asignar ancho al dialog
+      dialogConfig.width = '970px'; // Asignar ancho al dialog
+      dialogConfig.height = '720px'; // Asignar largo al dialog
       const dialogRef = this.dialog.open(DialogProductosComponent, dialogConfig); //abre el dialog
     }
 
