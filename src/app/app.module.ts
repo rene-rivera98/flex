@@ -14,6 +14,10 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { CustomMatPaginatorIntl } from './mat-paginator/paginator';
 
+import {MatSortModule} from '@angular/material/sort';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +28,8 @@ import { CustomMatPaginatorIntl } from './mat-paginator/paginator';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSortModule
 
   ],
   providers: [

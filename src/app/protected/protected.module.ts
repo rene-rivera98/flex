@@ -17,6 +17,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSortModule} from '@angular/material/sort';
 
 /*importacion de rutas */
 import { ProtectedRoutingModule } from './protected-routing.module';
@@ -109,7 +110,8 @@ import { DialogBorrarServicioComponent } from './pages/admin-master/registros/ga
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSortModule
   ]
 })
 export class ProtectedModule { }

@@ -15,6 +15,7 @@ import { DialogBorrarUsuarioComponent } from './dialog-borrar-usuario/dialog-bor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig  } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-usuarios',
@@ -26,10 +27,12 @@ export class UsuariosComponent {
 
   //decorador y variable de paginador material
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   // se crean las columnas de la tabla 
@@ -45,8 +48,213 @@ export class UsuariosComponent {
     'opciones'
   ];
 
+  dataSource = new MatTableDataSource<any>([
+    { 
+      nombre: 'John', 
+      apellidoPaterno: 'Doe', 
+      apellidoMaterno: 'Smith', 
+      username: 'jdoe', 
+      celular: '1234567890',
+      email: 'jdoe@example.com',
+      createdAt: '2022-01-01',
+      updatedAt: '2022-01-01'
+    },
+    { 
+      nombre: 'Jane', 
+      apellidoPaterno: 'Doe', 
+      apellidoMaterno: 'Smith', 
+      username: 'jane_doe', 
+      celular: '9876543210',
+      email: 'jane@example.com',
+      createdAt: '2022-02-01',
+      updatedAt: '2022-02-01'
+    },
+    { 
+      nombre: 'Robert', 
+      apellidoPaterno: 'Johnson', 
+      apellidoMaterno: 'Brown', 
+      username: 'rjohnson', 
+      celular: '5555555555',
+      email: 'rjohnson@example.com',
+      createdAt: '2022-03-01',
+      updatedAt: '2022-03-01'
+    },
+    { 
+      nombre: 'Michael', 
+      apellidoPaterno: 'Davis', 
+      apellidoMaterno: 'Miller', 
+      username: 'mdavis', 
+      celular: '1111111111',
+      email: 'mdavis@example.com',
+      createdAt: '2022-04-01',
+      updatedAt: '2022-04-01'
+    },
+    { 
+      nombre: 'Sarah', 
+      apellidoPaterno: 'Wilson', 
+      apellidoMaterno: 'Anderson', 
+      username: 'swilson', 
+      celular: '9999999999',
+      email: 'swilson@example.com',
+      createdAt: '2022-05-01',
+      updatedAt: '2022-05-01'
+    },
+    { 
+      nombre: 'David', 
+      apellidoPaterno: 'Thompson', 
+      apellidoMaterno: 'Robinson', 
+      username: 'drobinson', 
+      celular: '7777777777',
+      email: 'drobinson@example.com',
+      createdAt: '2022-06-01',
+      updatedAt: '2022-06-01'
+    },
+    { 
+      nombre: 'Emily', 
+      apellidoPaterno: 'White', 
+      apellidoMaterno: 'Taylor', 
+      username: 'ewhite', 
+      celular: '2222222222',
+      email: 'ewhite@example.com',
+      createdAt: '2022-07-01',
+      updatedAt: '2022-07-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    },
+    { 
+      nombre: 'Daniel', 
+      apellidoPaterno: 'Brown', 
+      apellidoMaterno: 'Wilson', 
+      username: 'dbrown', 
+      celular: '8888888888',
+      email: 'dbrown@example.com',
+      createdAt: '2022-08-01',
+      updatedAt: '2022-08-01'
+    }
+    // Agrega más objetos con datos de prueba aquí
+  ]);
+
+  
   // Variable que contiene los campos de interfaz productos
-  dataSource = new MatTableDataSource<usuario>([]);
+    //dataSource = new MatTableDataSource<usuario>([]);
   
   //inyeccion de dependencias _entriesService y dialog 
   constructor(private _entriesService:ApiRequestService, public dialog: MatDialog) { }
@@ -83,5 +291,6 @@ export class UsuariosComponent {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
+
  
 }

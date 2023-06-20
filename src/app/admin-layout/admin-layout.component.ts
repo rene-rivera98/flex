@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
+  activeIndex: number = -1;
+
+  panelOpened(index: number) {
+    this.activeIndex = index;
+  }
+  
   constructor() { }
 
   ngOnInit(): void {
