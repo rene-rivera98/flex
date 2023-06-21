@@ -3,8 +3,6 @@ import { RouterModule, Routes, CanActivate, CanLoad } from '@angular/router';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
 
-
-
 const routes: Routes = [
 
   {
@@ -19,8 +17,9 @@ const routes: Routes = [
     canLoad: [ValidarTokenGuard]
   },
   {
-    path: '**',
-    redirectTo: 'auth'
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
   }
 ];
 

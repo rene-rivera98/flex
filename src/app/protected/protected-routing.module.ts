@@ -10,6 +10,7 @@ import { AperturaCajaComponent } from './pages/admin-master/transacciones/caja/a
 import { CorteParcialComponent } from './pages/admin-master/transacciones/caja/corte-parcial/corte-parcial.component';
 import { GastosComponent } from './pages/admin-master/registros/gastos/gastos/gastos.component';
 import { ServiciosComponent } from './pages/admin-master/registros/gastos/servicios/servicios.component';
+import { SucursalesComponent } from './pages/admin-master/registros/sucursales/sucursales.component';
 
 const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'apertura-caja', component: AperturaCajaComponent},
   { path: 'corte-parcial', component: CorteParcialComponent},
   { path: 'gastos', component: GastosComponent},
-  { path: 'servicios', component: ServiciosComponent}
+  { path: 'servicios', component: ServiciosComponent},
+  { path: 'sucursales', component: SucursalesComponent}
 ];
 
 @NgModule({

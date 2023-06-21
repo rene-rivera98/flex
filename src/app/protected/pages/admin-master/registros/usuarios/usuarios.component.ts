@@ -120,7 +120,7 @@ export class UsuariosComponent {
       updatedAt: '2022-07-01'
     },
     { 
-      nombre: 'Daniel', 
+      nombre: 'Pedro', 
       apellidoPaterno: 'Brown', 
       apellidoMaterno: 'Wilson', 
       username: 'dbrown', 

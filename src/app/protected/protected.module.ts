@@ -68,6 +68,10 @@ import { DialogEditarGastoComponent } from './pages/admin-master/registros/gasto
 import { DialogServiciosComponent } from './pages/admin-master/registros/gastos/servicios/dialog-servicios/dialog-servicios.component';
 import { DialogEditarServicioComponent } from './pages/admin-master/registros/gastos/servicios/dialog-editar-servicio/dialog-editar-servicio.component';
 import { DialogBorrarServicioComponent } from './pages/admin-master/registros/gastos/servicios/dialog-borrar-servicio/dialog-borrar-servicio.component';
+import { SucursalesComponent } from './pages/admin-master/registros/sucursales/sucursales.component';
+import { DialogSucursalComponent } from './pages/admin-master/registros/sucursales/dialog-sucursal/dialog-sucursal.component';
+import { DialogEditarSucursalComponent } from './pages/admin-master/registros/sucursales/dialog-editar-sucursal/dialog-editar-sucursal.component';
+import { DialogBorrarSucursalComponent } from './pages/admin-master/registros/sucursales/dialog-borrar-sucursal/dialog-borrar-sucursal.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +94,7 @@ import { DialogBorrarServicioComponent } from './pages/admin-master/registros/ga
    DialogCafeteriaComponent, DialogEditarCafeteriaComponent, DialogBorrarCafeteriaComponent,
    DialogAperturaCajaComponent, DialogCorteParcialComponent,
    DialogGastoComponent,  DialogEditarGastoComponent, 
-   DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent
+   DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent, SucursalesComponent, DialogSucursalComponent, DialogEditarSucursalComponent, DialogBorrarSucursalComponent
   ],
   imports: [
     CommonModule,

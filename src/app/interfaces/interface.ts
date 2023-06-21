@@ -33,19 +33,18 @@ export interface compra {
 }
 
 export interface proveedores{
-    idproveedor: string;
-    rfcProveedor: string;
-    nombreProveedor: string;
-    cpProveedor: string;
-    regimenFiscal: string;
-    telefono1: string;
-    telefono2: string;
+    rfc: string;
+    nombre: string;
+    codigo_postal: string;
+    regimen_fiscal: string;
+    telefono_fijo: string;
+    telefono_movil: string;
     banco: string;
-    cuentaBancaria: string;
-    claveInter: string;
-    constancia: string; 
-    createdAt: string;
-    updatedAt: string;
+    cuenta_bancaria: string;
+    clave_interbancaria: string;
+    constancia: boolean;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface productos{
@@ -124,8 +123,17 @@ export interface gastos{
 }
 
 export interface servicios{
-    nombre_servicio: string;
+    nombre: string;
     tipo_egreso: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface sucursal{
+    nombre: string;
+    direccion: string;
+    codigo_postal: string;
+    telefono: string;
+    created_at: string;
+    updated_at: string;
 }

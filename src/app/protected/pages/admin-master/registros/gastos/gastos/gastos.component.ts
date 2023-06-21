@@ -13,6 +13,7 @@ import { DialogEditarGastoComponent } from './dialog-editar-gasto/dialog-editar-
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-gastos',
@@ -24,23 +25,49 @@ export class GastosComponent {
 
    //decorador y variable de paginador material 
    @ViewChild(MatPaginator) paginator!: MatPaginator;
+   @ViewChild(MatSort) sort!: MatSort;
 
    //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
 
     // se crean las columnas de la tabla 
     displayedColumns: string[] = [
-      'folio',
+      'folio_gasto',
       'fecha_factura',
-      'complemento_pago',
-      'importe_total',
-      'opciones',
+      'total',
+      'metodo_pago',
+      'sucursal',
+      'created_at',
+      'updated_at',
+      'opciones'
     ];
 
+    dataSource = new MatTableDataSource<any>([
+      {
+        folio_gasto: 'G001',
+        fecha_factura: '2022-01-01',
+        total: 1000,
+        metodo_pago: 'Efectivo',
+        sucursal: 'Sucursal A',
+        created_at: '2022-01-01',
+        updated_at: '2022-01-02'
+      },
+      {
+        folio_gasto: 'G002',
+        fecha_factura: '2022-02-01',
+        total: 1500,
+        metodo_pago: 'Tarjeta de crédito',
+        sucursal: 'Sucursal B',
+        created_at: '2022-02-01',
+        updated_at: '2022-02-02'
+      },
+    ])
+
     // Variable que contiene los campos de interfaz gasto 
-    dataSource = new MatTableDataSource<gastos>([]);
+    // dataSource = new MatTableDataSource<gastos>([]);
 
     //inyeccion de dependencias _entriesService y dialog 
     constructor(private _entriesService: ApiRequestService,public dialog: MatDialog) {}
