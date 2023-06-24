@@ -1,159 +1,165 @@
-<!-- TITULO DIALOG -->
 <h1 mat-dialog-title>
-  <div class="text-center">
-    <h1>Datos de nuevo usuario</h1>
-  </div>
-</h1>
-<!-- FIN TITULO DIALOG -->
 
-<!-- INICIO CONTENIDO DIALOG -->
+  <div class="text-center">
+
+    <h1>Datos de nuevo usuario</h1>
+
+  </div>
+
+</h1>
+
 <div mat-dialog-content class="custom-dialog">
 
   <form autocomplete="off">
 
-    <!-- FILA DE INPUT NOMBRES Y APELLIDOS -->
-      <div class="row mt-1">
-        <!-- INPUT NOMBRES -->
+    <div class="row col-13 mx-auto mt-2">
+
         <div class="col">
+
           <div class="form-floating mb-3">
-            <input class="form-control" id="inputNombre" type="text"
+
+            <input class="form-control" id="nombre" type="text"
                 formControlName="Nombre(s)" placeholder="Nombre(s)"/>
-            <label for="inputNombre">Nombre(s)</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
+
+            <label for="nombre">Nombre(s)</label>
+          
           </div>
+
         </div>
 
-        <!-- INPUTS APELLIDOS -->
         <div class="col">
+
           <div class="form-floating mb-3">
+            
             <input class="form-control" id="inputApellidoP" type="text"
                 formControlName="Apellido Paterno" placeholder="Apellido Paterno" />
-            <label for="inputApellidoP">Apellido Paterno</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-feedback">
-                La contraseña es obligatoria.
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- FIN FILA -->
+            
+              <label for="inputApellidoP">Apellido Paterno</label>
 
-    <!-- FILA DE INPUT APELLIDO MATERNO Y TELEFONO -->
-      <div class="row">
-        <!-- INPUT APELLIDO MATERNO -->
+          </div>
+
+        </div>
+
         <div class="col">
+
           <div class="form-floating mb-3">
+  
             <input class="form-control" id="inputApellidoMaterno" type="text"
-                formControlName="Apellido Materno" placeholder="Apellido Materno"/>
+                   formControlName="Apellido Materno" placeholder="Apellido Materno"/>
             <label for="inputApellidoM">Apellido Materno</label>
-
+  
           </div>
+  
         </div>
 
-        <!-- INPUT TELEFONO -->
-        <div class="col">
+    </div>
+
+    <div class="row col-13 mx-auto">
+
+      <div class="col">
+
           <div class="form-floating mb-3">
+
             <input class="form-control" id="inputTelefono" type="tel" pattern="[0-9]{10}"
                 formControlName="Teléfono" placeholder="Teléfono" />
+            
             <label for="inputTelefono">Teléfono</label>
 
           </div>
-        </div>
-      </div>
-    <!-- FIN FILA -->
-
-    <!-- INPUT EMAIL-->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputEmail" type="email" pattern="[0-9]{10}"
-            formControlName="Correo Electrónico" placeholder="Correo Electrónico" />
-        <label for="inputEmail">Correo Electrónico</label>
 
       </div>
-    <!-- FIN INPUT -->
 
-    <!-- INPUT FECHA NACIMIENTO -->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputNacimiento" type="date" min="1930-01-01" max="2016-12-31"
-            formControlName="Fecha de nacimiento" placeholder="Fecha de nacimiento"/>
-        <label for="inputNacimiento">Fecha de nacimiento</label>
-
-
-      </div>
-    <!-- FIN  INPUT -->
-    
-    <div class="row mt-1">
-      
-      <!-- INPUT SUCURSAL -->
-        <div class="col">
-          <div class="form-floating mb-3">
-            <select class="form-control" id="selectSucursal" formControlName="sucursalUser" placeholder="Sucursal">
-              <option value="" disabled selected>Seleccionar sucursal</option>
-              <option value="Coatepec">Coatepec</option>
-              <option value="Xalapa">Xalapa</option>
-            </select>
-            <label for="selectSucursal">Sucursal</label>
-  
-
-          </div>
-        </div>
-      <!-- FIN INPUT -->
-
-      <!-- INPUT AREA -->
       <div class="col">
+
+        <div class="form-floating mb-3 col-13 mx-auto">
+        
+          <input class="form-control" id="inputEmail" type="email" pattern="[0-9]{10}"
+              formControlName="Correo Electrónico" placeholder="Correo Electrónico" />
+          
+          <label for="inputEmail">Correo Electrónico</label>
+  
+        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3 col-13 mx-auto">
+
+          <input class="form-control" id="inputNacimiento" type="date" min="1930-01-01" max="2016-12-31"
+              formControlName="Fecha de nacimiento" placeholder="Fecha de nacimiento"/>
+          
+          <label for="inputNacimiento">Fecha de nacimiento</label>
+  
+        </div>  
+
+      </div>
+
+    </div>
+
+    <div class="row col-13 mx-auto">
+
+      <div class="col">
+
         <div class="form-floating mb-3">
+
           <select class="form-control" id="selectAreaUser" formControlName="areaUser" placeholder="Área">
-            <option value="" disabled selected>Seleccionar área</option>
+            <option disabled selected>Seleccione un área</option>
             <option value="Cafeteria">Cafetería</option>
             <option value="FrontDesk">FrontDesk</option>
           </select>
+
           <label for="selectArea">Área</label>
 
+        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3">
+
+          <select class="form-control" id="selectSucursal" formControlName="sucursalUser" placeholder="Sucursal">
+            <option disabled selected>Seleccione una sucursal</option>
+          </select>
+
+          <label for="selectSucursal">Sucursal</label>
 
         </div>
+
       </div>
-      <!-- FIN INPUT -->
+
+      <div class="col">
+
+        <div class="form-floating mb-3 col-13 mx-auto">
+
+          <select class="form-control" id="selectRol" formControlName="Rol" placeholder="Rol">
+            <option disabled selected>Seleccionar Rol</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Vendedor">Vendedor</option>
+            <option value="Almacen">Almacén</option>
+          </select>
+
+          <label for="selectRol">Rol</label>
+  
+        </div>
+
+      </div>
 
     </div>
-    
-
-    <!-- INPUT TIPO DE USUARIO -->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <select class="form-control" id="selectRol" formControlName="Rol" placeholder="Rol">
-          <option value="" disabled selected>Seleccionar Rol</option>
-          <option value="Administrador">Administrador</option>
-          <option value="Vendedor">Vendedor</option>
-          <option value="Almacen">Almacen</option>
-        </select>
-        <label for="selectRol">Rol</label>
-
-
-      </div>
-    <!-- FIN INPUT -->
-
-      <!-- DIV BOTONES -->
-      <div class="row">
-        <div class="col">
-          <div class="d-flex align-items-center mt-4">
-            <button class="btn btn-warning mx-auto col-6" type="submit">
-              Registrar
-            </button>
-          </div>
-        </div>
-        
-        <div class="col">
-          <div class="d-flex align-items-center mt-4">
-            <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- FIN DIV BOTONES -->
 
   </form>
   
 </div>
-<!-- FIN CONTENIDO DE DIALOG -->
+
+<div mat-dialog-actions class="mt-auto d-flex justify-content-center">
+
+  <button class="btn btn-warning mx-2" type="submit">
+      Registrar
+  </button>
+
+  <button type="button" class="btn btn-danger mx-2" (click)="dialogRef.close()">
+      Cerrar
+  </button>
+
+</div>

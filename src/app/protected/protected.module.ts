@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 /*importacion de librerias de material */
 import {MatCardModule} from '@angular/material/card';
@@ -115,7 +117,9 @@ import { DialogBorrarSucursalComponent } from './pages/admin-master/registros/su
     ReactiveFormsModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    HttpClientModule,
+    RouterModule
   ]
 })
 export class ProtectedModule { }

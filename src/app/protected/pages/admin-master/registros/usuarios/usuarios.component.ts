@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 //importacion de servicio api 
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
@@ -29,242 +30,34 @@ export class UsuariosComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
   // se crean las columnas de la tabla 
   displayedColumns: string[] = [
     'nombre',
-    'apellidoPaterno',
-    'apellidoMaterno',
-    'username',
+    'paterno',
+    'materno',
     'celular',
     'email',
-    'createdAt',
-    'updatedAt',
+    'departamento',
+    'id_sucursal',
+    'created_at',
+    'updated_at',
     'opciones'
   ];
-
-  dataSource = new MatTableDataSource<any>([
-    { 
-      nombre: 'John', 
-      apellidoPaterno: 'Doe', 
-      apellidoMaterno: 'Smith', 
-      username: 'jdoe', 
-      celular: '1234567890',
-      email: 'jdoe@example.com',
-      createdAt: '2022-01-01',
-      updatedAt: '2022-01-01'
-    },
-    { 
-      nombre: 'Jane', 
-      apellidoPaterno: 'Doe', 
-      apellidoMaterno: 'Smith', 
-      username: 'jane_doe', 
-      celular: '9876543210',
-      email: 'jane@example.com',
-      createdAt: '2022-02-01',
-      updatedAt: '2022-02-01'
-    },
-    { 
-      nombre: 'Robert', 
-      apellidoPaterno: 'Johnson', 
-      apellidoMaterno: 'Brown', 
-      username: 'rjohnson', 
-      celular: '5555555555',
-      email: 'rjohnson@example.com',
-      createdAt: '2022-03-01',
-      updatedAt: '2022-03-01'
-    },
-    { 
-      nombre: 'Michael', 
-      apellidoPaterno: 'Davis', 
-      apellidoMaterno: 'Miller', 
-      username: 'mdavis', 
-      celular: '1111111111',
-      email: 'mdavis@example.com',
-      createdAt: '2022-04-01',
-      updatedAt: '2022-04-01'
-    },
-    { 
-      nombre: 'Sarah', 
-      apellidoPaterno: 'Wilson', 
-      apellidoMaterno: 'Anderson', 
-      username: 'swilson', 
-      celular: '9999999999',
-      email: 'swilson@example.com',
-      createdAt: '2022-05-01',
-      updatedAt: '2022-05-01'
-    },
-    { 
-      nombre: 'David', 
-      apellidoPaterno: 'Thompson', 
-      apellidoMaterno: 'Robinson', 
-      username: 'drobinson', 
-      celular: '7777777777',
-      email: 'drobinson@example.com',
-      createdAt: '2022-06-01',
-      updatedAt: '2022-06-01'
-    },
-    { 
-      nombre: 'Emily', 
-      apellidoPaterno: 'White', 
-      apellidoMaterno: 'Taylor', 
-      username: 'ewhite', 
-      celular: '2222222222',
-      email: 'ewhite@example.com',
-      createdAt: '2022-07-01',
-      updatedAt: '2022-07-01'
-    },
-    { 
-      nombre: 'Pedro', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    },
-    { 
-      nombre: 'Daniel', 
-      apellidoPaterno: 'Brown', 
-      apellidoMaterno: 'Wilson', 
-      username: 'dbrown', 
-      celular: '8888888888',
-      email: 'dbrown@example.com',
-      createdAt: '2022-08-01',
-      updatedAt: '2022-08-01'
-    }
-    // Agrega más objetos con datos de prueba aquí
-  ]);
-
   
   // Variable que contiene los campos de interfaz productos
-    //dataSource = new MatTableDataSource<usuario>([]);
+
+  dataSource: MatTableDataSource<usuario> = new MatTableDataSource<usuario>([]);
   
-  //inyeccion de dependencias _entriesService y dialog 
-  constructor(private _entriesService:ApiRequestService, public dialog: MatDialog) { }
+  //inyeccion de dependencias apiRequest y dialog 
+  constructor(private apiRequest:ApiRequestService, public dialog: MatDialog, private http: HttpClient) { }
 
     //metodo para abrir el dialog crear usuario
     createDialog(): void {
       const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
       dialogConfig.disableClose = true; //bloquea el dialog
-      dialogConfig.width = '550px'; // Asignar ancho al dialog
-      dialogConfig.height = '570px'; // Asignar ancho al dialog
+      dialogConfig.width = '870px'; // Asignar ancho al dialog
+      dialogConfig.height = '410px'; // Asignar ancho al dialog
       const dialogRef = this.dialog.open(DialogUsuarioComponent, dialogConfig); //abre el dialog
     }
 
@@ -292,5 +85,23 @@ export class UsuariosComponent {
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
+    //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
+    ngAfterViewInit() {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+      this.getUsuarios();
+    }
+
+    getUsuarios() {
+      this.apiRequest.getUsuarios().subscribe(
+        (data: any[]) => {
+          this.dataSource.data = data; // Asignar los datos al dataSource.data
+        },
+        error => {
+          console.error('Error al obtener los usuarios:', error);
+        }
+      );
+    }
  
 }

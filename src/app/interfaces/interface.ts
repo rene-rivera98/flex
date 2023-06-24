@@ -1,21 +1,17 @@
 import { IterableDiffers } from "@angular/core";
 
 export interface usuario {
-    idusuario: string;
+    id_empleado: string;
     nombre: string;
-    apellidoPaterno: string;
-    apellidoMaterno: string;
-    username: string;
+    paterno: string;
+    materno: string;
     celular: string;
     email: string;
-    estado: boolean
-    fechaNacimiento: string;
-    idrol: number;
-    areaUser: string;
-    sucursalUser: string;
-    password_temporary: boolean;
-    createdAt: string;
-    updatedAt: string;
+    fecha_nacimiento: string;
+    departamento: string
+    id_sucursal: string;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface compra {
@@ -130,6 +126,7 @@ export interface servicios{
 }
 
 export interface sucursal{
+    id_sucursal: string;
     nombre: string;
     direccion: string;
     codigo_postal: string;
@@ -137,3 +134,8 @@ export interface sucursal{
     created_at: string;
     updated_at: string;
 }
+
+export interface AuthResponse {
+    success: boolean;
+    detail: string;
+  }

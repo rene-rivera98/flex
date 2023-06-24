@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-
-import { usuario } from 'src/app/interfaces/interface';
-import { compra } from 'src/app/interfaces/interface';
-import { proveedores } from 'src/app/interfaces/interface';
-
-import { Observable, map } from 'rxjs';
-
+import { tap, catchError, map } from 'rxjs/operators';
+import { Observable} from 'rxjs';
+import { sucursal } from 'src/app/interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,32 +14,38 @@ export class ApiRequestService {
 
   constructor(private http: HttpClient) { }
 
-  getUsuarios():Observable<usuario> {
-    const authorization = localStorage.getItem('token')!
-    const headers = new HttpHeaders({'Authorization': authorization})
-    const url = `${this.baseUrl}/users/${''}`
-    return this.http.get<usuario>(url, {headers})
+  //METODOS GET
+  getUsuarios(): Observable<any> {
+    const url = `${this.baseUrl}empleados/`;
+    return this.http.get(url).pipe(
+      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      tap((data: any[]) => {
+        console.log('Datos de usuarios:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener los usuarios:', error);
+        throw error;
+      })
+    );
   }
 
-  getCompras():Observable<compra> {
-    const authorization = localStorage.getItem('token')!
-    const headers = new HttpHeaders({'Authorization': authorization})
-    const url = `${this.baseUrl}/compras/${''}`
-    return this.http.get<compra>(url, {headers})
+  getSucursales(): Observable<any> {
+    const url = `${this.baseUrl}sucursales/`;
+    return this.http.get(url).pipe(
+      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      tap((data: any[]) => {
+        console.log('Datos de sucursales:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener las sucursales:', error);
+        throw error;
+      })
+    );
   }
 
-  getProveedores():Observable<proveedores> {
-    const authorization = localStorage.getItem('token')!
-    const headers = new HttpHeaders({'Authorization': authorization})
-    const url = `${this.baseUrl}/proveedores/${''}`
-    return this.http.get<proveedores>(url, {headers})
-  }
-
-  getListaProveedores(): Observable<proveedores[]> {
-    const authorization = localStorage.getItem('token')!;
-    const headers = new HttpHeaders({'Authorization': authorization});
-    const url = `${this.baseUrl}/proveedores?select=nombreProveedor/${''}`;
-    return this.http.get<proveedores[]>(url, {headers});
+  createSucursal(sucursal: sucursal): Observable<any> {
+    const url = `${environment.baseUrl}sucursales`;
+    return this.http.post(url, sucursal);
   }
   
 }

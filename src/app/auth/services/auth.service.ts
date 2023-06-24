@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { AuthResponse } from 'src/app/interfaces/interface';
+import { Observable } from 'rxjs';
 
 
 @Injectable({ 
@@ -12,13 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string) {
-    const url = `${this.baseUrl}/auth`
-    const body = { username, password }
-    return this.http.post(url, body)
+  login(username: string, password: string): Observable<AuthResponse> {
+    const body = { username, password };
+    return this.http.post<AuthResponse>(`${environment.baseUrl}empleados/login`, body);
   }
-
-  // validarToken():Observable<boolean>{
-
-  // }
 }

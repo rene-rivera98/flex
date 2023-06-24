@@ -1,9 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 //importacion de servicio api 
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
+import { SucursalesService } from 'src/app/protected/services/sucursales.service';
 
 //importacion de interfaz 
+import { sucursal } from 'src/app/interfaces/interface';
 
 //importacion de dialog productos
 import { DialogSucursalComponent } from './dialog-sucursal/dialog-sucursal.component';
@@ -27,12 +31,6 @@ export class SucursalesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   // se crean las columnas de la tabla 
   displayedColumns: string[] = [
     'nombre',
@@ -44,60 +42,21 @@ export class SucursalesComponent {
     'opciones'
   ];
 
-  dataSource = new MatTableDataSource<any>([
-    { 
-      nombre: 'Nombre 1',
-      direccion: 'Dirección 1',
-      codigo_postal: '12345',
-      telefono: '1234567890',
-      created_at: '2023-06-19',
-      updated_at: '2023-06-19'
-    },
-    { 
-      nombre: 'Nombre 2',
-      direccion: 'Dirección 2',
-      codigo_postal: '54321',
-      telefono: '0987654321',
-      created_at: '2023-06-19',
-      updated_at: '2023-06-19'
-    },
-    { 
-      nombre: 'Nombre 3',
-      direccion: 'Dirección 3',
-      codigo_postal: '67890',
-      telefono: '9876543210',
-      created_at: '2023-06-19',
-      updated_at: '2023-06-19'
-    },
-    { 
-      nombre: 'Nombre 4',
-      direccion: 'Dirección 4',
-      codigo_postal: '13579',
-      telefono: '0123456789',
-      created_at: '2023-06-19',
-      updated_at: '2023-06-19'
-    },
-    { 
-      nombre: 'Nombre 5',
-      direccion: 'Dirección 5',
-      codigo_postal: '97531',
-      telefono: '9876543210',
-      created_at: '2023-06-19',
-      updated_at: '2023-06-19'
-    },
-  ]);
+  dataSource: MatTableDataSource<sucursal> = new MatTableDataSource<sucursal>([]);
 
-    // Variable que contiene los campos de interfaz productos
-    //dataSource = new MatTableDataSource<usuario>([]);
-  
-  constructor(private _entriesService:ApiRequestService, public dialog: MatDialog) { }
+  sucursalCreatedSubscription!: Subscription ;
+
+  constructor(private apiRequest:ApiRequestService, 
+              public dialog: MatDialog, 
+              private http: HttpClient,
+              private sucursalService: SucursalesService) { }
 
   //metodo para abrir el dialog crear usuario
   createDialog(): void {
     const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
     dialogConfig.disableClose = true; //bloquea el dialog
     dialogConfig.width = '550px'; // Asignar ancho al dialog
-    dialogConfig.height = '570px'; // Asignar ancho al dialog
+    dialogConfig.height = '460px'; // Asignar ancho al dialog
     const dialogRef = this.dialog.open(DialogSucursalComponent, dialogConfig); //abre el dialog
   }
 
@@ -105,8 +64,8 @@ export class SucursalesComponent {
   editDialog(element: any): void {
     const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
     dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '650px'; // Asignar ancho al dialog
-    dialogConfig.height = '650px'; // Asignar ancho al dialog
+    dialogConfig.width = '550px'; // Asignar ancho al dialog
+    dialogConfig.height = '460px'; // Asignar ancho al dialog
     const dialogRefEd = this.dialog.open(DialogEditarSucursalComponent, dialogConfig); //abre el dialog
   }
 
@@ -123,6 +82,37 @@ export class SucursalesComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    this.getSucursales();
+
+    this.sucursalCreatedSubscription = this.sucursalService.sucursalCreated$.subscribe((sucursal) => {
+      if (sucursal) {
+        this.getSucursales();
+      }
+    });
+  }
+
+  getSucursales() {
+      this.apiRequest.getSucursales().subscribe(
+        (data: any[]) => {
+          this.dataSource.data = data; // Asignar los datos al dataSource.data
+        },
+        error => {
+          console.error('Error al obtener las sucursales:', error);
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    if (this.sucursalCreatedSubscription) {
+      this.sucursalCreatedSubscription.unsubscribe();
+    }
   }
 
 }

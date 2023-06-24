@@ -1,67 +1,47 @@
-import { Component } from '@angular/core';
+// login.component.ts
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
-// importaciones de terceros
-import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent implements OnInit {
 
-export class LoginComponent {
+  formulario!: FormGroup;
 
-  formulario: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]]
-  })
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
+  ngOnInit() {
+    this.formulario = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
-
+  }
 
   login() {
+    if (this.formulario.valid) {
+      const { username, password } = this.formulario.value;
+      this.authService.login(username, password).subscribe(
+        (response: any) => {
+          // Manejar la respuesta del servicio de autenticación
+          console.log(response);
+          // Guardar el token en el almacenamiento local o en una variable
+          const token = response.detail;
+          // Redirigir a la página principal o a otra ruta protegida
 
-    // console.log(this.formulario.value);
-    const { username, password } = this.formulario.value
-
-    this.authService.login(username, password).subscribe({
-      next: (resp: any) => {
-        console.log(resp);
-        const token = resp.token;
-        localStorage.setItem('token', token)
-        this.router.navigateByUrl('/dashboard')
-
-      }, error: (error: any) => {
-        console.log(error);
-
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.error.error,
-          showConfirmButton: false,
-          timer: 1500
-        })
-
-      }
-
-    })
-
-  };
-
+          this.router.navigate(['/protected/administrador']);         
+        },
+        (error: any) => {
+          // Manejar el error en caso de falla en la autenticación
+          console.error(error);
+        }
+      );
+    }
+  }
+  
 }
-
-
-
-
-// Swal.fire({
-    //   title: 'Espere!',
-    //   text: 'Procesando la solucitud',
-    //   didOpen: () => {
-    //     Swal.showLoading()
-    //   }
-
-    // })

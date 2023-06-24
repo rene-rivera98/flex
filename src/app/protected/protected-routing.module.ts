@@ -11,8 +11,10 @@ import { CorteParcialComponent } from './pages/admin-master/transacciones/caja/c
 import { GastosComponent } from './pages/admin-master/registros/gastos/gastos/gastos.component';
 import { ServiciosComponent } from './pages/admin-master/registros/gastos/servicios/servicios.component';
 import { SucursalesComponent } from './pages/admin-master/registros/sucursales/sucursales.component';
+import { AdminLayoutComponent } from '../admin-layout/admin-layout.component';
 
 const routes: Routes = [
+  { path: 'administrador', component: AdminLayoutComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'compras', component: ComprasComponent },
   { path: 'proveedores', component: ProveedoresComponent},

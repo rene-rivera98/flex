@@ -1,6 +1,5 @@
-<!-- <section> -->
 <body>
-
+    
     <div class="container py-5 h-100">
 
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -17,27 +16,22 @@
 
                         <div class="col-md-6 col-lg-7 d-flex align-items-center bg-login">
 
-
                             <div class="card-body p-4 p-lg-5 text-black">
 
                                 <form (ngSubmit)="login()" [formGroup]="formulario" autocomplete="off">
 
-                                    <h1 class="mb-5 text-center">Inicia sesión</h1>
+                                    <h1 class="mb-5 text-center">INICIO DE SESIÓN</h1>
 
                                     <div class="form-floating mb-3 col-8 mx-auto">
 
-                                        <input class="form-control" id="inputUsername" type="text"
-                                            formControlName="username" placeholder="username"/>
-
+                                        <input class="form-control" id="inputUsername" type="text"formControlName="username" placeholder="username" />
                                         <label for="inputUsername">Username</label>
 
                                     </div>
 
                                     <div class="form-floating col-8 mx-auto mb-3">
 
-                                        <input class="form-control" id="inputPassword" type="password"
-                                            formControlName="password" placeholder="Password" />
-
+                                        <input class="form-control" id="inputPassword" type="password"formControlName="password" placeholder="Password" />
                                          <label for="inputPassword">Contraseña</label>
 
                                     </div>
@@ -45,6 +39,7 @@
                                     <div class="d-flex align-items-center mt-4">
                                         
                                         <button class="btn mx-auto col-8 button" type="submit">Ingresar</button>
+
                                     </div>
 
                                 </form>

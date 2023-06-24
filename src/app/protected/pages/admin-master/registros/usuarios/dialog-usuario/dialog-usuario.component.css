@@ -1,5 +1,9 @@
-.custom-dialog {
-    max-width: 900px;
-    max-height: 90%;
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+.btn-options {
+  padding: 0 !important;
   }
-  
+
+.btn-mr {
+  margin-right: 3px !important;
+}

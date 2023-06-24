@@ -1,25 +1,29 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivate, CanLoad } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
 
 const routes: Routes = [
-
+  {
+    path: '',
+    redirectTo: '/auth',
+    pathMatch: 'full',
+  },
   {
     path: 'auth',
-    component: LoginComponent
+    component: LoginComponent,
+    pathMatch: 'full'
   },
-
   {
-    path: '', loadChildren: () =>
+    path: 'protected',
+    loadChildren: () =>
     import('./protected/protected.module').then(m => m.ProtectedModule),
-    canActivate:[ValidarTokenGuard],
+    canActivate: [ValidarTokenGuard],
     canLoad: [ValidarTokenGuard]
   },
   {
-    path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
+    path: '**',
+    redirectTo: '/auth'
   }
 ];
 
