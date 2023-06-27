@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   formulario!: FormGroup;
+  snackBar: any;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -34,11 +35,26 @@ export class LoginComponent implements OnInit {
           const token = response.detail;
           // Redirigir a la página principal o a otra ruta protegida
 
+          // this.snackBar.open('Inicio de sesión exitoso', '', {
+          //   duration: 5000,
+          //   verticalPosition: 'top',
+          //   horizontalPosition: 'end',
+          //   panelClass: ['mat-snack-bar-success']
+          // });
+
+
           this.router.navigate(['/protected/administrador']);         
         },
         (error: any) => {
           // Manejar el error en caso de falla en la autenticación
           console.error(error);
+          // this.snackBar.open('Error: favor de verificar bien su usuario y contraseña', '', {
+          //   duration: 5000,
+          //   verticalPosition: 'top',
+          //   horizontalPosition: 'end',
+          //   panelClass: ['mat-snack-bar-success']
+          // });
+
         }
       );
     }

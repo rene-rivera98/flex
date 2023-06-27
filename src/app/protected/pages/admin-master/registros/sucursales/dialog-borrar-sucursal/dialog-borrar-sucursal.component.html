@@ -1,21 +1,19 @@
-<!-- TITULO DIALOG -->
+
 <h1 mat-dialog-title>
     <div class="text-center">
-      <h1>¿Seguro desea eliminar este usuario?</h1>
+      <h1>¿Seguro desea eliminar esta sucursal?</h1>
     </div>
-  </h1>
-  <!-- FIN TITULO DIALOG -->
+</h1>
+
   
-  <!-- INICIO CONTENIDO DIALOG -->
   <div mat-dialog-content class="custom-dialog">
   
     <form autocomplete="off">
   
-        <!-- DIV BOTONES -->
         <div class="row">
           <div class="col">
             <div class="d-flex align-items-center mt-4">
-              <button class="btn btn-warning mx-auto col-6" type="submit">
+              <button class="btn btn-warning mx-auto col-6" type="submit" (click)="eliminarSucursal()">
                 Eliminar
               </button>
             </div>
@@ -29,9 +27,7 @@
             </div>
           </div>
         </div>
-        <!-- FIN DIV BOTONES -->
   
     </form>
     
   </div>
-  <!-- FIN CONTENIDO DE DIALOG -->

@@ -1,8 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy, AfterViewInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 //importacion de servicio api 
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
+import { UsuarioService } from 'src/app/protected/services/usuario.service';
 
 //importacion de interfaz 
 import { usuario } from 'src/app/interfaces/interface';
@@ -24,7 +26,7 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./usuarios.component.css']
 })
 
-export class UsuariosComponent {
+export class UsuariosComponent implements AfterViewInit, OnDestroy {
 
   //decorador y variable de paginador material
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -49,8 +51,16 @@ export class UsuariosComponent {
 
   dataSource: MatTableDataSource<usuario> = new MatTableDataSource<usuario>([]);
   
+  usuarioCreatedSubscription!: Subscription;
+  usuarioUpdatedSubscription!: Subscription;
+  usuarioDeletedSubscription!: Subscription;
+
   //inyeccion de dependencias apiRequest y dialog 
-  constructor(private apiRequest:ApiRequestService, public dialog: MatDialog, private http: HttpClient) { }
+  constructor(
+    private apiRequest:ApiRequestService, 
+    public dialog: MatDialog, 
+    private http: HttpClient,
+    private usuarioService: UsuarioService) { }
 
     //metodo para abrir el dialog crear usuario
     createDialog(): void {
@@ -65,9 +75,17 @@ export class UsuariosComponent {
     editDialog(element: any): void {
       const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
       dialogConfig.disableClose = true; //bloquea el dialog
-      dialogConfig.width = '650px'; // Asignar ancho al dialog
-      dialogConfig.height = '650px'; // Asignar ancho al dialog
-      const dialogRefEd = this.dialog.open(DialogEditarUsuarioComponent, dialogConfig); //abre el dialog
+      dialogConfig.width = '870px'; // Asignar ancho al dialog
+      dialogConfig.height = '410px'; // Asignar ancho al dialog
+      const dialogRef = this.dialog.open(DialogEditarUsuarioComponent, {
+        width: '600px',
+        data: element // Pasar los datos de la fila al diálogo
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.getUsuarios(); // Actualizar la lista de usuarios después de cerrar el diálogo
+      });
     }
 
     //metodo para abrir el dialog eliminar usuario
@@ -91,6 +109,12 @@ export class UsuariosComponent {
       this.dataSource.sort = this.sort;
 
       this.getUsuarios();
+
+      this.usuarioCreatedSubscription = this.usuarioService.usuarioCreated$.subscribe((usuario) => {
+        if (usuario) {
+          this.getUsuarios();
+        }
+      });
     }
 
     getUsuarios() {
@@ -102,6 +126,12 @@ export class UsuariosComponent {
           console.error('Error al obtener los usuarios:', error);
         }
       );
+    }
+
+    ngOnDestroy(): void {
+      if (this.usuarioCreatedSubscription) {
+        this.usuarioCreatedSubscription.unsubscribe();
+      }
     }
  
 }

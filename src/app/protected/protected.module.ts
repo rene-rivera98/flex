@@ -20,6 +20,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSortModule} from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 /*importacion de rutas */
 import { ProtectedRoutingModule } from './protected-routing.module';
@@ -119,7 +120,8 @@ import { DialogBorrarSucursalComponent } from './pages/admin-master/registros/su
     MatCheckboxModule,
     MatSortModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatSnackBarModule
   ]
 })
 export class ProtectedModule { }

@@ -10,6 +10,7 @@ export interface usuario {
     fecha_nacimiento: string;
     departamento: string
     id_sucursal: string;
+    rol: string;
     created_at: string;
     updated_at: string;
 }
@@ -29,6 +30,7 @@ export interface compra {
 }
 
 export interface proveedores{
+    id_proveedor: string;
     rfc: string;
     nombre: string;
     codigo_postal: string;

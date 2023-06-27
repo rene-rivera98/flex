@@ -1,176 +1,168 @@
-<!-- TITULO DIALOG -->
-<h1 mat-dialog-title>Datos de usuario a modificar</h1>
-<!-- FIN TITULO DIALOG -->
+<h1 mat-dialog-title>
 
-<!-- INICIO CONTENIDO DIALOG -->
+  <div class="text-center">
+
+    <h1>Datos de usuario a modificar</h1>
+
+  </div>
+
+</h1>
+
 <div mat-dialog-content class="custom-dialog">
 
-  <form autocomplete="off">
+  <form autocomplete="off" [formGroup]="usuarioForm">
 
-    <!-- FILA DE INPUT NOMBRES Y APELLIDOS -->
-      <div class="row mt-1">
-        <!-- INPUT NOMBRES -->
+    <div class="row col-13 mx-auto mt-2">
+
         <div class="col">
+
           <div class="form-floating mb-3">
-            <input class="form-control" id="inputNombreEd" type="text"
-                formControlName="NombreEd" placeholder="Nombre(s)"/>
-            <label for="inputNombreEd">Nombre(s)</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
+
+            <input class="form-control" id="nombre" type="text"
+                formControlName="nombre" placeholder="Nombre(s)"/>
+
+            <label for="nombre">Nombre(s)</label>
+          
           </div>
+
         </div>
 
-        <!-- INPUTS APELLIDOS -->
         <div class="col">
+
           <div class="form-floating mb-3">
-            <input class="form-control" id="inputApellidoPEd" type="text"
-                formControlName="ApellidoPaternoEd" placeholder="Apellido Paterno" />
-            <label for="inputApellidoPEd">Apellido Paterno</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-feedback">
-                La contraseña es obligatoria.
-            </div>
+            
+            <input class="form-control" id="inputApellidoP" type="text"
+                formControlName="paterno" placeholder="Apellido Paterno" />
+            
+              <label for="inputApellidoP">Apellido Paterno</label>
+
           </div>
-        </div>
-      </div>
-    <!-- FIN FILA -->
 
-    <!-- FILA DE INPUT APELLIDO MATERNO Y TELEFONO -->
-      <div class="row">
-        <!-- INPUT APELLIDO MATERNO -->
+        </div>
+
         <div class="col">
+
           <div class="form-floating mb-3">
-            <input class="form-control" id="inputApellidoMaternoEd" type="text"
-                formControlName="ApellidoMaternoEd" placeholder="Apellido Materno"/>
-            <label for="inputApellidoMEd">Apellido Materno</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
-          </div>
-        </div>
-
-        <!-- INPUT TELEFONO -->
-        <div class="col">
-          <div class="form-floating mb-3">
-            <input class="form-control" id="inputTelefonoEd" type="tel" pattern="[0-9]{10}"
-                formControlName="TelefonoEd" placeholder="Teléfono" />
-            <label for="inputTelefonoEd">Teléfono</label>
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-feedback">
-                La contraseña es obligatoria.
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- FIN FILA -->
-
-    <!-- INPUT EMAIL-->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputEmailEd" type="email" pattern="[0-9]{10}"
-            formControlName="CorreoElectrónicoEd" placeholder="Correo Electrónico" />
-        <label for="inputEmailEd">Correo Electrónico</label>
-        <!-- Aqui falta la validacion -->
-        <div class="invalid-feedback">
-            La contraseña es obligatoria.
-        </div>
-      </div>
-    <!-- FIN INPUT -->
-
-    <!-- INPUT FECHA NACIMIENTO -->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <input class="form-control" id="inputNacimientoEd" type="date" min="1930-01-01" max="2016-12-31"
-            formControlName="FechaNacimientoEd" placeholder="Fecha de nacimiento"/>
-        <label for="inputNacimientoEd">Fecha de nacimiento</label>
-
-        <!-- Aqui falta la validacion -->
-        <div class="invalid-tooltip">
-            Please choose a username.
-        </div>
-      </div>
-    <!-- FIN  INPUT -->
-    
-    <div class="row mt-1">
-      
-      <!-- INPUT SUCURSAL -->
-        <div class="col">
-          <div class="form-floating mb-3">
-            <select class="form-control" id="selectSucursalEd" formControlName="sucursalUserEd" placeholder="Sucursal">
-              <option value="" disabled selected>Seleccionar sucursal</option>
-              <option value="Coatepec">Coatepec</option>
-              <option value="Xalapa">Xalapa</option>
-            </select>
-            <label for="selectSucursalEd">Sucursal</label>
   
-            <!-- Aqui falta la validacion -->
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
+            <input class="form-control" id="inputApellidoMaterno" type="text"
+                   formControlName="materno" placeholder="Apellido Materno"/>
+            
+            <label for="inputApellidoM">Apellido Materno</label>
+  
           </div>
+  
         </div>
-      <!-- FIN INPUT -->
-
-      <!-- INPUT AREA -->
-      <div class="col">
-        <div class="form-floating mb-3">
-          <select class="form-control" id="selectAreaUserEd" formControlName="areaUserEd" placeholder="Área">
-            <option value="" disabled selected>Seleccionar área</option>
-            <option value="Cafeteria">Cafetería</option>
-            <option value="FrontDesk">FrontDesk</option>
-          </select>
-          <label for="selectAreaEd">Área</label>
-
-          <!-- Aqui falta la validacion -->
-          <div class="invalid-tooltip">
-              Please choose a username.
-          </div>
-        </div>
-      </div>
-      <!-- FIN INPUT -->
 
     </div>
 
+    <div class="row col-13 mx-auto">
 
-    <!-- INPUT TIPO DE USUARIO -->
-      <div class="form-floating mb-3 col-13 mx-auto">
-        <select class="form-control" id="selectRolEd" formControlName="RolEd" placeholder="Rol">
-          <option value="" disabled selected>Seleccionar Rol</option>
-          <option value="Administrador">Administrador</option>
-          <option value="Vendedor">Vendedor</option>
-          <option value="Almacen">Almacen</option>
-        </select>
-        <label for="selectRolEd">Rol</label>
+      <div class="col">
 
-        <!-- Aqui falta la validacion -->
-        <div class="invalid-tooltip">
-            Please choose a username.
-        </div>
-      </div>
-    <!-- FIN INPUT -->
+          <div class="form-floating mb-3">
 
-      <!-- DIV BOTONES -->
-      <div class="row">
-        <div class="col">
-          <div class="d-flex align-items-center mt-4">
-            <button class="btn btn-warning mx-auto col-6" type="submit">
-              Modificar
-            </button>
+            <input class="form-control" id="inputTelefono" type="text"
+                  formControlName="celular" placeholder="Teléfono" />
+            
+            <label for="inputTelefono">Teléfono</label>
+
           </div>
-        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3 col-13 mx-auto">
         
-        <div class="col">
-          <div class="d-flex align-items-center mt-4">
-            <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
-              Cerrar
-            </button>
-          </div>
+          <input class="form-control" id="inputEmail" type="text"
+              formControlName="email" placeholder="Correo Electrónico" />
+          
+          <label for="inputEmail">Correo Electrónico</label>
+  
         </div>
+
       </div>
-      <!-- FIN DIV BOTONES -->
+
+      <div class="col">
+
+        <div class="form-floating mb-3 col-13 mx-auto">
+
+          <input class="form-control" id="inputNacimiento" type="date" min="1930-01-01" max="2016-12-31"
+              formControlName="fecha_nacimiento" placeholder="Fecha de nacimiento"/>
+          
+          <label for="inputNacimiento">Fecha de nacimiento</label>
+  
+        </div>  
+
+      </div>
+
+    </div>
+
+    <div class="row col-13 mx-auto">
+
+      <div class="col">
+
+        <div class="form-floating mb-3">
+
+          <select class="form-control" id="selectAreaUser" formControlName="departamento" placeholder="Área">
+            <option disabled selected>Seleccione un área</option>
+            <option value="Cafeteria">Cafetería</option>
+            <option value="FrontDesk">FrontDesk</option>
+          </select>
+
+          <label for="selectArea">Área</label>
+
+        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3">
+
+          <select class="form-control" id="selectSucursal" formControlName="id_sucursal" placeholder="Sucursal">
+            <option disabled selected>Seleccione una sucursal</option>
+            <option *ngFor="let sucursal of sucursales" [value]="sucursal.id_sucursal">{{ sucursal.nombre }}</option>
+          </select>
+
+          <label for="selectSucursal">Sucursal</label>
+
+        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3 col-13 mx-auto">
+
+          <select class="form-control" id="selectRol" formControlName="rol" placeholder="Rol">
+            <option disabled selected>Seleccionar Rol</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Vendedor">Vendedor</option>
+            <option value="Almacen">Almacén</option>
+          </select>
+
+          <label for="selectRol">Rol</label>
+  
+        </div>
+
+      </div>
+
+    </div>
 
   </form>
   
 </div>
-<!-- FIN CONTENIDO DE DIALOG -->
+
+<div mat-dialog-actions class="mt-auto d-flex justify-content-center">
+
+  <button class="btn btn-warning mx-2" type="button" (click)="actualizarUsuario()">
+    Guardar cambios
+  </button>
+  
+
+  <button type="button" class="btn btn-danger mx-2" (click)="dialogRef.close()">
+      Cerrar
+  </button>
+
+</div>

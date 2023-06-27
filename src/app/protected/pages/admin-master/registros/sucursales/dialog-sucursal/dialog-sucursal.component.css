@@ -1,0 +1,15 @@
+.mat-snack-bar-success {
+  background-color: green;
+}
+
+.mat-snack-bar-success .mat-snack-bar-content {
+  color: white; /* Texto en color blanco para mensajes confirmatorios */
+}
+
+.mat-snack-bar-error {
+  background-color: red;
+}
+
+.mat-snack-bar-error .mat-snack-bar-content {
+  color: white; /* Texto en color blanco para mensajes de error */
+}

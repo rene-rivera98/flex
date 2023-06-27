@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ApiRequestService } from 'src/app/protected/services/api-request.service';
+import { usuario } from 'src/app/interfaces/interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { UsuarioService } from 'src/app/protected/services/usuario.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dialog-usuario',
@@ -8,14 +14,86 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogUsuarioComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogUsuarioComponent>) { }
+  usuarioForm!: FormGroup;
+  sucursales: any[] = [];
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogUsuarioComponent>,
+    private formBuilder: FormBuilder,
+    private apiRequest: ApiRequestService,
+    private usuarioService: UsuarioService,
+    private snackBar: MatSnackBar,
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
+    this.usuarioForm = this.formBuilder.group({
+      nombre: [],
+      paterno: [],
+      materno: [],
+      celular: [],
+      email: [],
+      fecha_nacimiento: [],
+      departamento: [],
+      id_sucursal: [],
+      rol: []
+    });
+
+    this.fetchSucursales();
   }
 
-  /* FUNCION CERRAR DIALOG*/
+  fetchSucursales() {
+    this.http.get<any>('http://localhost/api/sucursales/').subscribe(
+      (response: any) => {
+        if (Array.isArray(response.query)) {
+          this.sucursales = response.query.map((sucursal: { id_sucursal: any; nombre: any; }) => ({ id_sucursal: sucursal.id_sucursal, nombre: sucursal.nombre }));
+        } else {
+          console.error('La respuesta del API no contiene un arreglo de sucursales:', response);
+        }
+      },
+      (error: any) => {
+        console.error('Error al obtener las sucursales:', error);
+      }
+    );
+  }
+  
+
+  onSubmit() {
+    console.log('Submit button clicked');
+    if (this.usuarioForm.valid) {
+      const nuevoUsuario: usuario = this.usuarioForm.value;
+      this.apiRequest.createUsuario(nuevoUsuario).subscribe(
+        (response) => {
+          // Usuario creado con éxito
+          console.log(response);
+  
+          const message = `Usuario registrado correctamente:\r\nUsername: ${response.username}\r\nContraseña temporal: ${response['contraseña temporal']}`;
+  
+          this.snackBar.open(message, '', {
+            duration: 15000,
+            verticalPosition: 'top',
+            horizontalPosition: 'end'
+          });
+  
+          this.dialogRef.close();
+  
+          // Notificar a SucursalesComponent que se ha creado un nuevo usuario
+          this.usuarioService.notifyUsuarioCreated(nuevoUsuario);
+        },
+        (error) => {
+          // Error al crear el usuario
+          console.error(error);
+          this.snackBar.open('Error al registrar usuario', '', {
+            duration: 5000,
+          });
+        }
+      );
+    }
+  }
+  
+
   closeDialog() {
     this.dialogRef.close();
   }
-  
+
 }
