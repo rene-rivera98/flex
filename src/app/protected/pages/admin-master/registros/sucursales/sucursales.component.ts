@@ -1,5 +1,4 @@
 import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
@@ -41,7 +40,6 @@ export class SucursalesComponent implements AfterViewInit, OnDestroy {
   constructor(
     private apiRequest: ApiRequestService,
     public dialog: MatDialog,
-    private http: HttpClient,
     private sucursalService: SucursalesService
   ) {}
 

@@ -6,9 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SucursalesService {
-  // private sucursalesSource = new BehaviorSubject<sucursal[]>([]);
-  // public sucursales$ = this.sucursalesSource.asObservable();
-
+  
   private sucursalCreatedSubject: BehaviorSubject<sucursal | null> = new BehaviorSubject<sucursal | null>(null);
   public sucursalCreated$: Observable<sucursal | null> = this.sucursalCreatedSubject.asObservable();
 

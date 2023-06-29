@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 import { usuario } from 'src/app/interfaces/interface';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/protected/services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
+import { UsuarioDataService } from 'src/app/protected/services/usuario-data.service';
 
 @Component({
   selector: 'app-dialog-usuario',
@@ -23,20 +24,20 @@ export class DialogUsuarioComponent implements OnInit {
     private apiRequest: ApiRequestService,
     private usuarioService: UsuarioService,
     private snackBar: MatSnackBar,
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private usuarioDataService: UsuarioDataService) { }
 
   ngOnInit(): void {
     this.usuarioForm = this.formBuilder.group({
-      nombre: [],
-      paterno: [],
-      materno: [],
-      celular: [],
-      email: [],
-      fecha_nacimiento: [],
-      departamento: [],
-      id_sucursal: [],
-      rol: []
+      nombre: ['', Validators.required],
+      paterno: ['', Validators.required],
+      materno: ['', Validators.required],
+      celular: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      email: ['', [Validators.required, Validators.email]],
+      fecha_nacimiento: ['', Validators.required],
+      departamento: ['', Validators.required],
+      id_sucursal: ['', Validators.required],
+      rol: ['', Validators.required]
     });
 
     this.fetchSucursales();
@@ -74,6 +75,11 @@ export class DialogUsuarioComponent implements OnInit {
             verticalPosition: 'top',
             horizontalPosition: 'end'
           });
+
+          this.usuarioDataService.credenciales = {
+            username: response.username,
+            contrasena_temporal: response['contraseña temporal']
+          };
   
           this.dialogRef.close();
   

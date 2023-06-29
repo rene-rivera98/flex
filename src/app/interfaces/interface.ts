@@ -1,5 +1,3 @@
-import { IterableDiffers } from "@angular/core";
-
 export interface usuario {
     id_empleado: string;
     nombre: string;
@@ -11,6 +9,16 @@ export interface usuario {
     departamento: string
     id_sucursal: string;
     rol: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface user{
+    id_empleado: string;
+    username: string;
+    password: string;
+    rol: string;
+    activo: boolean;
     created_at: string;
     updated_at: string;
 }
@@ -40,18 +48,33 @@ export interface proveedores{
     banco: string;
     cuenta_bancaria: string;
     clave_interbancaria: string;
-    constancia: boolean;
+    constancia: string;
     created_at: string;
     updated_at: string;
 }
 
-export interface productos{
-    codigoProducto: string;
-    nombreProducto: string;
-    medidaProducto: string;
-    tallaProducto: string;
-    createdAt: string;
-    updatedAt: string;
+export interface productos_activo{
+    id_producto: string;
+    codigo: string;
+    tipo_egreso: string;
+    tipo_producto: string;
+    perecedero: string;
+    created_at: string;
+    updated_at: string;
+    nombre: string;
+}
+
+export interface producto_insumo{
+    id_producto: string;
+    codigo: string;
+    tipo_egreso: string;
+    tipo_producto: string;
+    perecedero: string;
+    created_at: string;
+    updated_at: string;
+    nombre: string;
+    unidad_medida: string;
+    cantidad: string;
 }
 
 export interface frontdesk{
@@ -99,28 +122,22 @@ export interface corteParcial{
 }
 
 export interface gastos{
-    folio_gasto: string;
-    cdfi: string;
-    fecha_factura: string;
-    subtotal: string;
-    IVA: string;
-    ISR: string;
-    IEPS: string;
-    total: string;
-    metodo_pago:string;
-    sucursal: string;
-    tipo_egreso: string;
-    complemento_pago: string;
-    fecha_pago: string;
-    forma_pago: string;
-    estado_pago: string;
-    monto: string;
-    saldo_insoluto: string;
-    createdAt: string;
-    updatedAt: string;
+    folio_gasto: string,
+    cfdi: string,
+    subtotal: string,
+    iva: string,
+    isr: string,
+    ieps: string,
+    monto_total: string,
+    metodo_pago: string,
+    fecha_factura: string,
+    estado_pago: string,
+    id_sucursal: string,
+    detalla_factura_gasto: []
 }
 
 export interface servicios{
+    id_servicio: string;
     nombre: string;
     tipo_egreso: string;
     createdAt: string;

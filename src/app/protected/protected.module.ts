@@ -21,6 +21,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSortModule} from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 /*importacion de rutas */
 import { ProtectedRoutingModule } from './protected-routing.module';
@@ -31,7 +33,6 @@ import { AdminLayoutComponent } from '../admin-layout/admin-layout.component';
 /*importaciones de modulos de administrador maestro*/
 import { UsuariosComponent } from './pages/admin-master/registros/usuarios/usuarios.component';
 import { ProveedoresComponent } from './pages/admin-master/registros/compras/proveedores/proveedores.component';
-import { ProductosComponent } from './pages/admin-master/registros/compras/productos/productos.component';
 import { ComprasComponent } from './pages/admin-master/registros/compras/compras/compras.component';
 import { FrontDeskComponent } from './pages/admin-master/registros/paquetes/frontdesk/frontdesk.component';
 import { CafeteriaComponent } from './pages/admin-master/registros/paquetes/cafeteria/cafeteria.component';
@@ -49,10 +50,6 @@ import { DialogEditarCompraComponent } from './pages/admin-master/registros/comp
 import { DialogProveedoresComponent } from './pages/admin-master/registros/compras/proveedores/dialog-proveedores/dialog-proveedores.component';
 import { DialogEditarProveedorComponent } from './pages/admin-master/registros/compras/proveedores/dialog-editar-proveedor/dialog-editar-proveedor.component';
 import { DialogBorrarProveedoresComponent } from './pages/admin-master/registros/compras/proveedores/dialog-borrar-proveedores/dialog-borrar-proveedores.component';
-
-import { DialogProductosComponent } from './pages/admin-master/registros/compras/productos/dialog-productos/dialog-productos.component';
-import { DialogEditarProductoComponent } from './pages/admin-master/registros/compras/productos/dialog-editar-producto/dialog-editar-producto.component';
-import { DialogBorrarProductoComponent } from './pages/admin-master/registros/compras/productos/dialog-borrar-producto/dialog-borrar-producto.component';
 
 import { DialogFrontDeskComponent } from './pages/admin-master/registros/paquetes/frontdesk/dialog-frontdesk/dialog-frontdesk.component';
 import { DialogEditarFrontDeskComponent } from './pages/admin-master/registros/paquetes/frontdesk/dialog-editar-frontdesk/dialog-editar-frontdesk.component';
@@ -75,13 +72,19 @@ import { SucursalesComponent } from './pages/admin-master/registros/sucursales/s
 import { DialogSucursalComponent } from './pages/admin-master/registros/sucursales/dialog-sucursal/dialog-sucursal.component';
 import { DialogEditarSucursalComponent } from './pages/admin-master/registros/sucursales/dialog-editar-sucursal/dialog-editar-sucursal.component';
 import { DialogBorrarSucursalComponent } from './pages/admin-master/registros/sucursales/dialog-borrar-sucursal/dialog-borrar-sucursal.component';
+import { DialogCredUsuarioComponent } from './pages/admin-master/registros/usuarios/dialog-cred-usuario/dialog-cred-usuario.component';
+import { ProductoActivoComponent } from './pages/admin-master/registros/productos/producto-activo/producto-activo.component';
+import { ProductoVentaComponent } from './pages/admin-master/registros/productos/producto-venta/producto-venta.component';
+import { ProductoInsumoComponent } from './pages/admin-master/registros/productos/producto-insumo/producto-insumo.component';
+import { DialogProductoInsumoComponent } from './pages/admin-master/registros/productos/producto-insumo/dialog-producto-insumo/dialog-producto-insumo.component';
+import { DialogEditarProductoInsumoComponent } from './pages/admin-master/registros/productos/producto-insumo/dialog-editar-producto-insumo/dialog-editar-producto-insumo.component';
+import { DialogBorrarProductoInsumoComponent } from './pages/admin-master/registros/productos/producto-insumo/dialog-borrar-producto-insumo/dialog-borrar-producto-insumo.component';
 
 @NgModule({
   declarations: [
    AdminLayoutComponent,
    UsuariosComponent,
    ProveedoresComponent,
-   ProductosComponent,
    ComprasComponent,
    GastosComponent,
    ServiciosComponent, 
@@ -92,12 +95,11 @@ import { DialogBorrarSucursalComponent } from './pages/admin-master/registros/su
    DialogUsuarioComponent, DialogEditarUsuarioComponent, DialogBorrarUsuarioComponent,
    DialogCompraComponent, DialogEditarCompraComponent,
    DialogProveedoresComponent, DialogEditarProveedorComponent, DialogBorrarProveedoresComponent,
-   DialogProductosComponent, DialogEditarProductoComponent, DialogBorrarProductoComponent,
    DialogFrontDeskComponent, DialogEditarFrontDeskComponent, DialogBorrarFrontDeskComponent,
    DialogCafeteriaComponent, DialogEditarCafeteriaComponent, DialogBorrarCafeteriaComponent,
    DialogAperturaCajaComponent, DialogCorteParcialComponent,
    DialogGastoComponent,  DialogEditarGastoComponent, 
-   DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent, SucursalesComponent, DialogSucursalComponent, DialogEditarSucursalComponent, DialogBorrarSucursalComponent
+   DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent, SucursalesComponent, DialogSucursalComponent, DialogEditarSucursalComponent, DialogBorrarSucursalComponent, DialogCredUsuarioComponent, ProductoActivoComponent, ProductoVentaComponent, ProductoInsumoComponent, DialogProductoInsumoComponent, DialogEditarProductoInsumoComponent, DialogBorrarProductoInsumoComponent
   ],
   imports: [
     CommonModule,
@@ -121,7 +123,9 @@ import { DialogBorrarSucursalComponent } from './pages/admin-master/registros/su
     MatSortModule,
     HttpClientModule,
     RouterModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class ProtectedModule { }

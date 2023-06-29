@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProveedorService } from 'src/app/protected/services/proveedor.service';
 import { proveedores } from 'src/app/interfaces/interface';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiRequestService } from 'src/app/protected/services/api-request.service';
 
@@ -12,9 +12,30 @@ import { ApiRequestService } from 'src/app/protected/services/api-request.servic
   styleUrls: ['./dialog-proveedores.component.css']
 })
 export class DialogProveedoresComponent implements OnInit {
+
   proveedorForm!: FormGroup; // Agrega una propiedad para almacenar los datos del formulario
 
-  constructor(private formBuilder: FormBuilder,
+  asociacionesBancos = [
+    { digitos: '002', banco: 'Banamex (Citibanamex)' },
+    { digitos: '006', banco: 'Bancomext' },
+    { digitos: '009', banco: 'Santander' },
+    { digitos: '012', banco: 'BBVA Bancomer' },
+    { digitos: '014', banco: 'Banco Santander' },
+    { digitos: '019', banco: 'Inbursa' },
+    { digitos: '021', banco: 'HSBC'},
+    { digitos: '030', banco: 'Scotiabank'},
+    { digitos: '032', banco: 'IXE Banco'},
+    { digitos: '036', banco: 'Banco Walmart'},
+    { digitos: '037', banco: 'Banca Afirme'},
+    { digitos: '042', banco: 'Banco Multiva'},
+    { digitos: '044', banco: 'Banco Ahorro Famsa' },
+    { digitos: '058', banco: 'BanRegio' },
+    { digitos: '059', banco: 'Invex Banco' },
+    { digitos: '072', banco: 'Banorte' },
+  ];
+
+  constructor(
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DialogProveedoresComponent>,
     private proveedorService: ProveedorService,
     private apiRequest: ApiRequestService,
@@ -36,6 +57,7 @@ export class DialogProveedoresComponent implements OnInit {
       created_at: [],
       updated_at: []
   });
+
   }
   closeDialog() {
     this.dialogRef.close();
@@ -72,4 +94,24 @@ export class DialogProveedoresComponent implements OnInit {
       );
     }
   }
+
+  onCuentaBancariaInput(): void {
+    const cuentaBancariaValue = this.proveedorForm.get('cuenta_bancaria')?.value;
+
+    if (cuentaBancariaValue && cuentaBancariaValue.length >= 3) {
+      const primerosTresDigitos = cuentaBancariaValue.substring(0, 3);
+      const asociacionBanco = this.asociacionesBancos.find(
+        asociacion => asociacion.digitos === primerosTresDigitos
+      );
+
+      if (asociacionBanco) {
+        this.proveedorForm.get('banco')?.setValue(asociacionBanco.banco);
+      } else {
+        this.proveedorForm.get('banco')?.setValue('');
+      }
+    } else {
+      this.proveedorForm.get('banco')?.setValue('');
+    }
+  }
+
 }

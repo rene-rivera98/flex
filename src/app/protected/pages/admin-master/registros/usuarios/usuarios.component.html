@@ -70,8 +70,12 @@
 
           
           <ng-container matColumnDef="opciones">
-            <th mat-header-cell *matHeaderCellDef> Editar /  Estado </th>
+            <th mat-header-cell *matHeaderCellDef> Credenciales/Editar/Estado </th>
             <td mat-cell *matCellDef="let element" class="btn-options">
+
+              <button *ngIf="element" type="button" class="btn btn-info btn-mr" (click)="credDialog()">
+                <i class="bi bi-shield-lock-fill"></i>
+              </button>
 
               <button *ngIf="element" type="button" class="btn btn-warning btn-mr" (click)="editDialog(element)">
                 <i class="bi bi-pencil-square"></i>

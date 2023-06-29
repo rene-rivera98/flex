@@ -13,6 +13,7 @@ import { usuario } from 'src/app/interfaces/interface';
 import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.component';
 import { DialogEditarUsuarioComponent } from './dialog-editar-usuario/dialog-editar-usuario.component';
 import { DialogBorrarUsuarioComponent } from './dialog-borrar-usuario/dialog-borrar-usuario.component';
+import { DialogCredUsuarioComponent } from './dialog-cred-usuario/dialog-cred-usuario.component';
 
 //importacion de librerias angular material
 import { MatPaginator } from '@angular/material/paginator';
@@ -86,6 +87,14 @@ export class UsuariosComponent implements AfterViewInit, OnDestroy {
         console.log('The dialog was closed');
         this.getUsuarios(); // Actualizar la lista de usuarios después de cerrar el diálogo
       });
+    }
+
+    credDialog(): void {
+      const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
+      dialogConfig.disableClose = true; //bloquea el dialog
+      dialogConfig.width = '870px'; // Asignar ancho al dialog
+      dialogConfig.height = '410px'; // Asignar ancho al dialog
+      const dialogRef = this.dialog.open(DialogCredUsuarioComponent, dialogConfig); //abre el dialog
     }
 
     //metodo para abrir el dialog eliminar usuario

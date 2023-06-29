@@ -29,7 +29,6 @@ export class ProveedoresComponent implements AfterViewInit, OnDestroy{
   //decorador y variable de paginador material 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   // se crean las columnas de la tabla 
   displayedColumns: string[] = [
     'rfc',
@@ -70,26 +69,30 @@ export class ProveedoresComponent implements AfterViewInit, OnDestroy{
 
   //metodo para abrir el dialog editar producto 
   editDialog(element: any): void {
-    const elementCopia = Object.assign({}, element);
-    
     const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
     dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '650px'; // Asignar ancho al dialog
-    dialogConfig.height = '650px'; // Asignar ancho al dialog
+    dialogConfig.width = '550px'; // Asignar ancho al dialog
+    dialogConfig.height = '570px'; // Asignar ancho al dialog
     const dialogRefEd = this.dialog.open(DialogEditarProveedorComponent, {
-      width: '650px',
-      height: '650px',
-      data: elementCopia
+      data: element
     });
   }
   
   //metodo para abrir el dialog eliminar producto
   deleteDialog(element: any) {
-    const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
-    dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '650px'; // Asignar ancho al dialog
-    dialogConfig.height = '180px'; // Asignar ancho al dialog
-    const dialogRef = this.dialog.open(DialogBorrarProveedoresComponent, dialogConfig); //abre el dialog
+    if (element.id_proveedor) {
+      console.log('ID de proveedor:', element.id_proveedor);
+  
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '650px';
+      dialogConfig.height = '180px';
+      dialogConfig.data = { proveedor: { id_proveedor: element.id_proveedor } };
+      const dialogRefEd = this.dialog.open(DialogBorrarProveedoresComponent, dialogConfig);
+    } else {
+      // Manejar el caso cuando no se tiene el ID de la sucursal
+      console.error('La fila seleccionada no tiene un ID de proveedor válido.');
+    }
   }
 
   //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
@@ -110,7 +113,13 @@ export class ProveedoresComponent implements AfterViewInit, OnDestroy{
         this.getProveedores();
       }
     });
-    
+
+    this.proveedorDeletedSubscription = this.proveedorService.proveedorDeleted$.subscribe((proveedor) => {
+      if (proveedor) {
+        this.getProveedores();
+      }
+    });
+
   }
 
   getProveedores() {
@@ -132,12 +141,16 @@ export class ProveedoresComponent implements AfterViewInit, OnDestroy{
     if (this.proveedorUpdatedSubscription) {
       this.proveedorUpdatedSubscription.unsubscribe();
     }
+
+    if (this.proveedorDeletedSubscription) {
+      this.proveedorDeletedSubscription.unsubscribe();
+    }
   }
   // evento para el buscador
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
-  
+
+
 }

@@ -1,130 +1,113 @@
+<app-admin-layout> 
 
-<app-admin-layout> <!-- SE INSERTA LO QUE CONTIENE ADMINLAYOUT -->
+  <mat-card>
 
-    <mat-card>
-        <mat-card-header class="d-flex align-items-center">
-            <h1 class="mx-auto">REGISTRO DE PROVEEDORES</h1>
-        </mat-card-header>
+    <mat-card-header class="d-flex align-items-center">
+        <h1 class="mx-auto">REGISTRO DE PROVEEDORES</h1>
+    </mat-card-header>
+      
+      <mat-card-content>
 
-        <mat-card-content>
-
-            <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
-                <!-- BOTON CREAR -->
-                <div>
-                  <button type="button" class="btn btn-warning" (click)="createDialog()">Registrar proveedor</button>
-                </div>
-                <!-- FIN BOTON -->
-              
-                <!-- FILTRO -->  
-                <div>
-                  <input class="form-control search-input w-100" matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
-                </div>
-                <!-- FIN FILTRO -->
-            </div>
+        <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
             
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
-                   matSort class="mat-elevation-z8">
+          <div>
+            <button type="button" class="btn btn-warning" (click)="createDialog()">Registrar proveedor</button>
+          </div>
+                      
+          <div>
+            <input class=" form-control search-input w-100" matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+          </div>
 
-                <!--  -->
-                <ng-container matColumnDef="rfc">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> RFC </th>
-                  <td mat-cell *matCellDef="let element"> {{element.rfc}}</td>
-                </ng-container>
-              
-                <!-- -->
-                <ng-container matColumnDef="nombre">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                </ng-container>
-              
-                <!-- -->
-                <ng-container matColumnDef="codigo_postal">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Código Postal </th>
-                  <td mat-cell *matCellDef="let element"> {{element.codigo_postal}} </td>
-                </ng-container>
-              
-                <!-- -->
-                <ng-container matColumnDef="regimen_fiscal">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Regimen Fiscal </th>
-                  <td mat-cell *matCellDef="let element"> {{element.regimen_fiscal}} </td>
-                </ng-container>
+        </div>
+                    
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
+               matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="rfc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> RFC </th>
+            <td mat-cell *matCellDef="let element"> {{element.rfc}}</td>
+          </ng-container>
+                      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+                      
+          <ng-container matColumnDef="codigo_postal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Código postal </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo_postal}} </td>
+          </ng-container>
+                      
+          <ng-container matColumnDef="regimen_fiscal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Regimen fiscal </th>
+            <td mat-cell *matCellDef="let element"> {{element.regimen_fiscal}} </td>
+          </ng-container>
+                        
+          <ng-container matColumnDef="telefono_fijo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
+            <td mat-cell *matCellDef="let element"> {{element.telefono_fijo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono_movil">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> WhatsApp </th>
+            <td mat-cell *matCellDef="let element"> {{element.telefono_movil}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="banco">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Banco </th>
+            <td mat-cell *matCellDef="let element"> {{element.banco}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="cuenta_bancaria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cuenta bancaria </th>
+            <td mat-cell *matCellDef="let element"> {{element.cuenta_bancaria}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="clave_interbancaria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Clave interbancaria </th>
+            <td mat-cell *matCellDef="let element"> {{element.clave_interbancaria}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="constancia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Constancia </th>
+            <td mat-cell *matCellDef="let element"> {{element.constancia}} </td>
+          </ng-container>
+                        
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y hora de alta </th>
+            <td mat-cell *matCellDef="let element"> {{ element.created_at | date: 'dd/MM/yyyy HH:mm:ss' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updated_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y hora de modificación </th>
+            <td mat-cell *matCellDef="let element"> {{element.updated_at | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="opciones">
+            <th mat-header-cell *matHeaderCellDef> Editar/Eliminar </th>
+            <td mat-cell *matCellDef="let element" class="btn-options">
+
+              <button *ngIf="element" type="button" class="btn btn-warning btn-mr" (click)="editDialog(element)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+
+              <button *ngIf="element" type="button" class="btn btn-danger" (click)="deleteDialog(element)">
+                <i class="bi bi-toggle2-off"></i>
+              </button>
+
+            </td>
+          </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
                 
-                <!-- -->
-                <ng-container matColumnDef="telefono_fijo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
-                    <td mat-cell *matCellDef="let element"> {{element.telefono_fijo}} </td>
-                </ng-container>
+      </mat-card-content>   
 
-                <!--  -->
-                <ng-container matColumnDef="telefono_movil">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> WhatsApp </th>
-                    <td mat-cell *matCellDef="let element"> {{element.telefono_movil}} </td>
-                </ng-container>
+      <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]"></mat-paginator>
 
-                <!-- -->
-                <ng-container matColumnDef="banco">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Banco </th>
-                    <td mat-cell *matCellDef="let element"> {{element.banco}} </td>
-                </ng-container>
-                
-                <!-- -->
-                <ng-container matColumnDef="cuenta_bancaria">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cuenta bancaria </th>
-                    <td mat-cell *matCellDef="let element"> {{element.cuenta_bancaria}} </td>
-                </ng-container>
-
-                <!-- -->
-                <ng-container matColumnDef="clave_interbancaria">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Clave Interbancaria </th>
-                    <td mat-cell *matCellDef="let element"> {{element.clave_interbancaria}} </td>
-                </ng-container>
-
-                <!-- -->
-                <ng-container matColumnDef="constancia">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Constancia </th>
-                    <td mat-cell *matCellDef="let element"> {{element.constancia}} </td>
-                </ng-container>
-
-                <!--  -->
-                <ng-container matColumnDef="updated_at">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y hora de alta </th>
-                  <td mat-cell *matCellDef="let element"> {{element.updated_at | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
-                </ng-container>
-
-                <!--  -->
-                <ng-container matColumnDef="created_at">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y hora de modificación </th>
-                  <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="opciones">
-                  <th mat-header-cell *matHeaderCellDef> Editar /  Eliminar </th>
-                  <td mat-cell *matCellDef="let element" class="btn-options">
-      
-                    <button *ngIf="element" type="button" class="btn btn-warning btn-mr" (click)="editDialog(element)">
-                      <i class="bi bi-pencil-square"></i>
-                    </button>
-      
-                    <button *ngIf="element" type="button" class="btn btn-danger" (click)="deleteDialog(element)">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-      
-                  </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                <!-- EN CASO DE QUE NO COINCIDAN LOS RESULTADOS DE BUSQUEDA -->
-                <!-- <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No se encuentran resultados "{{input.value}}"</td>
-                </tr> -->
-              </table>
-              
-              </mat-card-content>   
-      
-              <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]"></mat-paginator>
-
-          </mat-card>         
-
+  </mat-card>         
+    
 </app-admin-layout>

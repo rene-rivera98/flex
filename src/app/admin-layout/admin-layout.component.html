@@ -74,21 +74,32 @@
                     <a mat-list-item routerLink="/protected/frontdesk" class="my-link">FrontDesk</a>
                 </mat-nav-list>
             </mat-expansion-panel>
+
+            <!-- modulo productos -->
+            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(2)" [expanded]="activeIndex === 2">
+                <mat-expansion-panel-header class="my-list-item-acordeon">
+                    <span class="my-text"><i class="bi bi-grid-3x3-gap-fill"></i> Productos</span>
+                </mat-expansion-panel-header>
+                <mat-nav-list class="nav-list-items">
+                    <a mat-list-item routerLink="/protected/productos-activo" class="my-link">Activo</a>
+                    <a mat-list-item routerLink="/protected/productos-insumo" class="my-link">Insumo</a>
+                    <a mat-list-item routerLink="/protected/prodcutos-venta" class="my-link">Venta</a>
+                </mat-nav-list>
+            </mat-expansion-panel>
             
             <!-- modulo compras -->
-            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(2)" [expanded]="activeIndex === 2">
+            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(3)" [expanded]="activeIndex === 3">
                 <mat-expansion-panel-header class="my-list-item-acordeon">
                     <span class="my-text"><i class="bi bi-cart4"></i> Compras</span>
                 </mat-expansion-panel-header>
                 <mat-nav-list class="nav-list-items">
                     <a mat-list-item routerLink="/protected/compras" class="my-link">Compras</a>
-                    <a mat-list-item routerLink="/protected/productos" class="my-link">Productos</a>
                     <a mat-list-item routerLink="/protected/proveedores" class="my-link">Proveedores</a>
                 </mat-nav-list>
             </mat-expansion-panel>
 
             <!-- modulo gastos -->
-            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(3)" [expanded]="activeIndex === 3">
+            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(4)" [expanded]="activeIndex === 4">
                 <mat-expansion-panel-header class="my-list-item-acordeon">
                     <span class="my-text"><i class="bi bi-graph-down-arrow"></i> Gastos</span>
                 </mat-expansion-panel-header>
@@ -108,7 +119,7 @@
             <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>
   
             <!-- modulo caja -->
-            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(4)" [expanded]="activeIndex === 4">
+            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(5)" [expanded]="activeIndex === 5">
                 <mat-expansion-panel-header class="my-list-item-acordeon">
                     <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
                 </mat-expansion-panel-header>
@@ -126,7 +137,7 @@
             <h5 class="list-group-item my-heading-top">ANALISIS</h5>
   
             <!-- modulo reportes -->
-            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(5)" [expanded]="activeIndex === 5">
+            <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(6)" [expanded]="activeIndex === 6">
                 <mat-expansion-panel-header class="my-list-item-acordeon">
                     <span class="my-text"><i class="bi bi-clipboard-data-fill"></i> Reportes</span>
                 </mat-expansion-panel-header>

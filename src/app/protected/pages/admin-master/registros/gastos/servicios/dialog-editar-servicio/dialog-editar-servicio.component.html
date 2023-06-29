@@ -10,7 +10,7 @@
   
 <div mat-dialog-content class="custom-dialog">
   
-  <form autocomplete="off">
+  <form autocomplete="off" [formGroup]="servicioForm" (ngSubmit)="actualizarServicio()">
   
     <div class="row col-13 mx-auto mt-2">
 
@@ -19,9 +19,9 @@
           <div class="form-floating mb-3">
 
             <input class="form-control" id="nombre_servicio" type="text"
-                formControlName="Servicio" placeholder="Nombre" />
+                formControlName="nombre" placeholder="Concepto" />
 
-            <label for="nombre_servicio">Nombre</label>
+            <label for="nombre_servicio">Concepto</label>
 
           </div>
 
@@ -36,11 +36,11 @@
         <div class="form-floating mb-3">
 
           <select class="form-control" id="tipo_egreso" 
-                  formControlName="tipoEgreso">
+                  formControlName="tipo_egreso">
             <option disabled selected>Seleccione el tipo de egreso</option>
-            <option value="">Activos</option>
-            <option value="">Compras</option>
-            <option value="">Gastos</option>
+            <option value="Activos">Activos</option>
+            <option value="Compras">Compras</option>
+            <option value="Gastos">Gastos</option>
           </select>
           
           <label for="tipo_egreso">Tipo de egreso</label>
@@ -57,7 +57,7 @@
 
 <div mat-dialog-actions class="mt-auto d-flex justify-content-center">
 
-  <button class="btn btn-warning mx-2" type="submit">
+  <button class="btn btn-warning mx-2" type="submit" (click)="actualizarServicio()">
       Modificar
   </button>
 

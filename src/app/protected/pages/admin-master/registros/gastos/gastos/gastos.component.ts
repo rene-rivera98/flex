@@ -45,29 +45,8 @@ export class GastosComponent {
       'opciones'
     ];
 
-    dataSource = new MatTableDataSource<any>([
-      {
-        folio_gasto: 'G001',
-        fecha_factura: '2022-01-01',
-        total: 1000,
-        metodo_pago: 'Efectivo',
-        sucursal: 'Sucursal A',
-        created_at: '2022-01-01',
-        updated_at: '2022-01-02'
-      },
-      {
-        folio_gasto: 'G002',
-        fecha_factura: '2022-02-01',
-        total: 1500,
-        metodo_pago: 'Tarjeta de crédito',
-        sucursal: 'Sucursal B',
-        created_at: '2022-02-01',
-        updated_at: '2022-02-02'
-      },
-    ])
+    dataSource: MatTableDataSource<gastos> = new MatTableDataSource<gastos>([]);
 
-    // Variable que contiene los campos de interfaz gasto 
-    // dataSource = new MatTableDataSource<gastos>([]);
 
     //inyeccion de dependencias _entriesService y dialog 
     constructor(private _entriesService: ApiRequestService,public dialog: MatDialog) {}

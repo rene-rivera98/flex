@@ -1,4 +1,4 @@
-import { Component, Inject  } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { proveedores } from 'src/app/interfaces/interface';
@@ -16,6 +16,25 @@ export class DialogEditarProveedorComponent  {
   proveedorForm!: FormGroup;
   proveedor!: proveedores;
 
+  asociacionesBancos = [
+    { digitos: '002', banco: 'Banamex (Citibanamex)' },
+    { digitos: '006', banco: 'Bancomext' },
+    { digitos: '009', banco: 'Santander' },
+    { digitos: '012', banco: 'BBVA Bancomer' },
+    { digitos: '014', banco: 'Banco Santander' },
+    { digitos: '019', banco: 'Inbursa' },
+    { digitos: '021', banco: 'HSBC'},
+    { digitos: '030', banco: 'Scotiabank'},
+    { digitos: '032', banco: 'IXE Banco'},
+    { digitos: '036', banco: 'Banco Walmart'},
+    { digitos: '037', banco: 'Banca Afirme'},
+    { digitos: '042', banco: 'Banco Multiva'},
+    { digitos: '044', banco: 'Banco Ahorro Famsa' },
+    { digitos: '058', banco: 'BanRegio' },
+    { digitos: '059', banco: 'Invex Banco' },
+    { digitos: '072', banco: 'Banorte' },
+  ];
+
   constructor(
     public dialogRef: MatDialogRef<DialogEditarProveedorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,29 +48,29 @@ export class DialogEditarProveedorComponent  {
       console.log('Datos recibidos:', this.proveedor);
 
       this.proveedorForm = this.formBuilder.group({
-          rfc: [],
-          nombre: [],
-          codigo_postal: [],
-          regimen_fiscal: [],
-          telefono_fijo: [],
-          telefono_movil: [],
-          banco: [],
-          clave_interbancaria: [],
-          cuenta_bancaria: [],
-          constancia: []
+          rfc: [this.proveedor.rfc],
+          nombre: [this.proveedor.nombre],
+          codigo_postal: [this.proveedor.codigo_postal],
+          regimen_fiscal: [this.proveedor.regimen_fiscal],
+          telefono_fijo: [this.proveedor.telefono_fijo],
+          telefono_movil: [this.proveedor.telefono_movil],
+          banco: [this.proveedor.banco],
+          clave_interbancaria: [this.proveedor.clave_interbancaria],
+          cuenta_bancaria: [this.proveedor.cuenta_bancaria],
+          constancia: [this.proveedor.constancia]
       });
     }
 
     actualizarProveedor(): void {
       if (this.proveedorForm.valid) {
         // Obtener el id_proveedor de this.sucursal o desde donde lo obtengas en tu código
-        const id_proveedor = this.proveedor.id_proveedor;
+        const idProveedor = this.proveedor.id_proveedor;
         const proveedorActualizado = this.proveedorForm.value;
   
         // Llamar al servicio de API para actualizar la sucursal
-        this.apiRequest.actualizarSucursal(id_proveedor, proveedorActualizado).subscribe(
+        this.apiRequest.actualizarProveedor(idProveedor, proveedorActualizado).subscribe(
           (response: any) => {
-            console.log('Sucursal actualizada:', response);
+            console.log('Proveedor actualizado', response);
             // Mostrar una notificación o mensaje de éxito utilizando MatSnackBar
             this.snackBar.open('Proveedor actualizado correctamente', '', {
               duration: 5000,
@@ -82,5 +101,24 @@ export class DialogEditarProveedorComponent  {
   /* FUNCION CERRAR DIALOG*/
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  onCuentaBancariaInput(): void {
+    const cuentaBancariaValue = this.proveedorForm.get('cuenta_bancaria')?.value;
+
+    if (cuentaBancariaValue && cuentaBancariaValue.length >= 3) {
+      const primerosTresDigitos = cuentaBancariaValue.substring(0, 3);
+      const asociacionBanco = this.asociacionesBancos.find(
+        asociacion => asociacion.digitos === primerosTresDigitos
+      );
+
+      if (asociacionBanco) {
+        this.proveedorForm.get('banco')?.setValue(asociacionBanco.banco);
+      } else {
+        this.proveedorForm.get('banco')?.setValue('');
+      }
+    } else {
+      this.proveedorForm.get('banco')?.setValue('');
+    }
   }
 }

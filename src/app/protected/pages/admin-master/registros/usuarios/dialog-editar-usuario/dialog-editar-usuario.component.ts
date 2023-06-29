@@ -63,9 +63,11 @@ export class DialogEditarUsuarioComponent {
 
   actualizarUsuario(): void {
     if (this.usuarioForm.valid) {
+      // Obtener el id_proveedor de this.sucursal o desde donde lo obtengas en tu código
       const idUsuario = this.usuario.id_empleado;
       const usuarioActualizado = this.usuarioForm.value;
 
+      // Llamar al servicio de API para actualizar la sucursal
       this.apiRequest.actualizarUsuario(idUsuario, usuarioActualizado).subscribe(
         (response: any) => {
           console.log('Usuario actualizado:', response);
