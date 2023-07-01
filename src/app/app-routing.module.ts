@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/pages/login/login.component';
-import { ValidarTokenGuard } from './guards/validar-token.guard';
+import { TokenGuard } from './protected/guards/token.guard';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/auth',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: 'auth',
@@ -17,9 +17,9 @@ const routes: Routes = [
   {
     path: 'protected',
     loadChildren: () =>
-    import('./protected/protected.module').then(m => m.ProtectedModule),
-    canActivate: [ValidarTokenGuard],
-    canLoad: [ValidarTokenGuard]
+    import('./protected/modules/protected.module').then(m => m.ProtectedModule),
+    canActivate: [TokenGuard],
+    canLoad: [TokenGuard]
   },
   {
     path: '**',

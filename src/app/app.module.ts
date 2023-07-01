@@ -1,23 +1,17 @@
-
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/pages/login/login.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { LoginComponent } from './auth/pages/login/login.component';
+import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
-import { CustomMatPaginatorIntl } from './mat-paginator/paginator';
-
-import {MatSortModule} from '@angular/material/sort';
-
-
+import { CustomMatPaginatorIntl } from './protected/shared/paginator';
 
 @NgModule({
   declarations: [
@@ -27,14 +21,13 @@ import {MatSortModule} from '@angular/material/sort';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     MatSortModule
-
   ],
   providers: [
-    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl }
+    {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { AuthResponse } from 'src/app/interfaces/interface';
+import { environment } from 'src/environments/environment';
+import { AuthResponse } from '../interface/AuthResponse';
 import { Observable } from 'rxjs';
 
-
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
 })
 export class AuthService {
@@ -18,4 +17,5 @@ export class AuthService {
     const body = { username, password };
     return this.http.post<AuthResponse>(`${environment.baseUrl}empleados/login`, body);
   }
+  
 }

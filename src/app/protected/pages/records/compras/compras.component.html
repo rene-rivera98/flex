@@ -1,0 +1,98 @@
+<app-admin_master-layout>
+  <mat-card>
+      <mat-card-header class="d-flex align-items-center">
+          <h1 class="mx-auto">REGISTRO DE COMPRAS</h1>
+      </mat-card-header>
+
+      <mat-card-content>
+
+          <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
+              <!-- BOTON CREAR -->
+              <div>
+                <button type="button" class="btn btn-warning" (click)="createDialog()">Registrar nueva compra</button>
+              </div>
+              <!-- FIN BOTON -->
+            
+              <!-- FILTRO -->  
+              <div>
+                <input class="form-control search-input w-100" matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+              </div>
+              <!-- FIN FILTRO -->
+          </div>
+          
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
+                 matSort class="mat-elevation-z8">
+
+              <ng-container matColumnDef="folio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio </th>
+                <td mat-cell *matCellDef="let element"> {{element.folio}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="id_proveedor">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
+                <td mat-cell *matCellDef="let element"> {{element.id_proveedor}}</td>
+              </ng-container>
+            
+              <ng-container matColumnDef="monto_total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                <td mat-cell *matCellDef="let element"> {{element.monto_total}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="metodo_pago">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Metodo de pago </th>
+                  <td mat-cell *matCellDef="let element"> {{element.metodo_pago}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fecha_factura">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de factura </th>
+                <td mat-cell *matCellDef="let element"> {{element.fecha_factura}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="estado_pago">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado de pago </th>
+                <td mat-cell *matCellDef="let element"> {{element.estado_pago}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="id_sucursal">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de factura </th>
+                <td mat-cell *matCellDef="let element"> {{element.id_sucursal}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y hora de alta </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y hora de modificación </th>
+                <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="opciones">
+                <th mat-header-cell *matHeaderCellDef> Editar </th>
+                <td mat-cell *matCellDef="let element" class="btn-options">
+    
+                  <button *ngIf="element" type="button" class="btn btn-warning btn-mr" (click)="editDialog(element)">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+    
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- EN CASO DE QUE NO COINCIDAN LOS RESULTADOS DE BUSQUEDA -->
+              <!-- <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No se encuentran resultados "{{input.value}}"</td>
+              </tr> -->
+          </table>
+          
+      </mat-card-content>   
+
+      <!-- INICIO PAGINACION -->
+      <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]"></mat-paginator>
+      <!-- FIN PAGINACION -->
+
+  </mat-card> 
+</app-admin_master-layout>

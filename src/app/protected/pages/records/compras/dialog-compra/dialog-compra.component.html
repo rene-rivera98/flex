@@ -1,0 +1,350 @@
+<!-- titulo de dialog -->
+<h1 mat-dialog-title>
+
+  <div class="text-center">
+
+    <h1>DETALLE DE COMPRA</h1>
+
+  </div>
+
+</h1>
+
+
+<!-- inicio contenido del dialog -->
+<div mat-dialog-content class="custom-dialog">
+
+  <!-- inicio de formulario -->
+  <form autocomplete="off" [formGroup]="compraForm">
+
+    <mat-tab-group mat-align-tabs="center">
+
+      <mat-tab label="Datos de la factura">
+
+        <div class="row col-13 mx-auto mt-2">
+          
+          <div class="col">
+
+            <div class="form-floating mb-3">
+                
+              <input class="form-control" id="folio" type="text" formControlName="folio_compra" placeholder="Folio"/>
+
+              <label for="folio">Folio</label>
+                  
+            </div>
+                
+          </div>
+
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="cfdi" type="text" formControlName="cfdi" placeholder="Uso de CFDI"/>
+
+              <label for="cfdi">Uso de CFDI</label>
+                  
+            </div>
+                
+          </div>
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="fecha_factura" type="date" formControlName="fecha_factura"/>
+
+              <label for="fecha_factura">Fecha de factura</label>
+                  
+            </div>
+                
+          </div>
+              
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <select class="form-control" id="proveedor" formControlName="id_proveedor">
+                <option disabled selected>Seleccione el proveedor</option>
+                <option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedor">{{ proveedor.nombre }}</option>
+              </select>
+              
+              <label for="proveedor">Proveedor</label>
+
+            </div>
+
+          </div>
+
+          <div class="col">
+
+            <div class="form-floating mb-3 col-13 mx-auto">
+
+              <select class="form-control" id="selectSucursal" formControlName="id_sucursal">
+                <option disabled selected>Seleccione una sucursal</option>
+                <option *ngFor="let sucursal of sucursales" [value]="sucursal.id_sucursal">{{ sucursal.nombre }}</option>
+              </select>
+                
+              <label for="selectSucursal">Sucursal</label>
+            
+            </div>
+
+          </div>
+
+        </div>
+
+      </mat-tab>
+
+      <mat-tab label="Detalles de la compra">
+     
+        <div class="row col-13 mx-auto mt-2">
+
+            <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <select class="form-control" id="productos" formControlName="productos">
+                  <option disabled selected>Seleccione un producto</option>
+                  <option *ngFor="let producto of productos" [value]="producto.id_producto">{{ producto.nombre }}</option>
+                </select>
+
+                  <label for="productos">Productos</label>
+              </div>
+
+            </div>       
+
+            <div class="col">
+
+              <div class="d-flex align-items-center mt-2">
+                  <button class="btn btn-warning mx-auto col-6" (click)="agregarProducto()">
+                      Agregar
+                  </button>
+                  
+                  <button class="btn btn-danger mx-2 col-6" (click)="quitarProducto()">
+                      Quitar
+                  </button>
+
+              </div>
+
+            </div>
+
+        </div>
+         
+        <div class="row col-13 mx-auto">
+          
+          <div class="col">
+  
+            <div class="row col-13 mx-auto">
+              <div class="col">
+                <table class="table tabla-venta">
+                  <thead>
+                    <tr>
+                      <th>Productos</th>
+                      <!-- <th>Cantidad</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let producto of idProductos; let i = index">
+                      <td>{{ obtenerNombreProducto(producto) }}</td>
+                      <!-- <td>{{ cantidades[i] }}</td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="subtotal" type="number" 
+                       formControlName="subtotal" placeholder="Subtotal" 
+                       step="0.01" min="0" max="100000"/>
+
+              <label for="subtotal">Subtotal</label>
+
+              <div *ngIf="compraForm.get('Subtotal')?.invalid && (compraForm.get('Subtotal')?.dirty || compraForm.get('Subtotal')?.touched)"></div>
+              <div *ngIf="compraForm.get('Subtotal')?.errors?.['pattern']">El subtotal debe ser numérico</div>
+              
+            </div>
+
+          </div>
+
+          <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <input class="form-control" id="iva" type="number"
+                    formControlName="iva" placeholder="IVA" />
+
+                <label for="iva">IVA</label>
+
+              </div>
+
+          </div>
+
+          <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <input class="form-control" id="inputISR" type="number"
+                    formControlName="isr" placeholder="ISR"/>
+
+                <label for="inputISR">ISR</label>
+
+              </div>
+
+          </div>
+
+          <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <input class="form-control" id="inputIEPS" type="number"
+                    formControlName="ieps" placeholder="IEPS"/>
+                
+                <label for="inputIEPS">IEPS</label>
+
+              </div>
+
+          </div>
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="inputTotal" type="number"
+                      formControlName="monto_total" placeholder="Total"/>
+
+              <label for="inputTotal">Total</label>
+
+            </div>
+
+          </div>
+
+        </div>
+        
+      </mat-tab>
+
+      <mat-tab label="Información de pago">
+          
+        <div class="row col-13 mx-auto mt-2">
+
+            <div class="col">
+
+              <div class="form-floating mb-3 col-13 mx-auto">
+                    
+                <select class="form-control" id="selectMetodoPago" 
+                            formControlName="metodo_pago">
+                      <option disabled selected>Selecciona un metodo de pago</option>
+                      <option value="Pago en una exhibición (PUE)">Pago en una exhibición (PUE)</option>
+                      <option value="Pago diferido (PPD)">Pago diferido (PPD)</option>
+                </select>
+
+                <label for="selectMetodoPago">Metodo de pago</label>
+                  
+              </div>
+              
+            </div>
+
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+              <div class="col">
+
+                <div class="form-floating mb-3 col-13 mx-auto">
+                  
+                  <select class="form-control" id="selectPago" formControlName="estado_pago">
+                    <option disabled selected>Selecciona el estado de pago de la factura</option>
+                    <option value="Completado">Completado</option>
+                    <option value="Pendiente">Pendiente</option>
+                  </select>
+
+                  <label for="selectPago">Estado de pago de la factura</label>
+
+                </div>
+
+              </div>
+                
+        </div>   
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3 col-13 mx-auto">
+                
+              <select class="form-control" id="status_recepcion" (change)="onRecepcionChange()">
+                <option disabled selected>Seleccione el estado de recepción</option>
+                <option value="Recibido">Recibido</option>
+                <option value="Pendiente">Pendiente</option>
+              </select>
+
+              <label for="status_recepcion">Estado de recepción</label>
+
+            </div>
+
+          </div>
+
+          <div class="col" *ngIf="mostrarFechaRecepcion"> <!-- SE MOSTRARA SI ES QUE SE SELECCIONA RECIBIDO EN EL SELECT ANTERIOR -->
+              
+            <div class="form-floating mb-3 col-13 mx-auto">
+                
+              <input class="form-control" id="fecha_recepcion" type="date"
+                      formControlName="fecha_recepcion" placeholder="Fecha de recepción"/>
+                
+              <label for="fecha_recepcion">Fecha de recepción</label>
+              
+            </div>
+
+          </div>
+
+        </div>
+        
+        <div class="row col-13 mx-auto"><!--botones -->
+
+          <div class="col">
+
+            <div class="d-flex align-items-center mt-4">
+
+              <button class="btn btn-warning mx-auto col-6" type="submit" (click)="onSubmit()">
+                    Registrar
+              </button>
+
+            </div>
+
+          </div>
+              
+          <div class="col">
+
+            <div class="d-flex align-items-center mt-4">
+
+              <button type="button" class="btn btn-danger mx-auto col-4" (click)="dialogRef.close()">
+                Cerrar
+              </button>
+
+            </div>
+
+          </div>
+              
+        </div>
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </form>
+  
+</div>
