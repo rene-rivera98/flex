@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ProductoService } from 'src/app/protected/services/producto.service';
@@ -18,7 +18,7 @@ import { DialogBorrarInsumoComponent } from './dialog-borrar-insumo/dialog-borra
   templateUrl: './insumo.component.html',
   styleUrls: ['./insumo.component.css']
 })
-export class InsumoComponent implements AfterViewInit, OnDestroy{
+export class InsumoComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -26,7 +26,7 @@ export class InsumoComponent implements AfterViewInit, OnDestroy{
   displayedColumns: string[] = [
     'codigo',
     'nombre',
-    'cantidad',
+    // 'cantidad',
     'unidad_medida',
     'perecedero',
     'tipo_egreso',
@@ -43,37 +43,10 @@ export class InsumoComponent implements AfterViewInit, OnDestroy{
 
   constructor(
     public dialog: MatDialog,
-    private productoService : ProductoService
+    private productoService: ProductoService
   ) { }
 
-  createDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.width = '670px';
-    dialogConfig.height = '420px';
-    const dialogRef = this.dialog.open(DialogInsumoComponent, dialogConfig);
-  }
-
-  editDialog(element: any): void {
-    const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
-    dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '670px'; // Asignar ancho al dialog
-    dialogConfig.height = '420px'; // Asignar ancho al dialog
-    const dialogRefEd = this.dialog.open(DialogEditarInsumoComponent, {
-      data: element
-    });
-  }
-  deleteDialog(element: any) {}
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
+  ngOnInit(): void {
     this.getInsumos();
 
     this.insumoCreatedSubscription = this.productoService.insumoCreated$.subscribe((insumo) => {
@@ -87,6 +60,58 @@ export class InsumoComponent implements AfterViewInit, OnDestroy{
         this.getInsumos();
       }
     });
+
+    this.insumoDeletedSubscription = this.productoService.insumoDeleted$.subscribe((insumo) => {
+      if (insumo) {
+        this.getInsumos();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.insumoCreatedSubscription.unsubscribe();
+    this.insumoUpdatedSubscription.unsubscribe();
+    this.insumoDeletedSubscription.unsubscribe();
+  }
+
+  createDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '670px';
+    dialogConfig.height = '420px';
+    const dialogRef = this.dialog.open(DialogInsumoComponent, dialogConfig);
+  }
+
+  editDialog(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    const dialogRefEd = this.dialog.open(DialogEditarInsumoComponent, {
+      data: element,
+      disableClose: true,
+      width: '670px',
+      height: '420px'
+    });
+  }
+
+  openDeleteConfirmationDialog(element: any): void {
+    if (element.id_producto) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '650px';
+      dialogConfig.height = '180px';
+      dialogConfig.data = { insumo: { id_producto: element.id_producto } };
+      const dialogRefEd = this.dialog.open(DialogBorrarInsumoComponent, dialogConfig);
+    } else {
+      console.error('La fila seleccionada no tiene un ID de producto válido.');
+    }
+  }
+
+  deleteDialog(element: any): void {
+    this.openDeleteConfirmationDialog(element);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getInsumos() {
@@ -95,11 +120,8 @@ export class InsumoComponent implements AfterViewInit, OnDestroy{
         this.dataSource.data = data;
       },
       (error) => {
-        console.error('Error al obtener las productos:', error);
+        console.error('Error al obtener los productos:', error);
       }
     );
   }
-
-  ngOnDestroy(): void {}
 }
-

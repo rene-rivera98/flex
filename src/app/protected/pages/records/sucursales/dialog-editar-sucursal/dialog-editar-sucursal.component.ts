@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { sucursal } from 'src/app/protected/interfaces/interfaces';
@@ -25,10 +25,10 @@ export class DialogEditarSucursalComponent {
     console.log('Datos recibidos:', this.sucursal); // Agregar este console.log
 
     this.sucursalForm = this.formBuilder.group({
-      nombre: [],
+      nombre: ['',[Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')]],
       direccion: [],
-      codigo_postal: [],
-      telefono: []
+      codigo_postal: ['', [Validators.required, Validators.pattern('[0-9]{5}')]],
+      telefono: ['', [Validators.required, Validators.pattern('[0-9]{10}')]]
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { sucursal } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SucursalService } from 'src/app/protected/services/sucursal.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -22,10 +22,10 @@ export class DialogSucursalComponent implements OnInit {
 
   ngOnInit(): void {
     this.sucursalForm = this.formBuilder.group({
-      nombre: [],
+      nombre: ['',[Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')]],
       direccion: [],
-      codigo_postal: [],
-      telefono: []
+      codigo_postal: ['', [Validators.required, Validators.pattern('[0-9]{5}')]],
+      telefono: ['', [Validators.required, Validators.pattern('[0-9]{10}')]]
     });
   }
 

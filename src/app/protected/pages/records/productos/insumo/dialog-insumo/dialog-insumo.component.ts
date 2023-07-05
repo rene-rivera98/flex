@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/protected/services/producto.service';
 import { producto_insumo } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -22,13 +22,13 @@ export class DialogInsumoComponent implements OnInit {
 
   ngOnInit(): void {
     this.insumoForm = this.formBuilder.group({
-      codigo: [],
-      nombre: [],
-      cantidad: [],
-      unidad_medida: [],
+      codigo: ['', [Validators.required]],
+      nombre: ['', [Validators.required]],
+      cantidad: [0],
+      unidad_medida: ['', [Validators.required]],
       perecedero: [false],
-      tipo_egreso: [],
-      tipo_producto: new FormControl('Insumo')
+      tipo_egreso: ['', [Validators.required]],
+      tipo_producto: ['Insumo'],
     });
   }
 

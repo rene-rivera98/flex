@@ -19,6 +19,9 @@ export class ProductoService {
   private insumoUpdatedSubject: BehaviorSubject<producto_insumo | null> = new BehaviorSubject<producto_insumo | null>(null);
   public insumoUpdated$: Observable<producto_insumo | null> = this.insumoUpdatedSubject.asObservable();
 
+  private insumoDeletedSubject: BehaviorSubject<producto_insumo | null> = new BehaviorSubject<producto_insumo | null>(null);
+  public insumoDeleted$: Observable<producto_insumo | null> = this.insumoDeletedSubject.asObservable();
+
   private activoCreatedSubject: BehaviorSubject<productos_activo | null> = new BehaviorSubject<productos_activo | null>(null);
   public activoCreated$: Observable<productos_activo | null> = this.activoCreatedSubject.asObservable();
 
@@ -30,6 +33,9 @@ export class ProductoService {
 
   private ventaUpdatedSubject: BehaviorSubject<producto_venta | null> = new BehaviorSubject<producto_venta | null>(null);
   public ventaUpdated$: Observable<producto_venta | null> = this.ventaUpdatedSubject.asObservable();
+
+  private ventaDeletedSubject: BehaviorSubject<producto_venta | null> = new BehaviorSubject<producto_venta | null>(null);
+  public ventaDeleted$: Observable<producto_venta | null> = this.ventaDeletedSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -133,6 +139,19 @@ export class ProductoService {
       })
     );
   }
+
+  desactivedProducto(id_producto: string){
+    const url = `${this.baseUrl}producto/desactivar/${id_producto}`;
+    return this.http.delete(url).pipe(
+      tap((data: any) => {
+        console.log('Respuesta del DELETE:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al desactivar producto:', error);
+        throw error;
+      })
+    );
+  }
   
   //metodos notificacion para actualizar tabla
   public notifyInsumoCreated(insumo: producto_insumo) {
@@ -140,6 +159,10 @@ export class ProductoService {
   }
 
   public notifyInsumoUpdated(insumo: producto_insumo) {
+    this.insumoUpdatedSubject.next(insumo);
+  }
+
+  public notifyInsumoDeleted(insumo: producto_insumo) {
     this.insumoUpdatedSubject.next(insumo);
   }
 
@@ -152,10 +175,14 @@ export class ProductoService {
   }
 
   public notifyVentaCreated(venta: producto_venta) {
-    this.activoCreatedSubject.next(venta);
+    this.ventaCreatedSubject.next(venta);
   }
 
   public notifyVentaUpdated(venta: producto_venta) {
     this.ventaUpdatedSubject.next(venta);
+  }
+
+  public notifyVentaDeleted(venta: producto_venta) {
+    this.ventaDeletedSubject.next(venta);
   }
 }

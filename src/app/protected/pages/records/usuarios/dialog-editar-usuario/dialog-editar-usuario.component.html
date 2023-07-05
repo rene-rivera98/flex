@@ -1,11 +1,8 @@
-<h1 mat-dialog-title>
-
-  <div class="text-center">
-
-    <h1>Datos de usuario a modificar</h1>
-
+<h1 mat-dialog-title class="d-flex align-items-center">
+  <div class="flex-grow-1 text-center">
+    <h1>DATOS DE USUARIO A MODIFICAR</h1>
   </div>
-
+    <i class="bi bi-x-square" (click)="dialogRef.close()" type="button"></i>
 </h1>
 
 <div mat-dialog-content class="custom-dialog">
@@ -106,6 +103,8 @@
 
           <select class="form-control" id="selectAreaUser" formControlName="departamento" placeholder="Área">
             <option disabled selected>Seleccione un área</option>
+            <option value="Administracion">Administración</option>
+            <option value="Almacen">Almacén</option>
             <option value="Cafeteria">Cafetería</option>
             <option value="FrontDesk">FrontDesk</option>
           </select>
@@ -156,13 +155,8 @@
 
 <div mat-dialog-actions class="mt-auto d-flex justify-content-center">
 
-  <button class="btn btn-warning mx-2" type="button" (click)="actualizarUsuario()">
+  <button class="btn btn-warning mx-2" type="button" (click)="actualizarUsuario()" [disabled]="usuarioForm.invalid">
     Guardar cambios
-  </button>
-  
-
-  <button type="button" class="btn btn-danger mx-2" (click)="dialogRef.close()">
-      Cerrar
   </button>
 
 </div>

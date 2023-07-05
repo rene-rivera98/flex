@@ -1,19 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
-
-//importacion de servicio
-import { GastoService } from 'src/app/protected/services/gasto.service';
-
-//importacion de interfaz 
-import { gastos } from 'src/app/protected/interfaces/interfaces';
-
-//importacion de dialog gastos
-import { DialogGastoComponent } from './dialog-gasto/dialog-gasto.component';
-import { DialogEditarGastoComponent } from './dialog-editar-gasto/dialog-editar-gasto.component';
-//importacion de librerias angular material
+import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
+
+import { gastos, sucursal } from 'src/app/protected/interfaces/interfaces';
+import { DialogEditarGastoComponent } from './dialog-editar-gasto/dialog-editar-gasto.component';
+import { SucursalService } from 'src/app/protected/services/sucursal.service';
+import { GastoService } from 'src/app/protected/services/gasto.service';
+import { DialogGastoComponent } from './dialog-gasto/dialog-gasto.component';
 
 @Component({
   selector: 'app-gastos',
@@ -21,25 +17,17 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./gastos.component.css']
 })
 
-export class GastosComponent {
+export class GastosComponent implements AfterViewInit, OnDestroy{
 
-   //decorador y variable de paginador material 
    @ViewChild(MatPaginator) paginator!: MatPaginator;
    @ViewChild(MatSort) sort!: MatSort;
 
-   //en este metodo se habilita el paginador una vez iniciada las vistas y los componentes
-    ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-
-    // se crean las columnas de la tabla 
     displayedColumns: string[] = [
       'folio_gasto',
       'fecha_factura',
-      'total',
       'metodo_pago',
-      'sucursal',
+      'monto_total',
+      'nombreSucursal',
       'created_at',
       'updated_at',
       'opciones'
@@ -47,10 +35,14 @@ export class GastosComponent {
 
     dataSource: MatTableDataSource<gastos> = new MatTableDataSource<gastos>([]);
 
+    gastoCreatedSubscription!: Subscription;
+    gastoUpdatedSubscription!: Subscription;
+    gastoDeletedSubscription!: Subscription;
 
     //inyeccion de dependencias _entriesService y dialog 
     constructor(
       private gastoService: GastoService, 
+      private sucursalService: SucursalService,
       public dialog: MatDialog) {}
 
     //metodo para abrir el dialog registrar gasto
@@ -75,6 +67,42 @@ export class GastosComponent {
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    ngAfterViewInit() {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+      this.gastoCreatedSubscription = this.gastoService.gastoCreated$.subscribe(() => {
+        this.getGastos();
+      });
+    }
+
+    getGastos() {
+      this.sucursalService.getSucursales().subscribe(
+        (sucursales: sucursal[]) => {
+          const sucursalesMap = new Map<string, string>(sucursales.map(sucursal => [sucursal.id_sucursal, sucursal.nombre]));
+
+              this.gastoService.getGastos().subscribe(
+                (gastos: gastos[]) => {
+                  this.dataSource.data = gastos.map(gasto => ({
+                    ...gasto,
+                    nombreSucursal: sucursalesMap.get(gasto.id_sucursal)
+                  }));
+                },
+                error => {
+                  console.error('Error al obtener los gastos:', error);
+                }
+              );
+            },
+            error => {
+              console.error('Error al obtener los gastos:', error);
+            }
+          );
+        }
+
+    ngOnDestroy(): void {
+    
     }
 }
 

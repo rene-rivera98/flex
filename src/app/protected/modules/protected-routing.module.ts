@@ -13,7 +13,11 @@ import { InsumoComponent } from '../pages/records/productos/insumo/insumo.compon
 import { VentaComponent } from '../pages/records/productos/venta/venta.component';
 import { ActivoComponent } from '../pages/records/productos/activo/activo.component';
 import { GastosComponent } from '../pages/records/gastos/gastos.component';
+import { InventarioComponent } from '../pages/records/almacen/inventario/inventario.component';
+import { EntradasComponent } from '../pages/records/almacen/entradas/entradas.component';
+import { SalidasComponent } from '../pages/records/almacen/salidas/salidas.component';
 import { Admin_masterLayoutComponent } from '../components/admin_master-layout/admin_master-layout.component';
+import { AlmacenesComponent } from '../pages/records/almacenes/almacenes.component';
 
 const routes: Routes = [
   { path: 'administrador', component: Admin_masterLayoutComponent},
@@ -28,6 +32,10 @@ const routes: Routes = [
   { path: 'productos-activo', component: ActivoComponent},
   { path: 'cafeteria', component: CafeteriaComponent},
   { path: 'frontdesk', component: FrontdeskComponent},
+  { path: 'almacen', component: InventarioComponent},
+  { path: 'almacenes', component: AlmacenesComponent},
+  { path: 'entradas', component: EntradasComponent},
+  { path: 'salidas', component: SalidasComponent}
 ];
 
 

@@ -8,6 +8,7 @@ export interface usuario {
     fecha_nacimiento: string;
     departamento: string
     id_sucursal: string;
+    activo:string;
     rol: string;
     created_at: string;
     updated_at: string;
@@ -24,6 +25,7 @@ export interface user{
 }
 
 export interface compra {
+    id_compra: string,
     folio_compra: string,
     cfdi: string,
     subtotal: string,
@@ -34,14 +36,34 @@ export interface compra {
     metodo_pago: string,
     fecha_factura: string,
     fecha_recepcion: string,
+    fecha_comprobante: string;
     estado_pago: string,
     id_sucursal: string,
     id_proveedor: string,
-    detalla_factura_compra: string[],
-    // cantidad: number[],
-    id_compra: string,
-    created_at: string,
-    updated_at: string
+    detalla_factura_compra: {
+        id_producto: number,
+        cantidad: number
+    }[];
+}
+
+export interface gastos{
+    id_gasto: string;
+    folio_gasto: string,
+    cfdi: string,
+    subtotal: string,
+    iva: string,
+    isr: string,
+    ieps: string,
+    monto_total: string,
+    metodo_pago: string,
+    fecha_factura: string,
+    fecha_comprobante: string;
+    estado_pago: string,
+    id_sucursal: string,
+    detalla_factura_gasto: {
+        id_servicio: number,
+        concepto: string
+    }[]
 }
 
 export interface complemento_compra{
@@ -92,22 +114,27 @@ export interface producto_insumo{
     cantidad: string;
 }
 
-export interface producto_venta{
+export interface producto_venta {
     id_producto: string;
-    nombre: string;
     codigo: string;
+    tipo_egreso: string;
+    tipo_producto: string;
+    perecedero: boolean;
+    nombre: string;
     area: string;
     receta: boolean;
     talla: string;
-    precio: string;
     unidad_medida: string;
-    tipo_egreso: string;
-    tipo_producto: string;
-    perecedero: string;
-    productos_receta: string[];
-    cantidad: number[];
-    created_at: string;
-    updated_at: string;
+    precio: number;
+    productos_receta: {
+      insumos_id_producto: number;
+      cantidad: number;
+    }[];
+}
+
+export interface producto_receta {
+    insumos_id_producto: number;
+    cantidad: number;
 }
 
 export interface frontdesk{
@@ -154,21 +181,6 @@ export interface corteParcial{
     referencias: string;
 }
 
-export interface gastos{
-    folio_gasto: string,
-    cfdi: string,
-    subtotal: string,
-    iva: string,
-    isr: string,
-    ieps: string,
-    monto_total: string,
-    metodo_pago: string,
-    fecha_factura: string,
-    estado_pago: string,
-    id_sucursal: string,
-    detalla_factura_gasto: []
-}
-
 export interface servicios{
     id_servicio: string;
     nombre: string;
@@ -183,6 +195,25 @@ export interface sucursal{
     direccion: string;
     codigo_postal: string;
     telefono: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface almacen{
+    id_entrada: string;
+    id_almacen: string;
+    id_producto: string;
+    cantidad: string;
+    merma: string;
+    fecha_entrada: string;
+    fecha_caducidad: string;
+}
+
+export interface almacenes{
+    id_almacen: string;
+    id_sucursal: string;
+    nombre: string;
+    activo: string;
     created_at: string;
     updated_at: string;
 }

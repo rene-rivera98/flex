@@ -1,0 +1,10 @@
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+.tabla-venta {
+    font-size: 12px; /* Ajusta el tamaño de la fuente */
+  }
+  
+  .tabla-venta th,
+  .tabla-venta td {
+    width: 100px; /* Ajusta el ancho de las columnas */
+  }

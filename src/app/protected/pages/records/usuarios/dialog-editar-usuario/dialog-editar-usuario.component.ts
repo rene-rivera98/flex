@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { usuario } from 'src/app/protected/interfaces/interfaces';
 import { UsuarioService } from 'src/app/protected/services/usuario.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dialog-editar-usuario',
@@ -15,8 +16,8 @@ export class DialogEditarUsuarioComponent {
 
   usuarioForm!: FormGroup;
   usuario: usuario;
-
   sucursales: any[] = [];
+  private apiUrl = `${environment.baseUrl}sucursales/`;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditarUsuarioComponent>,
@@ -30,22 +31,22 @@ export class DialogEditarUsuarioComponent {
     console.log('Datos recibidos:', this.usuario); // Agregar este console.log
 
     this.usuarioForm = this.formBuilder.group({
-      nombre: [this.usuario.nombre],
-      paterno: [this.usuario.paterno],
-      materno: [this.usuario.materno],
-      email: [this.usuario.email],
-      fecha_nacimiento: [this.usuario.fecha_nacimiento],
-      departamento: [this.usuario.departamento],
-      celular: [this.usuario.celular],
-      id_sucursal: [this.usuario.id_sucursal],
-      rol: [this.usuario.rol]
+      nombre: [this.usuario.nombre, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      paterno: [this.usuario.paterno, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      materno: [this.usuario.materno, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      celular: [this.usuario.celular, [Validators.required, Validators.pattern('[0-9]{10}')]],
+      email: [this.usuario.email, [Validators.required, Validators.email, Validators.pattern('[^@]+@[^@]+\.[a-zA-Z]{2,6}')]],
+      fecha_nacimiento: [this.usuario.fecha_nacimiento, Validators.required],
+      departamento: [this.usuario.departamento, Validators.required],
+      id_sucursal: [this.usuario.id_sucursal, Validators.required],
+      rol: [this.usuario.rol, Validators.required]
     });
 
     this.fetchSucursales();
   }
 
   fetchSucursales() {
-    this.http.get<any>('http://localhost/api/sucursales/').subscribe(
+    this.http.get<any>(this.apiUrl).subscribe(
       (response: any) => {
         if (Array.isArray(response.query)) {
           this.sucursales = response.query.map((sucursal: { id_sucursal: any; nombre: any; }) => ({ id_sucursal: sucursal.id_sucursal, nombre: sucursal.nombre }));
@@ -75,7 +76,7 @@ export class DialogEditarUsuarioComponent {
             verticalPosition: 'top',
             horizontalPosition: 'end'
           });
-          this.dialogRef.close();
+          this.dialogRef.close('registroExitoso');
           this.usuarioService.notifyUsuarioUpdated(usuarioActualizado);
         },
         (error: any) => {

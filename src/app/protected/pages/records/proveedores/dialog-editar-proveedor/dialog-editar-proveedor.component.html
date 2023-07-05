@@ -1,15 +1,14 @@
-<!-- TITULO DIALOG -->
-<h1 mat-dialog-title>
-  <div class="text-center">
-    <h1>Datos a modificar de proveedor</h1>
+<h1 mat-dialog-title class="d-flex align-items-center">
+  <div class="flex-grow-1 text-center">
+    <h1>DATOS DE PROVEEDOR A MODIFICAR</h1>
   </div>
+    <i class="bi bi-x-square" (click)="dialogRef.close()" type="button"></i>
 </h1>
-<!-- FIN TITULO DIALOG -->
 
 <!-- INICIO CONTENIDO DIALOG -->
 <div mat-dialog-content class="custom-dialog">
 
-  <form autocomplete="off" [formGroup]="proveedorForm" (ngSubmit)=" actualizarProveedor()">
+  <form autocomplete="off" [formGroup]="proveedorForm" (ngSubmit)="actualizarProveedor()">
 
     <!-- FILA DE INPUT RFC, NOMBRE Y CP -->
       <div class="row mt-1 row col-13 mx-auto">
@@ -91,25 +90,27 @@
 
     <!-- FILA DE INPUT BANCO, CLAVE Y CUENTA -->
     <div class="row mt-3 col-13 mx-auto">
+  
+      <!-- INPUT CUENTA -->
+      <div class="col">
+        <div class="form-floating mb-3 col-13 mx-auto">
+          <input class="form-control" id="inputCuentaB" type="text" 
+                formControlName="cuenta_bancaria" placeholder="Cuenta bancaria" 
+                (keyup)="onCuentaBancariaInput()">
 
+          <label for="inputCuentaB">Cuenta bancaria</label>
+        </div>
+      </div>
+      <!-- FIN INPUT -->
+      
       <!-- INPUT BANCO-->
       <div class="col">
         <div class="form-floating mb-3 col-13 mx-auto">
           <input class="form-control" id="inputNombreBanco" type="text" 
-              formControlName="banco" [readonly]="true" />
+              formControlName="banco"
+              [readonly]="true"/>
 
           <label for="inputNombreBanco">Nombre del banco</label>
-        </div>
-      </div>
-      <!-- FIN INPUT -->
-
-      <!-- INPUT CLAVE -->
-      <div class="col">
-        <div class="form-floating mb-3 col-13 mx-auto">
-          <input class="form-control" id="inputClaveB" type="text" 
-              formControlName="clave_interbancaria" placeholder="Clave interbancaria" />
-
-          <label for="inputClaveB">Clave interbancaria</label>
         </div>
       </div>
       <!-- FIN INPUT -->
@@ -119,14 +120,14 @@
 
     <!-- FILA INPUT CUENTA BANCARIA, CONSTANCIA -->
     <div class="row mt-3 col-13 mx-auto">
-      <!-- INPUT CUENTA -->
+ 
+      <!-- INPUT CLAVE -->
       <div class="col">
         <div class="form-floating mb-3 col-13 mx-auto">
-          <input class="form-control" id="inputCuentaB" type="text" 
-              formControlName="cuenta_bancaria" placeholder="Cuenta bancaria" 
-              (keyup)="onCuentaBancariaInput()"/>
+          <input class="form-control" id="inputClaveB" type="text" 
+              formControlName="clave_interbancaria" placeholder="Clave interbancaria" />
 
-          <label for="inputCuentaB">Cuenta bancaria</label>
+          <label for="inputClaveB">Clave interbancaria</label>
         </div>
       </div>
       <!-- FIN INPUT -->
@@ -153,11 +154,7 @@
 <div mat-dialog-actions class="mt-auto d-flex justify-content-center">
 
   <button class="btn btn-warning mx-2" type="submit" (click)=" actualizarProveedor()">
-      Registrar
-  </button>
-
-  <button type="button" class="btn btn-danger mx-2" (click)="dialogRef.close()">
-      Cerrar
+      Guardar cambios
   </button>
 
 </div>

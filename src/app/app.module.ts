@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomMatPaginatorIntl } from './protected/shared/paginator';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { CustomMatPaginatorIntl } from './protected/shared/paginator';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule
   ],
   providers: [
     {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}

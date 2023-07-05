@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { DialogVentaComponent } from './dialog-venta/dialog-venta.component';
 import { DialogEditarVentaComponent } from './dialog-editar-venta/dialog-editar-venta.component';
+import { DialogBorrarVentaComponent } from './dialog-borrar-venta/dialog-borrar-venta.component';
 
 @Component({
   selector: 'app-venta',
@@ -56,15 +57,30 @@ export class VentaComponent implements AfterViewInit, OnDestroy {
 
   editDialog(element: any): void {
     const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
-    dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '670px'; // Asignar ancho al dialog
-    dialogConfig.height = '420px'; // Asignar ancho al dialog
     const dialogRefEd = this.dialog.open(DialogEditarVentaComponent, {
-      data: element
+      data: element,
+      disableClose: true,
+      width: '870px',
+      height: '720px'
     });
   }
 
-  deleteDialog(element: any) {}
+  openDeleteConfirmationDialog(element: any): void {
+    if (element.id_producto) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '650px';
+      dialogConfig.height = '180px';
+      dialogConfig.data = { venta: { id_producto: element.id_producto } };
+      const dialogRefEd = this.dialog.open(DialogBorrarVentaComponent, dialogConfig);
+    } else {
+      console.error('La fila seleccionada no tiene un ID de producto válido.');
+    }
+  }
+
+  deleteDialog(element: any): void {
+    this.openDeleteConfirmationDialog(element);
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -78,6 +94,18 @@ export class VentaComponent implements AfterViewInit, OnDestroy {
     this.getVentas();
 
     this.ventaCreatedSubscription = this.productoService.ventaCreated$.subscribe((venta) => {
+      if (venta) {
+        this.getVentas();
+      }
+    });
+
+    this.ventaUpdatedSubscription = this.productoService.ventaUpdated$.subscribe((venta) => {
+      if (venta) {
+        this.getVentas();
+      }
+    });
+
+    this.ventaDeletedSubscription = this.productoService.ventaDeleted$.subscribe((venta) => {
       if (venta) {
         this.getVentas();
       }
@@ -96,7 +124,9 @@ export class VentaComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    
+    this.ventaCreatedSubscription.unsubscribe();
+    this.ventaUpdatedSubscription.unsubscribe();
+    this.ventaDeletedSubscription.unsubscribe();
   }
 
 }

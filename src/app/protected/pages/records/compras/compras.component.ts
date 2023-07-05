@@ -1,21 +1,16 @@
 import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-
-//importacion de servicio 
-import { CompraService } from 'src/app/protected/services/compra.service';
-
-//importacion de interfaz 
-import { compra } from 'src/app/protected/interfaces/interfaces';
-
-//importacion de dialog compras
-import { DialogCompraComponent } from './dialog-compra/dialog-compra.component';
-import { DialogEditarCompraComponent } from './dialog-editar-compra/dialog-editar-compra.component';
-
-//importacion de librerias angular material
+import { Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { Subscription } from 'rxjs';
+
+import { CompraService } from 'src/app/protected/services/compra.service';
+import { compra, sucursal, proveedores } from 'src/app/protected/interfaces/interfaces';
+import { DialogCompraComponent } from './dialog-compra/dialog-compra.component';
+import { DialogEditarCompraComponent } from './dialog-editar-compra/dialog-editar-compra.component';
+import { SucursalService } from 'src/app/protected/services/sucursal.service';
+import { ProveedorService } from 'src/app/protected/services/proveedor.service';
 
 @Component({
   selector: 'app-compras',
@@ -29,12 +24,12 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'folio',
-    'id_proveedor',
-    'monto_total',
+    'folio_compra',
+    'nombreProveedor',
     'metodo_pago',
+    'monto_total',
     'fecha_factura',
-    'id_sucursal',
+    'nombreSucursal',
     'created_at',
     'updated_at',
     'opciones',
@@ -48,6 +43,8 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
 
   constructor(
     private compraService: CompraService,
+    private sucursalService: SucursalService,
+    private proveedorService : ProveedorService,
     public dialog: MatDialog) {}
 
   createDialog(): void {
@@ -75,25 +72,44 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.getCompras();
-
-    this.compraCreatedSubscription = this.compraService.compraCreated$.subscribe((compra) => {
-      if (compra) {
-        this.getCompras();
-      }
+    this.compraCreatedSubscription = this.compraService.compraCreated$.subscribe(() => {
+      this.getCompras();
     });
   }
 
   getCompras() {
-    this.compraService.getCompras().subscribe(
-      (data: any[]) => {
-        this.dataSource.data = data;
+    this.sucursalService.getSucursales().subscribe(
+      (sucursales: sucursal[]) => {
+        const sucursalesMap = new Map<string, string>(sucursales.map(sucursal => [sucursal.id_sucursal, sucursal.nombre]));
+  
+        this.proveedorService.getProveedores().subscribe(
+          (proveedores: proveedores[]) => {
+            const proveedoresMap = new Map<string, string>(proveedores.map(proveedor => [proveedor.id_proveedor, proveedor.nombre]));
+  
+            this.compraService.getCompras().subscribe(
+              (compras: compra[]) => {
+                this.dataSource.data = compras.map(compra => ({
+                  ...compra,
+                  nombreSucursal: sucursalesMap.get(compra.id_sucursal) || '',
+                  nombreProveedor: proveedoresMap.get(compra.id_proveedor) || ''
+                }));
+              },
+              error => {
+                console.error('Error al obtener las compras:', error);
+              }
+            );
+          },
+          error => {
+            console.error('Error al obtener los proveedores:', error);
+          }
+        );
       },
-      (error) => {
-        console.error('Error al obtener las compras:', error);
+      error => {
+        console.error('Error al obtener las sucursales:', error);
       }
     );
   }
+  
 
   ngOnDestroy(): void {
     

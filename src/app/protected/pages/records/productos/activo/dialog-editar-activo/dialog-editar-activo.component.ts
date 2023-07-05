@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { productos_activo } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from 'src/app/protected/services/producto.service';
 
 @Component({
@@ -27,10 +27,10 @@ export class DialogEditarActivoComponent {
     console.log('Datos recibidos:', this.activo);
 
     this.activoForm = this.formBuilder.group({
-      codigo: [this.activo.codigo],
-      nombre: [this.activo.nombre],
+      codigo: [this.activo.codigo,[Validators.required]],
+      nombre: [this.activo.nombre, [Validators.required]],
       perecedero: [this.activo.perecedero],
-      tipo_egreso: [this.activo.tipo_egreso]
+      tipo_egreso: [this.activo.tipo_egreso, [Validators.required]]
     })
   }
 

@@ -1,11 +1,8 @@
-<h1 mat-dialog-title>
-
-  <div class="text-center">
-
-    <h1>Datos de producto a modificar</h1>
-
+<h1 mat-dialog-title class="d-flex align-items-center">
+  <div class="flex-grow-1 text-center">
+    <h1>DATOS DE PRODUCTO: INSUMO A MODIFICAR</h1>
   </div>
-
+    <i class="bi bi-x-square" (click)="dialogRef.close()" type="button"></i>
 </h1>
 
 <div mat-dialog-content class="custom-dialog">
@@ -33,19 +30,6 @@
 
           <div class="col">
 
-            <div class="form-floating mb-3">
-
-              <input class="form-control" id="nombre" type="text"
-                  formControlName="codigo" placeholder="Código"/>
-
-              <label for="codigo">Código</label>
-
-            </div>
-
-          </div>
-
-          <div class="col">
-
               <div class="form-floating mb-3">
   
                 <input class="form-control" id="nombre" type="text"
@@ -61,20 +45,20 @@
 
       <div class="row col-13 mx-auto">
 
-          <div class="col">
+        <div class="col">
 
-              <div class="form-floating mb-3">
-  
-                <input class="form-control" id="cantidad" type="number"
-                    formControlName="cantidad" placeholder="Cantidad"/>
-  
-                <label for="cantidad">Cantidad</label>
-  
-              </div>
-  
+          <div class="form-floating mb-3">
+
+            <input class="form-control" id="nombre" type="text"
+                formControlName="codigo" placeholder="Código"/>
+
+            <label for="codigo">Código</label>
+
           </div>
 
-          <div class="col">
+        </div>
+
+        <div class="col">
 
               <div class="form-floating mb-3">
   
@@ -94,7 +78,7 @@
    
               </div>
   
-          </div>
+        </div>
 
       </div>
 
@@ -133,12 +117,8 @@
 
 <div mat-dialog-actions class="mt-auto d-flex justify-content-center">
 
-  <button class="btn btn-warning mx-2" type="submit" (click)="actualizarProducto()">
-      Registrar
-  </button>
-
-  <button type="button" class="btn btn-danger mx-2" (click)="dialogRef.close()">
-      Cerrar
+  <button class="btn btn-warning mx-2" type="submit" (click)="actualizarProducto()" [disabled]="insumoForm.invalid">
+      Guardar cambios
   </button>
 
 </div>

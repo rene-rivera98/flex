@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CompraService } from 'src/app/protected/services/compra.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,14 +16,17 @@ export class DialogCompraComponent implements OnInit {
 
   compraForm!: FormGroup;
   mostrarFechaRecepcion = false;
+  mostrarFechaRecibido = false;
 
   productos: any[] = [];
   proveedores: any[] = [];
   sucursales: any[] = [];
   // cantidades: number[] = [];
-
+  i!: number;
   idProductos: string[] = [];
   listaProductos: any[] = [];
+  cantidades: number[] = []; 
+  idProductoToNombre: { [key: string]: string } = {};
 
   constructor(
     private comprasService: CompraService, 
@@ -35,23 +38,23 @@ export class DialogCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.compraForm = this.formBuilder.group({
-      id_proveedor: [],
-      productos: [],
-      folio_compra: [],
-      cfdi: [''],
-      fecha_factura: [],
-      subtotal: ['', [Validators.pattern(/^\d+$/)]],
+      id_proveedor: ['', [Validators.required]],
+      folio_compra: ['', [Validators.required]],
+      cfdi: ['', [Validators.required]],
+      fecha_factura: ['', [Validators.required]],
+      subtotal: ['', [Validators.required]],
       iva: [0],
       isr: [0],
       ieps: [0],
-      monto_total: [],
-      metodo_pago: [],
-      estado_pago: [],
-      fecha_pago: [],
-      forma_pago: [],
-      id_sucursal: [],
-      fecha_recepcion: [''],
-      monto_pago: []
+      monto_total: ['', [Validators.required]],
+      metodo_pago: ['', [Validators.required]],
+      estado_pago: ['Pendiente', [Validators.required]],
+      id_sucursal: ['', [Validators.required]],
+      fecha_recepcion: [false],
+      detalla_factura_compra: this.formBuilder.array([]),
+      productos: [],
+      cantidad: [],
+      fecha_comprobante: [false]
     });
 
     this.obtenerProveedores();
@@ -60,22 +63,42 @@ export class DialogCompraComponent implements OnInit {
   }
 
   agregarProducto() {
-    const idProducto = this.compraForm.value.productos;
-    // const cantidad = this.compraForm.value.cantidad;
+    const productoSeleccionado = this.compraForm.value.productos;
+    const cantidad = this.compraForm.value.cantidad;
   
-    this.idProductos.push(idProducto);
-    // this.cantidades.push(cantidad);
+    // Verifica si se seleccionó un insumo y la cantidad es válida
+    if (productoSeleccionado && cantidad) {
+      const nuevoProducto = {
+        id_producto: productoSeleccionado,
+        cantidad: cantidad
+      };
   
-    console.log('ID Productos:', this.idProductos);
-    // console.log('Cantidades:', this.cantidades);
+      // Agrega el nuevo insumo al array de productos de receta
+      const productosCompra = this.compraForm.get('detalla_factura_compra') as FormArray;
+      productosCompra.push(this.formBuilder.group(nuevoProducto));
+  
+      // Imprime el array de productos de receta
+      console.log('Array de productos de compra:', productosCompra.value);
+  
+      // Limpia los campos de selección de insumo y cantidad
+      this.compraForm.patchValue({
+        productos: null,
+        cantidad: null,
+        fecha_recepcion: null,
+        fecha_comprobante: null
+      });
+    }
   }
 
-  quitarProducto() {
-    this.idProductos.pop();
-    // this.cantidades.pop();
+  quitarProducto(index: number) {
+    const productosCompra = this.compraForm.get('detalla_factura_compra') as FormArray;
+    productosCompra.removeAt(index);
   
-    console.log('ID Productos:', this.idProductos);
-    // console.log('Cantidades:', this.cantidades);
+    // Elimina el producto y la cantidad de los arreglos correspondientes
+    this.idProductos.splice(index, 1);
+    this.cantidades.splice(index, 1);
+
+    console.log('Array de productos de compra:', productosCompra.value);
   }
 
   obtenerNombreProducto(id: string): string {
@@ -117,6 +140,15 @@ export class DialogCompraComponent implements OnInit {
   
         this.productos = [...productosVenta, ...productosInsumo, ...productosActivo];
         this.listaProductos = [...productosVenta, ...productosInsumo, ...productosActivo]; // Agrega esta línea para inicializar la lista de productos
+  
+        // Crea un objeto de mapeo de id_producto a nombre
+        const idProductoToNombre: { [key: string]: string } = {};
+        for (const producto of this.listaProductos) {
+          idProductoToNombre[producto.id_producto] = producto.nombre;
+        }
+  
+        // Asigna el objeto de mapeo a una propiedad del componente
+        this.idProductoToNombre = idProductoToNombre;
       },
       (error: any) => {
         console.error('Error al obtener los productos:', error);
@@ -149,10 +181,17 @@ export class DialogCompraComponent implements OnInit {
     this.mostrarFechaRecepcion = valorRecepcion === 'Recibido';
   }
 
+  onRecibidoChange(){
+    const selectRecibido = document.getElementById("status_comprobante") as HTMLSelectElement;
+    const valorRecibido = selectRecibido.value;
+    this.mostrarFechaRecibido = valorRecibido === 'Recibido';
+  }
+
   onSubmit() {
     console.log('Submit button clicked');
     if (this.compraForm.valid) {
       const nuevaCompra: compra = {
+        id_compra: '',
         folio_compra: this.compraForm.value.folio_compra,
         cfdi: this.compraForm.value.cfdi,
         fecha_factura: this.compraForm.value.fecha_factura,
@@ -165,16 +204,15 @@ export class DialogCompraComponent implements OnInit {
         monto_total: this.compraForm.value.monto_total,
         metodo_pago: this.compraForm.value.metodo_pago,
         fecha_recepcion: this.compraForm.value.fecha_recepcion,
-        estado_pago: this.compraForm.value.estado_pago,
-        detalla_factura_compra: this.idProductos,
-        id_compra: '',
-        created_at: '', // Reemplaza 'valor' con el valor correcto para created_at
-        updated_at: '', // Reemplaza 'valor' con el valor correcto para updated_atts
+        estado_pago: 'Pendiente',
+        detalla_factura_compra: this.compraForm.value.detalla_factura_compra,
+        fecha_comprobante: this.compraForm.value.fecha_comprobante
       };
+
+      console.log('Nueva compra:', nuevaCompra);
 
       this.comprasService.createCompra(nuevaCompra).subscribe(
         (response) => {
-          // Producto creado con éxito
           console.log(response);
 
           this.snackBar.open('Compra registrada correctamente', '', {
@@ -185,12 +223,9 @@ export class DialogCompraComponent implements OnInit {
           });
 
           this.dialogRef.close();
-  
-          // Notificar a SucursalesComponent que se ha creado un nuevo producto
           this.comprasService.notifyCompraCreated(nuevaCompra);
         },
         (error) => {
-          // Error al crear el producto
           console.error(error);
           this.snackBar.open('Error al registrar la compra', '', {
             duration: 5000,

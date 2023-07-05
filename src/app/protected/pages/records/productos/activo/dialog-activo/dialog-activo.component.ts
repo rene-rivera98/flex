@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/protected/services/producto.service';
 import { productos_activo } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -23,11 +23,11 @@ export class DialogActivoComponent implements OnInit {
 
   ngOnInit(): void {
     this.activoForm = this.formBuilder.group({
-      codigo: [],
-      nombre: [],
-      perecedero: [false],
-      tipo_egreso: [],
-      tipo_producto: []
+      codigo: ['', [Validators.required]],
+      nombre: ['', [Validators.required]],
+      perecedero: [false, [Validators.required]],
+      tipo_egreso: ['', [Validators.required]],
+      tipo_producto: ['']
     })
   }
 

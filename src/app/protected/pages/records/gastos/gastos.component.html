@@ -9,7 +9,7 @@
           <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
               <!-- BOTON CREAR -->
               <div>
-                <button type="button" class="btn btn-warning" (click)="createDialog()">Registrar nueva compra</button>
+                <button type="button" class="btn btn-warning" (click)="createDialog()">Registrar nuevo gasto</button>
               </div>
               <!-- FIN BOTON -->
             
@@ -34,12 +34,6 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de factura </th>
                 <td mat-cell *matCellDef="let element"> {{element.fecha_factura}} </td>
               </ng-container>
-            
-              <!--  -->
-              <ng-container matColumnDef="total">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-                <td mat-cell *matCellDef="let element"> {{element.total}} </td>
-              </ng-container>
 
               <!--  -->
               <ng-container matColumnDef="metodo_pago">
@@ -48,25 +42,31 @@
               </ng-container>
 
               <!--  -->
-              <ng-container matColumnDef="sucursal">
+              <ng-container matColumnDef="monto_total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total de factura </th>
+                <td mat-cell *matCellDef="let element"> {{element.monto_total}} </td>
+              </ng-container>
+
+              <!--  -->
+              <ng-container matColumnDef="nombreSucursal">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-                <td mat-cell *matCellDef="let element"> {{element.sucursal}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.nombreSucursal}} </td>
               </ng-container>
 
               <!--  -->
               <ng-container matColumnDef="created_at">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alta </th>
-                <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de creación </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'dd/MM/yyyy - HH:mm:ss'}} </td>
               </ng-container>
 
               <!--  -->
               <ng-container matColumnDef="updated_at">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificación </th>
-                <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de actualización </th>
+                <td mat-cell *matCellDef="let element"> {{element.updated_at | date: 'dd/MM/yyyy - HH:mm:ss'}} </td>
               </ng-container>
 
               <ng-container matColumnDef="opciones">
-                <th mat-header-cell *matHeaderCellDef> Editar /  Estado </th>
+                <th mat-header-cell *matHeaderCellDef> Editar </th>
                 <td mat-cell *matCellDef="let element" class="btn-options">
     
                   <button *ngIf="element" type="button" class="btn btn-warning btn-mr" (click)="editDialog(element)">

@@ -47,17 +47,17 @@ export class ActivoComponent implements AfterViewInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.width = '670px';
-    dialogConfig.height = '420px';
+    dialogConfig.height = '380px';
     const dialogRef = this.dialog.open(DialogActivoComponent, dialogConfig);
   }
 
   editDialog(element: any): void {
     const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
-    dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '670px'; // Asignar ancho al dialog
-    dialogConfig.height = '420px'; // Asignar ancho al dialog
     const dialogRefEd = this.dialog.open(DialogEditarActivoComponent, {
-      data: element
+      data: element,
+      width: '670px',
+      height: '380px',
+      disableClose: true
     });
   }
 

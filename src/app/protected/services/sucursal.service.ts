@@ -58,7 +58,7 @@ export class SucursalService {
   }
 
   deletedSucursal(idSucursal: string): Observable<any> {
-    const url = `${this.baseUrl}sucursales/${idSucursal}`;
+    const url = `${this.baseUrl}sucursales/desactivar/${idSucursal}`;
     return this.http.delete(url).pipe(
       tap((data: any) => {
         console.log('Respuesta del DELETE:', data);

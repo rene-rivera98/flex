@@ -1,6 +1,5 @@
 import { Component,  ViewChild,  AfterViewInit, OnDestroy } from '@angular/core';
 
-
 //importacion de interfaz 
 import { proveedores } from 'src/app/protected/interfaces/interfaces';
 import { ProveedorService } from 'src/app/protected/services/proveedor.service';

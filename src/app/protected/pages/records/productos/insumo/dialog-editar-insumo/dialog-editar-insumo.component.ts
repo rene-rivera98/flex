@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { producto_insumo } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from 'src/app/protected/services/producto.service';
 
 @Component({
@@ -26,12 +26,11 @@ export class DialogEditarInsumoComponent {
       console.log('Datos recibidos:', this.insumo);
 
       this.insumoForm = this.formBuilder.group({
-        codigo: [this.insumo.codigo],
-        nombre: [this.insumo.nombre],
-        cantidad: [this.insumo.cantidad],
-        unidad_medida: [this.insumo.unidad_medida],
+        codigo: [this.insumo.codigo, [Validators.required]],
+        nombre: [this.insumo.nombre, [Validators.required]],
+        unidad_medida: [this.insumo.unidad_medida, [Validators.required]],
         perecedero: [this.insumo.perecedero],
-        tipo_egreso: [this.insumo.tipo_egreso],
+        tipo_egreso: [this.insumo.tipo_egreso, [Validators.required]],
         tipo_producto: [this.insumo.tipo_producto]
       });
     }

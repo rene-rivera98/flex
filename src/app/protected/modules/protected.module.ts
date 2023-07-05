@@ -23,7 +23,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 //rutas
 import { ProtectedRoutingModule } from './protected-routing.module';
 
@@ -41,6 +42,10 @@ import { InsumoComponent } from '../pages/records/productos/insumo/insumo.compon
 import { VentaComponent } from '../pages/records/productos/venta/venta.component';
 import { ActivoComponent } from '../pages/records/productos/activo/activo.component';
 import { GastosComponent } from '../pages/records/gastos/gastos.component';
+import { EntradasComponent } from '../pages/records/almacen/entradas/entradas.component';
+import { SalidasComponent } from '../pages/records/almacen/salidas/salidas.component';
+import { AlmacenesComponent } from '../pages/records/almacenes/almacenes.component';
+import { InventarioComponent } from '../pages/records/almacen/inventario/inventario.component';
 import { Admin_masterLayoutComponent } from '../components/admin_master-layout/admin_master-layout.component';
 
 //dialog componentes records
@@ -80,6 +85,7 @@ import { DialogVentaComponent } from '../pages/records/productos/venta/dialog-ve
 import { DialogEditarVentaComponent } from '../pages/records/productos/venta/dialog-editar-venta/dialog-editar-venta.component';
 import { DialogBorrarVentaComponent } from '../pages/records/productos/venta/dialog-borrar-venta/dialog-borrar-venta.component';
 
+import { DialogAlmacenesComponent } from '../pages/records/almacenes/dialog-almacenes/dialog-almacenes.component';
 
 
 @NgModule({
@@ -108,7 +114,7 @@ import { DialogBorrarVentaComponent } from '../pages/records/productos/venta/dia
     MatSnackBarModule,
     MatSelectModule,
     MatOptionModule,
-    MatAutocompleteModule
+    MatSlideToggleModule
   ],
   declarations: [
     UsuariosComponent, DialogUsuarioComponent, DialogEditarUsuarioComponent, DialogCredUsuarioComponent, DialogBorrarUsuarioComponent,
@@ -122,7 +128,11 @@ import { DialogBorrarVentaComponent } from '../pages/records/productos/venta/dia
     InsumoComponent, DialogInsumoComponent, DialogEditarInsumoComponent, DialogBorrarInsumoComponent,
     VentaComponent, DialogVentaComponent, DialogEditarVentaComponent, DialogBorrarVentaComponent,
     ActivoComponent, DialogActivoComponent, DialogEditarActivoComponent, DialogBorrarActivoComponent,
-    Admin_masterLayoutComponent
+    Admin_masterLayoutComponent,
+    EntradasComponent,
+    SalidasComponent,
+    AlmacenesComponent, DialogAlmacenesComponent,
+    InventarioComponent
   ]
 })
 export class ProtectedModule { }

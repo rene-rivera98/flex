@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/protected/services/producto.service';
 import { producto_venta } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,10 +15,11 @@ export class DialogVentaComponent implements OnInit {
 
   ventaForm!: FormGroup;
   insumos: any[] = []; // Array para almacenar los insumos seleccionados
-  idProductos: string[] = [];
-  cantidades: number[] = [];
   listaProductos: any[] = [];
-
+  i!: number;
+  idProductos: any[] = []; // Agrega esta línea
+  cantidades: number[] = []; // Agrega esta línea
+  idProductoToNombre: { [key: string]: string } = {};
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DialogVentaComponent>,
@@ -29,47 +30,76 @@ export class DialogVentaComponent implements OnInit {
 
   ngOnInit() {
     this.ventaForm = this.formBuilder.group({
-      codigo: [],
-      nombre: [],
-      cantidad: [],
-      area:[],
+      codigo: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+      tipo_egreso: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+      area:['', [Validators.required]],
       talla: [''],
-      precio: [],
-      receta: [false],
       unidad_medida: [''],
+      precio: ['0.00', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]],
+      receta: [false],
       perecedero: [false],
-      tipo_egreso: [],
-      insumos: []
+      productos_receta: this.formBuilder.array([]), // Define productos_receta como un FormArray vacío
+      insumos: [],
+      cantidad: []
     });
 
     this.obtenerInsumos();
   }
 
-  agregarProducto() {
-    const idProducto = this.ventaForm.value.insumos;
+  agregarInsumo() {
+    const insumoSeleccionado = this.ventaForm.value.insumos;
     const cantidad = this.ventaForm.value.cantidad;
   
-    this.idProductos.push(idProducto);
-    this.cantidades.push(cantidad);
+    // Verifica si se seleccionó un insumo y la cantidad es válida
+    if (insumoSeleccionado && cantidad) {
+      const nuevoInsumo = {
+        insumos_id_producto: insumoSeleccionado,
+        cantidad: cantidad
+      };
   
-    console.log('ID Productos:', this.idProductos);
-    console.log('Cantidades:', this.cantidades);
-  }
-
-  quitarProducto() {
-    this.idProductos.pop();
-    this.cantidades.pop();
+      // Agrega el nuevo insumo al array de productos de receta
+      const productosReceta = this.ventaForm.get('productos_receta') as FormArray;
+      productosReceta.push(this.formBuilder.group(nuevoInsumo));
   
-    console.log('ID Productos:', this.idProductos);
-    console.log('Cantidades:', this.cantidades);
+      // Imprime el array de productos de receta
+      console.log('Array de productos de receta:', productosReceta.value);
+  
+      // Limpia los campos de selección de insumo y cantidad
+      this.ventaForm.patchValue({
+        insumos: null,
+        cantidad: null
+      });
+    }
   }
+   
+  quitarInsumo(index: number) {
+    const productosReceta = this.ventaForm.get('productos_receta') as FormArray;
+    productosReceta.removeAt(index);
+  
+    // Elimina el producto y la cantidad de los arreglos correspondientes
+    this.idProductos.splice(index, 1);
+    this.cantidades.splice(index, 1);
 
+    console.log('Array de productos de receta:', productosReceta.value);
+  }
+  
   obtenerInsumos() {
     this.http.get<any>('http://localhost/api/producto/insumo').subscribe(
       (response: any) => {
         if (Array.isArray(response.query)) {
           this.insumos = response.query.map((insumo: { id_producto: any; nombre: any; }) => ({ id_producto: insumo.id_producto, nombre: insumo.nombre }));
           this.listaProductos = response.query; // Guarda la lista completa de productos
+  
+          // Crea un objeto de mapeo de id_producto a nombre
+          const idProductoToNombre: { [key: string]: string } = {};
+          for (const insumo of response.query) {
+            idProductoToNombre[insumo.id_producto] = insumo.nombre;
+          }
+  
+          // Asigna el objeto de mapeo a una propiedad del componente
+          this.idProductoToNombre = idProductoToNombre;
+  
           console.log(response.query);
         } else {
           console.error('La respuesta del API no contiene un arreglo de insumos:', response);
@@ -80,12 +110,8 @@ export class DialogVentaComponent implements OnInit {
       }
     );
   }
+  
 
-  obtenerNombreProducto(id: string): string {
-    const producto = this.listaProductos.find((p) => p.id_producto.toString() === id);
-    console.log(producto);
-    return producto ? producto.nombre : '';
-  }
 
   closeDialog() {
     this.dialogRef.close();
@@ -95,6 +121,7 @@ export class DialogVentaComponent implements OnInit {
     console.log('Submit button clicked');
     if (this.ventaForm.valid) {
       const nuevoProducto: producto_venta = {
+        id_producto: '',
         codigo: this.ventaForm.value.codigo,
         tipo_egreso: this.ventaForm.value.tipo_egreso,
         tipo_producto: 'Venta',
@@ -105,39 +132,31 @@ export class DialogVentaComponent implements OnInit {
         talla: this.ventaForm.value.talla,
         unidad_medida: this.ventaForm.value.unidad_medida,
         precio: this.ventaForm.value.precio,
-        productos_receta: this.idProductos,
-        cantidad: this.cantidades,
-        id_producto: '', // Reemplaza 'valor' con el valor correcto para id_producto
-        created_at: '', // Reemplaza 'valor' con el valor correcto para created_at
-        updated_at: '' // Reemplaza 'valor' con el valor correcto para updated_atts
+        productos_receta: this.ventaForm.value.productos_receta // Asigna el valor del array productos_receta al campo correspondiente
       };
-
-      this.ventaService.createVenta(nuevoProducto).subscribe(
-        (response) => {
-          // Producto creado con éxito
-          console.log(response);
-
-          this.snackBar.open('Producto registrado correctamente', '', {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'end',
-            panelClass: ['mat-snack-bar-success']
-          });
-
-          this.dialogRef.close();
   
-          // Notificar a SucursalesComponent que se ha creado un nuevo producto
-          this.ventaService.notifyVentaCreated(nuevoProducto);
+      console.log('Nuevo Producto:', nuevoProducto);
+  
+      // Envía el nuevo producto al servicio
+      this.ventaService.createVenta(nuevoProducto).subscribe(
+        (response: any) => {
+          console.log('Producto agregado:', response);
+          this.snackBar.open('Producto agregado correctamente', 'Aceptar', {
+            duration: 2000,
+          });
+          this.dialogRef.close();
+          this.ventaService.notifyVentaCreated(nuevoProducto); // Notifica que la sucursal ha sido eliminada
+
         },
-        (error) => {
-          // Error al crear el producto
-          console.error(error);
-          this.snackBar.open('Error al registrar el producto', 'Cerrar', {
-            duration: 5000,
+        (error: any) => {
+          console.error('Error al agregar el producto:', error);
+          this.snackBar.open('Error al agregar el producto', 'Aceptar', {
+            duration: 2000,
           });
         }
       );
     }
   }
+  
 
 }

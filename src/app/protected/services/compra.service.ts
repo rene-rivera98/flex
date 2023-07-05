@@ -22,7 +22,7 @@ export class CompraService {
   getCompras(): Observable<any> {
     const url = `${this.baseUrl}compras/`;
     return this.http.get(url).pipe(
-      map((response: any) => response),
+      map((response: any) => response.query),
       tap((data: any[]) => {
         console.log('Datos de compras:', data);
       }),
@@ -33,9 +33,9 @@ export class CompraService {
     );
   }
 
-  createCompra(activo: compra): Observable<any> {
+  createCompra(compra: compra): Observable<any> {
     const url = `${environment.baseUrl}compras/`;
-    return this.http.post(url, activo);
+    return this.http.post(url, compra);
   }
 
   //metodos de notificacion para actualizar tabla

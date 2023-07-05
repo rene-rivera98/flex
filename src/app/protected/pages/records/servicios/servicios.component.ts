@@ -63,12 +63,11 @@ export class ServiciosComponent {
   //metodo para abrir el dialog editar servicio
   editDialog(element: any): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.width = '550px';
-    dialogConfig.height = '350px';
-
     const dialogRefEd = this.dialog.open(DialogEditarServicioComponent, {
-      data: element
+      data: element,
+      width: '550px',
+      height: '350px',
+      disableClose: true
     });
   }
 

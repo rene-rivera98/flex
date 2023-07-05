@@ -25,7 +25,7 @@ export class DialogServiciosComponent implements OnInit {
       this.servicioForm = this.formBuilder.group({
         nombre: [],
         tipo_egreso: []
-      })
+      });
   }
 
   onSubmit() {
