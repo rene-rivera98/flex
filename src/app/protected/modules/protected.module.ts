@@ -42,10 +42,10 @@ import { InsumoComponent } from '../pages/records/productos/insumo/insumo.compon
 import { VentaComponent } from '../pages/records/productos/venta/venta.component';
 import { ActivoComponent } from '../pages/records/productos/activo/activo.component';
 import { GastosComponent } from '../pages/records/gastos/gastos.component';
-import { EntradasComponent } from '../pages/records/almacen/entradas/entradas.component';
-import { SalidasComponent } from '../pages/records/almacen/salidas/salidas.component';
 import { AlmacenesComponent } from '../pages/records/almacenes/almacenes.component';
-import { InventarioComponent } from '../pages/records/almacen/inventario/inventario.component';
+import { EntradasComponent } from '../pages/records/inventario/entradas/entradas.component';
+import { SalidasComponent } from '../pages/records/inventario/salidas/salidas.component';
+import { InventarioComponent } from '../pages/records/inventario/inventario/inventario.component';
 import { Admin_masterLayoutComponent } from '../components/admin_master-layout/admin_master-layout.component';
 
 //dialog componentes records
@@ -87,6 +87,7 @@ import { DialogBorrarVentaComponent } from '../pages/records/productos/venta/dia
 
 import { DialogAlmacenesComponent } from '../pages/records/almacenes/dialog-almacenes/dialog-almacenes.component';
 
+import { DialogEntradaComponent } from '../pages/records/inventario/entradas/dialog-entrada/dialog-entrada.component';
 
 @NgModule({
   imports: [
@@ -129,9 +130,9 @@ import { DialogAlmacenesComponent } from '../pages/records/almacenes/dialog-alma
     VentaComponent, DialogVentaComponent, DialogEditarVentaComponent, DialogBorrarVentaComponent,
     ActivoComponent, DialogActivoComponent, DialogEditarActivoComponent, DialogBorrarActivoComponent,
     Admin_masterLayoutComponent,
-    EntradasComponent,
-    SalidasComponent,
     AlmacenesComponent, DialogAlmacenesComponent,
+    EntradasComponent, DialogEntradaComponent,
+    SalidasComponent,
     InventarioComponent
   ]
 })

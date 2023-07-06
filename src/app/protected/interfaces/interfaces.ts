@@ -137,6 +137,11 @@ export interface producto_receta {
     cantidad: number;
 }
 
+export interface productos{
+    id_producto: string;
+    nombre: string;
+}
+
 export interface frontdesk{
     codigoPF: string;
     nombrePF: string;
@@ -199,10 +204,10 @@ export interface sucursal{
     updated_at: string;
 }
 
-export interface almacen{
+export interface entradas{
     id_entrada: string;
-    id_almacen: string;
     id_producto: string;
+    id_almacen: string;
     cantidad: string;
     merma: string;
     fecha_entrada: string;

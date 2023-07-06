@@ -22,7 +22,7 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./servicios.component.css']
 })
 
-export class ServiciosComponent {
+export class ServiciosComponent implements AfterViewInit, OnDestroy{
 
   //decorador y variable de paginador material 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

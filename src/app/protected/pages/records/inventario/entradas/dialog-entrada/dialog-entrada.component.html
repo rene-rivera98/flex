@@ -1,0 +1,126 @@
+<h1 mat-dialog-title class="d-flex align-items-center">
+  <div class="flex-grow-1 text-center">
+    <h1>DATOS DE NUEVA ENTRADA</h1>
+  </div>
+    <i class="bi bi-x-square" (click)="dialogRef.close()" type="button"></i>
+</h1>
+
+<div mat-dialog-content class="custom-dialog">
+
+<form autocomplete="off" [formGroup]="entradaForm" (ngSubmit)="onSubmit()">
+
+  <div class="row col-13 mx-auto mt-2">
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+
+        <select class="form-control" id="almacenes" 
+                formControlName="id_almacen">
+          <option disabled selected>Seleccione el almacén</option>
+          <option *ngFor="let almacen of almacenes" [value]="almacen.id_almacen">{{ almacen.nombre }}</option>
+        </select>
+        
+        <label for="almacenes">Almacén</label>
+
+    </div>
+
+    </div>
+
+  </div>
+
+  <div class="row col-13 mx-auto mt-2">
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+
+        <select class="form-control" id="productos" 
+                formControlName="id_producto">
+          <option disabled selected>Seleccione el producto</option>
+          <option *ngFor="let producto of productos" [value]="producto.id_producto">{{ producto.nombre }}</option>
+        </select>
+        
+        <label for="productos">Productos</label>
+
+    </div>
+
+    </div>
+
+  </div>
+
+  <div class="row col-13 mx-auto mt-2">
+
+      <div class="col">
+
+        <div class="form-floating mb-3">
+
+          <input class="form-control" id="cantidad" type="number"
+              formControlName="cantidad" placeholder="Cantidad" />
+
+          <label for="cantidad">Cantidad</label>
+
+        </div>
+
+      </div>
+
+  </div>
+  
+  <div class="row col-13 mx-auto mt-2">
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+
+        <input class="form-control" id="merma" type="number"
+            formControlName="merma" placeholder="merma" />
+
+        <label for="merma">Merma</label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row col-13 mx-auto mt-2">
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+
+        <input class="form-control" id="fecha_entrada" type="date"
+            formControlName="fecha_entrada"/>
+
+        <label for="fecha_entrada">Fecha de entrada</label>
+
+      </div>
+
+    </div>
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+
+        <input class="form-control" id="fecha_caducidad" type="date"
+            formControlName="fecha_caducidad"/>
+
+        <label for="fecha_caducidad">Fecha de caducidad</label>
+
+      </div>
+
+    </div>
+
+  </div>
+          
+</form>
+  
+</div>
+
+<div mat-dialog-actions class="mt-auto d-flex justify-content-center">
+
+<button class="btn btn-warning mx-2" type="submit" (click)="onSubmit()">
+    Registrar
+</button>
+
+</div>

@@ -40,6 +40,21 @@ export class ProductoService {
   constructor(private http: HttpClient) { }
 
   //metodos CRUD INSUMOS
+  getProductos(): Observable<any> {
+    const url = `${this.baseUrl}producto/`;
+    return this.http.get(url).pipe(
+      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      tap((data: any[]) => {
+        console.log('Datos de productos:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener los productos:', error);
+        throw error;
+      })
+    );
+  }
+
+  //metodos CRUD INSUMOS
   getInsumos(): Observable<any> {
     const url = `${this.baseUrl}producto/insumo/`;
     return this.http.get(url).pipe(
