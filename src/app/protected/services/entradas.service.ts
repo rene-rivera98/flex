@@ -18,7 +18,6 @@ export class EntradasService {
   constructor(private http: HttpClient) { }
 
   //metodos CRUD
-
   getEntradas(): Observable<any> {
     const url = `${this.baseUrl}entradas/`;
     return this.http.get(url).pipe(

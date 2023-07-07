@@ -114,23 +114,16 @@
           </mat-expansion-panel>
 
           <!-- modulo almacen --> 
-          <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(5)" [expanded]="activeIndex === 5">
-            <mat-expansion-panel-header class="my-list-item-acordeon">
-                <span class="my-text"><i class="bi bi-boxes"></i> Almacén</span>
-            </mat-expansion-panel-header>
-            <mat-nav-list class="nav-list-items">
-                <a mat-list-item routerLink="/protected/inventario" class="my-link">Inventario</a>
-                <a mat-list-item routerLink="/protected/entradas" class="my-link">Entradas</a>
-                <a mat-list-item routerLink="/protected/salidas" class="my-link">Salidas</a>
-            </mat-nav-list>
-        </mat-expansion-panel>
+          <mat-list-item routerLink="/protected/inventario" class="my-list-item">
+            <span class="my-text"><i class="bi bi-boxes"></i> Almacén</span>
+          </mat-list-item>  
               
 
           <!-- seccion transacciones -->
           <h5 class="list-group-item my-heading-top">TRANSACCIONES</h5>
 
           <!-- modulo caja -->
-          <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(6)" [expanded]="activeIndex === 6">
+          <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(5)" [expanded]="activeIndex === 5">
               <mat-expansion-panel-header class="my-list-item-acordeon">
                   <span class="my-text"><i class="bi bi-cash-coin"></i> Caja</span>
               </mat-expansion-panel-header>
@@ -148,7 +141,7 @@
           <h5 class="list-group-item my-heading-top">ANALISIS</h5>
 
           <!-- modulo reportes -->
-          <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(7)" [expanded]="activeIndex === 7">
+          <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpened(6)" [expanded]="activeIndex === 6">
               <mat-expansion-panel-header class="my-list-item-acordeon">
                   <span class="my-text"><i class="bi bi-clipboard-data-fill"></i> Reportes</span>
               </mat-expansion-panel-header>

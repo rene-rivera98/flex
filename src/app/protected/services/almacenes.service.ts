@@ -17,10 +17,10 @@ export class AlmacenesService {
   
   constructor(private http: HttpClient) { }
 
-  getAlmacenes(activo: boolean): Observable<any> {
+  getAlmacenes(activo: boolean): Observable<any[]> {
     const url = `${this.baseUrl}almacenes/?activo=${activo}`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+    return this.http.get<any[]>(url).pipe(
+      map((response: any) => response.query),
       tap((data: any[]) => {
         console.log('Datos de almacenes:', data);
       }),

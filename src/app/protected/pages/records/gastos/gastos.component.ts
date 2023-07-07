@@ -99,7 +99,7 @@ export class GastosComponent implements AfterViewInit, OnDestroy{
               console.error('Error al obtener los gastos:', error);
             }
           );
-        }
+    }
 
     ngOnDestroy(): void {
     

@@ -2,7 +2,7 @@
 
   <mat-card>
       <mat-card-header class="d-flex align-items-center">
-          <h1 class="mx-auto">ENTRADAS</h1>
+          <h1 class="mx-auto">REGISTRO DE ENTRADAS A ALMACÉN</h1>
       </mat-card-header>
 
       <mat-card-content>
@@ -24,14 +24,14 @@
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
                  matSort class="mat-elevation-z8">
 
-              <ng-container matColumnDef="id_almacen">
+              <ng-container matColumnDef="nombreAlmacen">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Almacén </th>
-                <td mat-cell *matCellDef="let element"> {{element.id_almacen}}</td>
+                <td mat-cell *matCellDef="let element"> {{element.nombreAlmacen}}</td>
               </ng-container>
             
-              <ng-container matColumnDef="id_producto">
+              <ng-container matColumnDef="nombreProducto">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
-                <td mat-cell *matCellDef="let element"> {{element.id_producto}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.nombreProducto}} </td>
               </ng-container>
             
               <ng-container matColumnDef="cantidad">

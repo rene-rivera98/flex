@@ -132,11 +132,6 @@ export interface producto_venta {
     }[];
 }
 
-export interface producto_receta {
-    insumos_id_producto: number;
-    cantidad: number;
-}
-
 export interface productos{
     id_producto: string;
     nombre: string;
@@ -221,4 +216,17 @@ export interface almacenes{
     activo: string;
     created_at: string;
     updated_at: string;
+}
+
+export interface inventario{
+    id_almacen: string;
+    id_producto: string;
+    existencias: string;
+}
+
+export interface salidas{
+    id_almacen: string;
+    id_producto: string;
+    cantidad: string;
+    fecha_salida: string;
 }

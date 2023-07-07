@@ -89,6 +89,8 @@ import { DialogAlmacenesComponent } from '../pages/records/almacenes/dialog-alma
 
 import { DialogEntradaComponent } from '../pages/records/inventario/entradas/dialog-entrada/dialog-entrada.component';
 
+import { DialogSalidaComponent } from '../pages/records/inventario/salidas/dialog-salida/dialog-salida.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -132,7 +134,7 @@ import { DialogEntradaComponent } from '../pages/records/inventario/entradas/dia
     Admin_masterLayoutComponent,
     AlmacenesComponent, DialogAlmacenesComponent,
     EntradasComponent, DialogEntradaComponent,
-    SalidasComponent,
+    SalidasComponent, DialogSalidaComponent,
     InventarioComponent
   ]
 })

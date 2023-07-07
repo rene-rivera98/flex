@@ -1,3 +1,64 @@
-<p>
-  inventario works!
-</p>
+<app-admin_master-layout>
+
+  <mat-card>
+      <mat-card-header class="d-flex align-items-center">
+          <h1 class="mx-auto">INVENTARIOS</h1>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
+        
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-warning" [routerLink]="['/protected/entradas']">Entradas</button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-warning" [routerLink]="['/protected/salidas']">Salidas</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-8">
+              <input class="form-control search-input" matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+            </label>
+            <div class="col-md-4">
+              <form [formGroup]="filtroForm">
+                <select class="form-control" formControlName="filtro" (change)="getInventarios(filtroForm.get('filtro')?.value)">
+                  <option *ngFor="let almacen of almacenes" [value]="almacen.id_almacen">{{ almacen.nombre }}</option>
+                </select>
+              </form>
+            </div>
+          </div>
+
+        </div>
+          
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
+                 matSort class="mat-elevation-z8">
+
+              <ng-container matColumnDef="id_producto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
+                <td mat-cell *matCellDef="let element"> {{element.id_producto}}</td>
+              </ng-container>
+            
+              <ng-container matColumnDef="existencias">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Existencias </th>
+                <td mat-cell *matCellDef="let element"> {{element.existencias}} </td>
+              </ng-container>
+            
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- EN CASO DE QUE NO COINCIDAN LOS RESULTADOS DE BUSQUEDA -->
+              <!-- <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No se encuentran resultados "{{input.value}}"</td>
+              </tr> -->
+            </table>
+      </mat-card-content>   
+       <!-- INICIO PAGINACION -->
+       <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]"></mat-paginator>
+       <!-- FIN PAGINACION -->
+</mat-card> 
+
+</app-admin_master-layout>

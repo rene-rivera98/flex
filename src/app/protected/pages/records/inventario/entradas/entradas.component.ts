@@ -24,8 +24,8 @@ export class EntradasComponent implements OnDestroy, AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'id_almacen',
-    'id_producto',
+    'nombreAlmacen',
+    'nombreProducto',
     'cantidad',
     'merma',
     'fecha_entrada',
