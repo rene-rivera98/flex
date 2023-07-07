@@ -28,7 +28,38 @@ export class ProveedorService {
   getProveedores(): Observable<any> {
     const url = `${this.baseUrl}proveedores/`;
     return this.http.get(url).pipe(
-      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      map((response: any) => response.query.map((proveedor: any) => ({
+        id_proveedor: proveedor.id_proveedor,
+        rfc: proveedor.rfc,
+        nombre: proveedor.nombre,
+        regimen_fiscal: proveedor.regimen_fiscal,
+        banco: proveedor.banco,
+        cuenta_bancaria: proveedor.cuenta_bancaria,
+        clave_interbancaria: proveedor.clave_interbancaria,
+        telefono_fijo: proveedor.telefono_fijo,
+        telefono_movil: proveedor.telefono_movil,
+        codigo_postal: proveedor.codigo_postal,
+        constancia: proveedor.constancia,
+        created_at: proveedor.created_at,
+        updated_at : proveedor.updated_at
+      }))), // Obtener el campo 'query' de la respuesta
+      tap((data: any[]) => {
+        console.log('Datos de proveedores:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener los proveedores:', error);
+        throw error;
+      })
+    );
+  }
+
+  getProveedores_(): Observable<any> {
+    const url = `${this.baseUrl}proveedores/`;
+    return this.http.get(url).pipe(
+      map((response: any) => response.query.map((proveedor: any) => ({
+        id_proveedor: proveedor.id_proveedor,
+        nombre: proveedor.nombre
+      }))), // Obtener el campo 'query' de la respuesta
       tap((data: any[]) => {
         console.log('Datos de proveedores:', data);
       }),

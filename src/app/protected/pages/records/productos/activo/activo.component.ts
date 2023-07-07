@@ -88,7 +88,7 @@ export class ActivoComponent implements AfterViewInit, OnDestroy {
   }
 
   getActivos() {
-    this.productoService.getActivos().subscribe(
+    this.productoService.getActivos_().subscribe(
       (data: any[]) => {
         this.dataSource.data = data;
       },

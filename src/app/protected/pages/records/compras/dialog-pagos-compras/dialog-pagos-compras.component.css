@@ -8,3 +8,7 @@
   .tabla-venta td {
     width: 100px; /* Ajusta el ancho de las columnas */
   }
+
+  .negrita {
+    font-weight: bold;
+  }

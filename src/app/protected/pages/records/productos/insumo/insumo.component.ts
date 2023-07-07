@@ -26,9 +26,6 @@ export class InsumoComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [
     'codigo',
     'nombre',
-    // 'cantidad',
-    'unidad_medida',
-    'perecedero',
     'tipo_egreso',
     'created_at',
     'updated_at',    

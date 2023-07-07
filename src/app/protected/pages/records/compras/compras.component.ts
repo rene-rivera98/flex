@@ -9,6 +9,7 @@ import { CompraService } from 'src/app/protected/services/compra.service';
 import { compra, sucursal, proveedores } from 'src/app/protected/interfaces/interfaces';
 import { DialogCompraComponent } from './dialog-compra/dialog-compra.component';
 import { DialogEditarCompraComponent } from './dialog-editar-compra/dialog-editar-compra.component';
+import { DialogPagosComprasComponent } from './dialog-pagos-compras/dialog-pagos-compras.component';
 import { SucursalService } from 'src/app/protected/services/sucursal.service';
 import { ProveedorService } from 'src/app/protected/services/proveedor.service';
 
@@ -30,6 +31,7 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
     'monto_total',
     'fecha_factura',
     'nombreSucursal',
+    'estado_pago',
     'created_at',
     'updated_at',
     'opciones',
@@ -39,7 +41,7 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
 
   compraCreatedSubscription!: Subscription;
   compraUpdatedSubscription!: Subscription;
-  compraDeletedSubscription!: Subscription;
+  pagoCreatedSubscription!: Subscription;
 
   constructor(
     private compraService: CompraService,
@@ -57,10 +59,28 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
 
   editDialog(element: any): void {
     const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
-    dialogConfig.disableClose = true; //bloquea el dialog
-    dialogConfig.width = '650px'; // Asignar ancho al dialog
-    dialogConfig.height = '650px'; // Asignar ancho al dialog
-    const dialogRefEd = this.dialog.open(DialogEditarCompraComponent,dialogConfig); //abre el dialog
+    const dialogRefEd = this.dialog.open(DialogEditarCompraComponent, {
+      data: element,
+      disableClose: true,
+      width: '780px',
+      height: '700px'
+    });
+  }
+
+  pagoDialog(element: any) {
+    if (element.id_compra || element.monto_total) {
+      console.log('ID de compra:', element.id_compra, element.monto_total);
+  
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '750px';
+      dialogConfig.height = '720px';
+      dialogConfig.data = { compra: { id_compra: element.id_compra, monto_total: element.monto_total } };
+      const dialogRefEd = this.dialog.open(DialogPagosComprasComponent, dialogConfig);
+    } else {
+      // Manejar el caso cuando no se tiene el ID de la sucursal
+      console.error('La fila seleccionada no tiene un ID de compra válido.');
+    }
   }
 
   applyFilter(event: Event) {
@@ -75,14 +95,22 @@ export class ComprasComponent implements AfterViewInit, OnDestroy{
     this.compraCreatedSubscription = this.compraService.compraCreated$.subscribe(() => {
       this.getCompras();
     });
+
+    this.compraUpdatedSubscription = this.compraService.compraUpdated$.subscribe(() => {
+      this.getCompras();
+    });
+
+    this.pagoCreatedSubscription = this.compraService.pagoCreated$.subscribe(() => {
+      this.getCompras();
+    });
   }
 
   getCompras() {
-    this.sucursalService.getSucursales().subscribe(
+    this.sucursalService.getSucursales_().subscribe(
       (sucursales: sucursal[]) => {
         const sucursalesMap = new Map<string, string>(sucursales.map(sucursal => [sucursal.id_sucursal, sucursal.nombre]));
   
-        this.proveedorService.getProveedores().subscribe(
+        this.proveedorService.getProveedores_().subscribe(
           (proveedores: proveedores[]) => {
             const proveedoresMap = new Map<string, string>(proveedores.map(proveedor => [proveedor.id_proveedor, proveedor.nombre]));
   

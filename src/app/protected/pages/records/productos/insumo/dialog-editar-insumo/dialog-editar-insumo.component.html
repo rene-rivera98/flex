@@ -9,107 +9,104 @@
 
   <form autocomplete="off" [formGroup]="insumoForm" (ngSubmit)="actualizarProducto()">
 
-      <div class="row col-13 mx-auto mt-2" style="display: none;">
+    <div class="row col-13 mx-auto mt-2">
 
-          <div class="col">
+      <div class="col">
 
-              <div class="form-floating mb-3">
+        <div class="form-floating mb-3">
 
-                <input class="form-control" id="tipoProducto" type="text"
-                    formControlName="tipo_producto" placeholder="Insumo" readonly/>
+          <input class="form-control" id="nombre" type="text"
+              formControlName="codigo" placeholder="Código"/>
 
-                <label for="tipoProducto">Tipo de producto</label>
+          <label for="codigo">Código</label>
 
-              </div>
+        </div>
 
+      </div>
+
+      <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="nombre" type="text"
+                  formControlName="nombre" placeholder="Nombre" />
+
+              <label for="nombre">Nombre</label>
+    
             </div>
 
       </div>
 
-      <div class="row col-13 mx-auto mt-2">
+    </div>
 
-          <div class="col">
+    <div class="row col-13 mx-auto">
 
-              <div class="form-floating mb-3">
-  
-                <input class="form-control" id="nombre" type="text"
-                    formControlName="nombre" placeholder="Nombre" />
-  
-                <label for="nombre">Nombre</label>
-      
-              </div>
-  
-          </div>
+      <div class="col">
 
-      </div>
+        <div class="form-floating mb-3">
 
-      <div class="row col-13 mx-auto">
+          <input class="form-control" id="cantidad" type="text"
+              formControlName="cantidad" placeholder="Cantidad"/>
 
-        <div class="col">
-
-          <div class="form-floating mb-3">
-
-            <input class="form-control" id="nombre" type="text"
-                formControlName="codigo" placeholder="Código"/>
-
-            <label for="codigo">Código</label>
-
-          </div>
+          <label for="cantidad">Cantidad</label>
 
         </div>
 
+      </div>
+
+      <div class="col">
+
+            <div class="form-floating mb-3">
+
+                <select class="form-control" id="unidadMedida" formControlName="unidad_medida">
+                    <option disabled selected>Seleccione una unidad de medida</option>
+                    <option value="ml">mililitros</option>
+                    <option value="grs">gramos</option>
+                    <option value="oz">onzas</option>
+                    <option value="pz">piezas</option>
+                    <option value="cm">centimetros</option>
+                    <option value="grs">gramos</option>
+                    <option value="bolsas">bolsas</option>
+                    <option value="grs">gramos</option>
+                  </select>
+        
+                  <label for="unidadMedida">Unidad de medida</label>
+ 
+            </div>
+
+      </div>
+
+    </div>
+
+    <div class="row col-13 mx-auto">
+
         <div class="col">
 
-              <div class="form-floating mb-3">
-  
-                  <select class="form-control" id="unidadMedida" formControlName="unidad_medida">
-                      <option disabled selected>Seleccione una unidad de medida</option>
-                      <option value="ml">mililitros</option>
-                      <option value="grs">gramos</option>
-                      <option value="oz">onzas</option>
-                      <option value="pz">piezas</option>
-                      <option value="cm">centimetros</option>
-                      <option value="grs">gramos</option>
-                      <option value="bolsas">bolsas</option>
-                      <option value="grs">gramos</option>
-                    </select>
-          
-                    <label for="unidadMedida">Unidad de medida</label>
-   
-              </div>
-  
+            <div class="form-floating mb-3">
+
+                <select class="form-control" id="tipoEgreso" formControlName="tipo_egreso">
+                    <option disabled selected>Seleccione el tipo de egreso</option>
+                    <option value="Activos">Activos</option>
+                    <option value="Compras">Compras</option>
+                    <option value="Gastos">Gastos</option>
+                  </select>
+        
+                  <label for="tipoEgreso">Tipo de egreso</label>
+ 
+            </div>
+
         </div>
 
-      </div>
+        <div class="col mt-3">
 
-      <div class="row col-13 mx-auto">
+            <section class="example-section">
+                <p><mat-checkbox formControlName="perecedero">Perecedero</mat-checkbox></p>
+            </section>
 
-          <div class="col">
+        </div>
 
-              <div class="form-floating mb-3">
-  
-                  <select class="form-control" id="tipoEgreso" formControlName="tipo_egreso">
-                      <option disabled selected>Seleccione el tipo de egreso</option>
-                      <option value="Activos">Activos</option>
-                      <option value="Compras">Compras</option>
-                      <option value="Gastos">Gastos</option>
-                    </select>
-          
-                    <label for="tipoEgreso">Tipo de egreso</label>
-   
-              </div>
-  
-          </div>
+    </div>
 
-          <div class="col mt-3">
-
-              <section class="example-section">
-                  <p><mat-checkbox formControlName="perecedero">Perecedero</mat-checkbox></p>
-              </section>
-  
-          </div>
-
-      </div>
 
   </form>
   

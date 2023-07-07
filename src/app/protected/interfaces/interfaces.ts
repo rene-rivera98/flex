@@ -46,6 +46,11 @@ export interface compra {
     }[];
 }
 
+export interface compra_ {
+    id_compra: string,
+    monto_total: string,
+}
+
 export interface gastos{
     id_gasto: string;
     folio_gasto: string,
@@ -197,6 +202,11 @@ export interface sucursal{
     telefono: string;
     created_at: string;
     updated_at: string;
+}
+
+export interface sucursal_ID_name{
+    id_sucursal: string;
+    nombre: string;
 }
 
 export interface entradas{

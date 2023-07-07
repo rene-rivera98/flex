@@ -56,6 +56,7 @@ import { DialogCredUsuarioComponent } from '../pages/records/usuarios/dialog-cre
 
 import { DialogCompraComponent } from '../pages/records/compras/dialog-compra/dialog-compra.component';
 import { DialogEditarCompraComponent } from '../pages/records/compras/dialog-editar-compra/dialog-editar-compra.component';
+import { DialogPagosComprasComponent } from '../pages/records/compras/dialog-pagos-compras/dialog-pagos-compras.component';
 
 import { DialogGastoComponent } from '../pages/records/gastos/dialog-gasto/dialog-gasto.component';
 import { DialogEditarGastoComponent } from '../pages/records/gastos/dialog-editar-gasto/dialog-editar-gasto.component';
@@ -91,6 +92,7 @@ import { DialogEntradaComponent } from '../pages/records/inventario/entradas/dia
 
 import { DialogSalidaComponent } from '../pages/records/inventario/salidas/dialog-salida/dialog-salida.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -122,7 +124,7 @@ import { DialogSalidaComponent } from '../pages/records/inventario/salidas/dialo
   declarations: [
     UsuariosComponent, DialogUsuarioComponent, DialogEditarUsuarioComponent, DialogCredUsuarioComponent, DialogBorrarUsuarioComponent,
     ProveedoresComponent, DialogProveedoresComponent, DialogEditarProveedorComponent, DialogBorrarProveedoresComponent,
-    ComprasComponent, DialogCompraComponent, DialogEditarCompraComponent,
+    ComprasComponent, DialogCompraComponent, DialogEditarCompraComponent,DialogPagosComprasComponent,
     GastosComponent, DialogGastoComponent, DialogEditarGastoComponent,
     ServiciosComponent, DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent,
     CafeteriaComponent,

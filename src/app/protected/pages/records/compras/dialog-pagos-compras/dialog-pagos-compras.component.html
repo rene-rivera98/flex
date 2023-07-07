@@ -1,0 +1,117 @@
+<h1 mat-dialog-title class="d-flex align-items-center">
+  <div class="flex-grow-1 text-center">
+    <h1>PAGOS DE FACTURA</h1>
+  </div>
+    <i class="bi bi-x-square" (click)="dialogRef.close()" type="button"></i>
+</h1>
+
+
+<!-- inicio contenido del dialog -->
+<div mat-dialog-content class="custom-dialog">
+
+  <!-- inicio de formulario -->
+  <form autocomplete="off" [formGroup]="pagoForm">
+
+    <div class="row col-13 mx-auto mt-2">
+          
+      <div class="col">
+
+        <div class="form-floating mb-3">
+            
+          <input class="form-control" id="monto_pago" type="text" formControlName="monto_pago" placeholder="Monto de pago"/>
+
+          <label for="monto_pago">Monto de pago</label>
+              
+        </div>
+            
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3">
+
+          <select class="form-control" id="forma_pago" formControlName="forma_pago">
+            <option disabled selected>Seleccione la forma de pago</option>
+            <option value="Credito">Credito</option>
+            <option value="Debito">Debito</option>
+            <option value="Deposito">Deposito</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Transferencia">Transferencia</option>
+          </select>
+          
+          <label for="forma_pago">Forma de pago</label>
+              
+        </div>
+            
+      </div>
+
+      <div class="col">
+
+        <div class="form-floating mb-3">
+
+          <input class="form-control" id="fecha_pago" type="date" formControlName="fecha_pago"/>
+
+          <label for="fecha_pago">Fecha de pago</label>
+              
+        </div>
+            
+      </div>
+
+    </div>
+
+    <div class="row col-13 mx-auto">
+          
+      <div class="col">
+
+        <div class="row col-13 mx-auto">
+          <div class="col">
+            <table class="table tabla-venta">
+              <thead>
+                <tr>
+                  <th>Monto</th>
+                  <th>Forma de pago</th>
+                  <th>Fecha de pago</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Filas de datos -->
+                <tr *ngFor="let pago of pagos">
+                  <td>{{ pago.monto_pago }}</td>
+                  <td>{{ pago.forma_pago }}</td>
+                  <td>{{ pago.fecha_pago }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td class="negrita">Sumatoria de pagos: ${{sumaMonto}}.00</td>
+                  <td class="negrita">Monto total: ${{montoTotal}}.00</td>
+                  <td class="negrita">Saldo insoluto: ${{restante}}.00</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row col-13 mx-auto"><!--botones -->
+
+      <div class="col">
+
+        <div class="d-flex align-items-center mt-4">
+
+          <button class="btn btn-warning mx-auto col-6" type="submit" (click)="onSubmit()" [disabled]="pagoForm.invalid">
+                Registrar
+          </button>
+
+        </div>
+
+      </div>
+          
+    </div>
+
+  </form>
+  
+</div>

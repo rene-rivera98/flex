@@ -9,26 +9,22 @@
 
   <form autocomplete="off" [formGroup]="insumoForm" (ngSubmit)="onSubmit()">
 
-      <div class="row col-13 mx-auto mt-2" style="display: none;">
-
-          <div class="col">
-
-              <div class="form-floating mb-3">
-
-                <input class="form-control" id="tipoProducto" type="text"
-                    formControlName="tipo_producto" placeholder="Insumo" readonly/>
-
-                <label for="tipoProducto">Tipo de producto</label>
-
-              </div>
-
-            </div>
-
-      </div>
-
       <div class="row col-13 mx-auto mt-2">
 
-          <div class="col">
+        <div class="col">
+
+          <div class="form-floating mb-3">
+
+            <input class="form-control" id="nombre" type="text"
+                formControlName="codigo" placeholder="Código"/>
+
+            <label for="codigo">Código</label>
+
+          </div>
+
+        </div>
+
+        <div class="col">
 
               <div class="form-floating mb-3">
   
@@ -39,7 +35,7 @@
       
               </div>
   
-          </div>
+        </div>
 
       </div>
 
@@ -49,10 +45,10 @@
 
           <div class="form-floating mb-3">
 
-            <input class="form-control" id="nombre" type="text"
-                formControlName="codigo" placeholder="Código"/>
+            <input class="form-control" id="cantidad" type="text"
+                formControlName="cantidad" placeholder="Cantidad"/>
 
-            <label for="codigo">Código</label>
+            <label for="cantidad">Cantidad</label>
 
           </div>
 

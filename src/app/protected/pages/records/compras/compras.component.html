@@ -48,14 +48,14 @@
                 <td mat-cell *matCellDef="let element"> {{element.fecha_factura | date: 'dd/MM/yyyy'}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="estado_pago">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado de pago </th>
-                <td mat-cell *matCellDef="let element"> {{element.estado_pago}} </td>
-              </ng-container>
-
               <ng-container matColumnDef="nombreSucursal">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
                 <td mat-cell *matCellDef="let element"> {{element.nombreSucursal }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="estado_pago">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado de pago </th>
+                <td mat-cell *matCellDef="let element"> {{element.estado_pago}} </td>
               </ng-container>
 
               <ng-container matColumnDef="created_at">
@@ -69,11 +69,15 @@
               </ng-container>
 
               <ng-container matColumnDef="opciones">
-                <th mat-header-cell *matHeaderCellDef> Editar </th>
+                <th mat-header-cell *matHeaderCellDef> Editar / Pagos </th>
                 <td mat-cell *matCellDef="let element" class="btn-options">
     
                   <button *ngIf="element" type="button" class="btn btn-warning btn-mr" (click)="editDialog(element)">
                     <i class="bi bi-pencil-square"></i>
+                  </button>
+
+                  <button *ngIf="element" type="button" class="btn btn-success btn-mr" (click)=" pagoDialog(element)">
+                    <i class="bi bi-wallet2"></i>
                   </button>
     
                 </td>

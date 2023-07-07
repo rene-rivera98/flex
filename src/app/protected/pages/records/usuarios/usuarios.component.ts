@@ -61,7 +61,7 @@ export class UsuariosComponent implements AfterViewInit, OnDestroy {
 
   getUsuarios() {
     const filtroActivo = this.filtroForm.value.filtro === 'activos';
-    this.sucursalService.getSucursales().subscribe(
+    this.sucursalService.getSucursales_().subscribe(
       (sucursales: sucursal[]) => {
         const sucursalesMap = new Map<string, string>(sucursales.map(sucursal => [sucursal.id_sucursal, sucursal.nombre]));
         this.usuarioService.getUsuarios(filtroActivo).subscribe(

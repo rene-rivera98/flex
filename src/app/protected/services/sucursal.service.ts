@@ -25,11 +25,36 @@ export class SucursalService {
   constructor(private http: HttpClient) { }
 
   //metodos CRUD
-  getSucursales(): Observable<any> {
+  getSucursales(): Observable<sucursal[]> {
     const url = `${this.baseUrl}sucursales/`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
-      tap((data: any[]) => {
+    return this.http.get<any[]>(url).pipe(
+      map((response: any) => response.query.map((sucursal: any) => ({
+        id_sucursal: sucursal.id_sucursal,
+        nombre: sucursal.nombre,
+        direccion: sucursal.direccion,
+        codigo_postal: sucursal.codigo_postal,
+        telefono: sucursal.telefono,
+        created_at: sucursal.created_at,
+        updated_at: sucursal.updated_at
+      }))),
+      tap((data: sucursal[]) => {
+        console.log('Datos de sucursales:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener las sucursales:', error);
+        throw error;
+      })
+    );
+  }
+
+  getSucursales_(): Observable<sucursal[]> {
+    const url = `${this.baseUrl}sucursales/`;
+    return this.http.get<any[]>(url).pipe(
+      map((response: any) => response.query.map((sucursal: any) => ({
+        id_sucursal: sucursal.id_sucursal,
+        nombre: sucursal.nombre
+      }))),
+      tap((data: sucursal[]) => {
         console.log('Datos de sucursales:', data);
       }),
       catchError((error: any) => {

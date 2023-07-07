@@ -28,7 +28,7 @@ export class DialogInsumoComponent implements OnInit {
       unidad_medida: ['', [Validators.required]],
       perecedero: [false],
       tipo_egreso: ['', [Validators.required]],
-      tipo_producto: ['Insumo'],
+      tipo_producto: [],
     });
   }
 

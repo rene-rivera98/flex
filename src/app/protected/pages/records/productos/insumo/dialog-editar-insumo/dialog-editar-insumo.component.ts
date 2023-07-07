@@ -31,7 +31,8 @@ export class DialogEditarInsumoComponent {
         unidad_medida: [this.insumo.unidad_medida, [Validators.required]],
         perecedero: [this.insumo.perecedero],
         tipo_egreso: [this.insumo.tipo_egreso, [Validators.required]],
-        tipo_producto: [this.insumo.tipo_producto]
+        tipo_producto: [this.insumo.tipo_producto],
+        cantidad: [this.insumo.cantidad]
       });
     }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/protected/services/producto.service';
-import { producto_venta } from 'src/app/protected/interfaces/interfaces';
+import { producto_venta, producto_insumo } from 'src/app/protected/interfaces/interfaces';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
@@ -85,33 +85,25 @@ export class DialogVentaComponent implements OnInit {
   }
   
   obtenerInsumos() {
-    this.http.get<any>('http://localhost/api/producto/insumo').subscribe(
-      (response: any) => {
-        if (Array.isArray(response.query)) {
-          this.insumos = response.query.map((insumo: { id_producto: any; nombre: any; }) => ({ id_producto: insumo.id_producto, nombre: insumo.nombre }));
-          this.listaProductos = response.query; // Guarda la lista completa de productos
-  
-          // Crea un objeto de mapeo de id_producto a nombre
-          const idProductoToNombre: { [key: string]: string } = {};
-          for (const insumo of response.query) {
-            idProductoToNombre[insumo.id_producto] = insumo.nombre;
-          }
-  
-          // Asigna el objeto de mapeo a una propiedad del componente
-          this.idProductoToNombre = idProductoToNombre;
-  
-          console.log(response.query);
-        } else {
-          console.error('La respuesta del API no contiene un arreglo de insumos:', response);
+    this.ventaService.getInsumos_().subscribe(
+      (response: any[]) => {
+        this.insumos = response.map((insumo: any) => ({
+          id_producto: insumo.id_producto,
+          nombre: insumo.nombre
+        }));
+        this.listaProductos = response;
+        const idProductoToNombre: { [key: string]: string } = {};
+        for (const insumo of response) {
+          idProductoToNombre[insumo.id_producto] = insumo.nombre;
         }
+        this.idProductoToNombre = idProductoToNombre;
+        // console.log(response);
       },
       (error: any) => {
         console.error('Error al obtener los insumos:', error);
       }
     );
   }
-  
-
 
   closeDialog() {
     this.dialogRef.close();

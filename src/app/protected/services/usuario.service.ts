@@ -25,7 +25,20 @@ export class UsuarioService {
     getUsuarios(activo: boolean): Observable<any> {
       const url = `${this.baseUrl}empleados/?activo_empleado=${activo}`; // Incluye el parámetro activo en la URL
       return this.http.get(url).pipe(
-        map((response: any) => response.query),
+        map((response: any) => response.query.map((usuario: any) =>({
+          id_empleado: usuario.id_empleado,
+          nombre: usuario.nombre,
+          paterno: usuario.paterno,
+          materno: usuario.materno,
+          celular: usuario.celular,
+          email: usuario.email,
+          fecha_nacimiento: usuario.fecha_nacimiento,
+          departamento: usuario.departamento,
+          id_sucursal: usuario.id_sucursal,
+          rol: usuario.rol,
+          created_at: usuario.created_at,
+          updated_at: usuario.updated_at
+        }))),
         tap((data: any[]) => {
           console.log('Datos de usuarios:', data);
         }),

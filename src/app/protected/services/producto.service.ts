@@ -54,11 +54,37 @@ export class ProductoService {
     );
   }
 
-  //metodos CRUD INSUMOS
   getInsumos(): Observable<any> {
     const url = `${this.baseUrl}producto/insumo/`;
     return this.http.get(url).pipe(
-      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      map((response: any) => response.query.map((insumo: any) =>({
+        id_producto: insumo.id_producto,
+        codigo: insumo.codigo,
+        nombre: insumo.nombre,
+        cantidad: insumo.cantidad,
+        unidad_medida: insumo.unidad_medida,
+        perecedero: insumo.perecedero,
+        tipo_egreso: insumo.tipo_egreso,
+        created_at: insumo.created_at,
+        updated_at: insumo.updated_at
+      }))), // Obtener el campo 'query' de la respuesta
+      tap((data: any[]) => {
+        console.log('Datos de productos:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener los productos:', error);
+        throw error;
+      })
+    );
+  }
+
+  getInsumos_(): Observable<any> {
+    const url = `${this.baseUrl}producto/insumo/`;
+    return this.http.get(url).pipe(
+      map((response: any) => response.query.map((insumo: any) =>({
+        id_producto: insumo.id_producto,
+        nombre: insumo.nombre
+      }))), // Obtener el campo 'query' de la respuesta
       tap((data: any[]) => {
         console.log('Datos de productos:', data);
       }),
@@ -103,6 +129,28 @@ export class ProductoService {
     );
   }
 
+    getActivos_(): Observable<any> {
+      const url = `${this.baseUrl}producto/activo/`;
+      return this.http.get(url).pipe(
+        map((response: any) => response.query.map((activo: any) =>({
+          id_producto: activo.id_producto,
+          codigo: activo.codigo,
+          nombre: activo.nombre,
+          tipo_egreso : activo.tipo_egreso,
+          created_at: activo.created_at,
+          updated_at: activo.updated_at,
+          perecedero: activo.perecedero
+        }))), // Obtener el campo 'query' de la respuesta
+        tap((data: any[]) => {
+          console.log('Datos de productos:', data);
+        }),
+        catchError((error: any) => {
+          console.error('Error al obtener los productos:', error);
+          throw error;
+        })
+        );
+    }
+
   createActivo(activo: productos_activo): Observable<any> {
     const url = `${environment.baseUrl}producto/activo/`;
     return this.http.post(url, activo);
@@ -126,7 +174,21 @@ export class ProductoService {
   getVentas(): Observable<any> {
     const url = `${this.baseUrl}producto/venta/`;
     return this.http.get(url).pipe(
-      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      map((response: any) => response.query.map((venta: any) =>({
+        id_producto: venta.id_producto,
+        codigo: venta.codigo,
+        nombre: venta.nombre,
+        tipo_egreso: venta.tipo_egreso,
+        tipo_producto: venta.tipo_producto,
+        perecedero: venta.perecedero,
+        area: venta.area,
+        receta: venta.receta,
+        talla: venta.talla,
+        unidad_medida: venta.unidad_medida,
+        precio: venta.precio,
+        created_at: venta.created_at,
+        updated_at: venta.updated_at
+      }))), // Obtener el campo 'query' de la respuesta
       tap((data: any[]) => {
         console.log('Datos de productos:', data);
       }),
