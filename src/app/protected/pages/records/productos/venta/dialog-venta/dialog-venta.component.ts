@@ -36,7 +36,7 @@ export class DialogVentaComponent implements OnInit {
       area:['', [Validators.required]],
       talla: [''],
       unidad_medida: [''],
-      precio: ['0.00', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]],
+      precio: ['0.00', [Validators.required]],
       receta: [false],
       perecedero: [false],
       productos_receta: this.formBuilder.array([]), // Define productos_receta como un FormArray vacío
