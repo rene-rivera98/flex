@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { forkJoin, Subscription } from 'rxjs';
+
 import { CompraService } from 'src/app/protected/services/compra.service';
 import { compra } from 'src/app/protected/interfaces/interfaces';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-editar-compra',
   templateUrl: './dialog-editar-compra.component.html',
   styleUrls: ['./dialog-editar-compra.component.css']
 })
-export class DialogEditarCompraComponent {
-
+export class DialogEditarCompraComponent implements OnDestroy {
   compraForm!: FormGroup;
   compra!: compra;
   mostrarFechaRecepcion = false;
@@ -22,12 +22,11 @@ export class DialogEditarCompraComponent {
   productos: any[] = [];
   proveedores: any[] = [];
   sucursales: any[] = [];
-  // cantidades: number[] = [];
-  i!: number;
-  idProductos: string[] = [];
   listaProductos: any[] = [];
-  cantidades: number[] = []; 
+  cantidades: number[] = [];
   idProductoToNombre: { [key: string]: string } = {};
+
+  private httpSubscription: Subscription | undefined;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditarCompraComponent>,
@@ -35,8 +34,8 @@ export class DialogEditarCompraComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient,
     private compraService: CompraService,
-    private snackBar: MatSnackBar) 
-  { 
+    private snackBar: MatSnackBar
+  ) {
     this.compra = data;
     console.log('Datos recibidos:', this.compra);
 
@@ -71,23 +70,23 @@ export class DialogEditarCompraComponent {
   }
 
   agregarProducto() {
-    const productoSeleccionado = this.compraForm.value.productos;
-    const cantidad = this.compraForm.value.cantidad;
-  
+    const productoSeleccionado = this.compraForm.get('detalla_factura_compra')?.value;
+    const cantidad = this.compraForm.get('cantidad')?.value;
+
     // Verifica si se seleccionó un insumo y la cantidad es válida
     if (productoSeleccionado && cantidad) {
       const nuevoProducto = {
         id_producto: productoSeleccionado,
         cantidad: cantidad
       };
-  
+
       // Agrega el nuevo insumo al array de productos de receta
       const productosCompra = this.compraForm.get('detalla_factura_compra') as FormArray;
       productosCompra.push(this.formBuilder.group(nuevoProducto));
-  
+
       // Imprime el array de productos de receta
       console.log('Array de productos de compra:', productosCompra.value);
-  
+
       // Limpia los campos de selección de insumo y cantidad
       this.compraForm.patchValue({
         productos: null,
@@ -101,22 +100,19 @@ export class DialogEditarCompraComponent {
   quitarProducto(index: number) {
     const productosCompra = this.compraForm.get('detalla_factura_compra') as FormArray;
     productosCompra.removeAt(index);
-  
+
     // Elimina el producto y la cantidad de los arreglos correspondientes
-    this.idProductos.splice(index, 1);
     this.cantidades.splice(index, 1);
 
     console.log('Array de productos de compra:', productosCompra.value);
   }
 
   obtenerNombreProducto(id: string): string {
-    const producto = this.listaProductos.find((p) => p.id_producto.toString() === id);
-    // console.log(producto);
-    return producto ? producto.nombre : '';
+    return this.idProductoToNombre[id] || '';
   }
 
   obtenerProveedores() {
-    this.http.get<any>('http://localhost/api/proveedores').subscribe(
+    this.httpSubscription = this.http.get<any>('http://localhost/api/proveedores').subscribe(
       (response: any) => {
         if (Array.isArray(response.query)) {
           this.proveedores = response.query.map((proveedor: { id_proveedor: any; nombre: any; }) => ({ id_proveedor: proveedor.id_proveedor, nombre: proveedor.nombre }));
@@ -135,26 +131,26 @@ export class DialogEditarCompraComponent {
     const urlVenta = 'http://localhost/api/producto/venta/';
     const urlInsumo = 'http://localhost/api/producto/insumo/';
     const urlActivo = 'http://localhost/api/producto/activo/';
-  
+
     const ventaRequest = this.http.get<any>(urlVenta);
     const insumoRequest = this.http.get<any>(urlInsumo);
     const activoRequest = this.http.get<any>(urlActivo);
-  
-    forkJoin([ventaRequest, insumoRequest, activoRequest]).subscribe(
+
+    this.httpSubscription = forkJoin([ventaRequest, insumoRequest, activoRequest]).subscribe(
       (responses: any[]) => {
         const productosVenta = responses[0].query.filter((producto: any) => producto.receta === 0).map((producto: any) => ({ id_producto: producto.id_producto, nombre: producto.nombre }));
         const productosInsumo = responses[1].query.map((producto: any) => ({ id_producto: producto.id_producto, nombre: producto.nombre }));
         const productosActivo = responses[2].query.map((producto: any) => ({ id_producto: producto.id_producto, nombre: producto.nombre }));
-  
+
         this.productos = [...productosVenta, ...productosInsumo, ...productosActivo];
-        this.listaProductos = [...productosVenta, ...productosInsumo, ...productosActivo]; // Agrega esta línea para inicializar la lista de productos
-  
+        this.listaProductos = [...productosVenta, ...productosInsumo, ...productosActivo];
+
         // Crea un objeto de mapeo de id_producto a nombre
         const idProductoToNombre: { [key: string]: string } = {};
         for (const producto of this.listaProductos) {
           idProductoToNombre[producto.id_producto] = producto.nombre;
         }
-  
+
         // Asigna el objeto de mapeo a una propiedad del componente
         this.idProductoToNombre = idProductoToNombre;
       },
@@ -164,8 +160,8 @@ export class DialogEditarCompraComponent {
     );
   }
 
-  obtenerSucursales(){
-    this.http.get<any>('http://localhost/api/sucursales/').subscribe(
+  obtenerSucursales() {
+    this.httpSubscription = this.http.get<any>('http://localhost/api/sucursales/').subscribe(
       (response: any) => {
         if (Array.isArray(response.query)) {
           this.sucursales = response.query.map((sucursal: { id_sucursal: any; nombre: any; }) => ({ id_sucursal: sucursal.id_sucursal, nombre: sucursal.nombre }));
@@ -185,21 +181,21 @@ export class DialogEditarCompraComponent {
     this.mostrarFechaRecepcion = valorRecepcion === 'Recibido';
   }
 
-  onRecibidoChange(){
+  onRecibidoChange() {
     const selectRecibido = document.getElementById("status_comprobante") as HTMLSelectElement;
     const valorRecibido = selectRecibido.value;
     this.mostrarFechaRecibido = valorRecibido === 'Recibido';
   }
 
   closeDialog() {
-      this.dialogRef.close();
+    this.dialogRef.close();
   }
 
   actualizarCompra(): void {
     if (this.compraForm.valid) {
       const idCompra = this.compra.id_compra;
-      const compraActualizada = { ...this.compraForm.value }; // Clonar el objeto
-  
+      const compraActualizada = { ...this.compraForm.value };
+
       this.compraService.updatedCompra(idCompra, compraActualizada).subscribe(
         (response: any) => {
           console.log('Compra actualizada', response);
@@ -224,6 +220,10 @@ export class DialogEditarCompraComponent {
       );
     }
   }
-  
 
+  ngOnDestroy() {
+    if (this.httpSubscription) {
+      this.httpSubscription.unsubscribe();
+    }
+  }
 }
