@@ -18,7 +18,7 @@ export class DialogEditarCompraComponent implements OnDestroy {
   compra!: compra;
   mostrarFechaRecepcion = false;
   mostrarFechaRecibido = false;
-
+  i!: number;
   productos: any[] = [];
   proveedores: any[] = [];
   sucursales: any[] = [];
