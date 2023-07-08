@@ -12,7 +12,7 @@
         <div class="row col-13 mx-auto mt-2">
           <div class="col">
             <div class="form-floating mb-3">
-              <select class="form-control" id="area" formControlName="area">
+              <select class="form-control" id="area" formControlName="area" (change)="actualizarValores()">
                 <option disabled selected>Seleccione un área</option>
                 <option value="Cafeteria">Cafetería</option>
                 <option value="FrontDesk">FrontDesk</option>
@@ -36,7 +36,7 @@
           </div>
           <div class="col">
             <div class="form-floating mb-3">
-              <input class="form-control" id="precio" type="number" formControlName="precio" step="0.01" placeholder="Precio" />
+              <input class="form-control" id="precio" type="number" formControlName="precio" step="0.01" pattern="\d+(\.\d{1,2})?" placeholder="Precio" />
               <label for="precio">Precio</label>
             </div>            
           </div>
@@ -46,10 +46,7 @@
             <div class="form-floating mb-3">
               <select class="form-control" id="talla" formControlName="talla">
                 <option disabled selected>Seleccione una talla</option>
-                <option value="Chica">Chica</option>
-                <option value="Mediana">Mediana</option>
-                <option value="Grande">Grande</option>
-                <option value="Extra-Grande">Extra-grande</option>
+                <option *ngFor="let talla of tallas" [value]="talla">{{ talla }}</option>
               </select>
               <label for="talla">Talla</label>
             </div>
@@ -58,15 +55,8 @@
             <div class="form-floating mb-3">
               <select class="form-control" id="unidadMedida" formControlName="unidad_medida">
                 <option disabled selected>Seleccione una unidad de medida</option>
-                <option value="ml">mililitros</option>
-                <option value="grs">gramos</option>
-                <option value="oz">onzas</option>
-                <option value="pz">piezas</option>
-                <option value="cm">centimetros</option>
-                <option value="grs">gramos</option>
-                <option value="bolsas">bolsas</option>
-                <option value="grs">gramos</option>
-              </select>
+                <option *ngFor="let unidadMedida of unidadesMedida" [value]="unidadMedida">{{ unidadMedida }}</option>
+              </select>              
               <label for="unidadMedida">Unidad de medida</label>
             </div>
           </div>

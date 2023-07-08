@@ -88,8 +88,8 @@ export class ProveedorService {
     );
   }
 
-  deletedProveedor(idProveedor: string): Observable<any> {
-    const url = `${this.baseUrl}proveedores/desactivar/${idProveedor}`;
+  deletedProveedor(id_proveedor: string): Observable<any> {
+    const url = `${this.baseUrl}proveedores/desactivar/${id_proveedor}`;
     return this.http.delete(url).pipe(
       tap((data: any) => {
         console.log('Respuesta del DELETE:', data);

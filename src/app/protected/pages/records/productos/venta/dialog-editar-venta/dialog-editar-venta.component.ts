@@ -1,13 +1,13 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject} from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/protected/services/producto.service';
 import { producto_venta } from 'src/app/protected/interfaces/interfaces';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-dialog-editar-venta',
+  selector: 'app-dialog-editar-producto-venta',
   templateUrl: './dialog-editar-venta.component.html',
   styleUrls: ['./dialog-editar-venta.component.css']
 })
@@ -15,74 +15,170 @@ export class DialogEditarVentaComponent {
 
   ventaForm!: FormGroup;
   venta!: producto_venta;
-  insumos: any[] = []; // Array para almacenar los insumos seleccionados
-  listaProductos: any[] = [];
-  idProductos: any[] = []; // Agrega esta línea
-  cantidades: number[] = []; // Agrega esta línea
+
+  tallas: string[] = [];
+  unidadesMedida: string[] = [];
+
+  productos: any[] = [];
   i!: number;
+  idProductos: string[] = [];
+  listaProductos: any[] = [];
+  cantidades: number[] = []; 
+  idProductoToNombre: { [key: string]: string } = {};
 
   constructor(
-    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DialogEditarVentaComponent>,
-    private ventaService: ProductoService,
+    private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar,
-    private http: HttpClient
-  ) { 
-    this.venta = data; // Asignar los datos del elemento seleccionado a la variable 'sucursal'
-      console.log('Datos recibidos:', this.venta);
+    private http: HttpClient,
+    private ventaService: ProductoService,
+    private snackBar: MatSnackBar) 
+  { 
+    this.venta = data;
+    console.log('Datos recibidos:', this.venta);
 
-      this.ventaForm = this.formBuilder.group({
-        codigo: [this.venta.codigo, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
-        tipo_egreso: [this.venta.tipo_egreso, [Validators.required]],
-        nombre: [this.venta.nombre, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
-        area:[this.venta.area, [Validators.required]],
-        talla: [this.venta.talla, [Validators.required]],
-        unidad_medida: [this.venta.unidad_medida, [Validators.required]],
-        precio: [this.venta.precio, [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]],
-        receta: [this.venta.receta],
-        perecedero: [this.venta.perecedero],
-        productos_receta: this.formBuilder.array([this.venta.productos_receta]),
-        insumos: [],
-        cantidad: []
-      });
+    this.ventaForm = this.formBuilder.group({
+      area: [this.venta.area, [Validators.required]],
+      codigo: [this.venta.codigo, [Validators.required]],
+      nombre: [this.venta.nombre, [Validators.required]],
+      precio: [this.venta.precio, [Validators.required]],
+      talla: [this.venta.talla, [Validators.required]],
+      unidad_medida: [this.venta.unidad_medida],
+      tipo_egreso: [this.venta.tipo_egreso],
+      perecedero: [this.venta.perecedero],
+      receta: [this.venta.receta],
+      productos_receta: this.formBuilder.array([]),
+      productos: [],
+      cantidad: []
+    });
 
-      this.obtenerInsumos();
+    const productosRecetaArray = this.ventaForm.get('productos_receta') as FormArray;
+      if (this.venta.productos_receta?.length) {
+        this.venta.productos_receta.forEach((producto: any) => {
+          productosRecetaArray.push(this.formBuilder.group(producto));
+          console.log('Array de insumos de receta:', productosRecetaArray.value);
+        });
+      }
 
-      console.log(this.ventaForm.get('productos_receta')?.value);
-
+    this.obtenerProductos();
   }
 
-  actualizarProducto(): void {
-    if (this.ventaForm.valid) {
-      // Obtener el id_proveedor de this.sucursal o desde donde lo obtengas en tu código
-      const idProducto = this.venta.id_producto;
-      const productoActualizado = this.ventaForm.value;
+  actualizarValores() {
+    const areaSeleccionada = this.ventaForm.get('area')?.value;
 
-      // Llamar al servicio de API para actualizar la sucursal
-      this.ventaService.updatedVenta(idProducto, productoActualizado).subscribe(
+    // Actualizar valores de acuerdo a la selección del área
+    if (areaSeleccionada === 'Cafeteria') {
+      this.tallas = ['Chico', 'Mediano', 'Grande' ,'N/A'];
+      this.unidadesMedida = ['ml', 'grs', 'oz', 'pz', 'cm', 'bolsa', 'grs', 'N/A'];
+    } else if (areaSeleccionada === 'FrontDesk') {
+      this.tallas = ['Bebe', 'Niño', 'Chica', 'Mediana', 'Grande', 'Extra-grande', 'N/A'];
+      this.unidadesMedida = ['pz', 'N/A'];
+    } else {
+      // Otras opciones
+      this.tallas = ['N/A'];
+      this.unidadesMedida = ['N/A'];
+    }
+  }
+
+  agregarProducto() {
+    const productoSeleccionado = this.ventaForm.value.productos;
+    const cantidad = this.ventaForm.value.cantidad;
+  
+    // Verifica si se seleccionó un insumo y la cantidad es válida
+    if (productoSeleccionado && cantidad) {
+      const nuevoProducto = {
+        id_producto: productoSeleccionado,
+        cantidad: cantidad
+      };
+  
+      // Agrega el nuevo insumo al array de productos de receta
+      const productosVenta = this.ventaForm.get('productos_receta') as FormArray;
+      productosVenta.push(this.formBuilder.group(nuevoProducto));
+  
+      // Imprime el array de productos 
+      console.log('Array de productos de receta:', productosVenta.value);
+  
+      // Limpia los campos de selección de insumo y cantidad
+      this.ventaForm.patchValue({
+        productos: null,
+        cantidad: null
+      });
+    }
+  }
+
+  quitarProducto(index: number) {
+    const productosVenta = this.ventaForm.get('productos_receta') as FormArray;
+    productosVenta.removeAt(index);
+  
+    // Elimina el producto y la cantidad de los arreglos correspondientes
+    this.idProductos.splice(index, 1);
+    this.cantidades.splice(index, 1);
+
+    console.log('Array de productos de venta:', productosVenta.value);
+  }
+
+  obtenerNombreProducto(id: string): string {
+    const producto = this.listaProductos.find((p) => p.id_producto.toString() === id);
+    // console.log(producto);
+    return producto ? producto.nombre : '';
+  }
+
+
+  obtenerProductos() {
+    const urlInsumo = 'http://localhost/api/producto/insumo/';
+  
+    const insumoRequest = this.http.get<any>(urlInsumo);
+  
+    insumoRequest.subscribe(
+      (response: any) => {
+        const productosInsumo = response.query.map((producto: any) => ({
+          id_producto: producto.id_producto,
+          nombre: producto.nombre
+        }));
+  
+        this.productos = [...productosInsumo];
+        this.listaProductos = [...productosInsumo];
+  
+        // Crea un objeto de mapeo de id_producto a nombre
+        const idProductoToNombre: { [key: string]: string } = {};
+        for (const producto of this.listaProductos) {
+          idProductoToNombre[producto.id_producto] = producto.nombre;
+        }
+  
+        // Asigna el objeto de mapeo a una propiedad del componente
+        this.idProductoToNombre = idProductoToNombre;
+      },
+      (error: any) => {
+        console.error('Error al obtener los productos:', error);
+      }
+    );
+  }
+  
+
+
+  actualizarVenta(): void {
+    if (this.ventaForm.valid) {
+      const idVenta = this.venta.id_producto;
+      const ventaActualizado = { ...this.ventaForm.value }; // Clonar el objeto
+  
+      this.ventaService.updatedVenta(idVenta, ventaActualizado).subscribe(
         (response: any) => {
-          console.log('Producto actualizado', response);
-          // Mostrar una notificación o mensaje de éxito utilizando MatSnackBar
+          console.log('Venta actualizada', response);
           this.snackBar.open('Producto actualizado correctamente', '', {
             duration: 5000,
-            panelClass: ['mat-snack-bar-success'], // Clase personalizada para el estilo de éxito
+            panelClass: ['mat-snack-bar-success'],
             verticalPosition: 'top',
             horizontalPosition: 'end'
           });
-          // Cerrar el diálogo
           this.dialogRef.close();
-
-          // Notificar a través del servicio SucursalesService que la sucursal ha sido actualizada
-          this.ventaService.notifyVentaUpdated(productoActualizado);
+          this.ventaService.notifyVentaUpdated(ventaActualizado);
         },
         (error: any) => {
-          console.error('Error al actualizar el producto:', error);
-          // Mostrar una notificación o mensaje de error utilizando MatSnackBar
+          console.error('Error al actualizar producto:', error);
           this.snackBar.open('Error al actualizar producto', '', {
             duration: 5000,
             verticalPosition: 'top',
-            panelClass: ['mat-snack-bar-error'], // Clase personalizada para el estilo de error
+            panelClass: ['mat-snack-bar-error'],
             horizontalPosition: 'end'
           });
         }
@@ -90,51 +186,8 @@ export class DialogEditarVentaComponent {
     }
   }
 
-  obtenerInsumos() {
-    this.http.get<any>('http://localhost/api/producto/insumo').subscribe(
-      (response: any) => {
-        if (Array.isArray(response.query)) {
-          this.insumos = response.query.map((insumo: { id_producto: any; nombre: any; }) => ({ id_producto: insumo.id_producto, nombre: insumo.nombre }));
-          this.listaProductos = response.query; // Guarda la lista completa de productos
-          console.log(response.query);
-        } else {
-          console.error('La respuesta del API no contiene un arreglo de insumos:', response);
-        }
-      },
-      (error: any) => {
-        console.error('Error al obtener los insumos:', error);
-      }
-    );
-  }
-
-  agregarProducto() {
-    const insumo = this.ventaForm.get('insumos')?.value;
-    const cantidad = this.ventaForm.get('cantidad')?.value;
-  
-    // Agregar insumo y cantidad a las propiedades correspondientes
-    this.idProductos.push(insumo);
-    this.cantidades.push(cantidad);
-  
-    // Limpiar campos de entrada
-    this.ventaForm.get('insumos')?.reset();
-    this.ventaForm.get('cantidad')?.reset();
-  }
-  
-  quitarProducto(index: number) {
-    // Quitar insumo y cantidad según el índice proporcionado
-    this.idProductos.splice(index, 1);
-    this.cantidades.splice(index, 1);
-  }
-
-  obtenerNombreProducto(id: string): string {
-    const producto = this.listaProductos.find((p) => p.id_producto.toString() === id);
-    console.log(producto);
-    return producto ? producto.nombre : '';
-  }
-
   closeDialog() {
     this.dialogRef.close();
   }
-
 
 }

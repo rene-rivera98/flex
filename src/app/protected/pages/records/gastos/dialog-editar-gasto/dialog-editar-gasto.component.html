@@ -1,3 +1,340 @@
-<p>
-  dialog-editar-gasto works!
-</p>
+<h1 mat-dialog-title class="d-flex align-items-center">
+  <div class="flex-grow-1 text-center">
+    <h1>DETALLE DE GASTO A MODIFICAR</h1>
+  </div>
+    <i class="bi bi-x-square" (click)="dialogRef.close()" type="button"></i>
+</h1>
+
+
+<!-- inicio contenido del dialog -->
+<div mat-dialog-content class="custom-dialog">
+
+  <!-- inicio de formulario -->
+  <form autocomplete="off" [formGroup]="gastoForm">
+
+    <mat-tab-group mat-align-tabs="center">
+
+      <mat-tab label="Datos de la factura">
+
+        <div class="row col-13 mx-auto mt-2">
+          
+          <div class="col">
+
+            <div class="form-floating mb-3">
+                
+              <input class="form-control" id="folio" type="text" formControlName="folio_gasto" placeholder="Folio"/>
+
+              <label for="folio">Folio</label>
+                  
+            </div>
+                
+          </div>
+
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <select class="form-control" id="cfdi" formControlName="cfdi">
+                <option disabled selected>Seleccione el uso de CFDI</option>
+                <option value="Adquisición de mercancías">Adquisición de mercancías</option>
+                <option value="Aportaciones voluntarias al SAR">Aportaciones voluntarias al SAR</option>
+                <option value="Comunicaciones satelitales">Comunicaciones satelitales</option>
+                <option value="Comunicaciones telefónicas">Comunicaciones telefónicas</option>
+                <option value="Construcciones">Construcciones</option>
+                <option value="Dados, troqueles, moldes, matrices y herramental">Dados, troqueles, moldes, matrices y herramental</option>
+                <option value="Devoluciones, descuentos o bonificaciones">Devoluciones, descuentos o bonificaciones</option>
+                <option value="Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones">Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones</option>
+                <option value="Donativos">Donativos</option>
+                <option value="Equipo de computo y accesorios">Equipo de computo y accesorios</option>
+                <option value="Equipo de transporte">Equipo de transporte</option>
+                <option value="Gastos de transportación escolar obligatoria">Gastos de transportación escolar obligatoria</option>
+                <option value="Gastos en general">Gastos en general</option>
+                <option value="Gastos funerales">Gastos funerales</option>
+                <option value="Gastos médicos por incapacidad o discapacidad">Gastos médicos por incapacidad o discapacidad</option>
+                <option value="Honorarios médicos, dentales y gastos hospitalarios">Honorarios médicos, dentales y gastos hospitalarios</option>
+                <option value="Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)">Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)</option>
+                <option value="Mobiliario y equipo de oficina por inversiones">Mobiliario y equipo de oficina por inversiones</option>
+                <option value="Nómina">Nómina</option>
+                <option value="Otra maquinaria y equipo">Otra maquinaria y equipo</option>
+                <option value="Pagos">Pagos</option>
+                <option value="Pagos por servicios educativos (colegiaturas)">Pagos por servicios educativos (colegiaturas)</option>
+                <option value="Primas por seguros de gastos médicos">Primas por seguros de gastos médicos</option>
+                <option value="Sin efectos fiscales">Sin efectos fiscales</option>
+              </select>
+              
+              <label for="cfdi">Uso de CFDI</label>
+                  
+            </div>
+                
+          </div>
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="fecha_factura" type="date" formControlName="fecha_factura"/>
+
+              <label for="fecha_factura">Fecha de factura</label>
+                  
+            </div>
+                
+          </div>
+              
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3 col-13 mx-auto">
+
+              <select class="form-control" id="selectSucursal" formControlName="id_sucursal">
+                <option disabled selected>Seleccione una sucursal</option>
+                <option *ngFor="let sucursal of sucursales" [value]="sucursal.id_sucursal">{{ sucursal.nombre }}</option>
+              </select>
+                
+              <label for="selectSucursal">Sucursal</label>
+            
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="subtotal" type="number" 
+                       formControlName="subtotal" placeholder="Subtotal" 
+                       step="0.01" min="0" max="100000"/>
+
+              <label for="subtotal">Subtotal</label>
+
+              <div *ngIf="gastoForm.get('Subtotal')?.invalid && (gastoForm.get('Subtotal')?.dirty || gastoForm.get('Subtotal')?.touched)"></div>
+              <div *ngIf="gastoForm.get('Subtotal')?.errors?.['pattern']">El subtotal debe ser numérico</div>
+              
+            </div>
+
+          </div>
+
+          <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <input class="form-control" id="iva" type="number"
+                    formControlName="iva" placeholder="IVA" />
+
+                <label for="iva">IVA</label>
+
+              </div>
+
+          </div>
+
+          <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <input class="form-control" id="inputISR" type="number"
+                    formControlName="isr" placeholder="ISR"/>
+
+                <label for="inputISR">ISR</label>
+
+              </div>
+
+          </div>
+
+          <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <input class="form-control" id="inputIEPS" type="number"
+                    formControlName="ieps" placeholder="IEPS"/>
+                
+                <label for="inputIEPS">IEPS</label>
+
+              </div>
+
+          </div>
+
+          <div class="col">
+
+            <div class="form-floating mb-3">
+
+              <input class="form-control" id="inputTotal" type="number"
+                      formControlName="monto_total" placeholder="Total"/>
+
+              <label for="inputTotal">Total</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </mat-tab>
+
+      <mat-tab label="Productos"
+       [disabled]="!gastoForm.get('monto_total')?.value || 
+                   !gastoForm.get('folio_gasto')?.value ||
+                   !gastoForm.get('cfdi')?.value ||
+                   !gastoForm.get('fecha_factura')?.value ||
+                   !gastoForm.get('id_sucursal')?.value ||
+                   !gastoForm.get('subtotal')?.value">
+     
+        <div class="row col-13 mx-auto mt-2">
+
+            <div class="col">
+
+              <div class="form-floating mb-3">
+
+                <select class="form-control" id="servicios" formControlName="servicios">
+                  <option disabled selected>Seleccione un servicio</option>
+                  <option *ngFor="let servicio of servicios" [value]="servicio.id_servicio">{{ servicio.nombre }}</option>
+                </select>
+
+                  <label for="servicios">Servicios</label>
+              </div>
+
+            </div>  
+            
+            <div class="col">
+              <div class="form-floating mb-3">
+                <input class="form-control" id="concepto" type="text" formControlName="concepto" placeholder="concepto"/>
+                <label for="concepto">Caracteristicas</label>
+              </div>
+            </div>
+
+            <div class="col">
+
+              <div class="d-flex align-items-center mt-2">
+                  <button class="btn btn-warning mx-auto col-6" (click)="agregarServicio()">
+                      Agregar
+                  </button>
+                  
+                  <button class="btn btn-danger mx-2 col-6" (click)="quitarServicio(i)">
+                      Quitar
+                  </button>
+
+              </div>
+
+            </div>
+
+        </div>
+         
+        <div class="row col-13 mx-auto">
+          
+          <div class="col">
+  
+            <div class="row col-13 mx-auto">
+              <div class="col">
+                <table class="table tabla-venta">
+                  <thead>
+                    <tr>
+                      <th>Servicios</th>
+                      <th>Caracteristicas</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let servicio of gastoForm.get('detalla_factura_gasto')?.value; let i = index">
+                      <td>{{ idServicioToNombre[servicio.id_servicio] }}</td>
+                      <td>{{ servicio.concepto }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+        
+      </mat-tab>
+
+      <mat-tab label="Información de pago"
+      [disabled]="!gastoForm.get('detalla_factura_gasto')?.value || 
+                  !gastoForm.get('detalla_factura_gasto')?.value.length">
+          
+        <div class="row col-13 mx-auto mt-2">
+
+            <div class="col">
+
+              <div class="form-floating mb-3 col-13 mx-auto">
+                    
+                <select class="form-control" id="selectMetodoPago" 
+                            formControlName="metodo_pago">
+                      <option disabled selected>Selecciona un metodo de pago</option>
+                      <option value="Pago en una exhibición (PUE)">Pago en una exhibición (PUE)</option>
+                      <option value="Pago diferido (PPD)">Pago diferido (PPD)</option>
+                </select>
+
+                <label for="selectMetodoPago">Metodo de pago</label>
+                  
+              </div>
+              
+            </div>
+
+        </div>  
+
+        <div class="row col-13 mx-auto">
+
+          <div class="col">
+
+            <div class="form-floating mb-3 col-13 mx-auto">
+                
+              <select class="form-control" id="status_comprobante" (change)="onRecibidoChange()">
+                <option disabled selected>Seleccione el estado del comprobante de pago</option>
+                <option value="Recibido">Recibido</option>
+                <option value="Pendiente">Pendiente</option>
+              </select>
+
+              <label for="status_comprobante">Estado de comprobante</label>
+
+            </div>
+
+          </div>
+
+          <div class="col" *ngIf="mostrarFechaRecibido"> <!-- SE MOSTRARA SI ES QUE SE SELECCIONA RECIBIDO EN EL SELECT ANTERIOR -->
+              
+            <div class="form-floating mb-3 col-13 mx-auto">
+                
+              <input class="form-control" id="fecha_comprobante" type="date"
+                      formControlName="fecha_comprobante" placeholder="Fecha de recibido"/>
+                
+              <label for="fecha_comprobante">Fecha de recibido</label>
+              
+            </div>
+
+          </div>
+
+        </div>
+        
+        <div class="row col-13 mx-auto"><!--botones -->
+
+          <div class="col">
+
+            <div class="d-flex align-items-center mt-4">
+
+              <button class="btn btn-warning mx-auto col-6" type="submit" (click)="actualizarGasto()" [disabled]="gastoForm.invalid">
+                    Guardar cambios
+              </button>
+
+            </div>
+
+          </div>
+              
+        </div>
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </form>
+  
+</div>

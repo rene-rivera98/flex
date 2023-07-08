@@ -38,8 +38,7 @@ export class DialogEditarUsuarioComponent {
       email: [this.usuario.email, [Validators.required, Validators.email, Validators.pattern('[^@]+@[^@]+\.[a-zA-Z]{2,6}')]],
       fecha_nacimiento: [this.usuario.fecha_nacimiento, Validators.required],
       departamento: [this.usuario.departamento, Validators.required],
-      id_sucursal: [this.usuario.id_sucursal, Validators.required],
-      rol: [this.usuario.rol, Validators.required]
+      id_sucursal: [this.usuario.id_sucursal, Validators.required]
     });
 
     this.fetchSucursales();

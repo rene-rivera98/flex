@@ -10,6 +10,7 @@ import { DialogEditarGastoComponent } from './dialog-editar-gasto/dialog-editar-
 import { SucursalService } from 'src/app/protected/services/sucursal.service';
 import { GastoService } from 'src/app/protected/services/gasto.service';
 import { DialogGastoComponent } from './dialog-gasto/dialog-gasto.component';
+import { DialogPagosGastosComponent } from './dialog-pagos-gastos/dialog-pagos-gastos.component';
 
 @Component({
   selector: 'app-gastos',
@@ -24,10 +25,11 @@ export class GastosComponent implements AfterViewInit, OnDestroy{
 
     displayedColumns: string[] = [
       'folio_gasto',
-      'fecha_factura',
       'metodo_pago',
       'monto_total',
+      'fecha_factura',
       'nombreSucursal',
+      'estado_pago',
       'created_at',
       'updated_at',
       'opciones'
@@ -37,7 +39,7 @@ export class GastosComponent implements AfterViewInit, OnDestroy{
 
     gastoCreatedSubscription!: Subscription;
     gastoUpdatedSubscription!: Subscription;
-    gastoDeletedSubscription!: Subscription;
+    pagoCreatedSubscription!: Subscription;
 
     //inyeccion de dependencias _entriesService y dialog 
     constructor(
@@ -49,18 +51,36 @@ export class GastosComponent implements AfterViewInit, OnDestroy{
     createDialog(): void {
       const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
       dialogConfig.disableClose = true; //bloquea el dialog
-      dialogConfig.width = '950px'; // Asignar ancho al dialog
-      dialogConfig.height = '600px'; // Asignar ancho al dialog
+      dialogConfig.width = '780px'; // Asignar ancho al dialog
+      dialogConfig.height = '700px'; // Asignar ancho al dialog
       const dialogRef = this.dialog.open(DialogGastoComponent, dialogConfig); //abre el dialog
     }
     
     //metodo para abrir el dialog editar gasto
     editDialog(element: any): void {
       const dialogConfig = new MatDialogConfig(); //se crea una instancia de la clase MatDialogConfig
-      dialogConfig.disableClose = true; //bloquea el dialog
-      dialogConfig.width = '650px'; // Asignar ancho al dialog
-      dialogConfig.height = '650px'; // Asignar ancho al dialog
-      const dialogRefEd = this.dialog.open(DialogEditarGastoComponent,dialogConfig); //abre el dialog
+      const dialogRefEd = this.dialog.open(DialogEditarGastoComponent, {
+        data: element,
+        disableClose: true,
+        width: '780px',
+        height: '700px'
+      });
+    }
+
+    pagoDialog(element: any) {
+      if (element.id_gasto || element.monto_total) {
+        console.log('ID de gasto:', element.id_gasto, element.monto_total);
+    
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.width = '750px';
+        dialogConfig.height = '720px';
+        dialogConfig.data = { gasto: { id_gasto: element.id_gasto, monto_total: element.monto_total } };
+        const dialogRefEd = this.dialog.open(DialogPagosGastosComponent, dialogConfig);
+      } else {
+        // Manejar el caso cuando no se tiene el ID de la sucursal
+        console.error('La fila seleccionada no tiene un ID de gasto válido.');
+      }
     }
 
     // evento para el buscador
@@ -74,6 +94,14 @@ export class GastosComponent implements AfterViewInit, OnDestroy{
       this.dataSource.sort = this.sort;
 
       this.gastoCreatedSubscription = this.gastoService.gastoCreated$.subscribe(() => {
+        this.getGastos();
+      });
+
+      this.gastoUpdatedSubscription = this.gastoService.gastoUpdated$.subscribe(() => {
+        this.getGastos();
+      });
+
+      this.pagoCreatedSubscription = this.gastoService.pagoCreated$.subscribe(() => {
         this.getGastos();
       });
     }

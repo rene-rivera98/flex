@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/protected/services/producto.service';
-import { producto_venta, producto_insumo } from 'src/app/protected/interfaces/interfaces';
+import { producto_venta} from 'src/app/protected/interfaces/interfaces';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,8 @@ import { HttpClient } from '@angular/common/http';
 export class DialogVentaComponent implements OnInit {
 
   ventaForm!: FormGroup;
+  tallas: string[] = [];
+  unidadesMedida: string[] = [];
   insumos: any[] = []; // Array para almacenar los insumos seleccionados
   listaProductos: any[] = [];
   i!: number;
@@ -36,7 +38,7 @@ export class DialogVentaComponent implements OnInit {
       area:['', [Validators.required]],
       talla: [''],
       unidad_medida: [''],
-      precio: ['0.00', [Validators.required]],
+      precio: ['', [Validators.required]],
       receta: [false],
       perecedero: [false],
       productos_receta: this.formBuilder.array([]), // Define productos_receta como un FormArray vacío
@@ -45,6 +47,23 @@ export class DialogVentaComponent implements OnInit {
     });
 
     this.obtenerInsumos();
+  }
+
+  actualizarValores() {
+    const areaSeleccionada = this.ventaForm.get('area')?.value;
+
+    // Actualizar valores de acuerdo a la selección del área
+    if (areaSeleccionada === 'Cafeteria') {
+      this.tallas = ['Chico', 'Mediano', 'Grande' ,'N/A'];
+      this.unidadesMedida = ['ml', 'grs', 'oz', 'pz', 'cm', 'bolsa', 'grs', 'N/A'];
+    } else if (areaSeleccionada === 'FrontDesk') {
+      this.tallas = ['Bebe', 'Niño', 'Chica', 'Mediana', 'Grande', 'Extra-grande', 'N/A'];
+      this.unidadesMedida = ['pz', 'N/A'];
+    } else {
+      // Otras opciones
+      this.tallas = ['N/A'];
+      this.unidadesMedida = ['N/A'];
+    }
   }
 
   agregarInsumo() {
@@ -135,6 +154,8 @@ export class DialogVentaComponent implements OnInit {
           console.log('Producto agregado:', response);
           this.snackBar.open('Producto agregado correctamente', 'Aceptar', {
             duration: 2000,
+            verticalPosition: 'top',
+            horizontalPosition: 'end'
           });
           this.dialogRef.close();
           this.ventaService.notifyVentaCreated(nuevoProducto); // Notifica que la sucursal ha sido eliminada

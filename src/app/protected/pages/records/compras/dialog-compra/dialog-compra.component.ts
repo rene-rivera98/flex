@@ -48,7 +48,6 @@ export class DialogCompraComponent implements OnInit {
       ieps: [0],
       monto_total: ['', [Validators.required]],
       metodo_pago: ['', [Validators.required]],
-      estado_pago: ['Pendiente', [Validators.required]],
       id_sucursal: ['', [Validators.required]],
       fecha_recepcion: [false],
       detalla_factura_compra: this.formBuilder.array([]),

@@ -105,7 +105,7 @@ export class DialogEntradaComponent implements OnInit {
         this.dialogRef.close();
 
         // Notificar a SucursalesComponent que se ha creado un nuevo usuario
-        // this.entradaService.notifyEntradaCreated(nuevaEntrada);
+        this.entradaService.notifyEntradaCreated(nuevaEntrada);
       },
       (error) => {
         // Error al crear el usuario

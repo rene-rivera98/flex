@@ -20,10 +20,10 @@ export class DialogBorrarServicioComponent {
     private snackBar: MatSnackBar) { }
 
     eliminarServicio(): void {
-      const idServicio = this.data.servicio.id_servicio; // Obtén el ID de la sucursal a eliminar
+      const id_servicio = this.data.servicio.id_servicio; // Obtén el ID de la sucursal a eliminar
   
       // Realiza la eliminación de la sucursal utilizando el servicio de API
-      this.serviciosServices.deletedServicio(idServicio).subscribe(
+      this.serviciosServices.deletedServicio(id_servicio).subscribe(
         () => {
           this.serviciosServices.notifyServicioDeleted(this.data); // Notifica que la sucursal ha sido eliminada
   

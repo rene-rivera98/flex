@@ -47,6 +47,7 @@ import { EntradasComponent } from '../pages/records/inventario/entradas/entradas
 import { SalidasComponent } from '../pages/records/inventario/salidas/salidas.component';
 import { InventarioComponent } from '../pages/records/inventario/inventario/inventario.component';
 import { Admin_masterLayoutComponent } from '../components/admin_master-layout/admin_master-layout.component';
+import { UserInfoComponent } from '../shared/user-info/user-info.component';
 
 //dialog componentes records
 import { DialogUsuarioComponent } from '../pages/records/usuarios/dialog-usuario/dialog-usuario.component';
@@ -60,6 +61,7 @@ import { DialogPagosComprasComponent } from '../pages/records/compras/dialog-pag
 
 import { DialogGastoComponent } from '../pages/records/gastos/dialog-gasto/dialog-gasto.component';
 import { DialogEditarGastoComponent } from '../pages/records/gastos/dialog-editar-gasto/dialog-editar-gasto.component';
+import { DialogPagosGastosComponent } from '../pages/records/gastos/dialog-pagos-gastos/dialog-pagos-gastos.component';
 
 import { DialogProveedoresComponent } from '../pages/records/proveedores/dialog-proveedores/dialog-proveedores.component';
 import { DialogEditarProveedorComponent } from '../pages/records/proveedores/dialog-editar-proveedor/dialog-editar-proveedor.component';
@@ -92,6 +94,13 @@ import { DialogEntradaComponent } from '../pages/records/inventario/entradas/dia
 
 import { DialogSalidaComponent } from '../pages/records/inventario/salidas/dialog-salida/dialog-salida.component';
 
+import { DialogCafeteriaComponent } from '../pages/records/paquetes/cafeteria/dialog-cafeteria/dialog-cafeteria.component';
+import { DialogEditarCafeteriaComponent } from '../pages/records/paquetes/cafeteria/dialog-editar-cafeteria/dialog-editar-cafeteria.component';
+import { DialogBorrarCafeteriaComponent } from '../pages/records/paquetes/cafeteria/dialog-borrar-cafeteria/dialog-borrar-cafeteria.component';
+
+import { DialogFrontdeskComponent } from '../pages/records/paquetes/frontdesk/dialog-frontdesk/dialog-frontdesk.component';
+import { DialogEditarFrontdeskComponent } from '../pages/records/paquetes/frontdesk/dialog-editar-frontdesk/dialog-editar-frontdesk.component';
+import { DialogBorrarFrontdeskComponent } from '../pages/records/paquetes/frontdesk/dialog-borrar-frontdesk/dialog-borrar-frontdesk.component';
 
 @NgModule({
   imports: [
@@ -125,10 +134,10 @@ import { DialogSalidaComponent } from '../pages/records/inventario/salidas/dialo
     UsuariosComponent, DialogUsuarioComponent, DialogEditarUsuarioComponent, DialogCredUsuarioComponent, DialogBorrarUsuarioComponent,
     ProveedoresComponent, DialogProveedoresComponent, DialogEditarProveedorComponent, DialogBorrarProveedoresComponent,
     ComprasComponent, DialogCompraComponent, DialogEditarCompraComponent,DialogPagosComprasComponent,
-    GastosComponent, DialogGastoComponent, DialogEditarGastoComponent,
+    GastosComponent, DialogGastoComponent, DialogEditarGastoComponent, DialogPagosGastosComponent,
     ServiciosComponent, DialogServiciosComponent, DialogEditarServicioComponent, DialogBorrarServicioComponent,
-    CafeteriaComponent,
-    FrontdeskComponent,
+    CafeteriaComponent, DialogCafeteriaComponent, DialogEditarCafeteriaComponent, DialogBorrarCafeteriaComponent,
+    FrontdeskComponent, DialogFrontdeskComponent, DialogEditarFrontdeskComponent, DialogBorrarFrontdeskComponent,
     SucursalesComponent, DialogSucursalComponent, DialogEditarSucursalComponent,DialogBorrarSucursalComponent,
     InsumoComponent, DialogInsumoComponent, DialogEditarInsumoComponent, DialogBorrarInsumoComponent,
     VentaComponent, DialogVentaComponent, DialogEditarVentaComponent, DialogBorrarVentaComponent,
@@ -137,7 +146,8 @@ import { DialogSalidaComponent } from '../pages/records/inventario/salidas/dialo
     AlmacenesComponent, DialogAlmacenesComponent,
     EntradasComponent, DialogEntradaComponent,
     SalidasComponent, DialogSalidaComponent,
-    InventarioComponent
+    InventarioComponent,
+    UserInfoComponent
   ]
 })
 export class ProtectedModule { }

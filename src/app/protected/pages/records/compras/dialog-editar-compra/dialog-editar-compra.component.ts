@@ -22,7 +22,6 @@ export class DialogEditarCompraComponent {
   productos: any[] = [];
   proveedores: any[] = [];
   sucursales: any[] = [];
-  // cantidades: number[] = [];
   i!: number;
   idProductos: string[] = [];
   listaProductos: any[] = [];
@@ -85,8 +84,8 @@ export class DialogEditarCompraComponent {
       const productosCompra = this.compraForm.get('detalla_factura_compra') as FormArray;
       productosCompra.push(this.formBuilder.group(nuevoProducto));
   
-      // Imprime el array de productos de receta
-      console.log('Array de productos de compra:', productosCompra.value);
+      // Imprime el array de productos 
+      console.log('Array de productos de compra 2:', productosCompra.value);
   
       // Limpia los campos de selección de insumo y cantidad
       this.compraForm.patchValue({
@@ -191,10 +190,6 @@ export class DialogEditarCompraComponent {
     this.mostrarFechaRecibido = valorRecibido === 'Recibido';
   }
 
-  closeDialog() {
-      this.dialogRef.close();
-  }
-
   actualizarCompra(): void {
     if (this.compraForm.valid) {
       const idCompra = this.compra.id_compra;
@@ -224,6 +219,9 @@ export class DialogEditarCompraComponent {
       );
     }
   }
-  
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
 
 }

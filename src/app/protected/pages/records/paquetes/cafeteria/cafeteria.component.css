@@ -1,0 +1,14 @@
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+.btn-options {
+  padding: 0 !important;
+  }
+
+.btn-mr {
+  margin-right: 3px !important;
+}
+
+
+.hidden-column {
+  display: none;
+}

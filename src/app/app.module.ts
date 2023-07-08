@@ -11,6 +11,7 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CustomMatPaginatorIntl } from './protected/shared/paginator';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CustomMatPaginatorIntl } from './protected/shared/paginator';
     HttpClientModule,
     ReactiveFormsModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}

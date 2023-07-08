@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { tap, catchError, map } from 'rxjs/operators';
+import { tap, catchError, map, filter } from 'rxjs/operators';
 import { BehaviorSubject, Observable} from 'rxjs';
-import { producto_insumo, productos_activo, producto_venta } from '../interfaces/interfaces';
+import { producto_insumo, productos_activo, producto_venta, producto_venta_ } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -177,21 +177,7 @@ export class ProductoService {
   getVentas(): Observable<any> {
     const url = `${this.baseUrl}producto/venta/`;
     return this.http.get(url).pipe(
-      map((response: any) => response.query.map((venta: any) =>({
-        id_producto: venta.id_producto,
-        codigo: venta.codigo,
-        nombre: venta.nombre,
-        tipo_egreso: venta.tipo_egreso,
-        tipo_producto: venta.tipo_producto,
-        perecedero: venta.perecedero,
-        area: venta.area,
-        receta: venta.receta,
-        talla: venta.talla,
-        unidad_medida: venta.unidad_medida,
-        precio: venta.precio,
-        created_at: venta.created_at,
-        updated_at: venta.updated_at
-      }))), // Obtener el campo 'query' de la respuesta
+      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
       tap((data: any[]) => {
         console.log('Datos de productos:', data);
       }),
@@ -207,14 +193,14 @@ export class ProductoService {
     return this.http.post(url, activo);
   }
 
-  updatedVenta(id_producto: string, venta: producto_venta): Observable<any> {
+  updatedVenta(id_producto: string, venta: producto_venta_): Observable<any> {
     const url = `${this.baseUrl}producto/venta/${id_producto}`;
     return this.http.put(url, venta).pipe(
       tap((data: any) => {
         console.log('Respuesta del PUT:', data);
       }),
       catchError((error: any) => {
-        console.error('Error al actualizar servicio:', error);
+        console.error('Error al actualizar producto venta:', error);
         throw error;
       })
     );
@@ -232,6 +218,22 @@ export class ProductoService {
       })
     );
   }
+
+  getProductosCafeteria(): Observable<any> {
+    const url = `${this.baseUrl}producto/venta/`;
+    return this.http.get(url).pipe(
+      map((response: any) => response.query), // Obtener el campo 'query' de la respuesta
+      map((productos: producto_venta[]) => productos.filter(producto => producto.area === 'Cafeteria')), // Filtrar los productos por el área 'Cafeteria'
+      tap((data: producto_venta[]) => {
+        console.log('Datos de productos filtrados:', data);
+      }),
+      catchError((error: any) => {
+        console.error('Error al obtener los productos:', error);
+        throw error;
+      })
+    );
+  }
+  
   
   //metodos notificacion para actualizar tabla
   public notifyInsumoCreated(insumo: producto_insumo) {

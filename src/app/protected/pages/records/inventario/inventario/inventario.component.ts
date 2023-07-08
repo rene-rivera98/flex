@@ -24,7 +24,11 @@ export class InventarioComponent implements OnDestroy, AfterViewInit {
   almacenes: any[] = [];
   selectedAlmacenId: number | undefined;
 
-  displayedColumns: string[] = ['id_producto', 'existencias'];
+  displayedColumns: string[] = [
+    'nombreProducto', 
+    'existencias'
+  ];
+  
   dataSource: MatTableDataSource<inventario> = new MatTableDataSource<inventario>([]);
 
   entradaCreatedSubscription!: Subscription;

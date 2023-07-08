@@ -20,10 +20,10 @@ export class DialogBorrarProveedoresComponent {
 
 
     eliminarProveedor(): void {
-      const idProveedor = this.data.proveedor.id_proveedor; // Obtén el ID de la sucursal a eliminar
+      const id_proveedor = this.data.proveedor.id_proveedor; // Obtén el ID de la sucursal a eliminar
   
       // Realiza la eliminación de la sucursal utilizando el servicio de API
-      this.proveedorService.deletedProveedor(idProveedor).subscribe(
+      this.proveedorService.deletedProveedor(id_proveedor).subscribe(
         () => {
           this.proveedorService.notifyProveedorDeleted(this.data); // Notifica que la sucursal ha sido eliminada
   

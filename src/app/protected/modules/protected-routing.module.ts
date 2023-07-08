@@ -18,6 +18,7 @@ import { AlmacenesComponent } from '../pages/records/almacenes/almacenes.compone
 import { EntradasComponent } from '../pages/records/inventario/entradas/entradas.component';
 import { SalidasComponent } from '../pages/records/inventario/salidas/salidas.component';
 import { InventarioComponent } from '../pages/records/inventario/inventario/inventario.component';
+import { UserInfoComponent } from '../shared/user-info/user-info.component';
 
 const routes: Routes = [
   { path: 'administrador', component: Admin_masterLayoutComponent},
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'almacenes', component: AlmacenesComponent},
   { path: 'entradas', component: EntradasComponent},
   { path: 'salidas', component: SalidasComponent},
-  { path: 'inventario', component: InventarioComponent}
+  { path: 'inventario', component: InventarioComponent},
+  { path: 'perfil', component: UserInfoComponent}
 ];
 
 

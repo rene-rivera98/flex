@@ -8,17 +8,13 @@
       <mat-card-content>
 
           <div class="d-flex justify-content-between p-3 bg-light border border-dashed rounded">
-              <!-- BOTON CREAR -->
               <div>
                 <button type="button" class="btn btn-warning" (click)="createDialog()">Registrar entrada</button>
               </div>
-              <!-- FIN BOTON -->
             
-              <!-- FILTRO -->  
               <div>
                 <input class="form-control search-input w-100" matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
               </div>
-              <!-- FIN FILTRO -->
           </div>
           
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"

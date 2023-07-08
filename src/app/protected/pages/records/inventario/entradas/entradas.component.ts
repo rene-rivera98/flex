@@ -55,6 +55,10 @@ export class EntradasComponent implements OnDestroy, AfterViewInit{
     this.dataSource.sort = this.sort;
 
     this.getEntradas();
+
+    this.entradaCreatedSubscription = this.entradasService.entradaCreated$.subscribe(() => {
+        this.getEntradas();
+    });
   }
 
   createDialog(): void {

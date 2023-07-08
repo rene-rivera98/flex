@@ -127,7 +127,7 @@
             <div class="form-floating mb-3">
 
               <input class="form-control" id="subtotal" type="number" 
-                       formControlName="subtotal" placeholder="Subtotal"/>
+                       formControlName="subtotal" placeholder="Subtotal" step="0.01" pattern="\d+(\.\d{1,2})?"/>
 
               <label for="subtotal">Subtotal</label>
 
@@ -182,7 +182,7 @@
             <div class="form-floating mb-3">
 
               <input class="form-control" id="inputTotal" type="number"
-                      formControlName="monto_total" placeholder="Total"/>
+                      formControlName="monto_total" placeholder="Total" step="0.01" pattern="\d+(\.\d{1,2})?"/>
 
               <label for="inputTotal">Total</label>
 

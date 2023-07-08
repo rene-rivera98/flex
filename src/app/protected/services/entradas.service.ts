@@ -37,5 +37,9 @@ export class EntradasService {
     return this.http.post(url, entrada);
   }
 
+  public notifyEntradaCreated(entrada: entradas) {
+    this.entradaCreatedSubject.next(entrada);
+  }
+
 
 }

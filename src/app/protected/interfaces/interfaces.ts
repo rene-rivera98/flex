@@ -51,6 +51,12 @@ export interface compra_ {
     monto_total: string,
 }
 
+export interface gasto_ {
+    id_gasto: string,
+    monto_total: string,
+}
+
+
 export interface gastos{
     id_gasto: string;
     folio_gasto: string,
@@ -74,6 +80,14 @@ export interface gastos{
 export interface complemento_compra{
     id_compra: string;
     id_complemento_compra: string;
+    monto_pago: string;
+    forma_pago: string;
+    fecha_pago: string;
+}
+
+export interface complemento_gasto{
+    id_gasto: string;
+    id_complemento_gasto: string;
     monto_pago: string;
     forma_pago: string;
     fecha_pago: string;
@@ -132,9 +146,13 @@ export interface producto_venta {
     unidad_medida: string;
     precio: number;
     productos_receta: {
-      insumos_id_producto: number;
-      cantidad: number;
+      id_producto: number;
+      cantidades: number;
     }[];
+}
+
+export interface producto_venta_ {
+    id_producto: string;
 }
 
 export interface productos{
@@ -150,15 +168,6 @@ export interface frontdesk{
     maximoPersonas: string;
     descripcionPF: string;
     precioPF: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface cafeteria{
-    codigoPC:string;
-    nombrePC: string;
-    descripcionPC: string;
-    precioPC: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -239,4 +248,18 @@ export interface salidas{
     id_producto: string;
     cantidad: string;
     fecha_salida: string;
+}
+
+export interface cafeteria {
+    id_paquete_cafeteria: string;
+    codigo: string;
+    nombre: string;
+    descripcion: string;
+    precio: string;
+    iva: string;
+    isr: string;
+    detalla_cafeteria_producto: {
+        id_producto: number;
+        cantidades: number;
+      }[];
 }
