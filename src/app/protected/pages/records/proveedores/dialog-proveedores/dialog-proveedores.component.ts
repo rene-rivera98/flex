@@ -128,7 +128,8 @@ export class DialogProveedoresComponent implements OnInit {
       clave_interbancaria: ['', [Validators.required, Validators.pattern(/^[0-9]{1,18}$/)]],
       constancia: [false],
       regimen_fiscal: ['', [Validators.required]],
-      banco: ['', [Validators.required]]
+      banco: ['', [Validators.required]],
+      cfdi: ['', [Validators.required]]
   });
 
   }

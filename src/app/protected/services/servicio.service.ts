@@ -58,7 +58,7 @@ export class ServicioService {
   }
 
   deletedServicio(idServicio: string): Observable<any> {
-    const url = `${this.baseUrl}servicios/${idServicio}`;
+    const url = `${this.baseUrl}servicios/desactivar/${idServicio}`;
     return this.http.delete(url).pipe(
       tap((data: any) => {
         console.log('Respuesta del DELETE:', data);
