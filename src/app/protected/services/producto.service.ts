@@ -28,6 +28,9 @@ export class ProductoService {
   private activoUpdatedSubject: BehaviorSubject<productos_activo | null> = new BehaviorSubject<productos_activo | null>(null);
   public activoUpdated$: Observable<productos_activo | null> = this.activoUpdatedSubject.asObservable();
 
+  private activoDeletedSubject: BehaviorSubject<productos_activo | null> = new BehaviorSubject<productos_activo | null>(null);
+  public activoDeleted$: Observable<productos_activo | null> = this.activoDeletedSubject.asObservable();
+
   private ventaCreatedSubject: BehaviorSubject<producto_venta | null> = new BehaviorSubject<producto_venta | null>(null);
   public ventaCreated$: Observable<producto_venta | null> = this.ventaCreatedSubject.asObservable();
 
@@ -261,5 +264,9 @@ export class ProductoService {
 
   public notifyVentaDeleted(venta: producto_venta) {
     this.ventaDeletedSubject.next(venta);
+  }
+
+  public notifyActivoDeleted(activo: productos_activo) {
+    this.activoDeletedSubject.next(activo);
   }
 }

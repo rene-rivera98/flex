@@ -61,7 +61,22 @@ export class ActivoComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  deleteDialog(element: any) {}
+  openDeleteConfirmationDialog(element: any): void {
+    if (element.id_producto) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '650px';
+      dialogConfig.height = '180px';
+      dialogConfig.data = { insumo: { id_producto: element.id_producto } };
+      const dialogRefEd = this.dialog.open(DialogBorrarActivoComponent, dialogConfig);
+    } else {
+      console.error('La fila seleccionada no tiene un ID de producto válido.');
+    }
+  }
+
+  deleteDialog(element: any): void {
+    this.openDeleteConfirmationDialog(element);
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -81,6 +96,12 @@ export class ActivoComponent implements AfterViewInit, OnDestroy {
     });
 
     this.activoUpdatedSubscription = this.productoService.activoUpdated$.subscribe((activo) => {
+      if (activo) {
+        this.getActivos();
+      }
+    });
+
+    this.activoDeletedSubscription = this.productoService.activoDeleted$.subscribe((activo) => {
       if (activo) {
         this.getActivos();
       }
